@@ -338,3 +338,69 @@ Make the paired-log and machine-checkable Sol provenance design binding in the a
 ### Next entry state
 
 - Start the durable explicitly GPT-5.6 Sol-selected implementation thread from `tcballard/Premonition`, run `/feedback`, record the core Session ID, create the ledger and execute S0 only—including implementation of `scripts/check-provenance.py`.
+
+---
+
+## Entry P6 — Correction to Entry P5: restore the PR workflow
+
+**Date:** 2026-07-13
+
+**Recorded at:** 2026-07-13T20:57:50+01:00
+
+**Phase:** Pre-implementation repository correction
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — owner-confirmed in visible project context
+
+**Session ID:** Not captured
+
+### Objective
+
+Correct the direct-to-main publication recorded in P5 and restore the expected reviewable GitHub workflow without rewriting repository history.
+
+### Completed
+
+- Acknowledged that committing the three project documents directly to `main` was incorrect.
+- Reverted commit `4dbaa1adac5f1853e3d04eec61a984a2a76bda14` non-destructively with commit `dfd2e96a250290213433fc9e09f06852a0dc83a4`.
+- Confirmed that `main` returned to the existing MIT `LICENSE` baseline.
+- Created branch `agent/add-premonition-project-records` from the corrected `main`.
+- Added the three documents on branch commit `05894be36bd6e5896d804d59258e7f81b4a6544c`.
+- Opened draft pull request [#1](https://github.com/tcballard/Premonition/pull/1) targeting `main`.
+- Preserved P5 as historical evidence and appended this correction rather than silently rewriting it.
+
+### Decisions and provenance
+
+- **Owner decision:** Repository changes must go through a pull request rather than being committed directly to `main`.
+- **Sol implemented:** Non-destructive revert, feature branch, draft pull request and paired correction entries.
+- **Sol reviewed:** Corrected branch topology, file scope, commit metadata and preservation of the existing licence.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- Revert commit `dfd2e96a250290213433fc9e09f06852a0dc83a4` — removes the prematurely published documents from `main` without rewriting history.
+- Branch `agent/add-premonition-project-records` — reviewable documentation change.
+- Branch commit `05894be36bd6e5896d804d59258e7f81b4a6544c` — adds the three P5 document versions.
+- Draft pull request [#1](https://github.com/tcballard/Premonition/pull/1) — review and merge surface.
+- `BUILDLOG.md` and `DEVLOG.md` — paired P6 correction entries added after the PR opened.
+
+### Verification
+
+- `main` head inspected after the revert — `dfd2e96a250290213433fc9e09f06852a0dc83a4`.
+- Draft PR metadata inspected — base `main`, head `agent/add-premonition-project-records`, three changed files.
+- Paired BUILDLOG/DEVLOG append and cross-reference checker — passed.
+- Updated correction entries pushed to the PR branch and fetched back for verification — passed.
+
+### Deviations
+
+- Entry P5's direct-to-main publication used the wrong workflow. It was corrected with an ordinary revert commit rather than a force-push or history rewrite.
+
+### Risks and missing evidence
+
+- Pull request #1 remains draft and unmerged; the three documents are not currently present on `main`.
+- The planning session still has no captured stable Session ID.
+- The durable S0 ledger and provenance checker remain unimplemented.
+
+### Next entry state
+
+- Owner reviews and merges draft PR #1 when satisfied. After merge, start the durable explicitly GPT-5.6 Sol-selected S0 thread, capture `/feedback`, create the ledger and implement the provenance checker.

@@ -101,3 +101,19 @@ The factual build log and this diary are now part of `tcballard/Premonition` alo
 That changes next. S0 starts from this record, captures `/feedback`, creates the Sol ledger and turns the empty project into a verified macOS scaffold.
 
 **Source:** `BUILDLOG.md`, Entry P5
+
+---
+
+## P6 — I put it on main. That was wrong.
+
+**Date:** 2026-07-13
+
+The three project documents landed in the right repository through the wrong workflow. They were committed directly to `main` instead of arriving as a pull request.
+
+That is now corrected without pretending it did not happen. The direct commit has an ordinary revert on `main`; no force-push, no tidied-up history. The documents now live on `agent/add-premonition-project-records` behind draft PR #1.
+
+The factual log keeps P5 because it happened. P6 records the correction. Slightly uncomfortable is better than suspiciously perfect.
+
+Next, the PR gets reviewed and merged deliberately. S0 still starts afterwards, with `/feedback`, the Sol ledger and the provenance checker—not before.
+
+**Source:** `BUILDLOG.md`, Entry P6
