@@ -179,3 +179,19 @@ Nothing new was squeezed into the final minutes. The benchmark correction, selec
 When the build resumes, it starts with the headless safety core. The real executor still belongs to S2. One phase at a time.
 
 **Source:** `BUILDLOG.md`, Entry S0.3
+
+---
+
+## S1.1 — The safety spine is real
+
+**Date:** 2026-07-14
+
+Premonition now has a headless safety core. Clipboard candidates are filtered before content is read, repositories are resolved through canonical allowlisted paths, patches cross one parser and bounds check, and Git validation remains non-mutating.
+
+The useful moment came during review. Three things looked finished but were not quite contract-tight: configuration covered only part of its locked shape, deduplication leaned on the short logging hash, and the verdict list stopped too early. All three were corrected before the phase was called complete. That is exactly what the review gate is for.
+
+The named A2, A5, A6, A7 and A9 headless contracts are green, alongside the wider unit and integration suite. The process runner also has real stdin, line streaming, bounded error capture, timeout and cancellation behaviour.
+
+This is still deliberately not the live product loop. There is no production Codex executor and no clipboard UI. Next comes S2: wire the already-measured Sol contract into this safety spine without loosening it.
+
+**Source:** `BUILDLOG.md`, Entry S1.1

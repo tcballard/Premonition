@@ -1,0 +1,106 @@
+import Darwin
+import Foundation
+
+public struct ProcessResult: Equatable, Sendable {
+    public let status: Int32
+    public let stdout: String
+    public let stderr: String
+}
+
+public enum ProcessRunnerError: Error, Equatable, Sendable { case timedOut, launch(String) }
+
+private final class ProcessCapture: @unchecked Sendable {
+    private let lock = NSLock()
+    private var output = Data(), errors = Data(), pending = Data()
+    private let onLine: (@Sendable (String) -> Void)?
+
+    init(onLine: (@Sendable (String) -> Void)?) { self.onLine = onLine }
+
+    func appendOutput(_ data: Data) {
+        lock.lock(); defer { lock.unlock() }
+        output.append(data); pending.append(data)
+        while let newline = pending.firstIndex(of: 0x0A) {
+            let line = pending[..<newline]
+            pending.removeSubrange(...newline)
+            onLine?(String(decoding: line, as: UTF8.self))
+        }
+    }
+
+    func appendError(_ data: Data) {
+        lock.lock(); defer { lock.unlock() }
+        let remaining = max(0, 64 * 1_024 - errors.count)
+        errors.append(data.prefix(remaining))
+    }
+
+    func result(status: Int32) -> ProcessResult {
+        lock.lock(); defer { lock.unlock() }
+        if !pending.isEmpty { onLine?(String(decoding: pending, as: UTF8.self)); pending.removeAll() }
+        return ProcessResult(status: status, stdout: String(decoding: output, as: UTF8.self),
+                             stderr: String(decoding: errors, as: UTF8.self))
+    }
+}
+
+public struct ProcessRunner: Sendable {
+    public init() {}
+
+    public func run(
+        _ executable: URL,
+        arguments: [String] = [],
+        currentDirectory: URL? = nil,
+        environment: [String: String]? = nil,
+        stdin: Data? = nil,
+        timeout: Duration = .seconds(30),
+        onStdoutLine: (@Sendable (String) -> Void)? = nil
+    ) async throws -> ProcessResult {
+        let process = Process()
+        let output = Pipe(), errors = Pipe(), input = Pipe()
+        let capture = ProcessCapture(onLine: onStdoutLine)
+        process.executableURL = executable
+        process.arguments = arguments
+        process.currentDirectoryURL = currentDirectory
+        process.standardOutput = output
+        process.standardError = errors
+        process.standardInput = input
+        output.fileHandleForReading.readabilityHandler = { handle in capture.appendOutput(handle.availableData) }
+        errors.fileHandleForReading.readabilityHandler = { handle in capture.appendError(handle.availableData) }
+        if let environment { process.environment = environment }
+        do { try process.run() } catch { throw ProcessRunnerError.launch(error.localizedDescription) }
+        if let stdin { input.fileHandleForWriting.write(stdin) }
+        try? input.fileHandleForWriting.close()
+
+        return try await withTaskCancellationHandler {
+            try await withThrowingTaskGroup(of: ProcessResult.self) { group in
+                group.addTask {
+                    process.waitUntilExit()
+                    output.fileHandleForReading.readabilityHandler = nil
+                    errors.fileHandleForReading.readabilityHandler = nil
+                    capture.appendOutput(output.fileHandleForReading.readDataToEndOfFile())
+                    capture.appendError(errors.fileHandleForReading.readDataToEndOfFile())
+                    return capture.result(status: process.terminationStatus)
+                }
+                group.addTask {
+                    try await Task.sleep(for: timeout)
+                    if process.isRunning { process.terminate() }
+                    throw ProcessRunnerError.timedOut
+                }
+                defer { group.cancelAll() }
+                guard let result = try await group.next() else { throw CancellationError() }
+                try Task.checkCancellation()
+                return result
+            }
+        } onCancel: {
+            if process.isRunning { process.terminate() }
+        }
+    }
+}
+
+public struct GitApplyChecker: Sendable {
+    private let runner = ProcessRunner()
+    public init() {}
+
+    public func check(_ diff: UnifiedDiff, repositoryRoot: URL, timeout: Duration = .seconds(10)) async throws {
+        let result = try await runner.run(URL(fileURLWithPath: "/usr/bin/git"), arguments: ["apply", "--check", "-"],
+                                          currentDirectory: repositoryRoot, stdin: Data(diff.text.utf8), timeout: timeout)
+        guard result.status == 0 else { throw DiffError.checkFailed(result.stderr) }
+    }
+}

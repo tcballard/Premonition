@@ -678,3 +678,70 @@ Close the durable S0 session with an exact, evidence-backed handoff for later wo
 ### Next entry state
 
 - When work resumes, first read PREMONITION_SPEC.md §11 and §13 plus BUILDLOG entries S0.2–S0.3, inspect PR #5 and the branch state, then begin S1 only after owner direction. S1 starts with the headless deterministic safety core; the real CodexExecutor remains S2 scope.
+
+---
+
+## Entry S1.1 — Headless safety core verified
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T07:43:12+01:00
+
+**Phase:** S1
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Implement and verify the deterministic headless safety core under issue #6 without beginning the production Codex executor or UI phases.
+
+### Completed
+
+- Added type-before-read clipboard filtering, full-hash ten-minute deduplication, two-second debounce abstraction and a multilingual deterministic error gate.
+- Added canonical allowlist/repository resolution, shape-locked safe-default configuration, persisted cap/state shapes and content-free verdict records.
+- Added a single canonical unified-diff parser, path/symlink bounds validator and non-mutating `git apply --check` boundary.
+- Added a subprocess runner with stdin, incremental stdout lines, bounded stderr, timeout and cancellation termination.
+- Added the candidate single-flight/cap state boundary, fixture replay/loading and deterministic initial/escalation fixture outcomes; no production Codex invocation exists in S1.
+- Added headless A2, A5, A6, A7 and A9 acceptance coverage plus unit/integration coverage and the S1 architecture and threat model.
+- Completed the required Sol review. It found and resolved three gaps before exit: configuration covered only part of the locked schema, deduplication used the short logging hash instead of full SHA-256, and verdict kinds omitted later lifecycle decisions.
+
+### Decisions and provenance
+
+- **Owner decision:** Begin the next build phase after confirming S0 pull request #5 was merged.
+- **Sol implemented:** S1 safety-core code, deterministic fixture boundaries, tests, architecture, threat model and phase evidence.
+- **Sol reviewed:** Privacy ordering, config and logging shapes, diff/path boundaries, process lifetime, acceptance mapping and strict S1/S2 scope separation.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- `Sources/PremonitionCore/` — clipboard, gate, resolver, configuration/state, logging, diff validation, process, speculation and fixture components.
+- `Tests/PremonitionCoreTests/PremonitionCoreTests.swift` — focused unit and integration coverage.
+- `Tests/AcceptanceTests/SafetyCoreAcceptanceTests.swift` — named headless A2/A5/A6/A7/A9 contracts.
+- `docs/architecture.md` and `docs/threat-model.md` — reviewed S1 system and safety boundaries.
+- Issue #6 and branch `codex/issue-6-headless-safety-core` — S1 work surface.
+
+### Verification
+
+- `swift test --filter PremonitionCoreTests` — focused safety-core suite passed during implementation.
+- `swift test --filter AcceptanceTests` — 5 named headless acceptance tests passed.
+- `swift test` — final Swift suite passed with 23 tests and zero issues after the Sol review corrections, including the retained S0 scaffold regression.
+- `scripts/test.sh` — repository exit suite passed: Swift tests, deterministic shallow/deep demo failures, overwrite refusal and measurement-normalisation boundaries.
+- `git diff --check` — passed before the final log update.
+
+### Deviations
+
+- The first sandboxed `scripts/test.sh` attempt could not write Swift/Clang user caches; the same repository script passed with normal cache access. This was an execution-sandbox constraint, not a product failure.
+
+### Risks and missing evidence
+
+- The production Codex process tree, JSONL contract and real timeout/escalation path remain deliberately unimplemented until S2.
+- Symlink targets can change after validation; the future explicit Apply path must revalidate immediately before mutation.
+- V14 still requires the durable thread's `/feedback` ID before submission.
+
+### Next entry state
+
+- After issue #6 is committed, pushed, reviewed and merged, begin S2 by re-reading the live CLI contract and implementing only the production `CodexExecutor`, explicit Sol effort roles and real headless escalation path. Do not begin S3 clipboard/UI integration.
