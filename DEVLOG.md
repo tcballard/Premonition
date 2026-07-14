@@ -149,3 +149,19 @@ The rest of the foundation is in place: deterministic demo failures, a measured 
 So S0 is partial, not complete. The next move is narrow: isolate why the CLI output is invalid, rerun the benchmark after the contract correction, then earn the S1 entry gate rather than declaring it.
 
 **Source:** `BUILDLOG.md`, Entry S0.1
+
+---
+
+## S0.2 — The model was fine; the ruler was bent
+
+**Date:** 2026-07-14
+
+The zero-out-of-fifteen result was real output from a broken measurement contract. The benchmark sent raw final text straight to Git, while Premonition's actual validator permits one surrounding Markdown fence. Worse, it threw away the reason each check failed.
+
+The corrected harness now measures the contract the product will use and reports only safe shape and reason enums. Low effort landed five applicable patches from five attempts. Medium and High each landed four; High took noticeably longer on the median.
+
+That gives S0 its defaults: Low for the first pass, Medium for escalation and Low for the short rationale. Every call stayed pinned to GPT-5.6 Sol. Luna and Terra remain outside v0.1, exactly as the specification requires.
+
+The full scaffold suite and real app-bundle launch are green again. S0 is complete. Next is the headless safety core—not the live executor, not the clipboard UI, and definitely not a victory lap around a misleading benchmark.
+
+**Source:** `BUILDLOG.md`, Entry S0.2

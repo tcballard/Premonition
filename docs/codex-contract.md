@@ -27,15 +27,35 @@ contents were inspected.
 ## S0 shallow-fixture measurements
 
 Five runs per effort, 120-second per-run bound; validity means the final agent
-message passed `git apply --check` against the untouched generated fixture.
+message passed the contract-correct normalisation and `git apply --check`
+against the untouched generated fixture.
+The first benchmark run reported low 0/5, medium 0/5 and high 0/5. That result
+is retained as superseded evidence: the harness passed raw model text directly
+to `git apply --check`, while Premonition's authoritative validator first strips
+one surrounding Markdown fence. It also discarded every apply diagnostic, so
+the result could not distinguish output-shape failures. This was a benchmark
+validator defect, not evidence that Sol could not produce the fixture patch.
+
+The corrected harness shares the single-fence contract and emits only safe
+shape/reason enums in opt-in diagnostics. A plain medium-effort diagnostic
+applied successfully; repeating it with the original temporary-path prefix
+also applied, ruling out path-triggered skill routing as the cause.
+
+Corrected five-run benchmark:
 
 | Effort | Runs | Median seconds | Valid patches |
 | --- | ---: | ---: | ---: |
-| low | 5 | 48.32 | 0/5 |
-| medium | 5 | 16.02 | 0/5 |
-| high | 5 | 41.07 | 0/5 |
+| low | 5 | 20.73 | 5/5 |
+| medium | 5 | 20.37 | 4/5 |
+| high | 5 | 34.07 | 4/5 |
 
-No runtime default is selected from these results. All measured outputs were
-invalid, so the S0 contract/measurement criterion is recorded but the S1 entry
-gate remains blocked pending a focused diagnosis of CLI instruction/skill
-loading and diff output. Raw prompts and model outputs were not persisted.
+Selected defaults:
+
+- initial speculation: `low` (5/5 validity and low latency);
+- escalation: `medium` (verified higher effort than Low, equal observed validity
+  to High and materially lower median latency than High);
+- rationale: `low` (the lowest verified viable effort for a bounded prose role).
+
+Every invocation remained explicitly pinned to `gpt-5.6-sol`; Luna and Terra
+were not benchmarked because §13 makes Sol the only real v0.1 executor. Raw
+prompts and model outputs were not persisted.

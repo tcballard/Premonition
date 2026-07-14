@@ -546,3 +546,75 @@ Execute S0 completely and only S0, leaving a verified, reviewable foundation for
 ### Next entry state
 
 - Resume S0 on issue #4. First isolate the invalid-patch cause using the generated demo repository without persisting model output, amend `docs/codex-contract.md`, rerun five calls per viable effort, select defaults only if validity supports them, then run the complete S0 exit suite. Do not begin S1.
+
+---
+
+## Entry S0.2 — Benchmark corrected and S0 exit verified
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T07:16:29+01:00
+
+**Phase:** S0
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Identify the cause of S0.1's invalid-output result, correct the benchmark contract, rerun the five-per-effort measurement and verify the S0 exit state without beginning S1.
+
+### Completed
+
+- Identified a benchmark validator defect: the harness passed raw final text directly to `git apply --check` instead of applying the specification's single-surrounding-fence normalisation, and discarded all apply diagnostics.
+- Added shared-contract fence normalisation, safe reason/shape diagnostics, bounded diagnostic controls and regression coverage to the measurement harness.
+- Ruled out the old temporary-path prefix as a cause: both neutral and original-prefix medium diagnostics produced plain applicable Git diffs.
+- Reran five shallow-fixture calls at each verified effort, all explicitly pinned to `gpt-5.6-sol`.
+- Recorded corrected results: Low 20.73 s median and 5/5 valid; Medium 20.37 s and 4/5; High 34.07 s and 4/5.
+- Selected Low for initial speculation, Medium for escalation and Low for rationale. Medium is a higher effort than Low, matched High's observed validity and avoided High's higher median latency.
+- Kept Luna and Terra out of the benchmark because §13 settles GPT-5.6 Sol as the only real v0.1 executor.
+- Completed the S0 exit suite and updated the Codex contract and Sol ledger.
+
+### Decisions and provenance
+
+- **Owner decision:** Review the invalid-output cause and rerun Medium then High while confirming the model remains pinned to GPT-5.6 Sol.
+- **Sol implemented:** Measurement normalisation, safe diagnostics, regression test, corrected benchmark, effort selection and S0 evidence updates.
+- **Sol reviewed:** Cause classification, model pinning, §13 scope, effort trade-offs and S0 exit criteria.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- `scripts/measure-sol.py` — contract-correct normalisation, safe diagnostics and bounded benchmark controls.
+- `scripts/test-measure-sol.py` — regression coverage for plain, single-fenced and prose-wrapped output boundaries.
+- `scripts/test.sh` — includes measurement-normalisation regression coverage.
+- `docs/codex-contract.md` — retains the superseded result, records the cause, corrected measurements and selected efforts.
+- `docs/build-week/sol-ledger.md` — append-only S0 correction and verification row.
+
+### Verification
+
+- `python3 -m py_compile scripts/measure-sol.py scripts/test-measure-sol.py` — passed.
+- `python3 scripts/test-measure-sol.py` — plain diff retained, one surrounding fence stripped and prose-wrapped fence rejected as a boundary; passed.
+- `python3 -u scripts/measure-sol.py --runs 1 --effort medium --diagnose` — plain Git diff, 312 bytes, applicable, 29.27 s; no raw output persisted.
+- Original-prefix controlled diagnostic — plain Git diff, 312 bytes, applicable, 13.57 s; path-triggered routing ruled out.
+- `python3 -u scripts/measure-sol.py` — 15 corrected runs completed: Low 20.73 s/5 of 5, Medium 20.37 s/4 of 5, High 34.07 s/4 of 5.
+- `scripts/test.sh` — Swift build passed; 2 Swift Testing tests, demo repository checks and measurement-normalisation checks passed.
+- `scripts/build-app.sh release` — release bundle staged successfully at `dist/Premonition.app`.
+- `script/build_and_run.sh --verify` — real debug `.app` rebuilt, launched and process verification exited 0.
+
+### Deviations
+
+- S0.1's 0/15 result is superseded rather than rewritten. It measured a defective harness and is retained as historical evidence in BUILDLOG and the Codex contract.
+- `/feedback` remains unavailable. The stable environment-provided Session ID is sufficient for the internal S0 ledger, while V14 remains explicit submission evidence debt for S6.
+
+### Risks and missing evidence
+
+- The shallow fixture has only five observations per effort; measurements guide defaults but do not prove general patch quality.
+- Medium and High each produced one invalid patch. S2 validation and the single permitted escalation remain load-bearing.
+- V14 still requires the durable thread's `/feedback` ID to be resolved before submission.
+
+### Next entry state
+
+- S1 may begin from commit-backed S0 evidence after the updated draft PR is reviewed. Start with the headless deterministic safety core only: gate corpus, resolver, configuration/state/verdict boundaries, canonical diff parser, ProcessRunner, candidate state machine and FixtureExecutor. Do not implement the real CodexExecutor until S2.
