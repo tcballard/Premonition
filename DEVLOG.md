@@ -165,3 +165,17 @@ That gives S0 its defaults: Low for the first pass, Medium for escalation and Lo
 The full scaffold suite and real app-bundle launch are green again. S0 is complete. Next is the headless safety core—not the live executor, not the clipboard UI, and definitely not a victory lap around a misleading benchmark.
 
 **Source:** `BUILDLOG.md`, Entry S0.2
+
+---
+
+## S0.3 — Stop at the clean seam
+
+**Date:** 2026-07-14
+
+This is a good place to put the tools down. S0 is complete, its two commits are pushed, and the draft PR is waiting for review rather than quietly drifting into S1.
+
+Nothing new was squeezed into the final minutes. The benchmark correction, selected Sol efforts and exit verification stay in S0.2; this entry simply makes the handoff explicit.
+
+When the build resumes, it starts with the headless safety core. The real executor still belongs to S2. One phase at a time.
+
+**Source:** `BUILDLOG.md`, Entry S0.3

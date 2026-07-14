@@ -618,3 +618,63 @@ Identify the cause of S0.1's invalid-output result, correct the benchmark contra
 ### Next entry state
 
 - S1 may begin from commit-backed S0 evidence after the updated draft PR is reviewed. Start with the headless deterministic safety core only: gate corpus, resolver, configuration/state/verdict boundaries, canonical diff parser, ProcessRunner, candidate state machine and FixtureExecutor. Do not implement the real CodexExecutor until S2.
+
+---
+
+## Entry S0.3 — Durable S0 session closed
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T07:22:46+01:00
+
+**Phase:** S0
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Close the durable S0 session with an exact, evidence-backed handoff for later work.
+
+### Completed
+
+- Confirmed the S0 branch is clean and matches its remote after commit `bd7634d`.
+- Confirmed draft pull request #5 is open, targets `main` and is titled `chore(scaffold): complete S0 foundation [issue:#4]`.
+- Preserved S0.2 as the implementation and verification record; this entry adds no product work or new verification claim.
+- Recorded the owner's decision to end this session and resume next steps later.
+
+### Decisions and provenance
+
+- **Owner decision:** End the durable session at the completed S0 boundary and pick up the next steps later.
+- **Sol implemented:** Paired session-closing handoff only.
+- **Sol reviewed:** Clean branch state, pushed commit, draft PR state and exact S1 entry boundary.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- Commit `bd7634d` — completed S0 benchmark correction and exit evidence.
+- Draft pull request #5 — open review surface targeting `main`.
+- `BUILDLOG.md` and `DEVLOG.md` — paired S0.3 session closure.
+- `docs/build-week/sol-ledger.md` — unchanged; the material S0.2 work is already recorded there.
+
+### Verification
+
+- `git status --short --branch` — clean branch tracking `origin/codex/issue-4-establish-s0-foundation` before this log-only checkpoint.
+- `git log -2 --oneline --decorate` — S0 commits `bd7634d` and `1d4a686` observed.
+- `gh pr view 5 --json number,title,isDraft,state,url` — PR #5 observed open and draft with the completed S0 title.
+
+### Deviations
+
+- None. This is a requested session-boundary checkpoint, not a new build phase.
+
+### Risks and missing evidence
+
+- V14 still requires the durable thread's `/feedback` ID before submission.
+- Draft PR #5 remains unmerged and requires owner review.
+
+### Next entry state
+
+- When work resumes, first read PREMONITION_SPEC.md §11 and §13 plus BUILDLOG entries S0.2–S0.3, inspect PR #5 and the branch state, then begin S1 only after owner direction. S1 starts with the headless deterministic safety core; the real CodexExecutor remains S2 scope.
