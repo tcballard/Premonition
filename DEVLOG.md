@@ -133,3 +133,19 @@ Premonition now records that contract in the specification. The older `agent/` d
 The documents still are not on `main`. That only happens after review. Next is a deliberate look at PR #3, then S0 with the stable session, ledger, `AGENTS.md` and provenance checker.
 
 **Source:** `BUILDLOG.md`, Entry P7
+
+---
+
+## S0.1 — The shell exists; the model contract blinked
+
+**Date:** 2026-07-14
+
+Premonition now has a real native menu-bar shell, not just a plan. SwiftPM builds it, the repository stages an actual `.app`, and one run script owns the developer loop. The shell is intentionally inert: no clipboard watcher, no executor and no patch path have leaked in from S1.
+
+The less comfortable result came from the live Sol benchmark. All fifteen shallow-fixture outputs failed `git apply --check`. Medium effort was quickest on the median, but zero valid patches means speed is not a useful winner and no runtime default has been selected.
+
+The rest of the foundation is in place: deterministic demo failures, a measured ephemeral CLI contract, the prior/new boundary, stable session provenance and repository checks. The staged app launches as an `LSUIElement` menu-bar process on the macOS 14 floor.
+
+So S0 is partial, not complete. The next move is narrow: isolate why the CLI output is invalid, rerun the benchmark after the contract correction, then earn the S1 entry gate rather than declaring it.
+
+**Source:** `BUILDLOG.md`, Entry S0.1

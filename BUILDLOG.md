@@ -473,3 +473,76 @@ Inspect the owner-supplied reference pull request `tcballard/SortingHat#14`, mak
 ### Next entry state
 
 - Owner reviews and merges draft PR #3 when satisfied. After merge, start the durable explicitly GPT-5.6 Sol-selected S0 thread, capture `/feedback`, create the ledger, add `AGENTS.md` with the PR contract and implement the provenance checker.
+
+---
+
+## Entry S0.1 — S0 foundation built; Sol patch benchmark blocks exit
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T06:55:10+01:00
+
+**Phase:** S0
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` was not callable on this surface
+
+### Objective
+
+Execute S0 completely and only S0, leaving a verified, reviewable foundation for S1.
+
+### Completed
+
+- Established issue #4 and branch `codex/issue-4-establish-s0-foundation` from clean `main` at `2e83e846d9bbe8764dce82a2e0869ce5655ea24c`.
+- Added the SwiftPM library, executable and two S0 test targets without S1 product behaviour.
+- Added a narrow `NSStatusItem` menu-bar shell, deterministic native `.app` assembly, the single build/run entrypoint and Codex Run action.
+- Added deterministic shallow and deep demo failures with overwrite refusal and automated verification.
+- Verified Codex CLI 0.144.2 flag placement, pinned model, low/medium/high effort acceptance, JSONL completion shape and ephemeral session-file behaviour.
+- Added the prior/new boundary, Sol ledger, paired-log checker, provenance checker and durable repository guidance.
+- Measured five shallow-fixture runs per effort. Low: 48.32 s median, 0/5 valid; medium: 16.02 s, 0/5; high: 41.07 s, 0/5.
+
+### Decisions and provenance
+
+- **Owner decision:** Execute S0 only under the attached durable GPT-5.6 Sol brief and the repository specification.
+- **Sol implemented:** S0 scaffold, scripts, demo generator, tests, CLI contract, measurements and provenance records.
+- **Sol reviewed:** Phase boundary, macOS 14+/SwiftPM/AppKit architecture, C1-C5/§13 invariants and measured blocker classification.
+- **Human-authored and Sol-reviewed:** Pre-existing `PREMONITION_SPEC.md`, BUILDLOG P0-P7, DEVLOG P0-P7 and `LICENSE`.
+
+### Artefacts
+
+- `Package.swift`, `Sources/`, `Tests/` — headless core boundary and menu-bar shell.
+- `scripts/`, `script/build_and_run.sh`, `packaging/` — deterministic build, launch, demo and evidence tooling.
+- `.codex/environments/environment.toml` — one Run action.
+- `docs/codex-contract.md` — verified CLI contract and aggregate measurements.
+- `docs/build-week/prior-new-boundary.md`, `docs/build-week/sol-ledger.md` — event boundary and primary provenance record.
+- `AGENTS.md` — durable phase, invariant and issue/PR workflow rules.
+
+### Verification
+
+- `swift test --filter minimumMacOSVersionIsPinned` — focused test built successfully and passed (1 test); the first sandboxed attempt failed only because Swift/Clang user caches were not writable, then passed with normal cache access.
+- Harmless ephemeral Sol call plus aggregate session-file counts — exit 0, final agent message `OK`, count 190 before and 190 after; no historical session names or contents inspected.
+- `python3 -u scripts/measure-sol.py` — 15 bounded ephemeral calls completed; medians and 0/15 valid-patch result recorded above.
+- `scripts/test.sh` — Swift build passed; 2 Swift Testing tests passed; deterministic shallow/deep demo failures and overwrite refusal passed.
+- `scripts/build-app.sh release` — release product built and staged at `dist/Premonition.app`.
+- `script/build_and_run.sh --verify` — debug bundle rebuilt, opened with `/usr/bin/open -n` and process verification exited 0 after correcting stdout path capture.
+- `plutil` inspection — staged bundle has identifier `co.armytage.Premonition`, macOS minimum 14.0 and `LSUIElement = true`.
+
+### Deviations
+
+- `/feedback` was unavailable as an action on this Codex surface. The stable `CODEX_THREAD_ID` was recorded instead; V14 still requires later `/feedback` resolution.
+- CLI 0.144.2 requires global `--ask-for-approval never` before `exec`, rather than the expected post-`exec` placement in the specification.
+- The S0 benchmark produced no valid shallow patch at any measured effort, so no reasoning-effort defaults were selected and S0 is not marked complete.
+
+### Risks and missing evidence
+
+- Diagnose why live CLI outputs fail `git apply --check`; observed CLI skill/plugin loading is a candidate but not yet established as cause.
+- Rerun the required five-per-effort benchmark after the contract fix and select evidence-backed initial, escalation and rationale efforts.
+- Run paired-log and provenance checks after the material commit exists, then update the draft PR evidence.
+- `/feedback` must later resolve this durable thread for V14.
+
+### Next entry state
+
+- Resume S0 on issue #4. First isolate the invalid-patch cause using the generated demo repository without persisting model output, amend `docs/codex-contract.md`, rerun five calls per viable effort, select defaults only if validity supports them, then run the complete S0 exit suite. Do not begin S1.
