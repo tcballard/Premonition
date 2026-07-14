@@ -133,3 +133,49 @@ Premonition now records that contract in the specification. The older `agent/` d
 The documents still are not on `main`. That only happens after review. Next is a deliberate look at PR #3, then S0 with the stable session, ledger, `AGENTS.md` and provenance checker.
 
 **Source:** `BUILDLOG.md`, Entry P7
+
+---
+
+## S0.1 — The shell exists; the model contract blinked
+
+**Date:** 2026-07-14
+
+Premonition now has a real native menu-bar shell, not just a plan. SwiftPM builds it, the repository stages an actual `.app`, and one run script owns the developer loop. The shell is intentionally inert: no clipboard watcher, no executor and no patch path have leaked in from S1.
+
+The less comfortable result came from the live Sol benchmark. All fifteen shallow-fixture outputs failed `git apply --check`. Medium effort was quickest on the median, but zero valid patches means speed is not a useful winner and no runtime default has been selected.
+
+The rest of the foundation is in place: deterministic demo failures, a measured ephemeral CLI contract, the prior/new boundary, stable session provenance and repository checks. The staged app launches as an `LSUIElement` menu-bar process on the macOS 14 floor.
+
+So S0 is partial, not complete. The next move is narrow: isolate why the CLI output is invalid, rerun the benchmark after the contract correction, then earn the S1 entry gate rather than declaring it.
+
+**Source:** `BUILDLOG.md`, Entry S0.1
+
+---
+
+## S0.2 — The model was fine; the ruler was bent
+
+**Date:** 2026-07-14
+
+The zero-out-of-fifteen result was real output from a broken measurement contract. The benchmark sent raw final text straight to Git, while Premonition's actual validator permits one surrounding Markdown fence. Worse, it threw away the reason each check failed.
+
+The corrected harness now measures the contract the product will use and reports only safe shape and reason enums. Low effort landed five applicable patches from five attempts. Medium and High each landed four; High took noticeably longer on the median.
+
+That gives S0 its defaults: Low for the first pass, Medium for escalation and Low for the short rationale. Every call stayed pinned to GPT-5.6 Sol. Luna and Terra remain outside v0.1, exactly as the specification requires.
+
+The full scaffold suite and real app-bundle launch are green again. S0 is complete. Next is the headless safety core—not the live executor, not the clipboard UI, and definitely not a victory lap around a misleading benchmark.
+
+**Source:** `BUILDLOG.md`, Entry S0.2
+
+---
+
+## S0.3 — Stop at the clean seam
+
+**Date:** 2026-07-14
+
+This is a good place to put the tools down. S0 is complete, its two commits are pushed, and the draft PR is waiting for review rather than quietly drifting into S1.
+
+Nothing new was squeezed into the final minutes. The benchmark correction, selected Sol efforts and exit verification stay in S0.2; this entry simply makes the handoff explicit.
+
+When the build resumes, it starts with the headless safety core. The real executor still belongs to S2. One phase at a time.
+
+**Source:** `BUILDLOG.md`, Entry S0.3

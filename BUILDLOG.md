@@ -473,3 +473,208 @@ Inspect the owner-supplied reference pull request `tcballard/SortingHat#14`, mak
 ### Next entry state
 
 - Owner reviews and merges draft PR #3 when satisfied. After merge, start the durable explicitly GPT-5.6 Sol-selected S0 thread, capture `/feedback`, create the ledger, add `AGENTS.md` with the PR contract and implement the provenance checker.
+
+---
+
+## Entry S0.1 — S0 foundation built; Sol patch benchmark blocks exit
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T06:55:10+01:00
+
+**Phase:** S0
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` was not callable on this surface
+
+### Objective
+
+Execute S0 completely and only S0, leaving a verified, reviewable foundation for S1.
+
+### Completed
+
+- Established issue #4 and branch `codex/issue-4-establish-s0-foundation` from clean `main` at `2e83e846d9bbe8764dce82a2e0869ce5655ea24c`.
+- Added the SwiftPM library, executable and two S0 test targets without S1 product behaviour.
+- Added a narrow `NSStatusItem` menu-bar shell, deterministic native `.app` assembly, the single build/run entrypoint and Codex Run action.
+- Added deterministic shallow and deep demo failures with overwrite refusal and automated verification.
+- Verified Codex CLI 0.144.2 flag placement, pinned model, low/medium/high effort acceptance, JSONL completion shape and ephemeral session-file behaviour.
+- Added the prior/new boundary, Sol ledger, paired-log checker, provenance checker and durable repository guidance.
+- Measured five shallow-fixture runs per effort. Low: 48.32 s median, 0/5 valid; medium: 16.02 s, 0/5; high: 41.07 s, 0/5.
+
+### Decisions and provenance
+
+- **Owner decision:** Execute S0 only under the attached durable GPT-5.6 Sol brief and the repository specification.
+- **Sol implemented:** S0 scaffold, scripts, demo generator, tests, CLI contract, measurements and provenance records.
+- **Sol reviewed:** Phase boundary, macOS 14+/SwiftPM/AppKit architecture, C1-C5/§13 invariants and measured blocker classification.
+- **Human-authored and Sol-reviewed:** Pre-existing `PREMONITION_SPEC.md`, BUILDLOG P0-P7, DEVLOG P0-P7 and `LICENSE`.
+
+### Artefacts
+
+- `Package.swift`, `Sources/`, `Tests/` — headless core boundary and menu-bar shell.
+- `scripts/`, `script/build_and_run.sh`, `packaging/` — deterministic build, launch, demo and evidence tooling.
+- `.codex/environments/environment.toml` — one Run action.
+- `docs/codex-contract.md` — verified CLI contract and aggregate measurements.
+- `docs/build-week/prior-new-boundary.md`, `docs/build-week/sol-ledger.md` — event boundary and primary provenance record.
+- `AGENTS.md` — durable phase, invariant and issue/PR workflow rules.
+
+### Verification
+
+- `swift test --filter minimumMacOSVersionIsPinned` — focused test built successfully and passed (1 test); the first sandboxed attempt failed only because Swift/Clang user caches were not writable, then passed with normal cache access.
+- Harmless ephemeral Sol call plus aggregate session-file counts — exit 0, final agent message `OK`, count 190 before and 190 after; no historical session names or contents inspected.
+- `python3 -u scripts/measure-sol.py` — 15 bounded ephemeral calls completed; medians and 0/15 valid-patch result recorded above.
+- `scripts/test.sh` — Swift build passed; 2 Swift Testing tests passed; deterministic shallow/deep demo failures and overwrite refusal passed.
+- `scripts/build-app.sh release` — release product built and staged at `dist/Premonition.app`.
+- `script/build_and_run.sh --verify` — debug bundle rebuilt, opened with `/usr/bin/open -n` and process verification exited 0 after correcting stdout path capture.
+- `plutil` inspection — staged bundle has identifier `co.armytage.Premonition`, macOS minimum 14.0 and `LSUIElement = true`.
+
+### Deviations
+
+- `/feedback` was unavailable as an action on this Codex surface. The stable `CODEX_THREAD_ID` was recorded instead; V14 still requires later `/feedback` resolution.
+- CLI 0.144.2 requires global `--ask-for-approval never` before `exec`, rather than the expected post-`exec` placement in the specification.
+- The S0 benchmark produced no valid shallow patch at any measured effort, so no reasoning-effort defaults were selected and S0 is not marked complete.
+
+### Risks and missing evidence
+
+- Diagnose why live CLI outputs fail `git apply --check`; observed CLI skill/plugin loading is a candidate but not yet established as cause.
+- Rerun the required five-per-effort benchmark after the contract fix and select evidence-backed initial, escalation and rationale efforts.
+- Run paired-log and provenance checks after the material commit exists, then update the draft PR evidence.
+- `/feedback` must later resolve this durable thread for V14.
+
+### Next entry state
+
+- Resume S0 on issue #4. First isolate the invalid-patch cause using the generated demo repository without persisting model output, amend `docs/codex-contract.md`, rerun five calls per viable effort, select defaults only if validity supports them, then run the complete S0 exit suite. Do not begin S1.
+
+---
+
+## Entry S0.2 — Benchmark corrected and S0 exit verified
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T07:16:29+01:00
+
+**Phase:** S0
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Identify the cause of S0.1's invalid-output result, correct the benchmark contract, rerun the five-per-effort measurement and verify the S0 exit state without beginning S1.
+
+### Completed
+
+- Identified a benchmark validator defect: the harness passed raw final text directly to `git apply --check` instead of applying the specification's single-surrounding-fence normalisation, and discarded all apply diagnostics.
+- Added shared-contract fence normalisation, safe reason/shape diagnostics, bounded diagnostic controls and regression coverage to the measurement harness.
+- Ruled out the old temporary-path prefix as a cause: both neutral and original-prefix medium diagnostics produced plain applicable Git diffs.
+- Reran five shallow-fixture calls at each verified effort, all explicitly pinned to `gpt-5.6-sol`.
+- Recorded corrected results: Low 20.73 s median and 5/5 valid; Medium 20.37 s and 4/5; High 34.07 s and 4/5.
+- Selected Low for initial speculation, Medium for escalation and Low for rationale. Medium is a higher effort than Low, matched High's observed validity and avoided High's higher median latency.
+- Kept Luna and Terra out of the benchmark because §13 settles GPT-5.6 Sol as the only real v0.1 executor.
+- Completed the S0 exit suite and updated the Codex contract and Sol ledger.
+
+### Decisions and provenance
+
+- **Owner decision:** Review the invalid-output cause and rerun Medium then High while confirming the model remains pinned to GPT-5.6 Sol.
+- **Sol implemented:** Measurement normalisation, safe diagnostics, regression test, corrected benchmark, effort selection and S0 evidence updates.
+- **Sol reviewed:** Cause classification, model pinning, §13 scope, effort trade-offs and S0 exit criteria.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- `scripts/measure-sol.py` — contract-correct normalisation, safe diagnostics and bounded benchmark controls.
+- `scripts/test-measure-sol.py` — regression coverage for plain, single-fenced and prose-wrapped output boundaries.
+- `scripts/test.sh` — includes measurement-normalisation regression coverage.
+- `docs/codex-contract.md` — retains the superseded result, records the cause, corrected measurements and selected efforts.
+- `docs/build-week/sol-ledger.md` — append-only S0 correction and verification row.
+
+### Verification
+
+- `python3 -m py_compile scripts/measure-sol.py scripts/test-measure-sol.py` — passed.
+- `python3 scripts/test-measure-sol.py` — plain diff retained, one surrounding fence stripped and prose-wrapped fence rejected as a boundary; passed.
+- `python3 -u scripts/measure-sol.py --runs 1 --effort medium --diagnose` — plain Git diff, 312 bytes, applicable, 29.27 s; no raw output persisted.
+- Original-prefix controlled diagnostic — plain Git diff, 312 bytes, applicable, 13.57 s; path-triggered routing ruled out.
+- `python3 -u scripts/measure-sol.py` — 15 corrected runs completed: Low 20.73 s/5 of 5, Medium 20.37 s/4 of 5, High 34.07 s/4 of 5.
+- `scripts/test.sh` — Swift build passed; 2 Swift Testing tests, demo repository checks and measurement-normalisation checks passed.
+- `scripts/build-app.sh release` — release bundle staged successfully at `dist/Premonition.app`.
+- `script/build_and_run.sh --verify` — real debug `.app` rebuilt, launched and process verification exited 0.
+
+### Deviations
+
+- S0.1's 0/15 result is superseded rather than rewritten. It measured a defective harness and is retained as historical evidence in BUILDLOG and the Codex contract.
+- `/feedback` remains unavailable. The stable environment-provided Session ID is sufficient for the internal S0 ledger, while V14 remains explicit submission evidence debt for S6.
+
+### Risks and missing evidence
+
+- The shallow fixture has only five observations per effort; measurements guide defaults but do not prove general patch quality.
+- Medium and High each produced one invalid patch. S2 validation and the single permitted escalation remain load-bearing.
+- V14 still requires the durable thread's `/feedback` ID to be resolved before submission.
+
+### Next entry state
+
+- S1 may begin from commit-backed S0 evidence after the updated draft PR is reviewed. Start with the headless deterministic safety core only: gate corpus, resolver, configuration/state/verdict boundaries, canonical diff parser, ProcessRunner, candidate state machine and FixtureExecutor. Do not implement the real CodexExecutor until S2.
+
+---
+
+## Entry S0.3 — Durable S0 session closed
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T07:22:46+01:00
+
+**Phase:** S0
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Close the durable S0 session with an exact, evidence-backed handoff for later work.
+
+### Completed
+
+- Confirmed the S0 branch is clean and matches its remote after commit `bd7634d`.
+- Confirmed draft pull request #5 is open, targets `main` and is titled `chore(scaffold): complete S0 foundation [issue:#4]`.
+- Preserved S0.2 as the implementation and verification record; this entry adds no product work or new verification claim.
+- Recorded the owner's decision to end this session and resume next steps later.
+
+### Decisions and provenance
+
+- **Owner decision:** End the durable session at the completed S0 boundary and pick up the next steps later.
+- **Sol implemented:** Paired session-closing handoff only.
+- **Sol reviewed:** Clean branch state, pushed commit, draft PR state and exact S1 entry boundary.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- Commit `bd7634d` — completed S0 benchmark correction and exit evidence.
+- Draft pull request #5 — open review surface targeting `main`.
+- `BUILDLOG.md` and `DEVLOG.md` — paired S0.3 session closure.
+- `docs/build-week/sol-ledger.md` — unchanged; the material S0.2 work is already recorded there.
+
+### Verification
+
+- `git status --short --branch` — clean branch tracking `origin/codex/issue-4-establish-s0-foundation` before this log-only checkpoint.
+- `git log -2 --oneline --decorate` — S0 commits `bd7634d` and `1d4a686` observed.
+- `gh pr view 5 --json number,title,isDraft,state,url` — PR #5 observed open and draft with the completed S0 title.
+
+### Deviations
+
+- None. This is a requested session-boundary checkpoint, not a new build phase.
+
+### Risks and missing evidence
+
+- V14 still requires the durable thread's `/feedback` ID before submission.
+- Draft PR #5 remains unmerged and requires owner review.
+
+### Next entry state
+
+- When work resumes, first read PREMONITION_SPEC.md §11 and §13 plus BUILDLOG entries S0.2–S0.3, inspect PR #5 and the branch state, then begin S1 only after owner direction. S1 starts with the headless deterministic safety core; the real CodexExecutor remains S2 scope.
