@@ -14,6 +14,7 @@ public enum CandidateAdmission: Equatable, Sendable {
 
 public struct CandidateStateMachine: Sendable {
     public private(set) var state: CandidateState = .idle
+    public var capState: DailyCapState { cap.state }
     private var cap: DailyCap
 
     public init(dailyCap: DailyCap) { self.cap = dailyCap }

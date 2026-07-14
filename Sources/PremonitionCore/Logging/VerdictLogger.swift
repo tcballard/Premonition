@@ -40,6 +40,13 @@ public struct VerdictRecord: Codable, Equatable, Sendable {
         case durationMilliseconds = "duration_ms"
         case reason
     }
+
+    public init(timestamp: Date, candidateHash: String?, verdict: VerdictKind, effortRole: String? = nil,
+                repositoryRoot: String? = nil, durationMilliseconds: Int? = nil, reason: String? = nil) {
+        self.timestamp = timestamp; self.candidateHash = candidateHash; self.verdict = verdict
+        self.effortRole = effortRole; self.repositoryRoot = repositoryRoot
+        self.durationMilliseconds = durationMilliseconds; self.reason = reason
+    }
 }
 
 public struct VerdictLogger: Sendable {

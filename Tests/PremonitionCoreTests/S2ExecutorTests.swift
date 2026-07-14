@@ -89,3 +89,20 @@ func pipelineTerminalFailure() async throws {
     #expect(await SpeculationPipeline(executor: executor).run(prompt: "error", repositoryRoot: root) == .discarded(calls: 2))
     #expect(await executor.captured().count == 2)
 }
+
+@Test("explicit patch apply requires a clean tree and produces an unstaged edit")
+func explicitApplyContract() async throws {
+    let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: root) }
+    try Data("old\n".utf8).write(to: root.appendingPathComponent("file.txt"))
+    _ = try await ProcessRunner().run(URL(fileURLWithPath: "/usr/bin/git"), arguments: ["init", "-q"], currentDirectory: root)
+    _ = try await ProcessRunner().run(URL(fileURLWithPath: "/usr/bin/git"), arguments: ["add", "file.txt"], currentDirectory: root)
+    _ = try await ProcessRunner().run(URL(fileURLWithPath: "/usr/bin/git"), arguments: ["-c", "user.name=Test", "-c", "user.email=test@example.com", "-c", "commit.gpgsign=false", "commit", "-qm", "base"], currentDirectory: root)
+    let diff = try UnifiedDiffParser().parse(pipelinePatch)
+    try await PatchApplier().apply(diff, repositoryRoot: root)
+    #expect(try String(contentsOf: root.appendingPathComponent("file.txt"), encoding: .utf8) == "new\n")
+    let status = try await ProcessRunner().run(URL(fileURLWithPath: "/usr/bin/git"), arguments: ["status", "--porcelain"], currentDirectory: root)
+    #expect(status.stdout == " M file.txt\n")
+    await #expect(throws: PatchApplyError.dirtyTree) { try await PatchApplier().apply(diff, repositoryRoot: root) }
+}

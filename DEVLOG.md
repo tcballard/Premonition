@@ -211,3 +211,19 @@ Two measurement wrinkles were worth keeping honest. Python created a cache befor
 This is still headless. The model path exists, but nobody using the menu bar can reach it yet. S3 is where the product surface finally meets the safety spine.
 
 **Source:** `BUILDLOG.md`, Entry S2.1
+
+---
+
+## S3.1 — The menu-bar shell became a product loop
+
+**Date:** 2026-07-14
+
+Premonition can now do the thing its menu-bar shell has been promising. It watches locally, admits only error-shaped text tied to an allowed repository, asks the pinned Sol executor for a patch and holds a validated fix for an explicit human choice.
+
+Apply is intentionally fussy. It checks the worktree again at the moment of the click, validates the patch again, uses only `git apply` and leaves the result unstaged. Copy and Dismiss release the candidate without touching the repository. Pause cancels work instead of merely changing an icon.
+
+Integration testing found two unglamorous but important process bugs: an EOF handler could spin, and a blocking wait could deadlock the async task running Codex or Git. Both are fixed, and the complete repository suite now passes with the new functional surface in place.
+
+This is not the polished S3 finish yet. The app bundle launches, but the owner still needs to walk the fresh-config onboarding and the real clipboard-to-click path before A1, A8 and A14 can be claimed. That hands-on pass—and the UI/accessibility review it informs—is the next move.
+
+**Source:** `BUILDLOG.md`, Entry S3.1

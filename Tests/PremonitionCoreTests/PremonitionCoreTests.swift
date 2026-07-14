@@ -97,6 +97,16 @@ func repositoryResolution() throws {
     #expect(result?.root == a.resolvingSymlinksInPath()); #expect(result?.matchedPathCount == 2)
 }
 
+@Test("resolver evaluates relative stack paths beneath allowlisted roots")
+func relativeRepositoryResolution() throws {
+    let root = try temporaryDirectory(); defer { try? FileManager.default.removeItem(at: root) }
+    try FileManager.default.createDirectory(at: root.appendingPathComponent(".git"), withIntermediateDirectories: true)
+    try FileManager.default.createDirectory(at: root.appendingPathComponent("Sources"), withIntermediateDirectories: true)
+    try Data().write(to: root.appendingPathComponent("Sources/main.swift"))
+    let result = RepositoryResolver().resolve(paths: ["Sources/main.swift"], allowlistedRoots: [root])
+    #expect(result?.root == root.resolvingSymlinksInPath())
+}
+
 private let validPatch = """
 diff --git a/file.txt b/file.txt
 --- a/file.txt

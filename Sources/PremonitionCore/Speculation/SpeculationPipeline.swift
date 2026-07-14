@@ -14,6 +14,7 @@ public struct SpeculationPipeline<E: Executor>: Sendable {
         let first = ExecutorRequest(purpose: .speculation, prompt: prompt, effort: .low,
                                     repositoryRoot: repositoryRoot, timeout: .seconds(120))
         if let diff = await attempt(first, root: repositoryRoot, onEvent: onEvent) { return .fixReady(diff, calls: 1) }
+        if Task.isCancelled { return .discarded(calls: 1) }
         let second = ExecutorRequest(purpose: .escalation, prompt: prompt, effort: .medium,
                                      repositoryRoot: repositoryRoot, timeout: .seconds(120))
         if let diff = await attempt(second, root: repositoryRoot, onEvent: onEvent) { return .fixReady(diff, calls: 2) }
@@ -32,6 +33,7 @@ public struct SpeculationPipeline<E: Executor>: Sendable {
     private func attempt(_ request: ExecutorRequest, root: URL,
                          onEvent: @escaping @Sendable (PipelineEvent) -> Void) async -> UnifiedDiff? {
         do {
+            try Task.checkCancellation()
             let result = try await executor.run(request: request, onEvent: onEvent)
             let diff = try UnifiedDiffParser().parse(result.finalText)
             try DiffBoundsValidator().validate(diff, repositoryRoot: root)
