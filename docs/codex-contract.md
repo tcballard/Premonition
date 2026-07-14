@@ -59,3 +59,19 @@ Selected defaults:
 Every invocation remained explicitly pinned to `gpt-5.6-sol`; Luna and Terra
 were not benchmarked because §13 makes Sol the only real v0.1 executor. Raw
 prompts and model outputs were not persisted.
+
+## S2 re-verification on Codex CLI 0.144.4
+
+Re-verified 2026-07-14 before implementing `CodexExecutor`. The S0 invocation
+shape remains valid: `--ask-for-approval never` is still global and precedes
+`exec`; `--json`, `--sandbox read-only`, `--ephemeral`,
+`--ignore-user-config`, explicit `--model gpt-5.6-sol` and the
+`model_reasoning_effort` override remain accepted.
+
+Two harmless Low-effort ephemeral calls emitted the same stable sequence:
+`thread.started`, `turn.started`, an `item.completed` `agent_message`, then
+`turn.completed` with usage. The corrected aggregate session-store check
+reported 158 files immediately before and after the second call. No historical
+session names or contents were inspected. CLI stderr contained model-catalog,
+plugin and MCP startup warnings; execution still completed successfully, so
+Premonition treats bounded stderr as diagnostics rather than result content.

@@ -63,7 +63,10 @@ public struct ProcessRunner: Sendable {
         process.standardInput = input
         output.fileHandleForReading.readabilityHandler = { handle in capture.appendOutput(handle.availableData) }
         errors.fileHandleForReading.readabilityHandler = { handle in capture.appendError(handle.availableData) }
-        if let environment { process.environment = environment }
+        var processEnvironment = environment ?? ProcessInfo.processInfo.environment
+        let prefix = "/opt/homebrew/bin:/usr/local/bin"
+        processEnvironment["PATH"] = prefix + ":" + (processEnvironment["PATH"] ?? "/usr/bin:/bin")
+        process.environment = processEnvironment
         do { try process.run() } catch { throw ProcessRunnerError.launch(error.localizedDescription) }
         if let stdin { input.fileHandleForWriting.write(stdin) }
         try? input.fileHandleForWriting.close()
@@ -80,7 +83,9 @@ public struct ProcessRunner: Sendable {
                 }
                 group.addTask {
                     try await Task.sleep(for: timeout)
-                    if process.isRunning { process.terminate() }
+                    if process.isRunning {
+                        terminateWithGrace(process)
+                    }
                     throw ProcessRunnerError.timedOut
                 }
                 defer { group.cancelAll() }
@@ -89,7 +94,15 @@ public struct ProcessRunner: Sendable {
                 return result
             }
         } onCancel: {
-            if process.isRunning { process.terminate() }
+            if process.isRunning { terminateWithGrace(process) }
+        }
+    }
+
+    private func terminateWithGrace(_ process: Process) {
+        let identifier = process.processIdentifier
+        process.terminate()
+        DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(250)) {
+            if process.isRunning { kill(identifier, SIGKILL) }
         }
     }
 }
