@@ -821,3 +821,69 @@ Implement the production Codex CLI executor and real headless speculation path u
 ### Next entry state
 
 - After issue #8 is committed, pushed, reviewed and merged with trailers preserved, begin S3 only: connect the verified pipeline to pasteboard polling, menu-bar states, popover, Settings/onboarding and explicit Apply/Copy/Dismiss behaviour. Do not begin S4 polish or release work.
+
+---
+
+## Entry S3.1 — Functional menu-bar loop reaches owner acceptance
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T18:49:38+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Connect the verified headless safety and executor layers to the functional menu-bar product under issue #10, stopping before S4 polish and retaining owner-visible acceptance as an explicit exit gate.
+
+### Completed
+
+- Added twice-per-second pasteboard polling with concealed/transient type inspection before string reads, two-second debounce and the existing gate, resolver, cap and single-flight admission order.
+- Connected admitted candidates to the pinned production Sol executor and canonical validation pipeline, with pause cancellation, ten-minute held-fix expiry and content-free lifecycle verdicts.
+- Replaced the inert status item with watching, speculating, fix-ready, paused and not-configured states plus a SwiftUI popover driven by one presentation model.
+- Added first-run Settings, allowlisted-root add/remove, privacy constitution, Codex path/status display, daily-cap visibility and sound preference without adding S4 polish or model controls.
+- Added explicit Apply, Copy and Dismiss actions. Apply rechecks literal clean-tree state and `git apply --check` at click time, then uses only `git apply` and leaves an unstaged edit.
+- Corrected repository resolution for relative stack paths and repaired two process-runner lifecycle defects found by integration testing: EOF handlers could spin and blocking process waiting could deadlock cooperative tasks.
+- Added explicit Apply and relative-path regression coverage; opening a held fix and pausing an active run now record the corresponding lifecycle verdicts.
+
+### Decisions and provenance
+
+- **Owner decision:** Proceed with issue #10's planned functional work and defer commentary or judgment on SwiftUI popover polish.
+- **Sol implemented:** S3 pasteboard adapter, application presentation model, menu-bar/popover/Settings wiring, explicit fix actions, persistence/logging integration, process lifecycle corrections and regression tests.
+- **Sol reviewed:** Privacy-before-read ordering, admission and egress order, clean-tree Apply contract, cancellation, single source of UI state and S3/S4 scope boundary.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- `Sources/PremonitionApp/PasteboardWatcher.swift`, `PresentationModel.swift` and `UI/PopoverView.swift` — functional S3 product loop.
+- `Sources/PremonitionCore/Diff/PatchApplier.swift` — bounded explicit Apply contract.
+- `Sources/PremonitionCore/Process/ProcessRunner.swift` — asynchronous termination and EOF-safe pipe draining.
+- `Tests/PremonitionCoreTests/` — Apply, relative resolver and retained process lifecycle coverage.
+- Issue #10 and branch `codex/issue-10-menu-bar-product` — S3 work surface.
+
+### Verification
+
+- `swift test && swift test` — two consecutive full runs passed with 32 tests each after the process lifecycle correction.
+- `scripts/test.sh` — passed with 32 Swift tests, deterministic demo-repository checks and measurement-normalisation checks; the first managed-sandbox attempt failed only on an unwritable Swift module cache and the exact script passed with normal host cache access.
+- `script/build_and_run.sh --verify` — rebuilt the debug application bundle, launched it and confirmed the Premonition process remained running.
+- Focused explicit Apply test — clean temporary repository accepted the patch as an unstaged edit; the subsequent dirty-tree apply was rejected.
+
+### Deviations
+
+- None from the S3 scope. Visual polish, detailed motion and the filmable demo remain deferred; the current popover is a functional acceptance surface.
+
+### Risks and missing evidence
+
+- S3 is not complete: A1 still needs an owner-observed end-to-end clipboard run with Apply/Copy/Dismiss clicks, and A8/A14 plus fresh-config root onboarding require owner-visible verification.
+- The local UI-control adapter could not enumerate the running accessory application, so no visual or accessibility claim is made from automation.
+- V14 still requires the durable thread's `/feedback` ID before submission.
+
+### Next entry state
+
+- Resume S3. First launch from a fresh configuration, add a demo root through Settings, exercise one real admitted clipboard error through fix presentation and Apply/Copy/Dismiss, and record A1, A8 and A14 observations. Then perform the required Sol UI/accessibility review, correct any findings, run the complete S3 exit suite and only then mark S3 complete; do not begin S4 meanwhile.

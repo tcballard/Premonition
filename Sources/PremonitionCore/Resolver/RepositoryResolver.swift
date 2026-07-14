@@ -18,11 +18,15 @@ public struct RepositoryResolver: @unchecked Sendable {
 
         for rawPath in paths {
             let expanded = NSString(string: rawPath).expandingTildeInPath
-            let candidate = URL(fileURLWithPath: expanded)
-            guard let realPath = canonicalExistingURL(candidate) else { continue }
-            for allowedRoot in roots where contains(realPath, in: allowedRoot) {
-                guard let repository = nearestRepository(from: realPath), contains(repository, in: allowedRoot) else { continue }
-                scores[repository, default: 0] += 1
+            let candidates = expanded.hasPrefix("/") ? [URL(fileURLWithPath: expanded)]
+                : roots.map { $0.appendingPathComponent(expanded) }
+            for candidate in candidates {
+                guard let realPath = canonicalExistingURL(candidate) else { continue }
+                for allowedRoot in roots where contains(realPath, in: allowedRoot) {
+                    guard let repository = nearestRepository(from: realPath), contains(repository, in: allowedRoot) else { continue }
+                    scores[repository, default: 0] += 1
+                    break
+                }
                 break
             }
         }

@@ -5,10 +5,12 @@ public struct CodexExecutor: Executor, Sendable {
     private let executable: URL
     private let runner: ProcessRunner
     private let parser: CodexJSONLParser
+    private let onEgress: @Sendable (ExecutorPurpose) -> Void
 
     public init(executable: URL = URL(fileURLWithPath: "/opt/homebrew/bin/codex"),
-                runner: ProcessRunner = .init(), parser: CodexJSONLParser = .init()) {
-        self.executable = executable; self.runner = runner; self.parser = parser
+                runner: ProcessRunner = .init(), parser: CodexJSONLParser = .init(),
+                onEgress: @escaping @Sendable (ExecutorPurpose) -> Void = { _ in }) {
+        self.executable = executable; self.runner = runner; self.parser = parser; self.onEgress = onEgress
     }
 
     public func run(request: ExecutorRequest,
@@ -16,6 +18,7 @@ public struct CodexExecutor: Executor, Sendable {
         guard request.model == Self.pinnedModel else { throw ExecutorError.invalidModel }
         let arguments = Self.arguments(effort: request.effort)
         let clock = ContinuousClock(), start = clock.now
+        onEgress(request.purpose)
         let result = try await runner.run(executable, arguments: arguments, currentDirectory: request.repositoryRoot,
                                           stdin: Data(request.prompt.utf8), timeout: request.timeout) { line in
             if let event = parser.event(from: line) { onEvent(event) }

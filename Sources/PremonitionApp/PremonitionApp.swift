@@ -6,7 +6,7 @@ struct PremonitionApp: App {
 
     var body: some Scene {
         Settings {
-            SettingsPlaceholderView()
+            SettingsPlaceholderView(model: AppServices.presentation)
         }
     }
 }

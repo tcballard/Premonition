@@ -40,6 +40,24 @@ private final class ProcessCapture: @unchecked Sendable {
     }
 }
 
+private final class ProcessTermination: @unchecked Sendable {
+    private let lock = NSLock()
+    private var completed = false
+    private var continuation: CheckedContinuation<Void, Never>?
+
+    func signal() {
+        lock.lock(); completed = true; let value = continuation; continuation = nil; lock.unlock()
+        value?.resume()
+    }
+    func wait() async {
+        await withCheckedContinuation { value in
+            lock.lock()
+            if completed { lock.unlock(); value.resume() }
+            else { continuation = value; lock.unlock() }
+        }
+    }
+}
+
 public struct ProcessRunner: Sendable {
     public init() {}
 
@@ -55,14 +73,22 @@ public struct ProcessRunner: Sendable {
         let process = Process()
         let output = Pipe(), errors = Pipe(), input = Pipe()
         let capture = ProcessCapture(onLine: onStdoutLine)
+        let termination = ProcessTermination()
         process.executableURL = executable
         process.arguments = arguments
         process.currentDirectoryURL = currentDirectory
         process.standardOutput = output
         process.standardError = errors
         process.standardInput = input
-        output.fileHandleForReading.readabilityHandler = { handle in capture.appendOutput(handle.availableData) }
-        errors.fileHandleForReading.readabilityHandler = { handle in capture.appendError(handle.availableData) }
+        process.terminationHandler = { _ in termination.signal() }
+        output.fileHandleForReading.readabilityHandler = { handle in
+            let data = handle.availableData
+            if data.isEmpty { handle.readabilityHandler = nil } else { capture.appendOutput(data) }
+        }
+        errors.fileHandleForReading.readabilityHandler = { handle in
+            let data = handle.availableData
+            if data.isEmpty { handle.readabilityHandler = nil } else { capture.appendError(data) }
+        }
         var processEnvironment = environment ?? ProcessInfo.processInfo.environment
         let prefix = "/opt/homebrew/bin:/usr/local/bin"
         processEnvironment["PATH"] = prefix + ":" + (processEnvironment["PATH"] ?? "/usr/bin:/bin")
@@ -74,11 +100,10 @@ public struct ProcessRunner: Sendable {
         return try await withTaskCancellationHandler {
             try await withThrowingTaskGroup(of: ProcessResult.self) { group in
                 group.addTask {
-                    process.waitUntilExit()
+                    await termination.wait()
+                    try? await Task.sleep(for: .milliseconds(20))
                     output.fileHandleForReading.readabilityHandler = nil
                     errors.fileHandleForReading.readabilityHandler = nil
-                    capture.appendOutput(output.fileHandleForReading.readDataToEndOfFile())
-                    capture.appendError(errors.fileHandleForReading.readDataToEndOfFile())
                     return capture.result(status: process.terminationStatus)
                 }
                 group.addTask {
