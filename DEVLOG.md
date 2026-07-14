@@ -195,3 +195,19 @@ The named A2, A5, A6, A7 and A9 headless contracts are green, alongside the wide
 This is still deliberately not the live product loop. There is no production Codex executor and no clipboard UI. Next comes S2: wire the already-measured Sol contract into this safety spine without loosening it.
 
 **Source:** `BUILDLOG.md`, Entry S1.1
+
+---
+
+## S2.1 — Sol crossed the runtime boundary
+
+**Date:** 2026-07-14
+
+Premonition now has a real Sol executor. It invokes Codex with the model pinned, the sandbox read-only, approvals disabled and sessions ephemeral; it accepts a result only after the JSONL stream says the turn completed.
+
+The live shallow run worked. Sol produced an applicable patch, the canonical validator accepted it and the temporary repository stayed untouched. The deterministic paths cover the less photogenic but more important cases too: one escalation, terminal second failure, timeout, cancellation and bounded rationale.
+
+Two measurement wrinkles were worth keeping honest. Python created a cache before the first mutation assertion, so the harness was corrected and rerun. More seriously, GitHub's squash merge stripped S1's provenance trailers. `main` was not rewritten and the checker was not quietly relaxed; the exact exception is now append-only and machine-checked.
+
+This is still headless. The model path exists, but nobody using the menu bar can reach it yet. S3 is where the product surface finally meets the safety spine.
+
+**Source:** `BUILDLOG.md`, Entry S2.1

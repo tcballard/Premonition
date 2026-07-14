@@ -69,3 +69,25 @@ func a9Bounds() throws {
     let accepted = try UnifiedDiffParser().parse("```diff\n\(acceptancePatch)```")
     try DiffBoundsValidator().validate(accepted, repositoryRoot: root)
 }
+
+@Test("A1 headless real Sol produces a validated shallow fix")
+func a1HeadlessRealSol() async throws {
+    guard ProcessInfo.processInfo.environment["PREMONITION_LIVE_CODEX"] == "1" else { return }
+    let manager = FileManager.default
+    let root = manager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? manager.removeItem(at: root) }
+    let project = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent().deletingLastPathComponent()
+    let generated = try await ProcessRunner().run(project.appendingPathComponent("scripts/make-demo-repo.sh"),
+                                                  arguments: [root.path], timeout: .seconds(30))
+    #expect(generated.status == 0)
+    let failure = try await ProcessRunner().run(URL(fileURLWithPath: "/usr/bin/make"), arguments: ["break"],
+                                                currentDirectory: root, timeout: .seconds(30))
+    #expect(failure.status != 0); #expect(!failure.stderr.isEmpty)
+    try? manager.removeItem(at: root.appendingPathComponent("premonition_demo/__pycache__"))
+    let prompt = PromptBuilder().speculation(error: failure.stderr)
+    let outcome = await SpeculationPipeline(executor: CodexExecutor()).run(prompt: prompt, repositoryRoot: root)
+    guard case .fixReady = outcome else { Issue.record("real Sol did not produce an applicable patch"); return }
+    let status = try await ProcessRunner().run(URL(fileURLWithPath: "/usr/bin/git"), arguments: ["status", "--porcelain"],
+                                               currentDirectory: root)
+    #expect(status.stdout.isEmpty)
+}

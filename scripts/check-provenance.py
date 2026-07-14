@@ -8,6 +8,21 @@ SESSION = re.compile(r"^[0-9a-f]{8}-[0-9a-f-]{27}$")
 ledger = (ROOT / "docs/build-week/sol-ledger.md").read_text()
 build = (ROOT / "BUILDLOG.md").read_text()
 dev = (ROOT / "DEVLOG.md").read_text()
+exceptions_path = ROOT / "docs/build-week/provenance-exceptions.md"
+exceptions: dict[str, dict[str, str]] = {}
+if exceptions_path.exists():
+    for line in exceptions_path.read_text().splitlines():
+        if not re.match(r"^\| [0-9a-f]{40} \|", line):
+            continue
+        fields = [field.strip() for field in line.strip("|").split("|")]
+        if len(fields) != 7:
+            raise SystemExit("provenance exception row is incomplete")
+        commit, pull_request, source, phase, session, entry, reason = fields
+        if not re.fullmatch(r"#[0-9]+", pull_request) or not re.fullmatch(r"[0-9a-f]{40}", source):
+            raise SystemExit(f"{commit}: invalid provenance exception linkage")
+        if not SESSION.match(session) or not phase.startswith("S") or not entry.startswith(phase + "."):
+            raise SystemExit(f"{commit}: invalid provenance exception identity")
+        exceptions[commit] = {"phase": phase, "session": session, "entry": entry, "reason": reason}
 rows = [line for line in ledger.splitlines() if line.startswith("| 20")]
 if not rows:
     raise SystemExit("ledger has no material rows")
@@ -35,6 +50,14 @@ for commit in commits:
         "Build-Log-Entry": None,
     }
     trailers = dict(re.findall(r"^([A-Za-z-]+): (.+)$", body, re.MULTILINE))
+    if commit in exceptions and not all(key in trailers for key in required):
+        exception = exceptions[commit]
+        if exception["session"] not in ledger or exception["phase"] not in ledger:
+            raise SystemExit(f"{commit}: exception session or phase absent from ledger")
+        entry = exception["entry"]
+        if f"## Entry {entry} " not in build or f"## {entry} " not in dev:
+            raise SystemExit(f"{commit}: exception paired log entry missing")
+        continue
     for key, value in required.items():
         if key not in trailers or (value is not None and trailers[key] != value):
             raise SystemExit(f"{commit}: missing or invalid {key} trailer")

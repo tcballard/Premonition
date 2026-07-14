@@ -745,3 +745,79 @@ Implement and verify the deterministic headless safety core under issue #6 witho
 ### Next entry state
 
 - After issue #6 is committed, pushed, reviewed and merged, begin S2 by re-reading the live CLI contract and implementing only the production `CodexExecutor`, explicit Sol effort roles and real headless escalation path. Do not begin S3 clipboard/UI integration.
+
+---
+
+## Entry S2.1 — Real Sol executor verified headlessly
+
+**Date:** 2026-07-14
+
+**Recorded at:** 2026-07-14T18:03:04+01:00
+
+**Phase:** S2
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief and pinned in live CLI verification
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Implement the production Codex CLI executor and real headless speculation path under issue #8, preserving S1 safety boundaries and stopping before S3 UI integration.
+
+### Completed
+
+- Re-verified Codex CLI 0.144.4: global no-approval placement, JSONL, read-only sandbox, explicit `gpt-5.6-sol`, Low/Medium effort override, ignored user config and ephemeral execution remain accepted.
+- Added the executor protocol, request/result/event contracts, tolerant JSONL parser and production `CodexExecutor` with stdin-only prompts, bounded stderr and final-message extraction only after successful turn completion.
+- Added Low initial speculation, exactly one Medium escalation, canonical diff/bounds/apply-check validation and terminal second failure. Added a Low, 30-second optional rationale path with first-ten-error-line and output bounds.
+- Aligned timeout and cooperative cancellation on terminate, 250 ms grace and hard-kill fallback; explicit process environments prepend Homebrew paths.
+- Added deterministic S2 tests for invocation flags, unknown JSONL events, malformed/incomplete streams, escalation/terminality, rationale limits and zero mutation.
+- Ran live A1 headlessly against a fresh shallow demo repository: the real Sol executor returned an applicable patch and left the worktree unchanged.
+- Verified A10: a corrected ephemeral call reported 158 session files before and after; Premonition Application Support had zero normal files, unexpected files or content matches.
+- Preserved the PR #7 squash-trailer loss as an explicit machine-checked provenance exception rather than rewriting protected `main` or weakening the failure silently.
+
+### Decisions and provenance
+
+- **Owner decision:** Continue the build after confirming pull request #7 was merged.
+- **Sol implemented:** S2 executor contracts, parser, production executor, speculation/rationale pipeline, prompt contracts, tests, live verification and provenance-exception handling.
+- **Sol reviewed:** CLI security flags, event completion rules, escalation terminality, process lifecycle, persistence boundaries and S2/S3 scope separation.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- `Sources/PremonitionCore/Executor/` — executor contract, JSONL parser and production Codex CLI executor.
+- `Sources/PremonitionCore/Speculation/` — prompt builder and real validation/escalation/rationale pipeline.
+- `Sources/PremonitionCore/Process/ProcessRunner.swift` — explicit PATH and symmetric timeout/cancellation termination.
+- `Tests/PremonitionCoreTests/S2ExecutorTests.swift` and `Tests/AcceptanceTests/SafetyCoreAcceptanceTests.swift` — S2 deterministic and opt-in live coverage.
+- `docs/codex-contract.md` and `docs/prompts/` — 0.144.4 re-verification and versioned prompt boundaries.
+- `docs/build-week/provenance-exceptions.md` and `scripts/check-provenance.py` — explicit PR #7 squash provenance exception.
+- Issue #8 and branch `codex/issue-8-real-sol-executor` — S2 work surface.
+
+### Verification
+
+- Corrected harmless ephemeral CLI check — exit 0; expected four JSONL event shapes; aggregate session files 158 before and 158 after; no historical session contents inspected.
+- `PREMONITION_LIVE_CODEX=1 swift test --filter a1HeadlessRealSol` — passed after 54.162 seconds with an applicable patch and clean temporary worktree.
+- `swift test --filter S2ExecutorTests` — 6 focused executor/pipeline tests passed after the final invocation-contract refactor.
+- `swift test` — 29 tests passed after lifecycle review; the opt-in live test returned immediately without its environment flag.
+- `scripts/test.sh` — 30 tests plus deterministic demo and measurement-normalisation checks passed before the final focused refactor.
+- Application Support privacy check — zero files, zero unexpected files and zero shallow-error/prompt/diff content matches.
+- `python3 scripts/check-provenance.py` — passed after recording the exact PR #7 squash exception.
+- `python3 scripts/check_buildlog.py BUILDLOG.md --devlog DEVLOG.md` and `git diff --check` — passed before this entry.
+
+### Deviations
+
+- The first corrected ephemeral wrapper attempt used zsh's reserved `status` variable and exited after the successful call but before printing counts; a second harmless call completed the 158/158 evidence.
+- The first live A1 assertion saw Python's pre-executor `__pycache__`; the harness now removes that generated cache before measuring executor mutation, and the rerun passed.
+- GitHub's squash merge for PR #7 stripped the verified S1 source commit trailers from `main` commit `27e4150`. Protected `main` was not rewritten; the exact commit, PR, source commit, phase, session and S1.1 entry are recorded as a narrow append-only exception.
+
+### Risks and missing evidence
+
+- CLI 0.144.4 emitted model-catalog, plugin and MCP startup warnings on bounded stderr despite successful turns; these can add latency and remain non-persisted diagnostics.
+- The current live A1 observation is one real shallow run, not a general correctness claim.
+- The PR #7 squash exception is auditable evidence debt; future squash merge messages must retain the four required trailers.
+- V14 still requires the durable thread's `/feedback` ID before submission.
+
+### Next entry state
+
+- After issue #8 is committed, pushed, reviewed and merged with trailers preserved, begin S3 only: connect the verified pipeline to pasteboard polling, menu-bar states, popover, Settings/onboarding and explicit Apply/Copy/Dismiss behaviour. Do not begin S4 polish or release work.
