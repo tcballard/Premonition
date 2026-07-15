@@ -1203,3 +1203,56 @@ Record the parallel formalisation of Codex skills used around the Premonition bu
 ### Next entry state
 
 - Continue issue #13 owner review. Update the logs again only when CodexToolkit produces a concrete Premonition-related durable artefact or when the popover review reaches an owner decision.
+
+---
+
+## Entry S3.7 — CodexToolkit thread linked
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T17:49:26+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; the model used by the CodexToolkit thread is not asserted here
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Attach the owner-supplied CodexToolkit thread identifier to the external provenance context recorded in S3.6.
+
+### Completed
+
+- Recorded CodexToolkit thread ID `019f647d-1687-7bf1-8b48-769da8e836d2` as owner-confirmed.
+- Kept it distinct from Premonition's durable Session ID `019f5f0f-a2dd-78e3-a5b3-413860708eab`.
+
+### Decisions and provenance
+
+- **Owner decision:** Supply the CodexToolkit thread ID for provenance tracking.
+- **Sol implemented:** Paired append-only linkage entries only.
+- **Sol reviewed:** Separation of the two project thread identities and avoidance of unsupported model claims for the external thread.
+- **Human-authored and Sol-reviewed:** Owner-supplied CodexToolkit thread identifier.
+
+### Artefacts
+
+- `BUILDLOG.md` and `DEVLOG.md` — paired S3.7 cross-project provenance link.
+
+### Verification
+
+- Owner-confirmed in the active Premonition conversation; no independent claim is made about the external thread's contents or model selection.
+
+### Deviations
+
+- None.
+
+### Risks and missing evidence
+
+- CodexToolkit remains evolving external workflow infrastructure.
+- Owner visual acceptance of Premonition issue #13 remains pending.
+
+### Next entry state
+
+- Continue issue #13 owner review; use the CodexToolkit thread ID only when tracing the related external skill work.

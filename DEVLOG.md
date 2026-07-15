@@ -303,3 +303,15 @@ The boundary matters. CodexToolkit is the workshop around the build, not a hidde
 For now this is provenance context, not a completion claim. The toolkit is still evolving, and Premonition's immediate gate remains the owner review of the monitoring and fix-ready popovers.
 
 **Source:** `BUILDLOG.md`, Entry S3.6
+
+---
+
+## S3.7 — The parallel workshop has an address
+
+**Date:** 2026-07-15
+
+The CodexToolkit work now has a durable thread handle: `019f647d-1687-7bf1-8b48-769da8e836d2`. It sits alongside the repository and PR trail as the route back to the session formalising the external skills.
+
+It is deliberately recorded separately from Premonition's own durable build thread. The projects inform one another, but their evidence should not blur together.
+
+**Source:** `BUILDLOG.md`, Entry S3.7
