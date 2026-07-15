@@ -4,6 +4,7 @@ enum PremonitionDesign {
     static let popoverWidth: CGFloat = 480
     static let popoverMaximumHeight: CGFloat = 440
     static let diffMaximumHeight: CGFloat = 220
+    static let monitoringDialSize: CGFloat = 132
 
     enum Space {
         static let tight: CGFloat = 4
@@ -15,6 +16,7 @@ enum PremonitionDesign {
 
     enum Shape {
         static let section: CGFloat = 6
+        static let receiptIcon: CGFloat = 7
     }
 
     enum Symbol {
@@ -26,5 +28,7 @@ enum PremonitionDesign {
         static let diffSurface = Color(nsColor: .textBackgroundColor)
         static let rationaleSurface = Color.primary.opacity(0.025)
         static let outline = Color(nsColor: .separatorColor)
+        static let dialTrack = Color.primary.opacity(0.18)
+        static let dialFace = Color.primary.opacity(0.035)
     }
 }

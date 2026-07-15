@@ -59,7 +59,7 @@ final class AppController: NSObject {
     private var popoverHeight: CGFloat {
         if model.heldFix != nil { return 440 }
         if model.configuration.allowlistedRoots.isEmpty { return 260 }
-        return 196
+        return 360
     }
 
     private func configurePulse() {

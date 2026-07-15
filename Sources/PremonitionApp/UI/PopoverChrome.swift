@@ -61,10 +61,34 @@ struct PopoverHeader: View {
     }
 }
 
-private struct SettingsMenu: View {
+struct SettingsMenu: View {
+    enum Chrome {
+        case compact
+        case prominent
+    }
+
     let model: PresentationModel
+    let chrome: Chrome
+
+    init(model: PresentationModel, chrome: Chrome = .compact) {
+        self.model = model
+        self.chrome = chrome
+    }
 
     var body: some View {
+        switch chrome {
+        case .compact:
+            menu
+                .menuStyle(.borderlessButton)
+                .controlSize(.small)
+        case .prominent:
+            menu
+                .menuStyle(.button)
+                .controlSize(.regular)
+        }
+    }
+
+    private var menu: some View {
         Menu {
             SettingsLink { Text(Strings.settings + "…") }
             Button(Strings.openConfig) { model.openConfigFile() }
@@ -75,8 +99,6 @@ private struct SettingsMenu: View {
             Image(systemName: "gearshape")
                 .accessibilityLabel(Strings.settings)
         }
-        .menuStyle(.borderlessButton)
-        .controlSize(.small)
     }
 }
 

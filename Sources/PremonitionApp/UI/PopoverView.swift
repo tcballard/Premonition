@@ -4,55 +4,29 @@ struct PopoverView: View {
     let model: PresentationModel
 
     var body: some View {
-        VStack(spacing: 0) {
-            PopoverHeader(model: model)
-            Divider()
-            content
-            Divider()
-            PopoverReceipt(model: model)
+        Group {
+            if let fix = model.heldFix {
+                VStack(spacing: 0) {
+                    PopoverHeader(model: model)
+                    Divider()
+                    FixReadyView(model: model, fix: fix)
+                    Divider()
+                    PopoverReceipt(model: model)
+                }
+            } else if model.configuration.allowlistedRoots.isEmpty {
+                VStack(spacing: 0) {
+                    PopoverHeader(model: model)
+                    Divider()
+                    EmptyPopoverView(model: model)
+                    Divider()
+                    PopoverReceipt(model: model)
+                }
+            } else {
+                MonitoringView(model: model)
+            }
         }
         .frame(width: PremonitionDesign.popoverWidth)
         .frame(maxHeight: PremonitionDesign.popoverMaximumHeight)
-    }
-
-    @ViewBuilder
-    private var content: some View {
-        if let fix = model.heldFix {
-            FixReadyView(model: model, fix: fix)
-        } else if model.configuration.allowlistedRoots.isEmpty {
-            EmptyPopoverView(model: model)
-        } else {
-            MonitoringView(model: model)
-        }
-    }
-}
-
-private struct MonitoringView: View {
-    let model: PresentationModel
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: PremonitionDesign.Space.regular) {
-            VStack(alignment: .leading, spacing: PremonitionDesign.Space.tight) {
-                Text(model.isPaused ? Strings.pausedLead : Strings.monitoringLead)
-                    .font(.body.weight(.medium))
-                Text(model.isPaused ? Strings.pausedInstruction : Strings.monitoringInstruction)
-                    .font(.callout)
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-
-            HStack(spacing: PremonitionDesign.Space.regular) {
-                Label(model.isPaused ? Strings.localGatePaused : Strings.localGateActive,
-                      systemImage: model.isPaused ? "pause.circle" : "checkmark.shield")
-                Spacer(minLength: PremonitionDesign.Space.compact)
-                Label(Strings.solWaits, systemImage: "lock")
-            }
-            .font(.caption)
-            .foregroundStyle(.tertiary)
-            .accessibilityElement(children: .combine)
-        }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(PremonitionDesign.Space.section)
     }
 }
 

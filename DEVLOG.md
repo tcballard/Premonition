@@ -315,3 +315,19 @@ The CodexToolkit work now has a durable thread handle: `019f647d-1687-7bf1-8b48-
 It is deliberately recorded separately from Premonition's own durable build thread. The projects inform one another, but their evidence should not blur together.
 
 **Source:** `BUILDLOG.md`, Entry S3.7
+
+---
+
+## S3.8 — The watch state finally became the instrument
+
+**Date:** 2026-07-15
+
+The important correction here is blunt: the previous monitoring pass had not really implemented the owner-approved screen. It moved some words around, but it did not give the ordinary watching state the centered eye instrument, dial, hierarchy and receipt shown in the selected direction.
+
+That is now in the app. The configured, no-fix popover has its own monitoring surface instead of borrowing the fix-card shell: Pause and Settings sit as native controls in the top right, the eye sits inside a radial watch dial, the instruction is centered and quiet, and the bottom receipt carries recent activity and the daily count without turning the counter into the main event.
+
+The safety shape did not move. There is no new model path, no automatic action, no extra persistence of clipboard or patch content, and no demo-panel work smuggled in from S4. The only new state is a content-free timestamp for the receipt.
+
+The build is verified, the app is installed into `/Applications`, and the installed executable matches the freshly built bundle. The next judgment is the right one: look at the actual running monitoring screen, then run the UX/design evaluation against the thing that now exists.
+
+**Source:** `BUILDLOG.md`, Entry S3.8

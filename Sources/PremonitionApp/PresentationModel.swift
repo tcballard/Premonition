@@ -13,6 +13,7 @@ final class PresentationModel {
     var configurationWarning: String?
     var heldFix: HeldFix?
     var lastRunStatus = Strings.noRunsYet
+    var lastRunAt: Date?
     var applyEnabled = false
     var codexStatus = Strings.notChecked
     var dailyCount: Int { machine.capState.capCount }
@@ -192,7 +193,9 @@ final class PresentationModel {
     }
 
     private func record(_ verdict: VerdictKind, effort: String? = nil, repository: URL? = nil) {
-        let record = VerdictRecord(timestamp: Date(), candidateHash: activeHash, verdict: verdict,
+        let timestamp = Date()
+        lastRunAt = timestamp
+        let record = VerdictRecord(timestamp: timestamp, candidateHash: activeHash, verdict: verdict,
                                    effortRole: effort, repositoryRoot: repository?.path)
         guard let data = try? VerdictLogger().encode(record) else { return }
         let url = configurationURL.deletingLastPathComponent().appendingPathComponent("verdicts.jsonl")

@@ -1256,3 +1256,75 @@ Attach the owner-supplied CodexToolkit thread identifier to the external provena
 ### Next entry state
 
 - Continue issue #13 owner review; use the CodexToolkit thread ID only when tracing the related external skill work.
+
+---
+
+## Entry S3.8 — Monitoring screen actually implemented
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T18:19:59+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Finish the owner-requested implementation of the pre-error monitoring screen from the dirty working tree after the previous Codex crash. Correct the gap where the earlier S3.4 monitoring refinement had not faithfully implemented the selected watch-dial visual direction.
+
+### Completed
+
+- Replaced the ordinary configured/no-fix popover body with a dedicated authored monitoring surface using the centered eye instrument, radial tick dial, top-right Pause and Settings controls, centered state copy and a quiet bottom receipt.
+- Preserved the existing fix-ready and no-roots popover structures; the new monitoring surface is used only when roots are configured and no fix is held.
+- Added reduced-motion aware dial behaviour: the sweep pauses for Reduce Motion and paused state, and the dial remains an SF Symbols eye-family identity element.
+- Added content-free recent-activity metadata through an in-memory `lastRunAt` timestamp and existing verdict status text; no clipboard, prompt, diff, model output or stderr content is persisted or displayed.
+- Added app-side monitoring presentation tests covering state copy, SF Symbols identity, receipt counter text and the daily-count accessibility label.
+- Rebuilt, installed and launched `/Applications/Premonition.app` from the verified bundle so owner review is not looking at the older installed version.
+
+### Decisions and provenance
+
+- **Owner decision:** Finish and verify the actual monitoring-screen implementation from the dirty working tree before running the later UX/design evaluation skills.
+- **Sol implemented:** S3 monitoring-screen SwiftUI implementation, presentation seam and tests, paired logs and provenance ledger update.
+- **Sol reviewed:** S3/S4 boundary, §13 invariants, authored macOS design constraints, no-Liquid-Glass target rule and absence of new runtime egress or Apply behaviour.
+- **Human-authored and Sol-reviewed:** Owner-supplied monitoring mock and approved product character.
+
+### Artefacts
+
+- `Sources/PremonitionApp/UI/MonitoringView.swift` — dedicated watch-dial monitoring surface and presentation mappers.
+- `Sources/PremonitionApp/UI/PopoverView.swift` — routes configured/no-fix state to the monitoring surface while preserving fix-ready and empty states.
+- `Sources/PremonitionApp/UI/PopoverChrome.swift` — gives Settings menu compact and prominent native control presentations.
+- `Sources/PremonitionApp/PresentationModel.swift` — records a content-free in-memory last-run timestamp for the monitoring receipt.
+- `Sources/PremonitionApp/Strings.swift` and `Sources/PremonitionApp/UI/PremonitionDesign.swift` — monitoring copy and semantic design tokens.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` and `Package.swift` — focused app presentation/accessibility coverage.
+- `/Applications/Premonition.app` — installed from the rebuilt `dist/Premonition.app` bundle for owner review.
+
+### Verification
+
+- `git diff --check` — passed before and after the implementation/test changes.
+- `swift build` — initial sandboxed run failed because SwiftPM could not write `~/.cache/clang/ModuleCache`; rerun outside the sandbox passed.
+- `swift test` — passed 36 Swift tests, including two new monitoring presentation/accessibility tests.
+- `scripts/test.sh` — passed 36 Swift tests plus demo-repository and measurement-normalisation checks.
+- `scripts/build-app.sh release` — produced `dist/Premonition.app`.
+- `script/build_and_run.sh --verify` — passed the repository developer build/verify entrypoint.
+- `pkill -x Premonition`; `ditto dist/Premonition.app /Applications/Premonition.app`; `open -n /Applications/Premonition.app` — refreshed and launched the installed app bundle.
+- `shasum -a 256 dist/Premonition.app/Contents/MacOS/Premonition /Applications/Premonition.app/Contents/MacOS/Premonition` — hashes matched.
+- `ps -p 36346 -o pid= -o comm=` — confirmed the running process path as `/Applications/Premonition.app/Contents/MacOS/Premonition`.
+
+### Deviations
+
+- None from the specification. This corrects the earlier visual implementation gap without starting S4, adding a demo panel, changing the executor, changing Apply or introducing persistence of protected content.
+
+### Risks and missing evidence
+
+- Owner visual acceptance of the installed monitoring screen remains pending.
+- Product-design evaluation skills have not yet been run; the owner explicitly sequenced those after implementation.
+- Light, increased-contrast and full accessibility matrix captures remain deferred to the later visual/accessibility review path.
+
+### Next entry state
+
+- Owner should inspect the installed monitoring state, then run the planned UX/design evaluation pass on the actual implementation and decide any follow-up issue #13 corrections before merging or beginning S4.
