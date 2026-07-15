@@ -40,16 +40,20 @@ func monitoringReceiptPresentationKeepsMetadataContentFree() {
                                           dailyCap: 30).receiptSymbol == "exclamationmark.triangle")
 }
 
-@Test("monitoring dial sweep stays instrument-like and motion-safe")
-func monitoringDialSweepScansTheUpperArc() {
+@Test("monitoring dial sweep travels the full ring and stays motion-safe")
+func monitoringDialSweepTravelsTheFullRing() {
     let sweep = MonitoringDialSweep()
     let start = Date(timeIntervalSinceReferenceDate: 0)
-    let middle = Date(timeIntervalSinceReferenceDate: 1.7)
-    let middleTick = Int(sweep.activePosition(status: .watching, at: middle).rounded())
+    let quarter = Date(timeIntervalSinceReferenceDate: 1.05)
+    let half = Date(timeIntervalSinceReferenceDate: 2.1)
+    let threeQuarter = Date(timeIntervalSinceReferenceDate: 3.15)
+    let halfTick = Int(sweep.activePosition(status: .watching, at: half).rounded())
 
-    #expect(sweep.activePosition(status: .watching, at: start) > 39)
-    #expect(sweep.activePosition(status: .watching, at: middle) < 9)
+    #expect(sweep.activePosition(status: .watching, at: start) == 0)
+    #expect(sweep.activePosition(status: .watching, at: quarter) == 12)
+    #expect(sweep.activePosition(status: .watching, at: half) == 24)
+    #expect(sweep.activePosition(status: .watching, at: threeQuarter) == 36)
     #expect(sweep.opacity(for: 0, status: .paused, at: start) == 0.18)
-    #expect(sweep.opacity(for: middleTick, status: .watching, at: middle) > 0.18)
-    #expect(sweep.opacity(for: 24, status: .watching, at: middle) == 0.18)
+    #expect(sweep.opacity(for: halfTick, status: .watching, at: half) > 0.18)
+    #expect(sweep.opacity(for: 0, status: .watching, at: half) == 0.18)
 }

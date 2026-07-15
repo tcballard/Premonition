@@ -1391,3 +1391,66 @@ Refine the monitoring dial so the eye remains a quiet SF Symbol instrument while
 ### Next entry state
 
 - Owner should inspect the installed refined monitoring sweep, then run the planned UX/design evaluation pass on the actual implementation and decide any follow-up issue #13 corrections before merging or beginning S4.
+
+---
+
+## Entry S3.10 — Dial sweep made full-circle
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T18:36:08+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Correct the S3.9 dial motion after owner review: the sweep must travel around the full circle rather than bounce across only the upper arc.
+
+### Completed
+
+- Changed `MonitoringDialSweep.activePosition` from upper-arc easing to a full-ring progression across all 48 dial ticks.
+- Kept the static SF Symbol eye and soft lobe falloff, so the scan cue remains in the dial rather than becoming eye or pupil animation.
+- Preserved separate watching and speculating speeds, paused stillness and Reduce Motion's static single-tick fallback.
+- Updated the app test to assert full-ring quarter, half and three-quarter positions plus paused and inactive-opposite-side behaviour.
+- Rebuilt, installed and launched `/Applications/Premonition.app` from the updated bundle.
+
+### Decisions and provenance
+
+- **Owner decision:** The sweep must go around the full circle.
+- **Sol implemented:** S3 monitoring-dial correction and matching test update.
+- **Sol reviewed:** Motion remains an instrument cue and does not change S3 safety, runtime or Apply behaviour.
+- **Human-authored and Sol-reviewed:** Owner correction of the S3.9 visual behaviour.
+
+### Artefacts
+
+- `Sources/PremonitionApp/UI/MonitoringView.swift` — full-circle monitoring dial sweep.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — full-ring sweep coverage.
+- `/Applications/Premonition.app` — refreshed installed bundle for owner review.
+
+### Verification
+
+- `swift test` — passed 37 Swift tests.
+- `scripts/test.sh` — passed 37 Swift tests plus demo-repository and measurement-normalisation checks.
+- `git diff --check` — passed.
+- `scripts/build-app.sh release` — produced `dist/Premonition.app`.
+- `pkill -x Premonition`; `ditto dist/Premonition.app /Applications/Premonition.app`; `open -n /Applications/Premonition.app` — refreshed and launched the installed app bundle.
+- `shasum -a 256 dist/Premonition.app/Contents/MacOS/Premonition /Applications/Premonition.app/Contents/MacOS/Premonition` — hashes matched.
+
+### Deviations
+
+- S3.9 recorded an upper-arc scan, but owner review found that behaviour insufficient because it did not travel around the full circle. This entry corrects that implementation without rewriting S3.9.
+
+### Risks and missing evidence
+
+- Owner visual acceptance of the installed full-circle sweep remains pending.
+- Product-design evaluation skills have not yet been run; they remain the next review step.
+
+### Next entry state
+
+- Owner should inspect the installed full-circle monitoring sweep, then run the planned UX/design evaluation pass on the actual implementation and decide any follow-up issue #13 corrections before merging or beginning S4.

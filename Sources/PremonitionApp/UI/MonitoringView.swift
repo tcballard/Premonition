@@ -100,7 +100,6 @@ struct MonitoringDialSweep: Equatable {
     let tickCount = 48
     let reducedMotionOpacity = 0.72
 
-    private let upperArcHalfSpan = 8.0
     private let lobeRadius = 4.6
 
     func opacity(for index: Int, status: PresentationModel.Status, at date: Date) -> Double {
@@ -114,12 +113,10 @@ struct MonitoringDialSweep: Equatable {
     }
 
     func activePosition(status: PresentationModel.Status, at date: Date) -> Double {
-        let cycleDuration = status == .speculating ? 1.65 : 3.4
+        let cycleDuration = status == .speculating ? 2.1 : 4.2
         let rawPhase = date.timeIntervalSinceReferenceDate / cycleDuration
         let phase = rawPhase - floor(rawPhase)
-        let easedSweep = 0.5 - 0.5 * cos(phase * .pi * 2)
-        let signedOffset = -upperArcHalfSpan + (upperArcHalfSpan * 2 * easedSweep)
-        return wrap(signedOffset)
+        return phase * Double(tickCount)
     }
 
     private func circularDistance(from index: Double, to active: Double) -> Double {

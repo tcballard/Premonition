@@ -345,3 +345,17 @@ The dial now does the work instead. Its active band eases across the upper arc a
 This is a small motion change, but it fits the product character better: awake, local and instrument-like, not autonomous. The updated app is installed for the next visual pass.
 
 **Source:** `BUILDLOG.md`, Entry S3.9
+
+---
+
+## S3.10 — The dial now uses the whole dial
+
+**Date:** 2026-07-15
+
+The upper-arc scan was too clever by half. It preserved the instrument feeling, but it did not do the simple thing the owner expected from a circular dial: travel around the circle.
+
+That is corrected now. The eye still does not look around and there is still no pupil glint; the moving part is the dial lobe. But the lobe now progresses through the full ring, with watching slower than speculating and reduced-motion still static.
+
+The updated bundle is installed again for visual review. The next useful step is not more theorising; it is looking at the live menu-bar popover and deciding whether the motion now reads correctly.
+
+**Source:** `BUILDLOG.md`, Entry S3.10
