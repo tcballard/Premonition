@@ -13,11 +13,12 @@ struct SettingsPlaceholderView: View {
             }
             Section(Strings.runtime) {
                 LabeledContent(Strings.model, value: "GPT-5.6 Sol")
-                LabeledContent(Strings.codex, value: FileManager.default.isExecutableFile(atPath: model.configuration.codexPath ?? "/opt/homebrew/bin/codex") ? Strings.available : Strings.notFound)
+                LabeledContent(Strings.codex, value: model.codexStatus)
                 LabeledContent(Strings.dailyCount, value: "\(model.dailyCount) / \(model.configuration.dailyCap)")
                 Toggle(Strings.soundOnReady, isOn: Binding(get: { model.configuration.soundOnReady }, set: { model.configuration.soundOnReady = $0; model.save() }))
             }
             if let warning = model.configurationWarning { Text(warning).foregroundStyle(.orange) }
         }.formStyle(.grouped).padding().frame(width: 520, height: 430)
+            .task { await model.refreshCodexStatus() }
     }
 }

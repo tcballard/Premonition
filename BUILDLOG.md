@@ -887,3 +887,74 @@ Connect the verified headless safety and executor layers to the functional menu-
 ### Next entry state
 
 - Resume S3. First launch from a fresh configuration, add a demo root through Settings, exercise one real admitted clipboard error through fix presentation and Apply/Copy/Dismiss, and record A1, A8 and A14 observations. Then perform the required Sol UI/accessibility review, correct any findings, run the complete S3 exit suite and only then mark S3 complete; do not begin S4 meanwhile.
+
+---
+
+## Entry S3.2 — Menu-bar product accepted and S3 completed
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T05:44:43+01:00
+
+**Phase:** S3
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief and used by the live acceptance runs
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Complete issue #10 by exercising the owner-visible S3 exit paths, correcting the functional and accessibility findings from the Sol review, and preserving S4 as a separate demo-surface phase.
+
+### Completed
+
+- Verified the provenance-preserving PR #11 squash at `5bb703f`; all four S3.1 trailers survived and the repository provenance checker passed.
+- Completed A1 through the staged application and real pasteboard/Sol pipeline. The owner reviewed the held fix and clicked Apply; the content-free verdict recorded `applied`, exactly one tracked file became an unstaged one-line edit, the deterministic command then exited successfully and `git restore` returned the disposable repository to clean state.
+- Completed A8 after presenting a fix from a clean tree and then adding one unrelated untracked marker. The owner clicked Apply and observed the safe failure with Copy patch retained; `apply_failed` was recorded and the target remained unchanged.
+- Completed A14 from no config. Settings opened for the owner, who added the demo root without JSON editing; the resulting file was mode `0600` and contained the selected root, pinned Sol model, default cap and sound-off default.
+- Performed the S3 Sol UI/accessibility review and corrected the findings: Escape no longer dismisses a held fix; the gear menu exposes Settings, Open Config and Quit; the footer shows daily count; Codex version is checked when Settings opens; popover height and configured render budget are bounded; large diffs show per-file counts; Apply failure is announced; status state carries label/value; single-instance launch is guarded; and the speculating glyph pulses unless Reduce Motion requests a static state.
+- Added semantic diff gutters and restrained backgrounds while retaining literal line markers and VoiceOver line-kind descriptions, so added/removed meaning does not rely on colour.
+- Corrected the deterministic demo generator to ignore Python cache artefacts so running the planted failure does not make the acceptance repository dirty before Apply.
+- Restored Application Support to the three permitted normal files after the fresh-config exercise.
+
+### Decisions and provenance
+
+- **Owner decision:** Continue S3 through its required product polish, while keeping the filmable demo panel, narration and sound behaviour in S4.
+- **Sol implemented:** S3 acceptance corrections, status motion/accessibility, menu and Settings completion, bounded semantic diff rendering, single-instance protection, Apply cleanliness refresh and clean demo-fixture behaviour.
+- **Sol reviewed:** S3 presentation contract, keyboard semantics, accessibility labels/announcements, Reduce Motion, semantic appearance adaptation, clean-tree mutation boundaries and S3/S4 scope separation.
+- **Human-authored and Sol-reviewed:** Owner-observed dark-appearance popover, Apply interaction, dirty-tree failure and fresh-config root onboarding.
+
+### Artefacts
+
+- `Sources/PremonitionApp/AppController.swift`, `AppDelegate.swift` and `PresentationModel.swift` — status/accessibility lifecycle, single-instance guard and safe user actions.
+- `Sources/PremonitionApp/UI/PopoverView.swift` and `SettingsPlaceholderView.swift` — completed S3 menu, footer, bounded semantic diff and runtime status surfaces.
+- `Sources/PremonitionApp/Strings.swift` — S3 user-visible and accessibility copy.
+- `scripts/make-demo-repo.sh` — clean-tree-safe Python demo fixture.
+- Branch `codex/issue-10-s3-acceptance` — S3 completion work surface.
+
+### Verification
+
+- Owner-observed A1 — held fix and rationale visible; Apply clicked; `applied` verdict observed; one unstaged one-line edit; deterministic command exit 0; `git restore` returned the disposable repository to clean state.
+- Owner-observed A8 — Apply clicked after an unrelated untracked file was added post-presentation; safe failure shown, Copy patch remained, `apply_failed` recorded and only the marker appeared in `git status --porcelain`.
+- Owner-observed A14 — no-config launch opened Settings; root added through `NSOpenPanel`; generated config was `-rw-------`, contained the selected root and retained `gpt-5.6-sol`, cap 30 and sound off.
+- Owner-supplied dark-appearance screenshot — popover hierarchy, bounded semantic diff, labeled Sol rationale, action row and daily count were visibly present; no copied runtime content is retained in project logs.
+- `scripts/test.sh` — 32 Swift tests, deterministic demo checks and measurement-normalisation checks passed after the final S3 corrections.
+- `script/build_and_run.sh --verify` — final staged debug bundle rebuilt, launched and remained running.
+- `swift build` and `git diff --check` — passed after the final 14 pt medium status-symbol configuration.
+- Application Support file-name inspection — exactly `config.json`, `state.json` and `verdicts.jsonl` remained.
+
+### Deviations
+
+- The local Computer Use bridge could not enumerate the `LSUIElement` accessory application by name or bundle identifier. Owner observations and the supplied screenshot provide the visual evidence; automation claims only process, repository and content-free state evidence.
+
+### Risks and missing evidence
+
+- Light and increased-contrast appearances use semantic system colours and standard controls but were not separately captured in this session; include them in the S5 visual verification matrix.
+- A1 is one live shallow-fixture observation, not a general patch-correctness claim.
+- V14 still requires the durable thread's `/feedback` ID before submission.
+
+### Next entry state
+
+- After this S3 completion commit is pushed, reviewed and merged with provenance retained, begin S4 only: add the filmable non-activating demo panel, honest narration/timer, fixture recording/replay and specified sound behaviour. Start by opening a scoped S4 issue; do not begin release or submission work.

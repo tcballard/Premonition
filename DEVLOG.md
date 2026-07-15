@@ -227,3 +227,19 @@ Integration testing found two unglamorous but important process bugs: an EOF han
 This is not the polished S3 finish yet. The app bundle launches, but the owner still needs to walk the fresh-config onboarding and the real clipboard-to-click path before A1, A8 and A14 can be claimed. That hands-on pass—and the UI/accessibility review it informs—is the next move.
 
 **Source:** `BUILDLOG.md`, Entry S3.1
+
+---
+
+## S3.2 — The menu-bar loop survived the clicks
+
+**Date:** 2026-07-15
+
+S3 is complete. Premonition did not merely produce a plausible card; the owner used the real menu-bar flow, reviewed the result and applied it. The repository received one unstaged edit, the planted failure stopped failing, and the change could be restored cleanly.
+
+The dirty-tree test was the more revealing click. We presented a valid fix, added an unrelated untracked file and then pressed Apply. Premonition refused the mutation, kept Copy patch available and left the target untouched. The demo generator also learned to ignore Python caches, because a safety rule is not very useful if the acceptance fixture accidentally trips it first.
+
+The final review tightened the surface around that behavior: Escape closes rather than dismisses, the gear menu has the missing desktop actions, runtime status is real, Reduce Motion is honoured, and diff colour now reinforces literal line markers instead of carrying meaning alone. Fresh-config onboarding also worked without hand-editing JSON.
+
+The filmable panel still does not exist. That is S4, along with narration, replay presentation and sound. First this S3 completion branch gets reviewed and merged with its provenance intact.
+
+**Source:** `BUILDLOG.md`, Entry S3.2

@@ -27,6 +27,11 @@ Copy the traceback; watch the menu bar.
 - `make break-deep` runs the cross-file deterministic failure.
 EOF
 
+cat >"$DESTINATION/.gitignore" <<'EOF'
+__pycache__/
+*.py[cod]
+EOF
+
 cat >"$DESTINATION/Makefile" <<'EOF'
 .PHONY: break break-deep
 break:
@@ -76,6 +81,6 @@ EOF
 git -C "$DESTINATION" init -q
 git -C "$DESTINATION" config user.name "Premonition Demo"
 git -C "$DESTINATION" config user.email "demo@premonition.invalid"
-git -C "$DESTINATION" add README.md Makefile premonition_demo
+git -C "$DESTINATION" add .gitignore README.md Makefile premonition_demo
 git -C "$DESTINATION" commit -q -m "test(demo): plant deterministic failures"
 printf '%s\n' "$(cd "$DESTINATION" && pwd)"
