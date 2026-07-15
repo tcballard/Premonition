@@ -359,3 +359,17 @@ That is corrected now. The eye still does not look around and there is still no 
 The updated bundle is installed again for visual review. The next useful step is not more theorising; it is looking at the live menu-bar popover and deciding whether the motion now reads correctly.
 
 **Source:** `BUILDLOG.md`, Entry S3.10
+
+---
+
+## S3.11 — The Sites idea is parked, not started
+
+**Date:** 2026-07-15
+
+The future Sites explainer now has a proper parking space in the repo. That matters because it is useful submission-support material, but it is also exactly the kind of useful thing that could pull focus too early.
+
+The handoff is explicit: do not start Sites yet. The app, README, demo flow, provenance logs and release evidence need to settle first. Nothing has been created, deployed, published or promoted.
+
+This does not change Premonition itself. Runtime scope, S3/S4 boundaries and the v0.1 safety invariants stay exactly where they were. The next work remains owner review of the actual app surface.
+
+**Source:** `BUILDLOG.md`, Entry S3.11

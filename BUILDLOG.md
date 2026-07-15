@@ -1454,3 +1454,60 @@ Correct the S3.9 dial motion after owner review: the sweep must travel around th
 ### Next entry state
 
 - Owner should inspect the installed full-circle monitoring sweep, then run the planned UX/design evaluation pass on the actual implementation and decide any follow-up issue #13 corrections before merging or beginning S4.
+
+---
+
+## Entry S3.11 — Deferred Sites explainer handoff persisted
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T18:40:03+01:00
+
+**Phase:** S3 checkpoint for deferred S6/submission-support material
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this checkpoint preserves owner-supplied future-session guidance
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Persist the owner-supplied Sites explainer handoff for a later S6/submission-support session without starting Sites work now.
+
+### Completed
+
+- Added `docs/build-week/sites-explainer-handoff.md` with the deferred future-session prompt.
+- Recorded that the Sites explainer remains deferred until the app, README, demo flow, provenance logs and release evidence are stable.
+- Recorded that no Sites work, deployment, publication or external promotion has started.
+- Recorded that this handoff does not alter Premonition's runtime scope, product implementation, S3/S4 phase boundary or v0.1 invariants.
+
+### Decisions and provenance
+
+- **Owner decision:** Persist the Sites explainer handoff now, but do not start Sites work.
+- **Sol implemented:** Deferred handoff document plus paired checkpoint logs.
+- **Sol reviewed:** S6/submission-support boundary and the no-public-action/no-runtime-scope-change guardrails.
+- **Human-authored and Sol-reviewed:** Owner-supplied handoff content and constraints.
+
+### Artefacts
+
+- `docs/build-week/sites-explainer-handoff.md` — deferred Sites landing/explainer handoff prompt.
+- `BUILDLOG.md` and `DEVLOG.md` — paired S3.11 checkpoint.
+
+### Verification
+
+- `test -f docs/build-week/sites-explainer-handoff.md` — passed.
+- `python3 scripts/check_buildlog.py BUILDLOG.md --devlog DEVLOG.md` — passed, reporting 24 paired BUILDLOG/DEVLOG entries.
+- `python3 scripts/check-provenance.py` — passed, reporting the provenance record complete.
+
+### Deviations
+
+- None. This is documentation-only and deliberately starts no Sites implementation, deployment, publication or promotion.
+
+### Risks and missing evidence
+
+- The Sites explainer remains future S6/submission-support work and must be re-grounded in the then-current spec, logs, README, demo flow and release evidence before use.
+
+### Next entry state
+
+- Continue issue #13 owner visual review and planned UX/design evaluation. Defer all Sites work until the app, README, demo, provenance logs and release evidence are stable and the owner explicitly authorises Sites work.
