@@ -91,9 +91,10 @@ struct PopoverReceipt: View {
             Text(model.lastRunStatus)
                 .lineLimit(1)
             Spacer()
-            Text("\(model.dailyCount) / \(model.configuration.dailyCap)")
+            Text(String(format: Strings.runsTodayFormat, model.dailyCount))
                 .monospacedDigit()
-                .accessibilityLabel(Strings.dailyCount)
+                .accessibilityLabel(String(format: Strings.dailyCountFormat,
+                                           model.dailyCount, model.configuration.dailyCap))
         }
         .font(.caption2)
         .foregroundStyle(.tertiary)

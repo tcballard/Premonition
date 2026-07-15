@@ -1026,3 +1026,68 @@ Implement the owner-approved post-S3 popover direction under issue #13 without b
 ### Next entry state
 
 - Owner opens the running popover with a held fix and reviews hierarchy, density, diff readability, rationale separation and actions. Correct any findings on issue #13, rerun the complete verification set, then merge only with explicit owner authority; after merge, open a scoped S4 issue before beginning the filmable demo layer.
+
+---
+
+## Entry S3.4 — Monitoring state becomes a quiet watch field
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T08:36:12+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Apply the authored macOS design review to issue #13's monitoring state after the owner found the newly installed idle presentation insufficiently authored.
+
+### Completed
+
+- Replaced the single stretched instruction with a compact three-level hierarchy: current state in the header, a direct next-action cue and a quiet local-admission status line.
+- Made the monitoring signature functional by stating that the local gate is active and Sol waits for admission; no new gate, executor or persistence behavior was introduced.
+- Reduced the configured monitoring popover height from 220 to 196 points while retaining separate heights for setup and fix-ready states.
+- Changed the tertiary daily receipt from a foregrounded fraction to a quieter runs-today label with a complete accessibility value.
+- Added a distinct paused treatment using the same hierarchy and native SF Symbols without ornamental watching animation.
+- Rebuilt the release bundle, replaced `/Applications/Premonition.app` and verified that the running process uses the installed bundle.
+
+### Decisions and provenance
+
+- **Owner decision:** Apply `authored-macos-design` to the new monitoring screen before accepting issue #13.
+- **Sol implemented:** Compact monitoring and paused compositions, admission-boundary copy, quiet daily receipt and state-specific popover sizing.
+- **Sol reviewed:** Native popover density, hierarchy, material restraint, motion role, accessibility semantics and unchanged S3/S4 safety boundary.
+- **Human-authored and Sol-reviewed:** Owner-supplied screenshot of the insufficient monitoring state.
+
+### Artefacts
+
+- `Sources/PremonitionApp/UI/PopoverView.swift` — authored monitoring and paused content.
+- `Sources/PremonitionApp/UI/PopoverChrome.swift` and `Strings.swift` — quieter receipt and production copy.
+- `Sources/PremonitionApp/AppController.swift` — state-specific native popover heights.
+- `/Applications/Premonition.app` — locally installed owner-review build; not a published release.
+
+### Verification
+
+- `swift build` — passed on the existing macOS 14 target.
+- `scripts/test.sh` — all 34 Swift tests plus deterministic demo and measurement-normalisation checks passed.
+- `scripts/build-app.sh release` — production bundle assembled successfully.
+- Installed-process check — the running command was `/Applications/Premonition.app/Contents/MacOS/Premonition`; installed and built executables matched byte-for-byte.
+- `git diff --check` — passed before the log append.
+
+### Deviations
+
+- None. This remains a bounded presentation refinement within issue #13 and does not enter S4.
+
+### Risks and missing evidence
+
+- Owner visual acceptance of the new monitoring state and the fix-ready state remains pending.
+- Automated UI control could not previously enumerate the accessory app; no automated focus or appearance claim is added here.
+- Light and increased-contrast captures remain deferred to the S5 visual matrix.
+
+### Next entry state
+
+- Owner opens the newly installed monitoring popover and reviews its hierarchy, density, copy and admission-boundary signature. Correct any findings, then review a real fix-ready state before issue #13 is eligible for owner-approved merge.

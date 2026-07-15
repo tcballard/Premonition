@@ -52,8 +52,14 @@ final class AppController: NSObject {
         statusItem?.button?.contentTintColor = model.status == .fixReady ? .controlAccentColor : nil
         statusItem?.button?.setAccessibilityLabel(Strings.statusItem)
         statusItem?.button?.setAccessibilityValue(label)
-        popover.contentSize = NSSize(width: 480, height: model.heldFix == nil ? 220 : 440)
+        popover.contentSize = NSSize(width: 480, height: popoverHeight)
         configurePulse()
+    }
+
+    private var popoverHeight: CGFloat {
+        if model.heldFix != nil { return 440 }
+        if model.configuration.allowlistedRoots.isEmpty { return 260 }
+        return 196
     }
 
     private func configurePulse() {

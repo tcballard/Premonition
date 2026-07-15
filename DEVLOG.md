@@ -259,3 +259,19 @@ Underneath, the view split is cleaner without moving the safety boundary. The UI
 The remaining gate is appropriately human: inspect a real held fix in the rebuilt popover and decide whether the hierarchy feels as deliberate as the approved direction. Only then should issue #13 be considered done and S4 begin.
 
 **Source:** `BUILDLOG.md`, Entry S3.3
+
+---
+
+## S3.4 — Watching should not look like waiting for a form
+
+**Date:** 2026-07-15
+
+The first installed S3.5 build improved the fix card, but the state seen most often still looked like a sentence stranded in a large popover. The owner called it out, correctly.
+
+The monitoring view is now smaller and more specific. It says what to do next, but it also exposes the product's important restraint: the local gate is active, and Sol waits until a candidate is admitted. That is a better signature than decoration because it explains how Premonition behaves.
+
+The daily fraction has quietened into receipt text, paused mode uses the same visual grammar, and watching remains still. Motion belongs to reasoning, not to proving that an idle utility is alive.
+
+The revised build and full test path pass, and the new bundle is installed for another owner look. The next judgment is visual: does this finally feel like a watchful instrument in its ordinary state, and does the fix-ready transition preserve that character?
+
+**Source:** `BUILDLOG.md`, Entry S3.4
