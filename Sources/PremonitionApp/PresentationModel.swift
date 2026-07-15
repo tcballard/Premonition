@@ -14,6 +14,7 @@ final class PresentationModel {
     var heldFix: HeldFix?
     var lastRunStatus = Strings.noRunsYet
     var applyEnabled = false
+    var codexStatus = Strings.notChecked
     var dailyCount: Int { machine.capState.capCount }
 
     struct HeldFix: Equatable {
@@ -65,6 +66,17 @@ final class PresentationModel {
     }
 
     func removeRoot(_ path: String) { configuration.allowlistedRoots.removeAll { $0 == path }; save() }
+    func refreshCodexStatus() async {
+        let executable = URL(fileURLWithPath: configuration.codexPath ?? "/opt/homebrew/bin/codex")
+        guard FileManager.default.isExecutableFile(atPath: executable.path) else { codexStatus = Strings.notFound; return }
+        do {
+            let result = try await ProcessRunner().run(executable, arguments: ["--version"], timeout: .seconds(5))
+            let version = result.stdout.trimmingCharacters(in: .whitespacesAndNewlines)
+            codexStatus = result.status == 0 && !version.isEmpty ? version : Strings.notFound
+        } catch { codexStatus = Strings.notFound }
+    }
+    func openConfigFile() { if FileManager.default.fileExists(atPath: configurationURL.path) { NSWorkspace.shared.open(configurationURL) } }
+    func quit() { NSApp.terminate(nil) }
     func save() {
         do { try ConfigurationStore().save(configuration, to: configurationURL); configurationWarning = nil }
         catch { configurationWarning = Strings.configurationSaveFailed }
@@ -151,7 +163,14 @@ final class PresentationModel {
         else { watcher.start(); record(.resumed) }
     }
 
-    func popoverPresented() { if heldFix != nil { record(.presented) } }
+    func popoverPresented() {
+        guard let fix = heldFix else { return }
+        record(.presented)
+        Task { [weak self] in
+            let clean = (try? await PatchApplier().isClean(repositoryRoot: fix.repositoryRoot)) ?? false
+            if self?.heldFix?.diff == fix.diff { self?.applyEnabled = clean }
+        }
+    }
 
     func dismissFix() { record(.dismissed); releaseFix() }
     func copyPatch() {
@@ -162,7 +181,12 @@ final class PresentationModel {
     func applyFix() async {
         guard let fix = heldFix else { return }
         do { try await PatchApplier().apply(fix.diff, repositoryRoot: fix.repositoryRoot); record(.applied, repository: fix.repositoryRoot); lastRunStatus = Strings.applied; releaseFix() }
-        catch { record(.applyFailed, repository: fix.repositoryRoot); applyEnabled = false; lastRunStatus = Strings.applyFailed }
+        catch {
+            record(.applyFailed, repository: fix.repositoryRoot); applyEnabled = false; lastRunStatus = Strings.applyFailed
+            NSAccessibility.post(element: NSApplication.shared, notification: .announcementRequested,
+                                 userInfo: [.announcement: Strings.applyFailed,
+                                            .priority: NSAccessibilityPriorityLevel.high.rawValue])
+        }
     }
 
     private func record(_ verdict: VerdictKind, effort: String? = nil, repository: URL? = nil) {

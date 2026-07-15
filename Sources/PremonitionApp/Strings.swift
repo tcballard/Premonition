@@ -1,5 +1,6 @@
 enum Strings {
     static let statusNotConfigured = "Premonition is not configured"
+    static let statusItem = "Premonition status"
     static let settingsTitle = "Premonition"
     static let quit = "Quit Premonition"
     static let watching = "Watching for errors"
@@ -8,6 +9,7 @@ enum Strings {
     static let paused = "Watching paused"
     static let pauseWatching = "Pause watching"
     static let settings = "Settings"
+    static let openConfig = "Open Config File…"
     static let emptyState = "Choose a Git repository root before Premonition can watch for errors."
     static let setUp = "Set up Premonition…"
     static let waitingForError = "Copy an error-shaped stack trace to begin."
@@ -20,6 +22,7 @@ enum Strings {
     static let codex = "Codex"
     static let available = "Available"
     static let notFound = "Not found"
+    static let notChecked = "Not checked"
     static let configurationWarning = "Some configuration values were restored to safe defaults."
     static let configurationLoadFailed = "Configuration could not be loaded."
     static let configurationSaveFailed = "Configuration could not be saved."
@@ -41,4 +44,9 @@ enum Strings {
     static let expired = "Held fix expired"
     static let dailyCount = "Daily count"
     static let soundOnReady = "Sound on ready"
+    static let solRationale = "Sol rationale"
+    static let patchPreview = "Patch preview"
+    static let addedLine = "Added line"
+    static let removedLine = "Removed line"
+    static let contextLine = "Context line"
 }
