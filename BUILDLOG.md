@@ -958,3 +958,71 @@ Complete issue #10 by exercising the owner-visible S3 exit paths, correcting the
 ### Next entry state
 
 - After this S3 completion commit is pushed, reviewed and merged with provenance retained, begin S4 only: add the filmable non-activating demo panel, honest narration/timer, fixture recording/replay and specified sound behaviour. Start by opening a scoped S4 issue; do not begin release or submission work.
+
+---
+
+## Entry S3.3 — Authored fix experience ready for owner review
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T08:21:33+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — exposed by `CODEX_THREAD_ID`; `/feedback` remains unavailable on this surface
+
+### Objective
+
+Implement the owner-approved post-S3 popover direction under issue #13 without beginning S4 or changing any speculation, admission, privacy, Apply or provenance contract.
+
+### Completed
+
+- Reframed the popover as a native instrument with Premonition identity and state first, followed by diagnosis, quiet repository/file context, a focused dark inset diff, a separately outlined Sol rationale, explicit actions and quiet safety/expiry metadata.
+- Made Apply the sole native accent-blue primary action; retained Copy patch and Dismiss as secondary native controls and reserved green/red for semantic diff additions/removals.
+- Kept the eye SF Symbol family as the functional identity and removed any need for a separate status rail, custom chrome, gradients or simulated Liquid Glass on the macOS 14 deployment target.
+- Split the SwiftUI presentation into stable shell, header/receipt, fix-ready, semantic-diff and design-token views while leaving AppKit status-item/popover ownership unchanged.
+- Added a read-only `DiffPresentation` projection over the existing canonical `UnifiedDiff`; it classifies visible lines and supplies non-colour VoiceOver descriptions without introducing a second parser or persistence path.
+- Added ten-minute expiry to the held-fix presentation model so the existing ephemeral lifetime can be shown quietly in the footer.
+- Added headless tests for file display, semantic line classification, accessible descriptions, aggregate counts and render-budget summarisation.
+
+### Decisions and provenance
+
+- **Owner decision:** Use Option 1 composition and hierarchy with Option 2's dark inset diff and outlined rationale, native-blue Apply, quiet operational metadata and no Option 3 status rail.
+- **Sol implemented:** Native SwiftUI hierarchy, presentation components, design tokens, diff presentation projection, expiry metadata and accessibility-focused tests.
+- **Sol reviewed:** S3/S4 phase boundary, canonical parser ownership, AppKit/SwiftUI ownership, colour semantics, accessibility labels and preservation of clean-tree Apply and privacy contracts.
+- **Human-authored and Sol-reviewed:** Owner-approved Product Design ideation direction.
+
+### Artefacts
+
+- `Sources/PremonitionApp/UI/PopoverView.swift`, `PopoverChrome.swift` and `FixReadyView.swift` — authored shell, identity/state hierarchy and explicit actions.
+- `Sources/PremonitionApp/UI/SemanticDiffView.swift` and `PremonitionDesign.swift` — native IDE-like diff presentation and semantic design roles.
+- `Sources/PremonitionCore/Diff/DiffPresentation.swift` — read-only presentation projection over the canonical parsed diff.
+- `Tests/PremonitionCoreTests/PremonitionCoreTests.swift` — semantic and accessibility presentation coverage.
+- Issue #13 and branch `codex/issue-13-authored-popover` — reviewable S3.5 work surface.
+
+### Verification
+
+- `swift build` — passed on the pinned macOS 14 target after normal SwiftPM cache access was granted.
+- `scripts/test.sh` — 34 Swift tests passed, including the new diff-presentation tests; deterministic demo and measurement-normalisation checks passed.
+- `scripts/build-app.sh release` — production bundle assembled at `dist/Premonition.app`.
+- `script/build_and_run.sh --verify` — debug bundle rebuilt, launched and remained running.
+- `git diff --check` — passed before the log append.
+- Existing paired-log and provenance checks — passed before this entry was appended.
+
+### Deviations
+
+- This is an owner-approved bounded S3 presentation refinement after S3 completion. It does not implement S4's demo panel, narration, fixture replay presentation or sound behaviour.
+
+### Risks and missing evidence
+
+- Owner visual review of the rebuilt fix-ready state is still pending, so no claim is made that the approved direction has been visually accepted in implementation.
+- Light and increased-contrast appearance captures remain deferred to the S5 visual verification matrix.
+- V14 still requires the durable thread's `/feedback` ID before submission.
+
+### Next entry state
+
+- Owner opens the running popover with a held fix and reviews hierarchy, density, diff readability, rationale separation and actions. Correct any findings on issue #13, rerun the complete verification set, then merge only with explicit owner authority; after merge, open a scoped S4 issue before beginning the filmable demo layer.

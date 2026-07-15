@@ -22,6 +22,7 @@ final class PresentationModel {
         let repositoryRoot: URL
         let errorLine: String
         let repositoryName: String
+        let expiresAt: Date
         var rationale: String?
     }
 
@@ -130,9 +131,10 @@ final class PresentationModel {
             switch outcome {
             case let .fixReady(diff, _):
                 machine.hold(diff: diff)
+                let expiresAt = Date().addingTimeInterval(600)
                 heldFix = HeldFix(diff: diff, repositoryRoot: resolution.root,
                                   errorLine: text.split(separator: "\n").first.map(String.init) ?? Strings.error,
-                                  repositoryName: resolution.root.lastPathComponent)
+                                  repositoryName: resolution.root.lastPathComponent, expiresAt: expiresAt)
                 applyEnabled = (try? await PatchApplier().isClean(repositoryRoot: resolution.root)) ?? false
                 status = .fixReady; lastRunStatus = Strings.fixReady
                 record(.fixReady, repository: resolution.root)

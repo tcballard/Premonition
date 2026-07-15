@@ -243,3 +243,19 @@ The final review tightened the surface around that behavior: Escape closes rathe
 The filmable panel still does not exist. That is S4, along with narration, replay presentation and sound. First this S3 completion branch gets reviewed and merged with its provenance intact.
 
 **Source:** `BUILDLOG.md`, Entry S3.2
+
+---
+
+## S3.3 — The popover learned what deserves attention
+
+**Date:** 2026-07-15
+
+The fix-ready popover now has an opinion about sequence. Premonition and its current state lead; the diagnosis and repository establish context; the patch gets a focused editor-like surface; Sol's reasoning sits apart; and Apply is the one action allowed to carry the system accent.
+
+This was mostly a job of restraint. The eye remains the instrument identity, operational facts have moved into quieter edges, and green and red are back to doing semantic work in the diff. There is no status rail, decorative chrome or pretend Liquid Glass competing with the fix.
+
+Underneath, the view split is cleaner without moving the safety boundary. The UI reads from the existing canonical parsed diff through a small presentation projection, while AppKit ownership and every admission, privacy and Apply contract stay where they were. The full 34-test path, release bundle and developer launch all pass.
+
+The remaining gate is appropriately human: inspect a real held fix in the rebuilt popover and decide whether the hierarchy feels as deliberate as the approved direction. Only then should issue #13 be considered done and S4 begin.
+
+**Source:** `BUILDLOG.md`, Entry S3.3
