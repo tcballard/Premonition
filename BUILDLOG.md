@@ -1091,3 +1091,58 @@ Apply the authored macOS design review to issue #13's monitoring state after the
 ### Next entry state
 
 - Owner opens the newly installed monitoring popover and reviews its hierarchy, density, copy and admission-boundary signature. Correct any findings, then review a real fix-ready state before issue #13 is eligible for owner-approved merge.
+
+---
+
+## Entry S3.5 — Durable feedback Session ID confirmed
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T17:37:34+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — owner-confirmed through `/feedback codex-session-id` and matched by `CODEX_THREAD_ID`
+
+### Objective
+
+Close the outstanding V14 provenance-evidence gap by recording the stable Session ID returned for the durable build thread.
+
+### Completed
+
+- The owner invoked `/feedback codex-session-id` and confirmed that the returned identifier is the required Session ID.
+- The identifier matched the active `CODEX_THREAD_ID` already carried by the S0–S3 build records.
+- V14's missing durable feedback Session ID is therefore resolved; earlier entries remain unchanged as accurate historical statements.
+
+### Decisions and provenance
+
+- **Owner decision:** Treat the confirmed `/feedback` identifier as the required V14 evidence.
+- **Sol implemented:** Append-only BUILDLOG, DEVLOG and Sol-ledger update only.
+- **Sol reviewed:** Identifier consistency with the active environment and prior phase records.
+- **Human-authored and Sol-reviewed:** Owner invocation and confirmation of `/feedback codex-session-id`.
+
+### Artefacts
+
+- `BUILDLOG.md` and `DEVLOG.md` — paired S3.5 evidence record.
+- `docs/build-week/sol-ledger.md` — V14 confirmation row.
+
+### Verification
+
+- `printenv CODEX_THREAD_ID` — returned `019f5f0f-a2dd-78e3-a5b3-413860708eab`, matching the owner-confirmed feedback identifier.
+
+### Deviations
+
+- None.
+
+### Risks and missing evidence
+
+- Owner visual acceptance of issue #13's monitoring and fix-ready states remains pending.
+- Light and increased-contrast captures remain deferred to the S5 visual matrix.
+
+### Next entry state
+
+- Resume issue #13 owner review: inspect the installed monitoring state and a real fix-ready state, correct any findings, rerun verification and merge only with explicit owner authority.

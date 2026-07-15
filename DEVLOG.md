@@ -275,3 +275,15 @@ The daily fraction has quietened into receipt text, paused mode uses the same vi
 The revised build and full test path pass, and the new bundle is installed for another owner look. The next judgment is visual: does this finally feel like a watchful instrument in its ordinary state, and does the fix-ready transition preserve that character?
 
 **Source:** `BUILDLOG.md`, Entry S3.4
+
+---
+
+## S3.5 — The durable thread has its receipt
+
+**Date:** 2026-07-15
+
+The stable feedback Session ID is now confirmed, and it matches the identifier carried through the build records from S0 onward. That closes the lingering V14 evidence gap without rewriting the earlier entries that honestly said it was unavailable.
+
+Nothing about the product changed here. The remaining work is still the owner review of the monitoring and fix-ready presentations on issue #13.
+
+**Source:** `BUILDLOG.md`, Entry S3.5
