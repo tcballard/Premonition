@@ -39,3 +39,17 @@ func monitoringReceiptPresentationKeepsMetadataContentFree() {
                                           dailyCount: 1,
                                           dailyCap: 30).receiptSymbol == "exclamationmark.triangle")
 }
+
+@Test("monitoring dial sweep stays instrument-like and motion-safe")
+func monitoringDialSweepScansTheUpperArc() {
+    let sweep = MonitoringDialSweep()
+    let start = Date(timeIntervalSinceReferenceDate: 0)
+    let middle = Date(timeIntervalSinceReferenceDate: 1.7)
+    let middleTick = Int(sweep.activePosition(status: .watching, at: middle).rounded())
+
+    #expect(sweep.activePosition(status: .watching, at: start) > 39)
+    #expect(sweep.activePosition(status: .watching, at: middle) < 9)
+    #expect(sweep.opacity(for: 0, status: .paused, at: start) == 0.18)
+    #expect(sweep.opacity(for: middleTick, status: .watching, at: middle) > 0.18)
+    #expect(sweep.opacity(for: 24, status: .watching, at: middle) == 0.18)
+}

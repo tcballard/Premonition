@@ -331,3 +331,17 @@ The safety shape did not move. There is no new model path, no automatic action, 
 The build is verified, the app is installed into `/Applications`, and the installed executable matches the freshly built bundle. The next judgment is the right one: look at the actual running monitoring screen, then run the UX/design evaluation against the thing that now exists.
 
 **Source:** `BUILDLOG.md`, Entry S3.8
+
+---
+
+## S3.9 — The scan moved into the instrument
+
+**Date:** 2026-07-15
+
+The tempting version was to make the eye itself look around. That would have been easy, but it would also have nudged Premonition toward feeling like a little watcher with intent.
+
+The dial now does the work instead. Its active band eases across the upper arc and back, which gives the surface a scanning cue without changing the eye into a character. Paused and Reduce Motion still stay still.
+
+This is a small motion change, but it fits the product character better: awake, local and instrument-like, not autonomous. The updated app is installed for the next visual pass.
+
+**Source:** `BUILDLOG.md`, Entry S3.9

@@ -1328,3 +1328,66 @@ Finish the owner-requested implementation of the pre-error monitoring screen fro
 ### Next entry state
 
 - Owner should inspect the installed monitoring state, then run the planned UX/design evaluation pass on the actual implementation and decide any follow-up issue #13 corrections before merging or beginning S4.
+
+---
+
+## Entry S3.9 — Dial sweep refined
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T18:30:41+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Refine the monitoring dial so the eye remains a quiet SF Symbol instrument while the dial, not the pupil, carries the scanning cue.
+
+### Completed
+
+- Replaced the prior three-tick circular orbit with a softer lobe that eases across the dial's upper arc from left to right and back.
+- Kept the eye glyph itself static so the product reads as an instrument rather than a character or autonomous observer.
+- Preserved paused and Reduce Motion behaviour: paused state remains static and reduced motion shows a single static lit tick.
+- Added app presentation coverage for the dial sweep's active arc, paused opacity and inactive lower-dial state.
+- Rebuilt, installed and launched `/Applications/Premonition.app` from the updated bundle.
+
+### Decisions and provenance
+
+- **Owner decision:** Prefer the best product fit: refine the dial sweep rather than animate the eye or add a pupil glint.
+- **Sol implemented:** S3 monitoring-dial motion refinement and app-side test coverage.
+- **Sol reviewed:** Motion grammar, Reduce Motion behaviour and the S3/S4 boundary.
+- **Human-authored and Sol-reviewed:** Owner's direction to avoid the pupil-glint risk and keep the cue instrument-like.
+
+### Artefacts
+
+- `Sources/PremonitionApp/UI/MonitoringView.swift` — upper-arc monitoring dial sweep.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — dial sweep behaviour coverage.
+- `/Applications/Premonition.app` — refreshed installed bundle for owner review.
+
+### Verification
+
+- `swift test` — passed 37 Swift tests after correcting the new dial-sweep assertion.
+- `scripts/test.sh` — passed 37 Swift tests plus demo-repository and measurement-normalisation checks.
+- `git diff --check` — passed.
+- `scripts/build-app.sh release` — produced `dist/Premonition.app`.
+- `pkill -x Premonition`; `ditto dist/Premonition.app /Applications/Premonition.app`; `open -n /Applications/Premonition.app` — refreshed and launched the installed app bundle.
+- `shasum -a 256 dist/Premonition.app/Contents/MacOS/Premonition /Applications/Premonition.app/Contents/MacOS/Premonition` — hashes matched.
+
+### Deviations
+
+- None from the specification. The change stays inside S3 monitoring polish and does not add S4 demo behaviour, persistence, executor changes or Apply changes.
+
+### Risks and missing evidence
+
+- Owner visual acceptance of the refined installed monitoring sweep remains pending.
+- Product-design evaluation skills have not yet been run; they remain the next review step.
+
+### Next entry state
+
+- Owner should inspect the installed refined monitoring sweep, then run the planned UX/design evaluation pass on the actual implementation and decide any follow-up issue #13 corrections before merging or beginning S4.

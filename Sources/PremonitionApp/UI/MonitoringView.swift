@@ -50,18 +50,18 @@ private struct WatchDial: View {
     let presentation: MonitoringPresentation
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    private let tickCount = 48
+    private let sweep = MonitoringDialSweep()
 
     var body: some View {
         TimelineView(.animation(minimumInterval: 1.0 / 15.0,
                                 paused: reduceMotion || presentation.status == .paused)) { context in
             ZStack {
-                ForEach(0..<tickCount, id: \.self) { index in
+                ForEach(0..<sweep.tickCount, id: \.self) { index in
                     Capsule(style: .continuous)
                         .fill(tickColor(index: index, at: context.date))
                         .frame(width: 3, height: 11)
                         .offset(y: -PremonitionDesign.monitoringDialSize / 2 + 7)
-                        .rotationEffect(.degrees(Double(index) * 360 / Double(tickCount)))
+                        .rotationEffect(.degrees(Double(index) * 360 / Double(sweep.tickCount)))
                 }
 
                 Circle()
@@ -89,17 +89,48 @@ private struct WatchDial: View {
     private func tickColor(index: Int, at date: Date) -> Color {
         guard presentation.status != .paused else { return PremonitionDesign.ColorRole.dialTrack }
         if reduceMotion {
-            return index == tickCount - 1 ? .primary : PremonitionDesign.ColorRole.dialTrack
+            return index == 0 ? Color.primary.opacity(sweep.reducedMotionOpacity) : PremonitionDesign.ColorRole.dialTrack
         }
-        let speed = presentation.status == .speculating ? 10.0 : 5.0
-        let active = Int(date.timeIntervalSinceReferenceDate * speed) % tickCount
-        let distance = (active - index + tickCount) % tickCount
-        switch distance {
-        case 0: return .primary
-        case 1: return Color.primary.opacity(0.55)
-        case 2: return Color.primary.opacity(0.32)
-        default: return PremonitionDesign.ColorRole.dialTrack
-        }
+        let opacity = sweep.opacity(for: index, status: presentation.status, at: date)
+        return Color.primary.opacity(opacity)
+    }
+}
+
+struct MonitoringDialSweep: Equatable {
+    let tickCount = 48
+    let reducedMotionOpacity = 0.72
+
+    private let upperArcHalfSpan = 8.0
+    private let lobeRadius = 4.6
+
+    func opacity(for index: Int, status: PresentationModel.Status, at date: Date) -> Double {
+        guard status != .paused else { return 0.18 }
+
+        let distance = abs(circularDistance(from: Double(index), to: activePosition(status: status, at: date)))
+        guard distance < lobeRadius else { return 0.18 }
+
+        let falloff = 1.0 - (distance / lobeRadius)
+        return 0.18 + pow(falloff, 1.7) * 0.72
+    }
+
+    func activePosition(status: PresentationModel.Status, at date: Date) -> Double {
+        let cycleDuration = status == .speculating ? 1.65 : 3.4
+        let rawPhase = date.timeIntervalSinceReferenceDate / cycleDuration
+        let phase = rawPhase - floor(rawPhase)
+        let easedSweep = 0.5 - 0.5 * cos(phase * .pi * 2)
+        let signedOffset = -upperArcHalfSpan + (upperArcHalfSpan * 2 * easedSweep)
+        return wrap(signedOffset)
+    }
+
+    private func circularDistance(from index: Double, to active: Double) -> Double {
+        let raw = abs(index - active)
+        return min(raw, Double(tickCount) - raw)
+    }
+
+    private func wrap(_ value: Double) -> Double {
+        let count = Double(tickCount)
+        let remainder = value.truncatingRemainder(dividingBy: count)
+        return remainder >= 0 ? remainder : remainder + count
     }
 }
 
