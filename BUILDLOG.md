@@ -1511,3 +1511,56 @@ Persist the owner-supplied Sites explainer handoff for a later S6/submission-sup
 ### Next entry state
 
 - Continue issue #13 owner visual review and planned UX/design evaluation. Defer all Sites work until the app, README, demo, provenance logs and release evidence are stable and the owner explicitly authorises Sites work.
+
+---
+
+## Entry S3.12 — CodexToolkit skill formalisation updated
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T18:59:14+01:00
+
+**Phase:** S3 provenance checkpoint
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this checkpoint records owner-supplied external workflow context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Record the owner's update that the Premonition workflow skills used in this session are now also being added to the external CodexToolkit repository.
+
+### Completed
+
+- Recorded that the `build-premonition` and `maintain-premonition-build-log` skills used in this session are being formalised into CodexToolkit.
+- Preserved the boundary that CodexToolkit remains external workflow infrastructure and provenance context, not Premonition app/runtime scope.
+- Confirmed that the next Premonition agenda remains issue #13 owner visual review, planned UX/design evaluation and any final popover corrections before S4.
+
+### Decisions and provenance
+
+- **Owner decision:** Note that the Premonition build/log skills are being added to CodexToolkit before continuing through the issue #13 agenda.
+- **Sol implemented:** Paired provenance checkpoint logs only.
+- **Sol reviewed:** Separation between external workflow tooling provenance and Premonition product/runtime invariants.
+- **Human-authored and Sol-reviewed:** Owner-supplied CodexToolkit update.
+
+### Artefacts
+
+- `BUILDLOG.md` and `DEVLOG.md` — paired S3.12 external workflow provenance checkpoint.
+
+### Verification
+
+- Owner-confirmed in the active Premonition conversation; no independent claim is made in this entry about the current CodexToolkit branch, pull request, merge status or model selection.
+
+### Deviations
+
+- None. This does not alter Premonition's runtime scope, v0.1 invariants, S3/S4 boundary, Sites deferral or publication status.
+
+### Risks and missing evidence
+
+- The CodexToolkit skill formalisation remains external and evolving; future Premonition sessions should re-check that repository only when its concrete artefacts become relevant to Premonition submission or process provenance.
+
+### Next entry state
+
+- Continue the previously outlined agenda: inspect the installed issue #13 UI, run the planned UX/design evaluation on the real implementation, apply any final corrections, then prepare PR #14 for owner review/merge before beginning S4.

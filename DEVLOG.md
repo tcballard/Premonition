@@ -373,3 +373,17 @@ The handoff is explicit: do not start Sites yet. The app, README, demo flow, pro
 This does not change Premonition itself. Runtime scope, S3/S4 boundaries and the v0.1 safety invariants stay exactly where they were. The next work remains owner review of the actual app surface.
 
 **Source:** `BUILDLOG.md`, Entry S3.11
+
+---
+
+## S3.12 — The build method is becoming reusable
+
+**Date:** 2026-07-15
+
+The Premonition-specific skills are no longer just local scaffolding around this one build. The owner has confirmed that the build and log-maintenance skills used here are also being added into CodexToolkit.
+
+That is worth recording because these skills have shaped the way this project has stayed honest: phase boundaries, paired logs, Sol provenance, and stopping bright ideas from quietly becoming runtime scope.
+
+It still changes nothing inside Premonition. CodexToolkit is external workflow infrastructure, not an app dependency. The next Premonition move remains the actual issue #13 review path: look at the installed UI, run the design evaluation, fix what needs fixing, then close the PR before S4.
+
+**Source:** `BUILDLOG.md`, Entry S3.12
