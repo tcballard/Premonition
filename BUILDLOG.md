@@ -1146,3 +1146,60 @@ Close the outstanding V14 provenance-evidence gap by recording the stable Sessio
 ### Next entry state
 
 - Resume issue #13 owner review: inspect the installed monitoring state and a real fix-ready state, correct any findings, rerun verification and merge only with explicit owner authority.
+
+---
+
+## Entry S3.6 — CodexToolkit provenance context recorded
+
+**Date:** 2026-07-15
+
+**Recorded at:** 2026-07-15T17:44:33+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed by the owner's durable-session brief
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — owner-confirmed through `/feedback codex-session-id`
+
+### Objective
+
+Record the parallel formalisation of Codex skills used around the Premonition build so the builder diary preserves the relationship without treating external tooling as shipped product scope.
+
+### Completed
+
+- Recorded [tcballard/CodexToolkit](https://github.com/tcballard/CodexToolkit) as the owner's external workshop for focused Codex skills used to design, build, document, demonstrate and ship software.
+- Recorded the owner-confirmed fact that other Codex sessions are preparing and pushing CodexToolkit pull requests alongside Premonition work.
+- Observed draft CodexToolkit pull request [#1](https://github.com/tcballard/CodexToolkit/pull/1), `feat(toolkit): add Product Demo skill scaffold`, from branch `codex/product-demo-v0.0.1`.
+- Preserved the boundary that CodexToolkit and the local workflow skills are provenance/build infrastructure, not Premonition runtime dependencies or v0.1 shipped features.
+
+### Decisions and provenance
+
+- **Owner decision:** Add the parallel CodexToolkit skill-formalisation work to Premonition's DEVLOG for provenance tracking.
+- **Sol implemented:** Paired append-only provenance-context entries only.
+- **Sol reviewed:** Separation between external workflow/tooling provenance and Premonition product/runtime scope.
+- **Human-authored and Sol-reviewed:** Owner's description of the concurrent CodexToolkit sessions.
+
+### Artefacts
+
+- `BUILDLOG.md` and `DEVLOG.md` — paired S3.6 provenance-context record.
+- [tcballard/CodexToolkit](https://github.com/tcballard/CodexToolkit) — external skill workshop; no code from it is added to Premonition by this entry.
+
+### Verification
+
+- `gh repo view tcballard/CodexToolkit` — confirmed the repository, description and `main` default branch.
+- `gh pr list --repo tcballard/CodexToolkit --state all` — observed draft PR #1 as the only currently visible pull request; additional concurrent work remains owner-confirmed rather than GitHub-observed at this timestamp.
+
+### Deviations
+
+- None. This entry records adjacent provenance only and does not change the authoritative specification or S3/S4 product boundary.
+
+### Risks and missing evidence
+
+- The eventual set of CodexToolkit skills and PRs is still evolving; this entry is a timestamped context record, not a claim that the toolkit is complete.
+- Owner visual acceptance of issue #13 remains pending.
+
+### Next entry state
+
+- Continue issue #13 owner review. Update the logs again only when CodexToolkit produces a concrete Premonition-related durable artefact or when the popover review reaches an owner decision.

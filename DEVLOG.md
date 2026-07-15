@@ -287,3 +287,19 @@ The stable feedback Session ID is now confirmed, and it matches the identifier c
 Nothing about the product changed here. The remaining work is still the owner review of the monitoring and fix-ready presentations on issue #13.
 
 **Source:** `BUILDLOG.md`, Entry S3.5
+
+---
+
+## S3.6 — The tools are becoming a project too
+
+**Date:** 2026-07-15
+
+Premonition has not only produced an app. It has also exposed a useful set of repeatable ways to work with Codex: keep a durable build record, protect phase boundaries, design native Mac surfaces deliberately, and turn the eventual product into something that can be demonstrated honestly.
+
+Those methods are now being formalised in parallel at [CodexToolkit](https://github.com/tcballard/CodexToolkit). Other sessions are preparing contributions there while this thread stays focused on Premonition; the first visible draft PR establishes a Product Demo skill scaffold.
+
+The boundary matters. CodexToolkit is the workshop around the build, not a hidden dependency inside Premonition. Nothing from it ships in v0.1 merely because it helped shape the process.
+
+For now this is provenance context, not a completion claim. The toolkit is still evolving, and Premonition's immediate gate remains the owner review of the monitoring and fix-ready popovers.
+
+**Source:** `BUILDLOG.md`, Entry S3.6
