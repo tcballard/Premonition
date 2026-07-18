@@ -1,0 +1,12 @@
+diff --git a/premonition_demo/shallow.py b/premonition_demo/shallow.py
+--- a/premonition_demo/shallow.py
++++ b/premonition_demo/shallow.py
+@@ -1,7 +1,7 @@
+ CONFIG = {"greeting": "hello"}
+
+ def main() -> None:
+-    print(CONFIG["greting"])
++    print(CONFIG["greeting"])
+
+ if __name__ == "__main__":
+     main()

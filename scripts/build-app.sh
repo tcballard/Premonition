@@ -17,6 +17,7 @@ rm -rf "$APP_BUNDLE"
 mkdir -p "$CONTENTS/MacOS" "$CONTENTS/Resources"
 cp "$BIN_DIR/Premonition" "$CONTENTS/MacOS/Premonition"
 cp "$ROOT_DIR/packaging/Info.plist" "$CONTENTS/Info.plist"
+cp -R "$ROOT_DIR/Fixtures" "$CONTENTS/Resources/Fixtures"
 chmod +x "$CONTENTS/MacOS/Premonition"
 plutil -lint "$CONTENTS/Info.plist" >/dev/null
 printf '%s\n' "$APP_BUNDLE"

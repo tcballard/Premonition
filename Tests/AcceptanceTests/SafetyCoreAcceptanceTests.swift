@@ -91,3 +91,67 @@ func a1HeadlessRealSol() async throws {
                                                currentDirectory: root)
     #expect(status.stdout.isEmpty)
 }
+
+private final class ReplayEventCapture: @unchecked Sendable {
+    private let lock = NSLock()
+    private var storage: [PipelineEvent] = []
+    func append(_ event: PipelineEvent) { lock.withLock { storage.append(event) } }
+    var values: [PipelineEvent] { lock.withLock { storage } }
+}
+
+@Test("A12 offline replay crosses the real gate resolver and validator without model egress")
+func a12OfflineReplay() async throws {
+    let manager = FileManager.default
+    let root = manager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    defer { try? manager.removeItem(at: root) }
+    let project = URL(fileURLWithPath: #filePath)
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+    let generated = try await ProcessRunner().run(
+        project.appendingPathComponent("scripts/make-demo-repo.sh"),
+        arguments: [root.path],
+        timeout: .seconds(30)
+    )
+    #expect(generated.status == 0)
+
+    let fixture = try FixtureExecutor().load(
+        directory: project.appendingPathComponent("Fixtures/shallow"),
+        repositoryRoot: root
+    )
+    let gate = try #require(ErrorGate().match(fixture.errorText))
+    let resolution = try #require(RepositoryResolver().resolve(
+        paths: gate.extractedPaths,
+        allowlistedRoots: [root]
+    ))
+    var machine = CandidateStateMachine(dailyCap: DailyCap(limit: 30))
+    guard case .admitted = machine.admit(
+        hash: ClipboardCandidateFilter.hashPrefix(fixture.errorText),
+        at: .distantPast
+    ) else {
+        Issue.record("fixture was not admitted")
+        return
+    }
+
+    let events = ReplayEventCapture()
+    let outcome = await SpeculationPipeline(
+        executor: FixtureReplayExecutor(bundle: fixture, speed: 100)
+    ).run(prompt: "fixture replay", repositoryRoot: resolution.root) {
+        events.append($0)
+    }
+    guard case let .fixReady(diff, calls) = outcome else {
+        Issue.record("fixture did not validate")
+        return
+    }
+
+    #expect(calls == 1)
+    #expect(diff.text == fixture.finalDiff)
+    #expect(events.values.contains(.validating))
+    #expect(events.values.contains(.validated))
+    let status = try await ProcessRunner().run(
+        URL(fileURLWithPath: "/usr/bin/git"),
+        arguments: ["status", "--porcelain"],
+        currentDirectory: root
+    )
+    #expect(status.stdout.isEmpty)
+}

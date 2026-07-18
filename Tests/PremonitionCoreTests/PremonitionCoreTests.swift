@@ -61,6 +61,19 @@ func configurationValidation() {
     #expect(warnings.contains("model"))
 }
 
+@Test("configuration admits only quiet and demo surface modes")
+func configurationSurfaceModeValidation() {
+    var demo = PremonitionConfiguration()
+    demo.surfaceMode = "demo"
+    #expect(!demo.validate().contains("surface_mode"))
+    #expect(demo.surfaceMode == "demo")
+
+    var permanent = PremonitionConfiguration()
+    permanent.surfaceMode = "permanent"
+    #expect(permanent.validate().contains("surface_mode"))
+    #expect(permanent.surfaceMode == "quiet")
+}
+
 @Test("configuration load warns on unknown keys without broadening roots")
 func configurationUnknownKeys() throws {
     let url = try temporaryDirectory().appendingPathComponent("config.json")
@@ -213,4 +226,52 @@ func fixtureReplay() throws {
     let data = Data(#"{"stdout_events":["started","completed"],"stderr":"","exit_code":0}"#.utf8)
     let result = try FixtureExecutor().replay(data)
     #expect(result.stdoutEvents == ["started", "completed"]); #expect(result.exitCode == 0)
+}
+
+private final class CapturedFixtureEvents: @unchecked Sendable {
+    private let lock = NSLock()
+    private var storage: [PipelineEvent] = []
+    func append(_ event: PipelineEvent) { lock.withLock { storage.append(event) } }
+    var values: [PipelineEvent] { lock.withLock { storage } }
+}
+
+@Test("fixture replay executor replays local timing and returns the recorded diff")
+func fixtureReplayExecutorIsLocal() async throws {
+    let events = [
+        #"{"type":"thread.started"}"#,
+        #"{"type":"turn.started"}"#,
+        #"{"type":"item.completed","item":{"type":"agent_message","text":"recorded"}}"#,
+        #"{"type":"turn.completed"}"#,
+    ]
+    let bundle = FixtureBundle(
+        errorText: "Traceback",
+        events: events,
+        finalDiff: validPatch,
+        execution: FixtureExecution(
+            stdoutEvents: [],
+            eventOffsetsMilliseconds: [0, 10, 20, 30],
+            stderr: "",
+            exitCode: 0
+        )
+    )
+    let captured = CapturedFixtureEvents()
+    let result = try await FixtureReplayExecutor(bundle: bundle, speed: 10).run(
+        request: ExecutorRequest(
+            purpose: .speculation,
+            prompt: "not used by replay",
+            effort: .low,
+            repositoryRoot: URL(fileURLWithPath: "/tmp"),
+            timeout: .seconds(120)
+        )
+    ) { event in
+        captured.append(event)
+    }
+
+    #expect(result.finalText == validPatch)
+    #expect(result.durationMilliseconds == 3)
+    let observed = captured.values
+    #expect(observed.contains(.started))
+    #expect(observed.contains(.turnStarted))
+    #expect(observed.contains(.narration("recorded")))
+    #expect(observed.contains(.completed))
 }

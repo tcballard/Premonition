@@ -16,12 +16,25 @@ enum HeldFixTerminalAction {
     }
 }
 
+private enum SpeculationSource {
+    case live
+    case fixture(FixtureBundle, speed: Double)
+
+    var demoMode: DemoRunMode {
+        switch self {
+        case .live: .live
+        case let .fixture(_, speed): .fixtureReplay(speed: speed)
+        }
+    }
+}
+
 @MainActor @Observable
 final class PresentationModel {
     enum Status: Equatable { case notConfigured, watching, speculating, fixReady, paused }
 
     var status: Status = .notConfigured { didSet { onStatusChange?() } }
     var onStatusChange: (() -> Void)?
+    var onDemoModeChange: ((Bool) -> Void)?
     var isPaused = false { didSet { status = isPaused ? .paused : (configuration.allowlistedRoots.isEmpty ? .notConfigured : .watching) } }
     var configuration = PremonitionConfiguration()
     var configurationWarning: String?
@@ -30,6 +43,7 @@ final class PresentationModel {
     var lastRunAt: Date?
     var applyEnabled = false
     var codexStatus = Strings.notChecked
+    let demo = DemoPresentation()
     var dailyCount: Int { machine.capState.capCount }
 
     struct HeldFix: Equatable {
@@ -39,6 +53,7 @@ final class PresentationModel {
         let repositoryName: String
         let expiresAt: Date
         var rationale: String?
+        let runMode: DemoRunMode
     }
 
     private var filter = ClipboardCandidateFilter()
@@ -48,6 +63,7 @@ final class PresentationModel {
     private var pipelineTask: Task<Void, Never>?
     private var expiryTask: Task<Void, Never>?
     private var activeHash: String?
+    private var persistedPanelFrame: String?
 
     let configurationURL = FileManager.default.homeDirectoryForCurrentUser
         .appendingPathComponent("Library/Application Support/Premonition/config.json")
@@ -57,11 +73,28 @@ final class PresentationModel {
         load()
         let persisted = (try? Data(contentsOf: stateURL)).flatMap { try? JSONDecoder().decode(PersistentState.self, from: $0) }
         let capState = DailyCapState(capDate: persisted?.capDate ?? "", capCount: persisted?.capCount ?? 0)
+        persistedPanelFrame = persisted?.panelFrame
         machine = CandidateStateMachine(dailyCap: DailyCap(limit: configuration.dailyCap, state: capState))
         watcher.onItem = { [weak self] item in self?.observe(item) }
     }
 
     func startWatching() { if !isPaused { watcher.start() } }
+    var fixtureReplayAvailable: Bool {
+        guard let directory = fixtureDirectory else { return false }
+        return FileManager.default.fileExists(atPath: directory.path)
+    }
+    private var fixtureDirectory: URL? {
+        if let configured = configuration.fixturePath {
+            return URL(fileURLWithPath: configured)
+        }
+        guard let resources = Bundle.main.resourceURL else { return nil }
+        return resources.appendingPathComponent("Fixtures/shallow", isDirectory: true)
+    }
+    var demoPanelFrame: NSRect? { PanelFrameCodec.decode(persistedPanelFrame) }
+    func saveDemoPanelFrame(_ frame: NSRect) {
+        persistedPanelFrame = PanelFrameCodec.encode(frame)
+        persistCapState()
+    }
 
     func load() {
         guard FileManager.default.fileExists(atPath: configurationURL.path) else { status = .notConfigured; return }
@@ -97,6 +130,7 @@ final class PresentationModel {
         do { try ConfigurationStore().save(configuration, to: configurationURL); configurationWarning = nil }
         catch { configurationWarning = Strings.configurationSaveFailed }
         status = isPaused ? .paused : (configuration.allowlistedRoots.isEmpty ? .notConfigured : .watching)
+        onDemoModeChange?(configuration.surfaceMode == "demo")
     }
 
     private func observe(_ item: PasteboardItem) {
@@ -106,7 +140,7 @@ final class PresentationModel {
             debounceTask?.cancel()
             debounceTask = Task { [weak self] in
                 try? await Task.sleep(for: .seconds(2)); guard !Task.isCancelled else { return }
-                await self?.admit(text: text, hash: hash)
+                await self?.admit(text: text, hash: hash, source: .live)
             }
         case .concealedSkip: activeHash = nil; record(.concealedSkip)
         case .sizeDrop: activeHash = nil; record(.sizeDrop)
@@ -115,7 +149,7 @@ final class PresentationModel {
         }
     }
 
-    private func admit(text: String, hash: String) async {
+    private func admit(text: String, hash: String, source: SpeculationSource) async {
         activeHash = hash
         guard let gate = ErrorGate().match(text) else { lastRunStatus = Strings.gateDropped; record(.gateDrop); return }
         let roots = configuration.allowlistedRoots.map { URL(fileURLWithPath: $0) }
@@ -128,20 +162,33 @@ final class PresentationModel {
         case .admitted: break
         }
         persistCapState()
+        demo.begin(mode: source.demoMode)
+        demo.advance(to: .repositoryResolved)
         activeHash = hash
         status = .speculating; lastRunStatus = Strings.speculating
         record(.executionStart, effort: ExecutorPurpose.speculation.rawValue, repository: resolution.root)
         let prompt = PromptBuilder().speculation(error: text)
-        let executable = URL(fileURLWithPath: configuration.codexPath ?? "/opt/homebrew/bin/codex")
-        pipelineTask = Task { [weak self] in
-            guard let self else { return }
-            let pipeline = SpeculationPipeline(executor: CodexExecutor(executable: executable) { [weak self] purpose in
+        let executor: AnyExecutor
+        switch source {
+        case .live:
+            let executable = URL(fileURLWithPath: configuration.codexPath ?? "/opt/homebrew/bin/codex")
+            executor = AnyExecutor(CodexExecutor(executable: executable) { [weak self] purpose in
                 Task { @MainActor in
-                    if purpose == .escalation { self?.record(.escalate, effort: purpose.rawValue, repository: resolution.root) }
+                    if purpose == .escalation {
+                        self?.record(.escalate, effort: purpose.rawValue, repository: resolution.root)
+                    }
                     self?.record(.egress, effort: purpose.rawValue, repository: resolution.root)
                 }
             })
-            let outcome = await pipeline.run(prompt: prompt, repositoryRoot: resolution.root)
+        case let .fixture(bundle, speed):
+            executor = AnyExecutor(FixtureReplayExecutor(bundle: bundle, speed: speed))
+        }
+        pipelineTask = Task { [weak self] in
+            guard let self else { return }
+            let pipeline = SpeculationPipeline(executor: executor)
+            let outcome = await pipeline.run(prompt: prompt, repositoryRoot: resolution.root) { [weak self] event in
+                Task { @MainActor in self?.demo.observe(event) }
+            }
             guard !Task.isCancelled else { machine.release(); pipelineTask = nil; status = .watching; return }
             switch outcome {
             case let .fixReady(diff, _):
@@ -149,9 +196,12 @@ final class PresentationModel {
                 let expiresAt = Date().addingTimeInterval(600)
                 heldFix = HeldFix(diff: diff, repositoryRoot: resolution.root,
                                   errorLine: text.split(separator: "\n").first.map(String.init) ?? Strings.error,
-                                  repositoryName: resolution.root.lastPathComponent, expiresAt: expiresAt)
+                                  repositoryName: resolution.root.lastPathComponent, expiresAt: expiresAt,
+                                  runMode: source.demoMode)
                 applyEnabled = (try? await PatchApplier().isClean(repositoryRoot: resolution.root)) ?? false
                 status = .fixReady; lastRunStatus = Strings.fixReady
+                demo.complete()
+                if configuration.soundOnReady { NSSound(named: "Tink")?.play() }
                 record(.fixReady, repository: resolution.root)
                 expiryTask?.cancel()
                 expiryTask = Task { [weak self] in
@@ -165,8 +215,34 @@ final class PresentationModel {
                 }
             case .discarded:
                 machine.release(); status = .watching; lastRunStatus = Strings.noApplicableFix; record(.validationDiscard, repository: resolution.root)
+                demo.reset()
             }
             pipelineTask = nil
+        }
+    }
+
+    func replayConfiguredFixture() async {
+        guard let fixtureDirectory,
+              let rootPath = configuration.allowlistedRoots.first else {
+            lastRunStatus = Strings.fixtureUnavailable
+            return
+        }
+        do {
+            let root = URL(fileURLWithPath: rootPath)
+                .standardizedFileURL.resolvingSymlinksInPath()
+            let bundle = try FixtureExecutor().load(
+                directory: fixtureDirectory,
+                repositoryRoot: root
+            )
+            configuration.surfaceMode = "demo"
+            save()
+            await admit(
+                text: bundle.errorText,
+                hash: ClipboardCandidateFilter.hashPrefix(bundle.errorText),
+                source: .fixture(bundle, speed: configuration.fixtureSpeed)
+            )
+        } catch {
+            lastRunStatus = Strings.fixtureUnavailable
         }
     }
 
@@ -176,6 +252,7 @@ final class PresentationModel {
             watcher.stop(); debounceTask?.cancel()
             if pipelineTask != nil { record(.cancelled) }
             pipelineTask?.cancel(); pipelineTask = nil; expiryTask?.cancel(); machine.release(); heldFix = nil; record(.paused)
+            demo.reset()
         }
         else { watcher.start(); record(.resumed) }
     }
@@ -231,6 +308,7 @@ final class PresentationModel {
 
     private func persistCapState() {
         var state = PersistentState(); state.capDate = machine.capState.capDate; state.capCount = machine.capState.capCount
+        state.panelFrame = persistedPanelFrame
         guard let data = try? JSONEncoder().encode(state) else { return }
         try? FileManager.default.createDirectory(at: stateURL.deletingLastPathComponent(), withIntermediateDirectories: true)
         try? data.write(to: stateURL, options: .atomic)

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"fixture-shallow"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"type":"agent_message","text":"Recorded fixture patch ready"}}
+{"type":"turn.completed","usage":{}}

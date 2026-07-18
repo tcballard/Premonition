@@ -30,6 +30,7 @@ final class AppController: NSObject {
     private let popover = NSPopover()
     private let model: PresentationModel
     private let settingsWindowController: SettingsWindowController
+    private let demoPanelController: DemoPanelController
     private var pulseTimer: Timer?
     private var pulseDimmed = false
 
@@ -37,6 +38,7 @@ final class AppController: NSObject {
         let model = AppServices.presentation
         self.model = model
         settingsWindowController = SettingsWindowController(model: model)
+        demoPanelController = DemoPanelController(presentation: model.demo)
         super.init()
     }
 
@@ -53,7 +55,15 @@ final class AppController: NSObject {
         )
         statusItem = item
         model.onStatusChange = { [weak self] in self?.refreshStatusItem() }
+        model.onDemoModeChange = { [weak self] visible in
+            self?.demoPanelController.setVisible(visible)
+        }
+        demoPanelController.onFrameChange = { [weak model] frame in
+            model?.saveDemoPanelFrame(frame)
+        }
+        demoPanelController.restoreFrame(model.demoPanelFrame)
         refreshStatusItem()
+        demoPanelController.setVisible(model.configuration.surfaceMode == "demo")
         model.startWatching()
         if model.configuration.allowlistedRoots.isEmpty {
             DispatchQueue.main.async { [weak self] in

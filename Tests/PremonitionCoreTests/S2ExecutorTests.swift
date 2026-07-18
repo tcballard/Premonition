@@ -90,6 +90,32 @@ func pipelineTerminalFailure() async throws {
     #expect(await executor.captured().count == 2)
 }
 
+@Test("A11 rationale failure is independent from an already validated fix")
+func rationaleFailureDoesNotInvalidateFix() async throws {
+    let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
+    defer { try? FileManager.default.removeItem(at: root) }
+    try Data("old\n".utf8).write(to: root.appendingPathComponent("file.txt"))
+    _ = try await ProcessRunner().run(
+        URL(fileURLWithPath: "/usr/bin/git"),
+        arguments: ["init", "-q"],
+        currentDirectory: root
+    )
+    let executor = ScriptedExecutor([
+        .success(pipelinePatch),
+        .failure(ExecutorError.missingFinalAnswer),
+    ])
+    let pipeline = SpeculationPipeline(executor: executor)
+
+    let outcome = await pipeline.run(prompt: "error", repositoryRoot: root)
+    guard case .fixReady = outcome else {
+        Issue.record("expected fix before rationale")
+        return
+    }
+    #expect(await pipeline.rationale(prompt: "rationale", repositoryRoot: root) == nil)
+    #expect(await executor.captured().map(\.purpose) == [.speculation, .rationale])
+}
+
 @Test("explicit patch apply requires a clean tree and produces an unstaged edit")
 func explicitApplyContract() async throws {
     let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
