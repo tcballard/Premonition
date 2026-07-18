@@ -43,6 +43,13 @@ struct FixReadyView: View {
 
             HStack(spacing: PremonitionDesign.Space.compact) {
                 Label(fix.repositoryName, systemImage: "shippingbox")
+                if case .fixtureReplay = fix.runMode {
+                    Text(Strings.fixtureReplay)
+                        .padding(.horizontal, PremonitionDesign.Space.tight)
+                        .padding(.vertical, 2)
+                        .background(.quaternary.opacity(0.5), in: Capsule())
+                        .accessibilityLabel(Strings.fixtureReplay)
+                }
                 if let affectedFile = presentation.primaryFile {
                     Text("/")
                         .foregroundStyle(.quaternary)

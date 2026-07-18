@@ -15,7 +15,15 @@ struct SettingsPlaceholderView: View {
                 LabeledContent(Strings.model, value: "GPT-5.6 Sol")
                 LabeledContent(Strings.codex, value: model.codexStatus)
                 LabeledContent(Strings.dailyCount, value: "\(model.dailyCount) / \(model.configuration.dailyCap)")
+                Toggle(Strings.showDemoPanel, isOn: Binding(
+                    get: { model.configuration.surfaceMode == "demo" },
+                    set: { model.configuration.surfaceMode = $0 ? "demo" : "quiet"; model.save() }
+                ))
                 Toggle(Strings.soundOnReady, isOn: Binding(get: { model.configuration.soundOnReady }, set: { model.configuration.soundOnReady = $0; model.save() }))
+                Button(Strings.replayFixture) {
+                    Task { await model.replayConfiguredFixture() }
+                }
+                .disabled(!model.fixtureReplayAvailable || model.configuration.allowlistedRoots.isEmpty)
             }
             if let warning = model.configurationWarning { Text(warning).foregroundStyle(.orange) }
         }.formStyle(.grouped).padding().frame(width: 520, height: 430)

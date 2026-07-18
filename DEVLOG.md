@@ -507,3 +507,35 @@ The owner has confirmed that pass. That closes the issue #13 visual gate and tur
 The branch still needs its deliberate commit and draft PR refresh, and nothing is being merged yet. Once that review package is ready, S3 can wait at the proper boundary before S4 begins.
 
 **Source:** `BUILDLOG.md`, Entry S3.20
+
+---
+
+## S4.1 — The filmable phase has a clean starting line
+
+**Date:** 2026-07-18
+
+The authored popover is no longer a branch waiting for judgment. PR #14 is squash merged, its Sol trail survived the merge, and the owner-accepted instrument is now the baseline.
+
+Getting local `main` there was briefly less elegant than the product. Git's fast-forward was interrupted by a filesystem cancellation and left half of the new tree checked out. Because the branch had been clean, the recovery could be exact: restore from the confirmed remote commit, validate the logs and provenance again, and move on without rewriting anything.
+
+S4 now has issue #15, its own branch and a durable plan. The important boundary is already visible in that plan: the demo panel may narrate stages, but it stores no captured content; fixture replay may replace the model hop, but the gate, repository resolution, admission, validation and human decision remain real.
+
+No S4 runtime code exists yet. Next comes the content-free stage model and the non-activating panel, followed by the offline replay evidence that makes the demo resilient without pretending it was live.
+
+**Source:** `BUILDLOG.md`, Entry S4.1
+
+---
+
+## S4.2 — A filmable shadow, not a second product
+
+**Date:** 2026-07-18
+
+Premonition now has a second surface, but not a second source of truth. The floating panel narrates only content-free stages and an honest clock; the actual gate, repository resolution, Sol call, validation and human decision still happen in the pipeline we already trust.
+
+Offline replay follows the same rule. It replaces only the model hop with a timed local fixture. Everything around that hop remains real, and the UI says `Fixture replay` instead of asking a judge to guess. The fixture is bundled into the app, so the resilient path does not depend on hand-editing a config file.
+
+The privacy decision was to avoid building a recorder just because the specification permits one. A repository-authored fixture satisfies the offline evidence without adding a new content-bearing persistence path. That is the smaller and safer S4.
+
+Fifty-one tests pass, including A11 and A12, and the exact release with its fixture is installed. What remains is visible evidence: use the panel, watch the stages and timer, confirm it never steals focus, then run replay with networking disabled before packaging the branch for review.
+
+**Source:** `BUILDLOG.md`, Entry S4.2

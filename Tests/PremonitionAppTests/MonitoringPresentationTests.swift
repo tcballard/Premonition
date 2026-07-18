@@ -151,6 +151,64 @@ func fixReadyFocusUsesSafeInitialAction() {
     #expect(FixReadyAction.initial(applyEnabled: false) == .copyPatch)
 }
 
+@MainActor
+@Test("demo presentation is ordered content-free state with honest elapsed time")
+func demoPresentationProjectsOrderedStages() {
+    let presentation = DemoPresentation()
+    let admitted = Date(timeIntervalSinceReferenceDate: 100)
+
+    #expect(presentation.stage == .waiting)
+    #expect(presentation.elapsed(at: admitted) == 0)
+
+    presentation.begin(at: admitted)
+    presentation.advance(to: .repositoryResolved)
+    presentation.observe(.turnStarted)
+    presentation.observe(.narration("content is deliberately ignored"))
+    presentation.observe(.validating)
+    presentation.complete()
+
+    #expect(presentation.stage == .appliesCleanly)
+    #expect(presentation.mode == .live)
+    #expect(abs(presentation.elapsed(at: admitted.addingTimeInterval(7.8)) - 7.8) < 0.000_1)
+
+    presentation.advance(to: .gatePassed)
+    #expect(presentation.stage == .appliesCleanly)
+    presentation.reset()
+    #expect(presentation.stage == .waiting)
+    #expect(presentation.admittedAt == nil)
+}
+
+@MainActor
+@Test("demo panel is explicitly non-activating and reusable")
+func demoPanelIsNonActivating() throws {
+    let controller = DemoPanelController(presentation: DemoPresentation())
+    let panel = try #require(controller.window as? NonActivatingDemoPanel)
+
+    #expect(panel.styleMask.contains(.borderless))
+    #expect(panel.styleMask.contains(.nonactivatingPanel))
+    #expect(!panel.canBecomeKey)
+    #expect(!panel.canBecomeMain)
+    #expect(panel.level == .floating)
+    #expect(panel.hasShadow)
+    #expect(panel.isMovableByWindowBackground)
+
+    controller.setVisible(true)
+    #expect(panel.isVisible)
+    #expect(!panel.isKeyWindow)
+    controller.setVisible(false)
+    #expect(!panel.isVisible)
+}
+
+@Test("demo panel persists geometry only through a bounded frame codec")
+func demoPanelFrameCodecRoundTrips() throws {
+    let frame = NSRect(x: 10, y: 20, width: 312, height: 148)
+    let encoded = PanelFrameCodec.encode(frame)
+    #expect(encoded == "10.0,20.0,312.0,148.0")
+    #expect(PanelFrameCodec.decode(encoded) == frame)
+    #expect(PanelFrameCodec.decode("not,a,frame") == nil)
+    #expect(PanelFrameCodec.decode("1,2,-3,4") == nil)
+}
+
 @Test("monitoring dial sweep travels the full ring and stays motion-safe")
 func monitoringDialSweepTravelsTheFullRing() {
     let sweep = MonitoringDialSweep()

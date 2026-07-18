@@ -100,7 +100,10 @@ public struct PremonitionConfiguration: Codable, Equatable, Sendable {
             renderBudgetLines = 120
             warnings.append("render_budget_lines")
         }
-        if surfaceMode != "quiet" { surfaceMode = "quiet"; warnings.append("surface_mode") }
+        if !["quiet", "demo"].contains(surfaceMode) {
+            surfaceMode = "quiet"
+            warnings.append("surface_mode")
+        }
         if fixtureSpeed <= 0 { fixtureSpeed = 1.0; warnings.append("fixture_speed") }
         let efforts = [reasoningEffort.initial, reasoningEffort.escalation, reasoningEffort.rationale]
         if efforts.contains(where: { !["low", "medium", "high"].contains($0) }) {

@@ -35,9 +35,11 @@ public struct SpeculationPipeline<E: Executor>: Sendable {
         do {
             try Task.checkCancellation()
             let result = try await executor.run(request: request, onEvent: onEvent)
+            onEvent(.validating)
             let diff = try UnifiedDiffParser().parse(result.finalText)
             try DiffBoundsValidator().validate(diff, repositoryRoot: root)
             try await GitApplyChecker().check(diff, repositoryRoot: root)
+            onEvent(.validated)
             return diff
         } catch { return nil }
     }

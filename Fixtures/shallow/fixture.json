@@ -1,0 +1,16 @@
+{
+  "event_offsets_ms": [
+    0,
+    500,
+    1250,
+    1500
+  ],
+  "exit_code": 0,
+  "stderr": "",
+  "stdout_events": [
+    "thread.started",
+    "turn.started",
+    "item.completed",
+    "turn.completed"
+  ]
+}

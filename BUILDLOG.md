@@ -2081,3 +2081,141 @@ Record the owner's installed-app acceptance of the S3.19 remediation and close t
 ### Next entry state
 
 - Review the complete issue #13 diff, run log and provenance validation, commit with the required Sol trailers, push `codex/issue-13-authored-popover`, refresh draft PR #14 and return it for owner review without merging.
+
+---
+
+## Entry S4.1 — S4 starts from the accepted instrument
+
+**Date:** 2026-07-18
+
+**Recorded at:** 2026-07-18T14:10:26+01:00
+
+**Phase:** S4
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Verify the owner-confirmed issue #13 squash merge, restore a clean `main`, establish the bounded S4 issue and branch, and translate the specification into an implementation plan before changing runtime code.
+
+### Completed
+
+- Verified PR #14 merged as squash commit `3839966c4c4f6b86ce4750f433eea0e358929c36` and retained the issue #13 Sol trailers through BUILDLOG S3.20.
+- Repaired an interrupted local fast-forward after the filesystem cancelled Git's `mmap`; the pre-operation tree was clean and local `main` now exactly matches `origin/main`.
+- Re-ran paired-log and provenance validation successfully on merged `main`.
+- Closed completed issue #13 after its owner-accepted merge.
+- Created issue #15, `S4: build rationale and filmable demo`, from the authoritative S4 scope and acceptance scenarios A11 and A12.
+- Created `codex/issue-15-rationale-filmable-demo` from clean merged `main`.
+- Added `docs/build-week/s4-implementation-plan.md`, mapping the existing rationale, FixtureExecutor, configuration, Settings and AppKit seams into a bounded S4 architecture and test plan.
+
+### Decisions and provenance
+
+- **Owner decision:** PR #14 was squash merged; continue to the next build phase.
+- **Sol implemented:** Merge/provenance verification, safe local baseline repair, S4 issue, branch and implementation plan.
+- **Sol reviewed:** Earliest-incomplete-phase selection, S4 entry criteria, A11/A12 boundary, non-activating panel ownership, content-free stage state and replay-only model-hop substitution.
+
+### Artefacts
+
+- GitHub issue #15 — bounded S4 objective, scope, acceptance and exclusions.
+- `codex/issue-15-rationale-filmable-demo` — S4 implementation branch.
+- `docs/build-week/s4-implementation-plan.md` — durable implementation and verification plan.
+
+### Verification
+
+- `gh pr view 14` — merged at 2026-07-18T12:55:29Z as `3839966c4c4f6b86ce4750f433eea0e358929c36`.
+- Squash commit inspection — retained Sol model, session, phase and BUILDLOG trailers for all material issue #13 commits.
+- `python3 scripts/check_buildlog.py BUILDLOG.md --devlog DEVLOG.md` — 33 paired entries valid before this append.
+- `python3 scripts/check-provenance.py` — provenance record complete before this append.
+- Local `main` and `origin/main` — identical and clean after the interrupted-fast-forward repair.
+
+### Deviations
+
+- Git's first fast-forward was interrupted by a filesystem `mmap` cancellation and left a partial checkout. Because the source branch was verified clean, the worktree and index were restored exactly from `origin/main` and the local ref advanced to the confirmed squash commit without rewriting history.
+
+### Risks and missing evidence
+
+- No S4 runtime code or tests have been added yet.
+- DEBUG fixture recording remains conditional: it will be deferred if A12 can be satisfied without adding a content-bearing persistence path.
+- S4 owner visual acceptance and airplane-mode replay evidence remain open.
+
+### Next entry state
+
+- Implement the content-free demo-stage model, explicitly owned non-activating panel, live event projection, clearly labelled fixture replay and system Tink preference on issue #15; then add focused A11/A12 and accessibility coverage before running the S4 exit suite.
+
+---
+
+## Entry S4.2 — The safety spine now has a filmable shadow
+
+**Date:** 2026-07-18
+
+**Recorded at:** 2026-07-18T15:51:28+01:00
+
+**Phase:** S4
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Implement the S4 demo surface and offline replay path while preserving the admitted pipeline, optional post-validation rationale, explicit human decision boundary and normal-operation privacy contract.
+
+### Completed
+
+- Added a content-free ordered demo model covering gate, repository, Sol reading/drafting, validation and clean-apply stages with an honest admission-based elapsed clock.
+- Added a long-lived AppKit-owned `NSPanel` that is borderless, floating, shadowed, movable by background and explicitly unable to become key or main.
+- Persisted panel geometry only through the existing `panel_frame` state field.
+- Projected live pipeline lifecycle and new internal validating/validated events into the panel without retaining narration text.
+- Added the Settings panel toggle and retained the existing sound preference; the only ready sound is the system Tink and remains off by default.
+- Added `AnyExecutor` and a local `FixtureReplayExecutor` with recorded relative offsets and configurable acceleration.
+- Routed fixture replay through the real gate, allowlisted repository resolver, admission state machine, canonical diff parser, bounds validator, `git apply --check` and normal held-fix presentation while bypassing Codex and egress logging.
+- Added a visible `Fixture replay` label to both panel and held-fix presentation.
+- Bundled the canonical shallow replay fixture inside the app so owner/judge replay does not require a JSON fixture path; `fixture_path` remains an explicit override.
+- Deferred DEBUG fixture recording because the repository-authored fixture satisfies A12 without introducing a content-bearing persistence path.
+
+### Decisions and provenance
+
+- **Owner decision:** Continue S4 after the issue #15 phase plan was established.
+- **Sol implemented:** Demo-stage state, non-activating panel, live projection, honest timer, sound route, timed replay executor, bundled fixture, Settings controls and A11/A12 coverage.
+- **Sol reviewed:** Replay replaces only the model hop; live egress callback remains exclusive to `CodexExecutor`; panel state is content-free; rationale remains post-validation and non-blocking; Apply remains unchanged.
+
+### Artefacts
+
+- `Sources/PremonitionApp/DemoPresentation.swift` — content-free ordered stage and timing model.
+- `Sources/PremonitionApp/DemoPanelController.swift` and `UI/DemoPanelView.swift` — explicit native panel ownership and presentation.
+- `Sources/PremonitionCore/Executor/FixtureExecutor.swift` and `Executor.swift` — timed local replay and executor erasure.
+- `Fixtures/shallow/` — bundled deterministic offline replay fixture.
+- `docs/build-week/s4-implementation-plan.md` — implementation status and remaining review gates.
+- `/Applications/Premonition.app` — installed S4 owner-review release with bundled fixture.
+
+### Verification
+
+- Stable snapshot `swift test` — 51 tests passed, including named A11 rationale independence and A12 offline replay.
+- Stable snapshot `scripts/test.sh` — 51 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- Stable snapshot `scripts/build-app.sh release` — release bundle assembled successfully.
+- Stable snapshot `script/build_and_run.sh --verify` — developer bundle built and launched successfully.
+- Final focused A12 test after fixture bundling — passed.
+- Release resource check — `Contents/Resources/Fixtures/shallow/fixture.json` exists in the built and installed bundles.
+- SHA-256 comparison — built and installed release executables matched at `5132f54d2d9d2d6ca6eb3dc8fd89c468ecc3a2a26cb1d347e991f4ae6a35ac6d`.
+- `git diff --check` — no whitespace errors before this append.
+
+### Deviations
+
+- Direct workspace test builds remain vulnerable to the previously recorded file-provider mtime race, so authoritative test evidence used stable `/tmp` snapshots.
+- Fixture recording is deferred: the required offline path uses a repository-authored deterministic bundle, and no normal-operation recorder was added.
+
+### Risks and missing evidence
+
+- Owner visual review of panel placement, non-activation, stage timing, replay labelling and system sound remains open.
+- A12 is deterministic and mechanically green, but the installed airplane-mode replay observation remains open.
+- S4 is not ready for commit or PR until those owner-visible gates are completed.
+
+### Next entry state
+
+- Owner opens Settings, enables `Show “See the Future” panel`, confirms the quiet waiting presentation, then uses `Replay configured fixture` against the clean demo repository with networking disabled. Confirm stage/timer/replay labelling, no focus theft, fix review and optional Tink; resolve any visual or interaction defects before final S4 verification and PR preparation.

@@ -19,7 +19,7 @@ public struct ExecutorRequest: Sendable {
 }
 
 public enum PipelineEvent: Equatable, Sendable {
-    case started, turnStarted, narration(String), completed, unknown(String)
+    case started, turnStarted, narration(String), validating, validated, completed, unknown(String)
 }
 
 public struct ExecutorResult: Equatable, Sendable {
@@ -29,6 +29,24 @@ public struct ExecutorResult: Equatable, Sendable {
 
 public protocol Executor: Sendable {
     func run(request: ExecutorRequest, onEvent: @escaping @Sendable (PipelineEvent) -> Void) async throws -> ExecutorResult
+}
+
+public struct AnyExecutor: Executor, Sendable {
+    private let operation: @Sendable (
+        ExecutorRequest,
+        @escaping @Sendable (PipelineEvent) -> Void
+    ) async throws -> ExecutorResult
+
+    public init<E: Executor>(_ executor: E) {
+        operation = { request, onEvent in
+            try await executor.run(request: request, onEvent: onEvent)
+        }
+    }
+
+    public func run(request: ExecutorRequest,
+                    onEvent: @escaping @Sendable (PipelineEvent) -> Void) async throws -> ExecutorResult {
+        try await operation(request, onEvent)
+    }
 }
 
 public enum ExecutorError: Error, Equatable, Sendable {
