@@ -1,9 +1,20 @@
 import PremonitionCore
 import SwiftUI
 
+enum FixReadyAction: Hashable {
+    case apply
+    case copyPatch
+    case dismiss
+
+    static func initial(applyEnabled: Bool) -> Self {
+        applyEnabled ? .apply : .copyPatch
+    }
+}
+
 struct FixReadyView: View {
     let model: PresentationModel
     let fix: PresentationModel.HeldFix
+    @FocusState private var focusedAction: FixReadyAction?
 
     private var presentation: DiffPresentation {
         DiffPresentation(diff: fix.diff, renderBudgetLines: model.configuration.renderBudgetLines)
@@ -53,8 +64,26 @@ struct FixReadyView: View {
                 .tint(.accentColor)
                 .disabled(!model.applyEnabled)
                 .keyboardShortcut(.return)
+                .focusable()
+                .focused($focusedAction, equals: .apply)
+                .accessibilityLabel(Strings.apply)
             Button(Strings.copyPatch) { model.copyPatch() }
+                .focusable()
+                .focused($focusedAction, equals: .copyPatch)
+                .accessibilityLabel(Strings.copyPatch)
             Button(Strings.dismiss) { model.dismissFix() }
+                .focusable()
+                .focused($focusedAction, equals: .dismiss)
+                .accessibilityLabel(Strings.dismiss)
+        }
+        .onAppear(perform: focusInitialAction)
+        .onReceive(NotificationCenter.default.publisher(for: .premonitionPopoverBecameKey)) { _ in
+            focusInitialAction()
+        }
+        .onChange(of: model.applyEnabled) {
+            if focusedAction == .apply && !model.applyEnabled {
+                focusedAction = .copyPatch
+            }
         }
     }
 
@@ -75,6 +104,10 @@ struct FixReadyView: View {
     private func expiryText(at date: Date) -> String {
         let minutes = max(1, Int(ceil(fix.expiresAt.timeIntervalSince(date) / 60)))
         return String(format: Strings.expiresFormat, minutes)
+    }
+
+    private func focusInitialAction() {
+        focusedAction = .initial(applyEnabled: model.applyEnabled)
     }
 }
 

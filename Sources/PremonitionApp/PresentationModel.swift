@@ -2,6 +2,20 @@ import AppKit
 import Observation
 import PremonitionCore
 
+enum HeldFixTerminalAction {
+    case dismiss
+    case copyPatch
+    case apply
+
+    var receipt: String {
+        switch self {
+        case .dismiss: Strings.dismissed
+        case .copyPatch: Strings.patchCopied
+        case .apply: Strings.applied
+        }
+    }
+}
+
 @MainActor @Observable
 final class PresentationModel {
     enum Status: Equatable { case notConfigured, watching, speculating, fixReady, paused }
@@ -175,15 +189,20 @@ final class PresentationModel {
         }
     }
 
-    func dismissFix() { record(.dismissed); releaseFix() }
+    func dismissFix() {
+        record(.dismissed)
+        lastRunStatus = HeldFixTerminalAction.dismiss.receipt
+        releaseFix()
+    }
     func copyPatch() {
         guard let fix = heldFix else { return }
         NSPasteboard.general.clearContents(); NSPasteboard.general.setString(fix.diff.text, forType: .string)
-        record(.copied); lastRunStatus = Strings.patchCopied; releaseFix()
+        watcher.markCurrentContentsAsHandled()
+        record(.copied); lastRunStatus = HeldFixTerminalAction.copyPatch.receipt; releaseFix()
     }
     func applyFix() async {
         guard let fix = heldFix else { return }
-        do { try await PatchApplier().apply(fix.diff, repositoryRoot: fix.repositoryRoot); record(.applied, repository: fix.repositoryRoot); lastRunStatus = Strings.applied; releaseFix() }
+        do { try await PatchApplier().apply(fix.diff, repositoryRoot: fix.repositoryRoot); record(.applied, repository: fix.repositoryRoot); lastRunStatus = HeldFixTerminalAction.apply.receipt; releaseFix() }
         catch {
             record(.applyFailed, repository: fix.repositoryRoot); applyEnabled = false; lastRunStatus = Strings.applyFailed
             NSAccessibility.post(element: NSApplication.shared, notification: .announcementRequested,

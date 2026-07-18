@@ -1,6 +1,73 @@
+import AppKit
 import Foundation
+import PremonitionCore
+import SwiftUI
 import Testing
 @testable import PremonitionApp
+
+@Test("status item routes left click to popover and right click to native menu")
+func statusItemInteractionUsesNativeClickSplit() {
+    #expect(StatusItemInteraction.resolve(eventType: .leftMouseUp) == .togglePopover)
+    #expect(StatusItemInteraction.resolve(eventType: .rightMouseUp) == .showContextMenu)
+    #expect(StatusItemInteraction.resolve(eventType: nil) == .togglePopover)
+}
+
+@Test("status item menu anchors at the menu bar bottom edge")
+func statusItemMenuAnchorsAtMenuBarBottomEdge() {
+    let buttonFrame = NSRect(x: 120, y: 900, width: 28, height: 24)
+    let visibleFrame = NSRect(x: 0, y: 40, width: 1_440, height: 852)
+    let autoHiddenMenuBarFrame = NSRect(x: 0, y: 40, width: 1_440, height: 960)
+
+    #expect(StatusItemMenuPosition.anchor(
+        for: buttonFrame,
+        screenVisibleFrame: visibleFrame
+    ) == NSPoint(x: 120, y: 892))
+    #expect(StatusItemMenuPosition.anchor(
+        for: buttonFrame,
+        screenVisibleFrame: autoHiddenMenuBarFrame
+    ) == NSPoint(x: 120, y: 900))
+}
+
+@MainActor
+@Test("status item native menu exposes settings config and quit")
+func statusItemMenuExposesUtilityCommands() {
+    let controller = AppController()
+    let menu = controller.makeStatusMenu()
+
+    #expect(menu.items.map(\.title) == [
+        Strings.settings + "…",
+        Strings.openConfig,
+        "",
+        Strings.quit,
+    ])
+    #expect(menu.items[0].target === controller)
+    #expect(menu.items[1].target === controller)
+    #expect(menu.items[2].isSeparatorItem)
+    #expect(menu.items[3].target === controller)
+}
+
+@MainActor
+@Test("settings controller owns one reusable fixed native window")
+func settingsWindowControllerOwnsReusableWindow() throws {
+    let controller = SettingsWindowController(rootView: AnyView(Text("Settings")))
+    let window = try #require(controller.window)
+
+    #expect(window.title == Strings.settingsTitle)
+    #expect(window.styleMask.contains(.titled))
+    #expect(window.styleMask.contains(.closable))
+    #expect(window.styleMask.contains(.miniaturizable))
+    #expect(!window.styleMask.contains(.resizable))
+    #expect(window.contentMinSize == SettingsWindowController.contentSize)
+    #expect(window.contentMaxSize == SettingsWindowController.contentSize)
+    #expect(!window.isReleasedWhenClosed)
+
+    controller.showSettings()
+    #expect(window.isVisible)
+    #expect(controller.window === window)
+
+    window.close()
+    #expect(controller.window === window)
+}
 
 @Test("monitoring presentation maps status to native identity symbols and copy")
 func monitoringPresentationMapsStatus() {
@@ -38,6 +105,50 @@ func monitoringReceiptPresentationKeepsMetadataContentFree() {
                                           lastRunAt: .distantPast,
                                           dailyCount: 1,
                                           dailyCap: 30).receiptSymbol == "exclamationmark.triangle")
+    #expect(MonitoringReceiptPresentation(lastRunStatus: Strings.dismissed,
+                                          lastRunAt: .distantPast,
+                                          dailyCount: 1,
+                                          dailyCap: 30).receiptSymbol == "xmark.circle")
+}
+
+@Test("held fix actions expose distinct terminal receipts")
+func heldFixActionsExposeDistinctTerminalReceipts() {
+    #expect(HeldFixTerminalAction.dismiss.receipt == "Dismissed")
+    #expect(HeldFixTerminalAction.copyPatch.receipt == "Patch copied")
+    #expect(HeldFixTerminalAction.apply.receipt == "Applied ✓")
+}
+
+@MainActor
+@Test("pasteboard watcher ignores one handled local write and resumes external observation")
+func pasteboardWatcherSuppressesOnlyHandledLocalWrite() {
+    let pasteboard = NSPasteboard(name: .init("PremonitionTests.\(UUID().uuidString)"))
+    let watcher = PasteboardWatcher(pasteboard: pasteboard)
+    var observed: [String] = []
+    watcher.onItem = { item in
+        if let text = item.readPlainText() { observed.append(text) }
+    }
+
+    pasteboard.clearContents()
+    pasteboard.setString("external one", forType: .string)
+    watcher.poll()
+    #expect(observed == ["external one"])
+
+    pasteboard.clearContents()
+    pasteboard.setString("local patch", forType: .string)
+    watcher.markCurrentContentsAsHandled()
+    watcher.poll()
+    #expect(observed == ["external one"])
+
+    pasteboard.clearContents()
+    pasteboard.setString("external two", forType: .string)
+    watcher.poll()
+    #expect(observed == ["external one", "external two"])
+}
+
+@Test("fix-ready focus prefers Apply only while it is safe")
+func fixReadyFocusUsesSafeInitialAction() {
+    #expect(FixReadyAction.initial(applyEnabled: true) == .apply)
+    #expect(FixReadyAction.initial(applyEnabled: false) == .copyPatch)
 }
 
 @Test("monitoring dial sweep travels the full ring and stays motion-safe")

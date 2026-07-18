@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PopoverHeader: View {
     let model: PresentationModel
+    let openSettings: () -> Void
 
     var body: some View {
         HStack(spacing: PremonitionDesign.Space.regular) {
@@ -31,7 +32,7 @@ struct PopoverHeader: View {
             .controlSize(.small)
             .accessibilityValue(stateTitle)
 
-            SettingsMenu(model: model)
+            SettingsButton(openSettings: openSettings)
         }
         .padding(.horizontal, PremonitionDesign.Space.section)
         .padding(.vertical, PremonitionDesign.Space.regular)
@@ -61,44 +62,41 @@ struct PopoverHeader: View {
     }
 }
 
-struct SettingsMenu: View {
+struct SettingsButton: View {
     enum Chrome {
         case compact
         case prominent
     }
 
-    let model: PresentationModel
+    let openSettings: () -> Void
     let chrome: Chrome
 
-    init(model: PresentationModel, chrome: Chrome = .compact) {
-        self.model = model
+    init(openSettings: @escaping () -> Void,
+         chrome: Chrome = .compact) {
+        self.openSettings = openSettings
         self.chrome = chrome
     }
 
+    @ViewBuilder
     var body: some View {
         switch chrome {
         case .compact:
-            menu
-                .menuStyle(.borderlessButton)
+            button
+                .buttonStyle(.borderless)
                 .controlSize(.small)
         case .prominent:
-            menu
-                .menuStyle(.button)
+            button
+                .buttonStyle(.bordered)
                 .controlSize(.regular)
         }
     }
 
-    private var menu: some View {
-        Menu {
-            SettingsLink { Text(Strings.settings + "…") }
-            Button(Strings.openConfig) { model.openConfigFile() }
-                .disabled(!FileManager.default.fileExists(atPath: model.configurationURL.path))
-            Divider()
-            Button(Strings.quit) { model.quit() }
-        } label: {
+    private var button: some View {
+        Button(action: openSettings) {
             Image(systemName: "gearshape")
-                .accessibilityLabel(Strings.settings)
         }
+        .help(Strings.settings)
+        .accessibilityLabel(Strings.settings)
     }
 }
 

@@ -49,6 +49,7 @@ enum Strings {
     static let noApplicableFix = "No applicable patch was produced"
     static let error = "Runtime error"
     static let patchCopied = "Patch copied"
+    static let dismissed = "Dismissed"
     static let applied = "Applied ✓"
     static let applyFailed = "Apply failed; the patch was not written"
     static let apply = "Apply"

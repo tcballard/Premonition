@@ -1564,3 +1564,520 @@ Record the owner's update that the Premonition workflow skills used in this sess
 ### Next entry state
 
 - Continue the previously outlined agenda: inspect the installed issue #13 UI, run the planned UX/design evaluation on the real implementation, apply any final corrections, then prepare PR #14 for owner review/merge before beginning S4.
+
+---
+
+## Entry S3.13 — Settings menu opens the shared Settings scene
+
+**Date:** 2026-07-16
+
+**Recorded at:** 2026-07-16T07:08:21+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Repair the issue #13 monitoring and fix-ready gear-menu path after the owner observed that choosing Settings did not present the Settings window.
+
+### Completed
+
+- Replaced the popover's detached `SettingsLink` with an explicit action routed back to `AppController`, because the manually hosted `NSPopover` view does not inherit the SwiftUI Settings scene environment reliably.
+- Added one shared `SettingsWindowOpener` for both first-run onboarding and the gear menu. It activates the accessory application and sends the existing `showSettingsWindow:` scene action.
+- Made the gear-menu path close the transient popover before opening Settings.
+- Added an app-side regression test that verifies activation and the exact Settings scene selector without adding runtime telemetry or changing configuration, admission, executor, Apply or persistence behaviour.
+- Rebuilt, installed and launched `/Applications/Premonition.app` from the verified release bundle.
+
+### Decisions and provenance
+
+- **Owner decision:** Fix the non-opening Settings action before continuing the issue #13 UX agenda.
+- **Sol implemented:** Shared Settings-window action routing, popover closure wiring, regression coverage and paired provenance records.
+- **Sol reviewed:** S3/A14 Settings ownership, AppKit/SwiftUI boundary, accessory-app activation and unchanged v0.1 safety/runtime invariants.
+- **Human-authored and Sol-reviewed:** Owner observation that the Settings action did not present its window.
+
+### Artefacts
+
+- `Sources/PremonitionApp/AppController.swift` — shared AppKit-owned Settings opener and first-run/menu routing.
+- `Sources/PremonitionApp/UI/PopoverView.swift`, `PopoverChrome.swift` and `MonitoringView.swift` — explicit Settings action propagation through the manually hosted popover.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — focused Settings routing regression test.
+- `/Applications/Premonition.app` — refreshed local owner-review bundle; not a published release.
+
+### Verification
+
+- `swift test --filter settingsWindowOpenerRoutesToSettingsScene` — focused Settings route passed after correcting an initial actor-isolation compile error in the injected default construction.
+- `swift test` — 38 Swift tests passed.
+- `scripts/test.sh` — 38 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed; the first sandboxed attempt failed only because Swift/Clang user caches were not writable, and the prescribed script passed with normal cache access.
+- `scripts/build-app.sh release` — production bundle assembled at `dist/Premonition.app`.
+- `script/build_and_run.sh --verify` — freshly staged debug bundle built and launched through the repository's single developer entrypoint.
+- SHA-256 comparison — built and installed executables matched at `bb4639f157c9d30988b3ca1f48941ac619033b69e503d8ded29061ecfcbef3db`.
+- Installed-process check — PID 80505 was running `/Applications/Premonition.app/Contents/MacOS/Premonition`.
+
+### Deviations
+
+- None from the specification. The repair restores the required shared non-modal Settings scene and A14 path within S3; it does not begin S4 or alter product safety contracts.
+
+### Risks and missing evidence
+
+- The available Computer Use bridge again could not enumerate the `LSUIElement` accessory application, so the final gear → Settings visual/focus observation remains an owner-review step rather than an automated UI claim.
+- Issue #13 owner visual acceptance remains open.
+
+### Next entry state
+
+- Owner clicks the installed app's gear menu and confirms that Settings opens and takes focus. If accepted, continue the planned UX/design evaluation of the monitoring and fix-ready states, apply any final issue #13 corrections, and prepare the branch for owner review before S4.
+
+---
+
+## Entry S3.14 — Settings action deferred and app installed from a clean slate
+
+**Date:** 2026-07-16
+
+**Recorded at:** 2026-07-16T07:18:03+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Respond to the owner's report that S3.13 still did not visibly open Settings by correcting the menu-dismissal timing and performing a genuinely clean rebuild, cache cleanup and fresh installation.
+
+### Completed
+
+- Deferred the Settings scene action until the next main-loop turn after closing the transient popover, so the action is no longer sent while the gear menu's tracking loop is still unwinding.
+- Stopped Premonition and unregistered both the installed and staged bundles from Launch Services.
+- Removed the 436 MB repository-local `.build` cache, staged `dist` bundle and old `/Applications/Premonition.app` before rebuilding.
+- Cleared the app's AppKit/SwiftUI preference domain, which contained the prior Settings-window frame and open-panel state; no dedicated Premonition cache directory or saved-application-state directory existed.
+- Preserved `/Users/tballard/Library/Application Support/Premonition` and its three permitted files: `config.json`, `state.json` and `verdicts.jsonl`.
+- Built the focused regression and complete repository suite from the empty SwiftPM build directory, assembled a release bundle, installed it into an empty `/Applications/Premonition.app` destination, registered only that bundle and launched it.
+- Verified the installed executable against the freshly built release, then removed the regenerated `.build` and `dist` directories so only the installed application copy remains.
+
+### Decisions and provenance
+
+- **Owner decision:** Perform a fresh rebuild and installation while clearing Premonition-associated cache/state accumulated during the UX iteration.
+- **Sol implemented:** Main-loop deferral of the Settings action, bounded generated-state cleanup, clean rebuild/install and paired provenance records.
+- **Sol reviewed:** Preservation of Application Support configuration, Launch Services duplicate-bundle risk, menu tracking timing and unchanged runtime safety invariants.
+- **Human-authored and Sol-reviewed:** Owner observation that the S3.13 installed flow still did not visibly present Settings.
+
+### Artefacts
+
+- `Sources/PremonitionApp/AppController.swift` — defers Settings presentation until after the gear menu and transient popover finish closing.
+- `/Applications/Premonition.app` — sole freshly installed owner-review bundle.
+- `BUILDLOG.md`, `DEVLOG.md` and `docs/build-week/sol-ledger.md` — append-only correction and clean-install evidence.
+
+### Verification
+
+- Empty-state checks before rebuild — `.build`, `dist` and the installed bundle were absent; the AppKit preference domain was empty; Application Support retained its three permitted files.
+- `swift test --filter settingsWindowOpenerRoutesToSettingsScene` — rebuilt from an empty `.build` directory and passed the focused Settings route.
+- `scripts/test.sh` — 38 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- `scripts/build-app.sh release` — release bundle assembled from the clean build state.
+- SHA-256 comparison before removing `dist` — built and installed executables matched at `d5a9a1e51c559a53033c94c542577614aacdfef2ae0b48756388d647b663464b`.
+- Installed-process check — PID 94951 was running `/Applications/Premonition.app/Contents/MacOS/Premonition`.
+- Final cleanup check — `.build` and `dist` were absent and the installed executable remained present.
+
+### Deviations
+
+- S3.13's synchronous menu action did not visibly resolve the owner's flow despite matching installed and built binaries. This append-only entry records the smaller timing correction rather than rewriting S3.13.
+
+### Risks and missing evidence
+
+- The Computer Use bridge still timed out when enumerating the sole installed `LSUIElement` app, so the clean install and action wiring are verified but the final visual/focus result remains owner-observed.
+- If Settings still fails after this exact clean install, replace the SwiftUI responder action with an explicitly owned `NSWindowController`; do not attribute another failure to stale build artifacts.
+- Issue #13 owner visual acceptance remains open.
+
+### Next entry state
+
+- Owner retries gear → Settings… in the sole running `/Applications/Premonition.app`. If Settings appears, continue the planned issue #13 UX/design review. If it does not, implement the explicit shared `NSWindowController` fallback as the next bounded S3 correction.
+
+---
+
+## Entry S3.15 — Settings now uses an explicitly owned native window
+
+**Date:** 2026-07-16
+
+**Recorded at:** 2026-07-16T07:26:32+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Replace the repeatedly failing SwiftUI Settings-scene responder path with the explicit shared `NSWindowController` fallback identified in S3.14.
+
+### Completed
+
+- Added one long-lived `SettingsWindowController` owned by `AppController` and backed by the existing `SettingsPlaceholderView` through `NSHostingController`.
+- Configured one fixed 520 × 430 native titled, closable and miniaturizable non-modal window; it is not released when closed, disables tabbing, follows the active Space and restores its frame through one autosave name.
+- Made both first-run onboarding and gear → Settings call the owned controller directly after the transient popover closes.
+- `showSettings()` activates the accessory application, restores a miniaturized window when necessary, shows the retained controller and explicitly makes the window key and frontmost.
+- Removed the SwiftUI `Settings` scene and the `showSettingsWindow:` responder selector entirely. The app now starts through the existing AppKit delegate while SwiftUI remains the source of truth for Settings and popover content.
+- Replaced the selector-spy regression with a native-window lifecycle test that calls the real show path, observes visibility, closes the window and confirms the same controller retains the same window instance.
+- Built, installed and launched the explicit-controller release at `/Applications/Premonition.app`, then removed `.build` and `dist` so only the installed bundle remains.
+
+### Decisions and provenance
+
+- **Owner decision:** Replace the still-failing Settings path with an explicitly owned `NSWindowController`.
+- **Sol implemented:** Native Settings window ownership, AppKit application entrypoint, shared first-run/menu routing, visibility/reuse regression coverage and paired provenance records.
+- **Sol reviewed:** Single-window lifetime, accessory-app activation/focus, SwiftUI/AppKit source-of-truth boundary, macOS 14 compatibility and unchanged runtime safety invariants.
+- **Human-authored and Sol-reviewed:** Owner observation that the clean S3.14 build still did not visibly open Settings.
+
+### Artefacts
+
+- `Sources/PremonitionApp/SettingsWindowController.swift` — explicitly owned native window hosting the existing SwiftUI Settings content.
+- `Sources/PremonitionApp/AppController.swift` — owns and routes both Settings entry paths to the controller.
+- `Sources/PremonitionApp/PremonitionApp.swift` — AppKit accessory-app entrypoint with no competing SwiftUI Settings scene.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — native window visibility, fixed-contract and retained-lifetime regression.
+- `/Applications/Premonition.app` — sole freshly installed owner-review bundle.
+
+### Verification
+
+- `swift test --filter settingsWindowControllerOwnsReusableWindow` — focused test passed twice; the final version called `showSettings()`, observed `isVisible`, closed the window and confirmed retained identity.
+- `scripts/test.sh` — 38 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- `scripts/build-app.sh release` — release bundle assembled successfully.
+- Source search — no `SettingsWindowOpener`, `showSettingsWindow:` selector or SwiftUI `Settings` scene remains under `Sources` or `Tests`.
+- SHA-256 comparison before removing `dist` — built and installed executables matched at `f88bf96420be0de018c63702c083f453da55f3fbd49c2701295f9810319abf6a`.
+- Installed-process check — PID 8507 was running `/Applications/Premonition.app/Contents/MacOS/Premonition`.
+- Final cleanup check — `.build` and `dist` were absent and the installed executable remained present.
+
+### Deviations
+
+- S3.13 and S3.14 attempted to retain SwiftUI Settings-scene presentation through the responder chain; owner observation proved that path unreliable in the installed accessory app. This entry replaces it with the specification's explicitly owned shared non-modal window controller rather than adding another fallback layer.
+
+### Risks and missing evidence
+
+- The native show path is now exercised by an automated window-visibility test, but the final gear-menu click and focus result in the installed `LSUIElement` app still requires owner observation because Computer Use cannot enumerate it.
+- Issue #13 owner visual acceptance remains open.
+
+### Next entry state
+
+- Owner retries gear → Settings… in the running `/Applications/Premonition.app`. If accepted, resume the planned issue #13 UX/design evaluation and final review preparation before S4.
+
+---
+
+## Entry S3.16 — Native menu-bar interaction split
+
+**Date:** 2026-07-16
+
+**Recorded at:** 2026-07-16T07:36:58+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Replace the popover gear submenu with a direct Settings action and move infrequent application commands to the menu-bar eye's native right-click menu.
+
+### Completed
+
+- Kept left-click on the menu-bar eye as the single toggle for Premonition's primary popover.
+- Added AppKit event routing so right-click opens a native `NSMenu` without changing the left-click interaction.
+- Added Settings…, Open Config File… and Quit Premonition to that context menu, with native separators, key equivalents and config-file availability validation.
+- Replaced the gear's SwiftUI `Menu` in both monitoring and fix-ready surfaces with one direct Settings button. The button retains native compact/prominent chrome, help text and an explicit accessibility label, but no longer presents a chevron or secondary menu.
+- Preserved the S3.15 explicitly owned `SettingsWindowController`; first-run onboarding, the direct gear and the native context menu all route to the same retained non-modal window.
+- Added presentation regressions for the left/right-click split and the native utility-menu command structure.
+- Built, installed and launched the updated release at `/Applications/Premonition.app`.
+
+### Decisions and provenance
+
+- **Owner decision:** Use the menu-bar eye's native right-click menu for Settings, Open Config File and Quit, while making the in-popover gear a direct Settings action.
+- **Sol implemented:** AppKit status-item event routing, native context-menu construction, direct SwiftUI Settings buttons, regression coverage, release installation and paired provenance records.
+- **Sol reviewed:** Left-click discoverability, native menu validation, single Settings-window ownership, accessibility naming, macOS 14 compatibility and unchanged runtime safety invariants.
+- **Human-authored and Sol-reviewed:** Owner preference that the gear should not trigger its own submenu after the Settings window became reliable.
+
+### Artefacts
+
+- `Sources/PremonitionApp/AppController.swift` — status-item click routing and native application utility menu.
+- `Sources/PremonitionApp/UI/PopoverChrome.swift` — direct compact Settings button.
+- `Sources/PremonitionApp/UI/MonitoringView.swift` — direct prominent Settings button.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — click-routing and native-menu structure regressions.
+- `/Applications/Premonition.app` — installed owner-review bundle.
+
+### Verification
+
+- `swift test --disable-sandbox --filter MonitoringPresentationTests` — six focused presentation/window/menu tests passed.
+- `scripts/test.sh` — 40 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- `script/build_and_run.sh --verify` — prescribed developer entrypoint built, launched and confirmed the app remained running.
+- `scripts/build-app.sh release` — release bundle assembled successfully.
+- SHA-256 comparison — built and installed executables matched at `c5f8b7fa572bd970e545132e2ad2d74468d73b7a1ef342dec432ff707c390743`.
+- Installed-process check — PID 20092 was running `/Applications/Premonition.app/Contents/MacOS/Premonition`.
+- `git diff --check` — no whitespace errors.
+
+### Deviations
+
+- The earlier S3 popover contract grouped Settings, config and Quit under the visible gear. The owner-approved interaction refinement moves secondary application commands to the conventional status-item right-click menu while retaining a visible, one-click Settings route. No runtime pipeline or safety contract changed.
+
+### Risks and missing evidence
+
+- Automated tests cover routing and menu composition, but the final click feel, menu placement and Settings focus in the installed `LSUIElement` app remain owner-observed.
+- Issue #13 owner visual acceptance remains open; S4 has not started.
+
+### Next entry state
+
+- Owner verifies left-click popover, direct gear → Settings, and right-click Settings/Open Config/Quit in the installed app. If accepted, run the planned issue #13 UX/design evaluation and prepare the existing branch for review without merging.
+
+---
+
+## Entry S3.17 — Status menu now opens below the menu bar
+
+**Date:** 2026-07-16
+
+**Recorded at:** 2026-07-16T07:43:43+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Correct S3.16's right-click menu placement after owner observation showed the context menu overlapping the macOS menu bar.
+
+### Completed
+
+- Replaced cursor-event `NSMenu.popUpContextMenu` presentation with `NSMenu.popUp(positioning:at:in:)`.
+- Converted the status button's bounds into screen coordinates and anchored the menu's top edge to the button's bottom-left edge, placing the menu below the menu bar independently of the pointer position.
+- Preserved native status-button highlighting while the menu tracks and retained the approved left-click popover, right-click utility menu and direct gear → Settings split.
+- Added a regression for the screen-space bottom-edge anchor.
+- Built, installed and launched the corrected release at `/Applications/Premonition.app`.
+
+### Decisions and provenance
+
+- **Owner observation:** S3.16's menu overlapped the menu bar and should use standard below-menu-bar placement.
+- **Sol implemented:** Screen-space status-button anchoring, native tracking highlight, regression coverage, release installation and append-only correction records.
+- **Sol reviewed:** AppKit menu positioning semantics, right-click-only routing, macOS 14 compatibility and unchanged runtime safety invariants.
+
+### Artefacts
+
+- `Sources/PremonitionApp/AppController.swift` — bottom-edge status-menu presentation.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — menu anchor regression.
+- `/Applications/Premonition.app` — corrected installed owner-review bundle.
+
+### Verification
+
+- `swift test --disable-sandbox --filter MonitoringPresentationTests` — seven focused tests passed.
+- `scripts/test.sh` — 41 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- `script/build_and_run.sh --verify` — developer bundle built, launched and remained running.
+- `scripts/build-app.sh release` — release bundle assembled successfully.
+- SHA-256 comparison — built and installed executables matched at `e5b96875dba5137433ddc2c7d31096921610e656f2b3ec7d083ae6bc0b4a4a6d`.
+- Installed-process check — PID 26245 was running `/Applications/Premonition.app/Contents/MacOS/Premonition`.
+
+### Deviations
+
+- S3.16 described the right-click surface as native but used context-menu positioning tied to the click event. The menu content and routing were correct; this append-only correction replaces only the inappropriate presentation primitive.
+
+### Risks and missing evidence
+
+- The anchor is mechanically covered and the exact release is installed, but final menu placement remains owner-observed in the live menu-bar environment.
+- Issue #13 owner visual acceptance remains open; S4 has not started.
+
+### Next entry state
+
+- Owner right-clicks the running menu-bar eye and confirms the utility menu begins below the menu bar. If accepted, continue the planned issue #13 UX/design evaluation without beginning S4.
+
+---
+
+## Entry S3.18 — Menu anchor follows the actual menu-bar boundary
+
+**Date:** 2026-07-16
+
+**Recorded at:** 2026-07-16T07:52:19+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Correct S3.17 after owner screenshot evidence showed that the status button's lower edge was inset above the display's real menu-bar boundary, leaving the menu surface overlapping system chrome.
+
+### Completed
+
+- Replaced the status-button-only vertical anchor with the top of the active screen's `visibleFrame`, which represents the actual bottom edge of the menu bar.
+- Retained the button's horizontal anchor and used the lower of the button edge and visible-frame edge so auto-hidden menu bars remain safe.
+- Updated the placement regression to cover both a visible menu bar with an inset status button and an auto-hidden menu-bar fallback.
+- Preserved every S3.16 interaction decision and all runtime safety invariants.
+- Built, installed and launched the corrected release at `/Applications/Premonition.app`.
+
+### Decisions and provenance
+
+- **Owner evidence:** The S3.17 installed screenshot showed the menu below the pointer but still intruding into the menu bar because the status button itself does not extend to the menu bar's bottom edge.
+- **Sol implemented:** Dynamic screen-visible-frame anchoring, fallback coverage, release installation and append-only correction records.
+- **Sol reviewed:** Multi-display screen selection, auto-hidden-menu-bar behaviour, macOS 14 availability and unchanged runtime safety boundaries.
+
+### Artefacts
+
+- `Sources/PremonitionApp/AppController.swift` — actual menu-bar-boundary anchor.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — visible and auto-hidden menu-bar geometry coverage.
+- `/Applications/Premonition.app` — corrected installed owner-review bundle.
+
+### Verification
+
+- `swift test --disable-sandbox --filter MonitoringPresentationTests` — seven focused tests passed.
+- `scripts/test.sh` — 41 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- `script/build_and_run.sh --verify` — developer bundle built, launched and remained running.
+- `scripts/build-app.sh release` — release bundle assembled successfully.
+- SHA-256 comparison — built and installed executables matched at `9f427db393d2d2ed3e4f045cf66f49315a7b4cef4db1be6aecdd5b56b4e445ec`.
+- Installed-process check — PID 38924 was running `/Applications/Premonition.app/Contents/MacOS/Premonition`.
+
+### Deviations
+
+- S3.17 assumed the bottom of `NSStatusBarButton` matched the display's menu-bar boundary. The owner screenshot disproved that assumption on the current display; this correction derives the boundary from `NSScreen.visibleFrame` instead of adding a device-specific offset.
+
+### Risks and missing evidence
+
+- The exact release and geometry rule are verified mechanically, but the corrected live placement remains an owner visual check.
+- Issue #13 owner visual acceptance remains open; S4 has not started.
+
+### Next entry state
+
+- Owner right-clicks the running menu-bar eye and confirms the menu surface now starts wholly beneath the menu bar. If accepted, continue the planned issue #13 UX/design evaluation without beginning S4.
+
+---
+
+## Entry S3.19 — Fix actions now leave the state they promise
+
+**Date:** 2026-07-18
+
+**Recorded at:** 2026-07-18T12:04:11+01:00
+
+**Phase:** S3
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Resolve the three interaction defects confirmed by the issue #13 UX audit: stale Dismiss feedback, Copy Patch feedback overwritten by Premonition's own pasteboard write, and unreliable keyboard focus in the fix-ready popover.
+
+### Completed
+
+- Persisted the reviewable remediation plan at `docs/build-week/s3-ux-remediation-plan.md`.
+- Added distinct content-free terminal receipts for Apply, Copy Patch and Dismiss, so releasing a candidate no longer leaves `Fix ready` behind.
+- Marked only Premonition's known Copy Patch pasteboard write as handled; later external pasteboard changes still enter the existing watcher normally.
+- Made the transient popover window key after presentation and gave Apply, Copy Patch and Dismiss explicit SwiftUI focus ownership and accessibility labels.
+- Focus now begins on Apply only while Apply is safe, falls back to Copy Patch when Apply is unavailable, and moves away if a clean-tree recheck disables Apply.
+- Added focused regression coverage for terminal receipts, local pasteboard suppression followed by external observation, receipt presentation and focus policy.
+- Rebuilt, replaced and relaunched `/Applications/Premonition.app` from the verified release snapshot.
+
+### Decisions and provenance
+
+- **Owner decision:** Fix the three verified UX defects before filming and keep the work documented in a plan alongside the thread.
+- **Sol implemented:** Terminal-action receipts, narrow self-authored pasteboard suppression, AppKit key-window handoff, SwiftUI action focus, accessibility labels, regression coverage, plan and provenance checkpoint.
+- **Sol reviewed:** S3 phase fit, explicit human decision boundary, unchanged gate/allowlist/cap/Sol/validation/Apply contracts and the dirty-tree scope.
+
+### Artefacts
+
+- `docs/build-week/s3-ux-remediation-plan.md` — owner-reviewable scope, acceptance criteria and completion checklist.
+- `Sources/PremonitionApp/PresentationModel.swift` and `Strings.swift` — distinct terminal receipts.
+- `Sources/PremonitionApp/PasteboardWatcher.swift` — narrow handled-local-write boundary.
+- `Sources/PremonitionApp/AppController.swift` and `UI/FixReadyView.swift` — key popover and explicit action focus.
+- `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — receipt, watcher and focus regressions.
+- `/Applications/Premonition.app` — installed owner-review release.
+
+### Verification
+
+- Focused `PremonitionAppTests` — ten tests passed during implementation.
+- Stable `/tmp` snapshot `swift test` — 44 tests passed; this snapshot was required because the workspace file-provider layer changed source/build mtimes during two direct SwiftPM attempts.
+- Stable snapshot `scripts/test.sh` — 44 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- Stable snapshot `scripts/build-app.sh release` — release bundle assembled successfully.
+- Stable snapshot `script/build_and_run.sh --verify` — developer bundle built and launched successfully.
+- Installed accessibility observation — Apply was the focused action in a safe fix-ready state (`true, false, false` for Apply, Copy Patch and Dismiss).
+- SHA-256 comparison — snapshot release and installed executables matched at `ef36360a41f22ecfb91b12c48c6f7e4b4231c4e1b7865e4145d1cb5ad5e1e2f9`.
+- `git diff --check` — no whitespace errors before this log append.
+
+### Deviations
+
+- Direct workspace verification was not accepted as final evidence because external mtime changes invalidated compilation twice. The unchanged dirty-tree snapshot was copied to `/tmp` and all prescribed commands were rerun there.
+- Accessibility automation reliably proved initial action focus, but transient-popover closure made the scripted post-click receipt inspection flaky. The receipt and pasteboard state transitions are covered deterministically; final visual feel remains an owner check.
+
+### Risks and missing evidence
+
+- The wider screenshot audit still needs the owner's visual pass across light/dark appearance, Escape, Dismiss and Copy Patch receipts in the installed app.
+- Issue #13 remains uncommitted and unmerged in the existing dirty worktree. S4 has not started.
+
+### Next entry state
+
+- Owner reviews the installed S3.19 build against `docs/build-week/s3-ux-remediation-plan.md`, especially Dismiss, Copy Patch, keyboard traversal, Escape and light/dark appearance. Resolve any observed defect, then prepare issue #13 for review without merging or beginning S4.
+
+---
+
+## Entry S3.20 — Owner acceptance closes the popover gate
+
+**Date:** 2026-07-18
+
+**Recorded at:** 2026-07-18T13:15:42+01:00
+
+**Phase:** S3
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session; this entry continues issue #13 in that session context
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Record the owner's installed-app acceptance of the S3.19 remediation and close the remaining issue #13 visual gate before preparing the branch for review.
+
+### Completed
+
+- Owner confirmed the installed Dismiss receipt, Copy Patch receipt, keyboard traversal, Escape behaviour and light/dark appearance.
+- Marked `docs/build-week/s3-ux-remediation-plan.md` owner accepted.
+- Confirmed that issue #13 remains the active S3 scope and that draft PR #14 already exists for the branch.
+
+### Decisions and provenance
+
+- **Owner acceptance:** The installed S3.19 interaction and appearance checks passed; continue to branch and PR preparation.
+- **Sol implemented:** Acceptance checkpoint, plan state and provenance record.
+- **Sol reviewed:** Issue #13 scope, S3 completion boundary and the prohibition on merging or beginning S4 without the next owner decision.
+
+### Artefacts
+
+- `docs/build-week/s3-ux-remediation-plan.md` — owner-accepted remediation record.
+- `BUILDLOG.md`, `DEVLOG.md` and `docs/build-week/sol-ledger.md` — paired acceptance evidence.
+
+### Verification
+
+- Owner-observed installed-app pass — Dismiss, Copy Patch, keyboard traversal, Escape, light appearance and dark appearance confirmed.
+- GitHub inspection — issue #13 remains open and draft PR #14 targets `main` from `codex/issue-13-authored-popover`.
+
+### Deviations
+
+- None. This checkpoint records acceptance only and adds no runtime behaviour.
+
+### Risks and missing evidence
+
+- The dirty issue #13 work still requires final diff review, provenance-bearing commit, push and draft PR refresh.
+- No merge is authorised. S4 has not started.
+
+### Next entry state
+
+- Review the complete issue #13 diff, run log and provenance validation, commit with the required Sol trailers, push `codex/issue-13-authored-popover`, refresh draft PR #14 and return it for owner review without merging.

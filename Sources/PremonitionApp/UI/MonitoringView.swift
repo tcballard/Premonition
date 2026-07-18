@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MonitoringView: View {
     let model: PresentationModel
+    let openSettings: () -> Void
 
     var body: some View {
         let presentation = MonitoringPresentation(status: model.status)
@@ -18,7 +19,8 @@ struct MonitoringView: View {
                 .controlSize(.regular)
                 .accessibilityValue(presentation.stateTitle)
 
-                SettingsMenu(model: model, chrome: .prominent)
+                SettingsButton(openSettings: openSettings,
+                               chrome: .prominent)
             }
             .padding(.horizontal, PremonitionDesign.Space.section)
             .padding(.top, PremonitionDesign.Space.section)
@@ -230,6 +232,7 @@ struct MonitoringReceiptPresentation: Equatable {
         switch lastRunStatus {
         case Strings.applied: "checkmark.circle"
         case Strings.applyFailed: "exclamationmark.triangle"
+        case Strings.dismissed: "xmark.circle"
         default: "list.clipboard"
         }
     }

@@ -387,3 +387,123 @@ That is worth recording because these skills have shaped the way this project ha
 It still changes nothing inside Premonition. CodexToolkit is external workflow infrastructure, not an app dependency. The next Premonition move remains the actual issue #13 review path: look at the installed UI, run the design evaluation, fix what needs fixing, then close the PR before S4.
 
 **Source:** `BUILDLOG.md`, Entry S3.12
+
+---
+
+## S3.13 — The gear now reaches the window it promised
+
+**Date:** 2026-07-16
+
+The Settings item looked native, but it was wired through `SettingsLink` inside a SwiftUI view manually hosted by `NSPopover`. That view did not reliably inherit the app's Settings-scene environment, so the control could simply lead nowhere.
+
+The popover now hands the action back to `AppController`. First-run onboarding and the gear menu share one opener: close the transient popover, activate the accessory app, then ask the existing Settings scene to show its window. No product state or runtime safety boundary moved.
+
+The focused regression and all 38 Swift tests pass, as do the repository suite and bundle build. The exact verified executable is installed and running from `/Applications`.
+
+The remaining proof is appropriately small and human: click the installed gear menu and confirm that Settings appears and takes focus. After that, issue #13 returns to its broader visual-review gate.
+
+**Source:** `BUILDLOG.md`, Entry S3.13
+
+---
+
+## S3.14 — This time the rebuild really was clean
+
+**Date:** 2026-07-16
+
+The first Settings repair was present in the installed binary, but the window still did not appear for the owner. That ruled out the comforting explanation that we had merely copied the wrong executable.
+
+There was still a timing flaw: the app asked SwiftUI to show Settings while the gear menu was closing. The action now waits one main-loop turn, after the menu and transient popover have finished unwinding.
+
+The rebuild also started from an actual empty slate. SwiftPM's 436 MB local build cache, both application bundles, duplicate Launch Services registrations and the old SwiftUI window preferences were removed. Premonition's real Application Support configuration was deliberately preserved.
+
+All 38 tests pass from the clean build, the release executable was matched before installation, and only the fresh `/Applications/Premonition.app` copy remains. The automation bridge still cannot see this accessory app, so the next step is one honest manual click. If that still fails, the next repair is an explicit `NSWindowController`, not another cache purge.
+
+**Source:** `BUILDLOG.md`, Entry S3.14
+
+---
+
+## S3.15 — Settings finally owns a real window
+
+**Date:** 2026-07-16
+
+The clean rebuild settled the argument: this was not an old app, a duplicate bundle or a stale frame. The SwiftUI Settings responder simply was not a dependable way into a window from this accessory popover.
+
+That mechanism is gone. `AppController` now owns one native `NSWindowController` for the lifetime of the app, and that window hosts the same SwiftUI Settings form we already had. First-run onboarding and the gear menu reach the same object directly. Closing it does not release it; opening it again brings the same window forward.
+
+The test now does the useful thing rather than checking a selector name: it shows the window, sees it become visible, closes it and verifies that the controller still owns that exact instance. The full 38-test path passes, and the matching release is the only Premonition bundle left installed.
+
+One manual click remains because the automation bridge still cannot enumerate this menu-bar-only app. But there is no responder chain left to blame now: gear → Settings calls a concrete window controller.
+
+**Source:** `BUILDLOG.md`, Entry S3.15
+
+---
+
+## S3.16 — The gear stopped pretending to be an application menu
+
+**Date:** 2026-07-16
+
+Once Settings had a window it actually owned, the gear's remaining submenu felt like an unnecessary extra stop. Opening a popover, opening another menu, then choosing Settings was ceremony where the user expected a button.
+
+The gear is now exactly that button. The quieter application-level commands have moved to the menu-bar eye's native right-click menu: Settings, Open Config File and Quit. Left-click still opens Premonition itself, so the product's primary path has not become a menu of utilities.
+
+This is a better native split and a cleaner hierarchy. It also leaves the hard-won explicit Settings controller intact: first run, the gear and the context menu all reach the same retained window. Forty tests pass, the installed release matches the build, and the next decision is visual rather than architectural.
+
+**Source:** `BUILDLOG.md`, Entry S3.16
+
+---
+
+## S3.17 — Native content still needs native placement
+
+**Date:** 2026-07-16
+
+The menu had the right commands and the wrong relationship to the menu bar. Presenting it as a cursor context menu made AppKit align it to the click point, so it climbed over the system chrome instead of dropping cleanly beneath the eye.
+
+That primitive is gone. The app now finds the status button's bottom edge in screen coordinates and anchors the native menu there, while keeping the button highlighted during tracking. The interaction split itself has not changed.
+
+The focused coverage now includes that anchor, all 41 tests pass, and the corrected release is installed. The remaining check is the obvious one: right-click the eye and look at where the menu begins.
+
+**Source:** `BUILDLOG.md`, Entry S3.17
+
+---
+
+## S3.18 — The button was not the bar
+
+**Date:** 2026-07-16
+
+The second screenshot made the remaining mistake clear. The menu was anchored below the eye's button, but that button floats inside a taller menu bar. Its lower edge was still several points above the system boundary, so the menu continued to intrude into the chrome.
+
+The app now asks the screen where its usable area actually begins and uses that boundary. There is no guessed seven-point correction; the placement adapts to the current display and falls back safely when the menu bar auto-hides.
+
+All 41 tests still pass and the matching release is installed. The next check is visual again, but this time the geometry describes the bar rather than the icon inside it.
+
+**Source:** `BUILDLOG.md`, Entry S3.18
+
+---
+
+## S3.19 — The buttons now finish their sentences
+
+**Date:** 2026-07-18
+
+Three small interaction failures were making the fix-ready state less trustworthy than its visual polish suggested. Dismiss left the app saying a fix was still ready, Copy Patch immediately talked over its own success message, and the keyboard did not have a dependable place to land.
+
+Those paths now end cleanly. Each decision leaves its own quiet receipt, Premonition ignores only the pasteboard change it authored itself, and the action row has explicit focus ownership with Apply leading only when it is safe.
+
+The final build also exposed an environmental wrinkle: files in the workspace changed modification times during compilation. Rather than call an invalid build green, verification moved to an exact temporary snapshot, where all 44 tests and the prescribed bundle paths passed. The matching release is installed.
+
+The remaining gate is human and visual: walk Dismiss, Copy Patch, keyboard traversal, Escape and both appearances in the installed app. Then issue #13 can be prepared for review; S4 still waits.
+
+**Source:** `BUILDLOG.md`, Entry S3.19
+
+---
+
+## S3.20 — The owner pass is green
+
+**Date:** 2026-07-18
+
+The last S3 check was not another test command. It was using the installed app: dismissing a fix, copying a patch, moving through the actions from the keyboard, closing with Escape, and looking at the surface in both appearances.
+
+The owner has confirmed that pass. That closes the issue #13 visual gate and turns the remediation plan from a working checklist into an acceptance record.
+
+The branch still needs its deliberate commit and draft PR refresh, and nothing is being merged yet. Once that review package is ready, S3 can wait at the proper boundary before S4 begins.
+
+**Source:** `BUILDLOG.md`, Entry S3.20

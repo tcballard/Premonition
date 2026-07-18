@@ -2,12 +2,13 @@ import SwiftUI
 
 struct PopoverView: View {
     let model: PresentationModel
+    let openSettings: () -> Void
 
     var body: some View {
         Group {
             if let fix = model.heldFix {
                 VStack(spacing: 0) {
-                    PopoverHeader(model: model)
+                    PopoverHeader(model: model, openSettings: openSettings)
                     Divider()
                     FixReadyView(model: model, fix: fix)
                     Divider()
@@ -15,14 +16,14 @@ struct PopoverView: View {
                 }
             } else if model.configuration.allowlistedRoots.isEmpty {
                 VStack(spacing: 0) {
-                    PopoverHeader(model: model)
+                    PopoverHeader(model: model, openSettings: openSettings)
                     Divider()
                     EmptyPopoverView(model: model)
                     Divider()
                     PopoverReceipt(model: model)
                 }
             } else {
-                MonitoringView(model: model)
+                MonitoringView(model: model, openSettings: openSettings)
             }
         }
         .frame(width: PremonitionDesign.popoverWidth)
