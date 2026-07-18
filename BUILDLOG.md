@@ -2219,3 +2219,73 @@ Implement the S4 demo surface and offline replay path while preserving the admit
 ### Next entry state
 
 - Owner opens Settings, enables `Show “See the Future” panel`, confirms the quiet waiting presentation, then uses `Replay configured fixture` against the clean demo repository with networking disabled. Confirm stage/timer/replay labelling, no focus theft, fix review and optional Tink; resolve any visual or interaction defects before final S4 verification and PR preparation.
+
+---
+
+## Entry S4.3 — The offline loop is accepted and reviewable
+
+**Date:** 2026-07-18
+
+**Recorded at:** 2026-07-18T16:33:40+01:00
+
+**Phase:** S4
+
+**Status:** Complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Record the owner's installed S4 acceptance, repeat the complete branch verification from a stable snapshot, and publish the provenance-bearing issue #15 implementation as a draft pull request without merging it.
+
+### Completed
+
+- Owner approved the requested installed review covering panel placement, stage progression, honest timer, replay labelling, focus behaviour, optional sound and networking-disabled fixture replay.
+- Repeated the full 51-test Swift suite, repository wrapper, release bundle and developer launch verification from a fresh stable `/tmp` snapshot.
+- Reworked the fixture's blank context lines so the stored patch remains applicable while the repository change is whitespace-clean; reran focused A12 after the correction.
+- Committed the complete S4 implementation as `778517df1b5620ff5e5a219f33109837a3078fb3` with the required model, session, phase and BUILDLOG trailers.
+- Pushed `codex/issue-15-rationale-filmable-demo` and opened draft pull request [#16](https://github.com/tcballard/Premonition/pull/16) targeting `main`.
+
+### Decisions and provenance
+
+- **Owner decision:** Accept the installed S4 demo panel and offline replay checks and continue to the reviewable draft PR.
+- **Sol implemented:** Final fixture cleanup, fresh verification, commit and draft-PR preparation, paired handoff records and plan completion.
+- **Sol reviewed:** S4 exit criteria, A11/A12 evidence, replay's zero-model boundary, content-free panel state, unchanged Apply contract and the S5 stop boundary.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- Commit `778517df1b5620ff5e5a219f33109837a3078fb3` — filmable panel, bundled offline replay, Settings controls and S4 tests.
+- Draft pull request [#16](https://github.com/tcballard/Premonition/pull/16) — owner review surface for issue #15.
+- `docs/build-week/s4-implementation-plan.md` — completed S4 checklist and explicit exclusions.
+- `BUILDLOG.md`, `DEVLOG.md` and `docs/build-week/sol-ledger.md` — final S4 owner-acceptance and handoff evidence.
+
+### Verification
+
+- Stable snapshot `swift test` — 51 tests passed, including A11 rationale independence and A12 real-pipeline offline replay.
+- Stable snapshot `scripts/test.sh` — 51 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- Stable snapshot `scripts/build-app.sh release` — release bundle assembled with `Contents/Resources/Fixtures/shallow/fixture.json` present.
+- Stable snapshot `script/build_and_run.sh --verify` — developer app bundle built and launched successfully.
+- `swift test --filter a12OfflineReplay` — focused A12 passed after the final fixture whitespace cleanup.
+- `git diff --cached --check` — staged issue #15 implementation was whitespace-clean.
+- `python3 scripts/check_buildlog.py BUILDLOG.md --devlog DEVLOG.md` — 35 paired entries valid before this append.
+- `python3 scripts/check-provenance.py` — provenance record complete after commit `778517d` and before this final append.
+- Commit identity check — author and committer were both `Tom Ballard <tom@armytage.co>`; all four required Sol trailers were present.
+- Owner-observed installed review — panel, timer, replay labelling, non-focus-stealing behaviour, sound option and networking-disabled replay approved.
+
+### Deviations
+
+- The first sandboxed `scripts/test.sh` attempt could not write the user Swift/Clang module cache; the unchanged snapshot was rerun with the prescribed cache access and passed.
+- A zero-context fixture cleanup did not satisfy default `git apply`; the fixture was corrected to retain its required full hunk while representing blank context without trailing spaces, and focused A12 then passed.
+- Local `gh auth status` reported stale credentials, so the already-connected GitHub integration created draft PR #16 after ordinary Git credentials successfully pushed the branch.
+
+### Risks and missing evidence
+
+- The S4 release remains unsigned development output; signing, notarisation and release hardening belong to S5.
+- Draft PR #16 remains unmerged. No merge, auto-merge, release, publication or S5 implementation is authorised by this entry.
+
+### Next entry state
+
+- Owner reviews draft PR #16 and squash-merges it if satisfied while preserving the required Sol provenance. Only after that merge is confirmed may the next durable session select S5 and begin the full A1–A14 hardening sweep.

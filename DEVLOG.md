@@ -539,3 +539,19 @@ The privacy decision was to avoid building a recorder just because the specifica
 Fifty-one tests pass, including A11 and A12, and the exact release with its fixture is installed. What remains is visible evidence: use the panel, watch the stages and timer, confirm it never steals focus, then run replay with networking disabled before packaging the branch for review.
 
 **Source:** `BUILDLOG.md`, Entry S4.2
+
+---
+
+## S4.3 — The resilient demo loop is ready for review
+
+**Date:** 2026-07-18
+
+The last S4 gate was deliberately ordinary: use the installed app, watch the panel tell the truth about what it is doing, and then remove the network. The owner has approved that pass. Replay still reached the same local gate, repository, validation and review surfaces without quietly becoming a staged animation or a model call in disguise.
+
+The final verification ran again from a fresh stable snapshot. All 51 tests, the repository wrapper, release bundle and developer launch passed. A tiny fixture-format issue surfaced during staging: valid blank diff context looked like trailing whitespace inside the repository. The final fixture keeps the applicability context without carrying that whitespace, and focused A12 passed again.
+
+The implementation is now commit `778517d` on the issue #15 branch and draft PR #16 is open. The panel, replay and sound remain S4 presentation tools around the existing safety spine; they do not change when Premonition may call Sol or mutate a repository.
+
+That is the end of S4, not permission to drift into release work. The next move belongs to the owner: review and merge the draft while preserving provenance. S5 starts only after that merge is confirmed.
+
+**Source:** `BUILDLOG.md`, Entry S4.3

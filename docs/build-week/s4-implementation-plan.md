@@ -1,6 +1,6 @@
 # S4 Rationale and Filmable Demo Plan
 
-**Status:** Owner accepted; final provenance audit and draft PR preparation remain
+**Status:** Complete; draft PR #16 awaits owner review
 **Issue:** #15 — S4: build rationale and filmable demo
 **Branch:** `codex/issue-15-rationale-filmable-demo`
 **Phase boundary:** S4 only
@@ -153,6 +153,6 @@ Use only the system `Tink` sound when a validated fix becomes ready. Sound remai
 - [x] Exact release installed with fixture resource and matching executable hash.
 - [x] Owner visual/focus/timer/replay/sound review.
 - [x] Airplane-mode installed replay observation.
-- [ ] Final S4 log/ledger audit and draft PR.
+- [x] Final S4 log/ledger audit and draft PR.
 
 DEBUG fixture recording is deferred. A12 is satisfied by the repository-authored deterministic fixture, so adding a content-bearing recording path would increase privacy risk without improving the required offline replay evidence.
