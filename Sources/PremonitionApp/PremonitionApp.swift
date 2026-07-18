@@ -1,12 +1,13 @@
-import SwiftUI
+import AppKit
 
 @main
-struct PremonitionApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
-
-    var body: some Scene {
-        Settings {
-            SettingsPlaceholderView(model: AppServices.presentation)
-        }
+enum PremonitionApp {
+    @MainActor
+    static func main() {
+        let application = NSApplication.shared
+        let delegate = AppDelegate()
+        application.delegate = delegate
+        application.setActivationPolicy(.accessory)
+        application.run()
     }
 }

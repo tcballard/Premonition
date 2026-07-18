@@ -27,7 +27,10 @@ final class PasteboardWatcher {
         }
     }
     func stop() { timer?.invalidate(); timer = nil }
-    private func poll() {
+    func markCurrentContentsAsHandled() {
+        changeCount = pasteboard.changeCount
+    }
+    func poll() {
         guard pasteboard.changeCount != changeCount else { return }
         changeCount = pasteboard.changeCount
         guard let item = pasteboard.pasteboardItems?.first else { return }

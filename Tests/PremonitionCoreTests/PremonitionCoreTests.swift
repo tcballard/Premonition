@@ -122,6 +122,31 @@ func parsesFencedDiff() throws {
     #expect(diff.files.count == 1); #expect(diff.files[0].newPath == "b/file.txt")
 }
 
+@Test("diff presentation preserves semantic lines and accessible descriptions")
+func diffPresentationSemantics() throws {
+    let diff = try UnifiedDiffParser().parse(validPatch)
+    let presentation = DiffPresentation(diff: diff, renderBudgetLines: 20)
+
+    #expect(presentation.primaryFile == "file.txt")
+    #expect(presentation.added == 1)
+    #expect(presentation.removed == 1)
+    #expect(presentation.changeSummary == "+1 −1")
+    #expect(presentation.accessibleChangeSummary == "1 added, 1 removed")
+    #expect(presentation.lines.contains {
+        $0.kind == .added && $0.accessibilityDescription == "Added line: new"
+    })
+    #expect(presentation.lines.contains {
+        $0.kind == .removed && $0.accessibilityDescription == "Removed line: old"
+    })
+    #expect(!presentation.isSummarized)
+}
+
+@Test("diff presentation reports when the visual render budget is exceeded")
+func diffPresentationRenderBudget() throws {
+    let diff = try UnifiedDiffParser().parse(validPatch)
+    #expect(DiffPresentation(diff: diff, renderBudgetLines: 2).isSummarized)
+}
+
 @Test("diff bounds reject traversal, metadata and binary patches", arguments: [
     "diff --git a/../x b/../x\n--- a/../x\n+++ b/../x\n@@ -1 +1 @@\n-a\n+b\n",
     "diff --git a/.git/config b/.git/config\n--- a/.git/config\n+++ b/.git/config\n@@ -1 +1 @@\n-a\n+b\n",

@@ -243,3 +243,267 @@ The final review tightened the surface around that behavior: Escape closes rathe
 The filmable panel still does not exist. That is S4, along with narration, replay presentation and sound. First this S3 completion branch gets reviewed and merged with its provenance intact.
 
 **Source:** `BUILDLOG.md`, Entry S3.2
+
+---
+
+## S3.3 — The popover learned what deserves attention
+
+**Date:** 2026-07-15
+
+The fix-ready popover now has an opinion about sequence. Premonition and its current state lead; the diagnosis and repository establish context; the patch gets a focused editor-like surface; Sol's reasoning sits apart; and Apply is the one action allowed to carry the system accent.
+
+This was mostly a job of restraint. The eye remains the instrument identity, operational facts have moved into quieter edges, and green and red are back to doing semantic work in the diff. There is no status rail, decorative chrome or pretend Liquid Glass competing with the fix.
+
+Underneath, the view split is cleaner without moving the safety boundary. The UI reads from the existing canonical parsed diff through a small presentation projection, while AppKit ownership and every admission, privacy and Apply contract stay where they were. The full 34-test path, release bundle and developer launch all pass.
+
+The remaining gate is appropriately human: inspect a real held fix in the rebuilt popover and decide whether the hierarchy feels as deliberate as the approved direction. Only then should issue #13 be considered done and S4 begin.
+
+**Source:** `BUILDLOG.md`, Entry S3.3
+
+---
+
+## S3.4 — Watching should not look like waiting for a form
+
+**Date:** 2026-07-15
+
+The first installed S3.5 build improved the fix card, but the state seen most often still looked like a sentence stranded in a large popover. The owner called it out, correctly.
+
+The monitoring view is now smaller and more specific. It says what to do next, but it also exposes the product's important restraint: the local gate is active, and Sol waits until a candidate is admitted. That is a better signature than decoration because it explains how Premonition behaves.
+
+The daily fraction has quietened into receipt text, paused mode uses the same visual grammar, and watching remains still. Motion belongs to reasoning, not to proving that an idle utility is alive.
+
+The revised build and full test path pass, and the new bundle is installed for another owner look. The next judgment is visual: does this finally feel like a watchful instrument in its ordinary state, and does the fix-ready transition preserve that character?
+
+**Source:** `BUILDLOG.md`, Entry S3.4
+
+---
+
+## S3.5 — The durable thread has its receipt
+
+**Date:** 2026-07-15
+
+The stable feedback Session ID is now confirmed, and it matches the identifier carried through the build records from S0 onward. That closes the lingering V14 evidence gap without rewriting the earlier entries that honestly said it was unavailable.
+
+Nothing about the product changed here. The remaining work is still the owner review of the monitoring and fix-ready presentations on issue #13.
+
+**Source:** `BUILDLOG.md`, Entry S3.5
+
+---
+
+## S3.6 — The tools are becoming a project too
+
+**Date:** 2026-07-15
+
+Premonition has not only produced an app. It has also exposed a useful set of repeatable ways to work with Codex: keep a durable build record, protect phase boundaries, design native Mac surfaces deliberately, and turn the eventual product into something that can be demonstrated honestly.
+
+Those methods are now being formalised in parallel at [CodexToolkit](https://github.com/tcballard/CodexToolkit). Other sessions are preparing contributions there while this thread stays focused on Premonition; the first visible draft PR establishes a Product Demo skill scaffold.
+
+The boundary matters. CodexToolkit is the workshop around the build, not a hidden dependency inside Premonition. Nothing from it ships in v0.1 merely because it helped shape the process.
+
+For now this is provenance context, not a completion claim. The toolkit is still evolving, and Premonition's immediate gate remains the owner review of the monitoring and fix-ready popovers.
+
+**Source:** `BUILDLOG.md`, Entry S3.6
+
+---
+
+## S3.7 — The parallel workshop has an address
+
+**Date:** 2026-07-15
+
+The CodexToolkit work now has a durable thread handle: `019f647d-1687-7bf1-8b48-769da8e836d2`. It sits alongside the repository and PR trail as the route back to the session formalising the external skills.
+
+It is deliberately recorded separately from Premonition's own durable build thread. The projects inform one another, but their evidence should not blur together.
+
+**Source:** `BUILDLOG.md`, Entry S3.7
+
+---
+
+## S3.8 — The watch state finally became the instrument
+
+**Date:** 2026-07-15
+
+The important correction here is blunt: the previous monitoring pass had not really implemented the owner-approved screen. It moved some words around, but it did not give the ordinary watching state the centered eye instrument, dial, hierarchy and receipt shown in the selected direction.
+
+That is now in the app. The configured, no-fix popover has its own monitoring surface instead of borrowing the fix-card shell: Pause and Settings sit as native controls in the top right, the eye sits inside a radial watch dial, the instruction is centered and quiet, and the bottom receipt carries recent activity and the daily count without turning the counter into the main event.
+
+The safety shape did not move. There is no new model path, no automatic action, no extra persistence of clipboard or patch content, and no demo-panel work smuggled in from S4. The only new state is a content-free timestamp for the receipt.
+
+The build is verified, the app is installed into `/Applications`, and the installed executable matches the freshly built bundle. The next judgment is the right one: look at the actual running monitoring screen, then run the UX/design evaluation against the thing that now exists.
+
+**Source:** `BUILDLOG.md`, Entry S3.8
+
+---
+
+## S3.9 — The scan moved into the instrument
+
+**Date:** 2026-07-15
+
+The tempting version was to make the eye itself look around. That would have been easy, but it would also have nudged Premonition toward feeling like a little watcher with intent.
+
+The dial now does the work instead. Its active band eases across the upper arc and back, which gives the surface a scanning cue without changing the eye into a character. Paused and Reduce Motion still stay still.
+
+This is a small motion change, but it fits the product character better: awake, local and instrument-like, not autonomous. The updated app is installed for the next visual pass.
+
+**Source:** `BUILDLOG.md`, Entry S3.9
+
+---
+
+## S3.10 — The dial now uses the whole dial
+
+**Date:** 2026-07-15
+
+The upper-arc scan was too clever by half. It preserved the instrument feeling, but it did not do the simple thing the owner expected from a circular dial: travel around the circle.
+
+That is corrected now. The eye still does not look around and there is still no pupil glint; the moving part is the dial lobe. But the lobe now progresses through the full ring, with watching slower than speculating and reduced-motion still static.
+
+The updated bundle is installed again for visual review. The next useful step is not more theorising; it is looking at the live menu-bar popover and deciding whether the motion now reads correctly.
+
+**Source:** `BUILDLOG.md`, Entry S3.10
+
+---
+
+## S3.11 — The Sites idea is parked, not started
+
+**Date:** 2026-07-15
+
+The future Sites explainer now has a proper parking space in the repo. That matters because it is useful submission-support material, but it is also exactly the kind of useful thing that could pull focus too early.
+
+The handoff is explicit: do not start Sites yet. The app, README, demo flow, provenance logs and release evidence need to settle first. Nothing has been created, deployed, published or promoted.
+
+This does not change Premonition itself. Runtime scope, S3/S4 boundaries and the v0.1 safety invariants stay exactly where they were. The next work remains owner review of the actual app surface.
+
+**Source:** `BUILDLOG.md`, Entry S3.11
+
+---
+
+## S3.12 — The build method is becoming reusable
+
+**Date:** 2026-07-15
+
+The Premonition-specific skills are no longer just local scaffolding around this one build. The owner has confirmed that the build and log-maintenance skills used here are also being added into CodexToolkit.
+
+That is worth recording because these skills have shaped the way this project has stayed honest: phase boundaries, paired logs, Sol provenance, and stopping bright ideas from quietly becoming runtime scope.
+
+It still changes nothing inside Premonition. CodexToolkit is external workflow infrastructure, not an app dependency. The next Premonition move remains the actual issue #13 review path: look at the installed UI, run the design evaluation, fix what needs fixing, then close the PR before S4.
+
+**Source:** `BUILDLOG.md`, Entry S3.12
+
+---
+
+## S3.13 — The gear now reaches the window it promised
+
+**Date:** 2026-07-16
+
+The Settings item looked native, but it was wired through `SettingsLink` inside a SwiftUI view manually hosted by `NSPopover`. That view did not reliably inherit the app's Settings-scene environment, so the control could simply lead nowhere.
+
+The popover now hands the action back to `AppController`. First-run onboarding and the gear menu share one opener: close the transient popover, activate the accessory app, then ask the existing Settings scene to show its window. No product state or runtime safety boundary moved.
+
+The focused regression and all 38 Swift tests pass, as do the repository suite and bundle build. The exact verified executable is installed and running from `/Applications`.
+
+The remaining proof is appropriately small and human: click the installed gear menu and confirm that Settings appears and takes focus. After that, issue #13 returns to its broader visual-review gate.
+
+**Source:** `BUILDLOG.md`, Entry S3.13
+
+---
+
+## S3.14 — This time the rebuild really was clean
+
+**Date:** 2026-07-16
+
+The first Settings repair was present in the installed binary, but the window still did not appear for the owner. That ruled out the comforting explanation that we had merely copied the wrong executable.
+
+There was still a timing flaw: the app asked SwiftUI to show Settings while the gear menu was closing. The action now waits one main-loop turn, after the menu and transient popover have finished unwinding.
+
+The rebuild also started from an actual empty slate. SwiftPM's 436 MB local build cache, both application bundles, duplicate Launch Services registrations and the old SwiftUI window preferences were removed. Premonition's real Application Support configuration was deliberately preserved.
+
+All 38 tests pass from the clean build, the release executable was matched before installation, and only the fresh `/Applications/Premonition.app` copy remains. The automation bridge still cannot see this accessory app, so the next step is one honest manual click. If that still fails, the next repair is an explicit `NSWindowController`, not another cache purge.
+
+**Source:** `BUILDLOG.md`, Entry S3.14
+
+---
+
+## S3.15 — Settings finally owns a real window
+
+**Date:** 2026-07-16
+
+The clean rebuild settled the argument: this was not an old app, a duplicate bundle or a stale frame. The SwiftUI Settings responder simply was not a dependable way into a window from this accessory popover.
+
+That mechanism is gone. `AppController` now owns one native `NSWindowController` for the lifetime of the app, and that window hosts the same SwiftUI Settings form we already had. First-run onboarding and the gear menu reach the same object directly. Closing it does not release it; opening it again brings the same window forward.
+
+The test now does the useful thing rather than checking a selector name: it shows the window, sees it become visible, closes it and verifies that the controller still owns that exact instance. The full 38-test path passes, and the matching release is the only Premonition bundle left installed.
+
+One manual click remains because the automation bridge still cannot enumerate this menu-bar-only app. But there is no responder chain left to blame now: gear → Settings calls a concrete window controller.
+
+**Source:** `BUILDLOG.md`, Entry S3.15
+
+---
+
+## S3.16 — The gear stopped pretending to be an application menu
+
+**Date:** 2026-07-16
+
+Once Settings had a window it actually owned, the gear's remaining submenu felt like an unnecessary extra stop. Opening a popover, opening another menu, then choosing Settings was ceremony where the user expected a button.
+
+The gear is now exactly that button. The quieter application-level commands have moved to the menu-bar eye's native right-click menu: Settings, Open Config File and Quit. Left-click still opens Premonition itself, so the product's primary path has not become a menu of utilities.
+
+This is a better native split and a cleaner hierarchy. It also leaves the hard-won explicit Settings controller intact: first run, the gear and the context menu all reach the same retained window. Forty tests pass, the installed release matches the build, and the next decision is visual rather than architectural.
+
+**Source:** `BUILDLOG.md`, Entry S3.16
+
+---
+
+## S3.17 — Native content still needs native placement
+
+**Date:** 2026-07-16
+
+The menu had the right commands and the wrong relationship to the menu bar. Presenting it as a cursor context menu made AppKit align it to the click point, so it climbed over the system chrome instead of dropping cleanly beneath the eye.
+
+That primitive is gone. The app now finds the status button's bottom edge in screen coordinates and anchors the native menu there, while keeping the button highlighted during tracking. The interaction split itself has not changed.
+
+The focused coverage now includes that anchor, all 41 tests pass, and the corrected release is installed. The remaining check is the obvious one: right-click the eye and look at where the menu begins.
+
+**Source:** `BUILDLOG.md`, Entry S3.17
+
+---
+
+## S3.18 — The button was not the bar
+
+**Date:** 2026-07-16
+
+The second screenshot made the remaining mistake clear. The menu was anchored below the eye's button, but that button floats inside a taller menu bar. Its lower edge was still several points above the system boundary, so the menu continued to intrude into the chrome.
+
+The app now asks the screen where its usable area actually begins and uses that boundary. There is no guessed seven-point correction; the placement adapts to the current display and falls back safely when the menu bar auto-hides.
+
+All 41 tests still pass and the matching release is installed. The next check is visual again, but this time the geometry describes the bar rather than the icon inside it.
+
+**Source:** `BUILDLOG.md`, Entry S3.18
+
+---
+
+## S3.19 — The buttons now finish their sentences
+
+**Date:** 2026-07-18
+
+Three small interaction failures were making the fix-ready state less trustworthy than its visual polish suggested. Dismiss left the app saying a fix was still ready, Copy Patch immediately talked over its own success message, and the keyboard did not have a dependable place to land.
+
+Those paths now end cleanly. Each decision leaves its own quiet receipt, Premonition ignores only the pasteboard change it authored itself, and the action row has explicit focus ownership with Apply leading only when it is safe.
+
+The final build also exposed an environmental wrinkle: files in the workspace changed modification times during compilation. Rather than call an invalid build green, verification moved to an exact temporary snapshot, where all 44 tests and the prescribed bundle paths passed. The matching release is installed.
+
+The remaining gate is human and visual: walk Dismiss, Copy Patch, keyboard traversal, Escape and both appearances in the installed app. Then issue #13 can be prepared for review; S4 still waits.
+
+**Source:** `BUILDLOG.md`, Entry S3.19
+
+---
+
+## S3.20 — The owner pass is green
+
+**Date:** 2026-07-18
+
+The last S3 check was not another test command. It was using the installed app: dismissing a fix, copying a patch, moving through the actions from the keyboard, closing with Escape, and looking at the surface in both appearances.
+
+The owner has confirmed that pass. That closes the issue #13 visual gate and turns the remediation plan from a working checklist into an acceptance record.
+
+The branch still needs its deliberate commit and draft PR refresh, and nothing is being merged yet. Once that review package is ready, S3 can wait at the proper boundary before S4 begins.
+
+**Source:** `BUILDLOG.md`, Entry S3.20

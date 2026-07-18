@@ -17,5 +17,6 @@ let package = Package(
         ),
         .testTarget(name: "PremonitionCoreTests", dependencies: ["PremonitionCore"]),
         .testTarget(name: "AcceptanceTests", dependencies: ["PremonitionCore"]),
+        .testTarget(name: "PremonitionAppTests", dependencies: ["PremonitionApp"]),
     ]
 )

@@ -2,6 +2,20 @@ import AppKit
 import Observation
 import PremonitionCore
 
+enum HeldFixTerminalAction {
+    case dismiss
+    case copyPatch
+    case apply
+
+    var receipt: String {
+        switch self {
+        case .dismiss: Strings.dismissed
+        case .copyPatch: Strings.patchCopied
+        case .apply: Strings.applied
+        }
+    }
+}
+
 @MainActor @Observable
 final class PresentationModel {
     enum Status: Equatable { case notConfigured, watching, speculating, fixReady, paused }
@@ -13,6 +27,7 @@ final class PresentationModel {
     var configurationWarning: String?
     var heldFix: HeldFix?
     var lastRunStatus = Strings.noRunsYet
+    var lastRunAt: Date?
     var applyEnabled = false
     var codexStatus = Strings.notChecked
     var dailyCount: Int { machine.capState.capCount }
@@ -22,6 +37,7 @@ final class PresentationModel {
         let repositoryRoot: URL
         let errorLine: String
         let repositoryName: String
+        let expiresAt: Date
         var rationale: String?
     }
 
@@ -130,9 +146,10 @@ final class PresentationModel {
             switch outcome {
             case let .fixReady(diff, _):
                 machine.hold(diff: diff)
+                let expiresAt = Date().addingTimeInterval(600)
                 heldFix = HeldFix(diff: diff, repositoryRoot: resolution.root,
                                   errorLine: text.split(separator: "\n").first.map(String.init) ?? Strings.error,
-                                  repositoryName: resolution.root.lastPathComponent)
+                                  repositoryName: resolution.root.lastPathComponent, expiresAt: expiresAt)
                 applyEnabled = (try? await PatchApplier().isClean(repositoryRoot: resolution.root)) ?? false
                 status = .fixReady; lastRunStatus = Strings.fixReady
                 record(.fixReady, repository: resolution.root)
@@ -172,15 +189,20 @@ final class PresentationModel {
         }
     }
 
-    func dismissFix() { record(.dismissed); releaseFix() }
+    func dismissFix() {
+        record(.dismissed)
+        lastRunStatus = HeldFixTerminalAction.dismiss.receipt
+        releaseFix()
+    }
     func copyPatch() {
         guard let fix = heldFix else { return }
         NSPasteboard.general.clearContents(); NSPasteboard.general.setString(fix.diff.text, forType: .string)
-        record(.copied); lastRunStatus = Strings.patchCopied; releaseFix()
+        watcher.markCurrentContentsAsHandled()
+        record(.copied); lastRunStatus = HeldFixTerminalAction.copyPatch.receipt; releaseFix()
     }
     func applyFix() async {
         guard let fix = heldFix else { return }
-        do { try await PatchApplier().apply(fix.diff, repositoryRoot: fix.repositoryRoot); record(.applied, repository: fix.repositoryRoot); lastRunStatus = Strings.applied; releaseFix() }
+        do { try await PatchApplier().apply(fix.diff, repositoryRoot: fix.repositoryRoot); record(.applied, repository: fix.repositoryRoot); lastRunStatus = HeldFixTerminalAction.apply.receipt; releaseFix() }
         catch {
             record(.applyFailed, repository: fix.repositoryRoot); applyEnabled = false; lastRunStatus = Strings.applyFailed
             NSAccessibility.post(element: NSApplication.shared, notification: .announcementRequested,
@@ -190,7 +212,9 @@ final class PresentationModel {
     }
 
     private func record(_ verdict: VerdictKind, effort: String? = nil, repository: URL? = nil) {
-        let record = VerdictRecord(timestamp: Date(), candidateHash: activeHash, verdict: verdict,
+        let timestamp = Date()
+        lastRunAt = timestamp
+        let record = VerdictRecord(timestamp: timestamp, candidateHash: activeHash, verdict: verdict,
                                    effortRole: effort, repositoryRoot: repository?.path)
         guard let data = try? VerdictLogger().encode(record) else { return }
         let url = configurationURL.deletingLastPathComponent().appendingPathComponent("verdicts.jsonl")
