@@ -64,23 +64,60 @@ diff --git a/file.txt b/file.txt
 +new
 """
 
-@Test("initial validation failure escalates exactly once at Medium effort")
+private let deepFixturePatch = [
+    "diff --git a/premonition_demo/deep.py b/premonition_demo/deep.py",
+    "--- a/premonition_demo/deep.py",
+    "+++ b/premonition_demo/deep.py",
+    "@@ -1,7 +1,7 @@",
+    " from .rules import priority",
+    " ",
+    " def ordered_steps() -> list[str]:",
+    "     steps = [\"second\", \"first\"]",
+    "-    return sorted(steps, key=priority, reverse=True)",
+    "+    return sorted(steps, key=priority)",
+    " ",
+    " def main() -> None:",
+].joined(separator: "\n") + "\n"
+
+@Test("A3 deep fixture escalates exactly once from Low to Medium and validates")
 func pipelineEscalatesOnce() async throws {
     let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)
     defer { try? FileManager.default.removeItem(at: root) }
-    try Data("old\n".utf8).write(to: root.appendingPathComponent("file.txt"))
-    _ = try await ProcessRunner().run(URL(fileURLWithPath: "/usr/bin/git"), arguments: ["init", "-q"], currentDirectory: root)
-    let executor = ScriptedExecutor([.success("not a patch"), .success(pipelinePatch)])
-    let outcome = await SpeculationPipeline(executor: executor).run(prompt: "error", repositoryRoot: root)
+    let project = URL(fileURLWithPath: #filePath)
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+        .deletingLastPathComponent()
+    let generated = try await ProcessRunner().run(
+        project.appendingPathComponent("scripts/make-demo-repo.sh"),
+        arguments: [root.path],
+        timeout: .seconds(30)
+    )
+    #expect(generated.status == 0)
+    let failure = try await ProcessRunner().run(
+        URL(fileURLWithPath: "/usr/bin/make"),
+        arguments: ["break-deep"],
+        currentDirectory: root,
+        timeout: .seconds(30)
+    )
+    #expect(failure.status != 0)
+
+    let executor = ScriptedExecutor([.success("not a patch"), .success(deepFixturePatch)])
+    let outcome = await SpeculationPipeline(executor: executor).run(prompt: failure.stderr, repositoryRoot: root)
     guard case .fixReady(_, calls: 2) = outcome else { Issue.record("expected escalated fix"); return }
     let requests = await executor.captured()
     #expect(requests.map(\.effort) == [.low, .medium])
     #expect(requests.allSatisfy { $0.model == "gpt-5.6-sol" })
-    #expect(try String(contentsOf: root.appendingPathComponent("file.txt"), encoding: .utf8) == "old\n")
+    #expect(try String(contentsOf: root.appendingPathComponent("premonition_demo/deep.py"), encoding: .utf8).contains("reverse=True"))
+    let status = try await ProcessRunner().run(
+        URL(fileURLWithPath: "/usr/bin/git"),
+        arguments: ["status", "--porcelain"],
+        currentDirectory: root
+    )
+    #expect(status.stdout.isEmpty)
 }
 
-@Test("escalated failure is terminal")
+@Test("A4 escalated failure is terminal")
 func pipelineTerminalFailure() async throws {
     let root = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
     try FileManager.default.createDirectory(at: root, withIntermediateDirectories: true)

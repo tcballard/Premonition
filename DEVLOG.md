@@ -555,3 +555,86 @@ The implementation is now commit `778517d` on the issue #15 branch and draft PR 
 That is the end of S4, not permission to drift into release work. The next move belongs to the owner: review and merge the draft while preserving provenance. S5 starts only after that merge is confirmed.
 
 **Source:** `BUILDLOG.md`, Entry S4.3
+
+---
+
+## S5.1 — The demo is merged; now it has to survive release scrutiny
+
+**Date:** 2026-07-18
+
+PR #16 is merged, and its squash commit kept the two S4 provenance records intact. The filmable loop is no longer branch work; it is the product baseline.
+
+S5 is a different kind of pressure. The app works, but the repository still has no README, SECURITY or CHANGELOG, no signing/notarisation path, no independent release verifier and no prepared Homebrew surface. The architecture and threat model also still talk as if the live executor and product UI are future work.
+
+Issue #17 and the new plan make that gap explicit. Evidence comes first: every A1–A14 result must say whether it is deterministic, live, owner-observed or blocked. Signing stays behind real owner-provided identity and notary inputs, and nothing in this phase authorises publication.
+
+The next move is the baseline acceptance register and machine-capability inspection. Only then do we harden what the evidence says is actually missing.
+
+**Source:** `BUILDLOG.md`, Entry S5.1
+
+---
+
+## S5.2 — A green suite is not the same as complete evidence
+
+**Date:** 2026-07-18
+
+The merged product still passes all 51 tests, but S5 is forcing a more useful question: what does each test actually prove?
+
+The new acceptance register does not let historical, skipped or neighbouring coverage blur together. The money path has real earlier evidence, but the current baseline did not call Sol. A2 passes a small negative set, not yet the full corpus or workday simulation. A10 and fresh-machine onboarding also need current evidence rather than inheritance by confidence.
+
+The distribution check was equally plain. This Mac has the tools—Xcode, notarytool, stapler and Homebrew—but no valid code-signing identity. The installed app is exactly what it has been so far: an ad hoc development bundle, not a Gatekeeper-ready release.
+
+So the next move is not to fake a release command. It is to close the deterministic acceptance gaps and build the documentation and tooling that can be verified now. Signing waits for a real owner-provided identity and notary profile.
+
+**Source:** `BUILDLOG.md`, Entry S5.2
+
+---
+
+## S5.3 — The honest stopping point is the credential gate
+
+**Date:** 2026-07-18
+
+S5 has now done the work that can actually be done on this Mac. The acceptance
+register is no longer a list of inherited confidence: the negative clipboard
+set is broad, the normal-workday simulation stays at zero egress, the deep
+fixture proves the one-step escalation, dirty trees are rechecked after
+presentation, held fixes really exclude replacements, and onboarding runs in
+an isolated support directory instead of risking the owner’s active setup.
+
+The live evidence was usefully imperfect. Sol produced an applicable patch on
+the first current run and no applicable patch on the deliberate repeat. That is
+exactly why the product says “validated” rather than “correct,” and why offline
+fixture replay matters. The repeat also left the aggregate ephemeral-session
+count unchanged; the earlier one-file increase remains labelled inconclusive
+instead of being reverse-engineered into a convenient story.
+
+The final review found one actual privacy/lifecycle issue: a rationale could
+keep running after the person had paused or finished with the fix. That task is
+now owned by the candidate and cancelled with it. The rest of the release work
+is similarly explicit. README, SECURITY and CHANGELOG tell the whole truth;
+the architecture and threat model describe the product that exists; the
+signing script refuses to move without real inputs; and the Homebrew cask keeps
+visible placeholders rather than inventing an artifact.
+
+Fifty-five tests, the repository wrapper, release bundle, independent unsigned
+verification, launch check, README audit and Homebrew style all pass. The only
+remaining work is genuinely hard-blocked: this Mac has no Developer ID
+identity, the session has no owner-confirmed notary profile, and therefore
+there can be no stapled judge artifact, final cask metadata or owner release
+review yet. Nothing was published and S6 has not started.
+
+**Source:** `BUILDLOG.md`, Entry S5.3
+
+---
+
+## S5.4 — The review package is ready; the release is not
+
+**Date:** 2026-07-19
+
+Everything S5 could honestly finish without the owner's distribution credentials is now in draft PR #18. The commit carries the required Sol trail, the pushed branch passes the independent paired-log and provenance checks, and the PR explains both the evidence and its limits.
+
+That distinction matters. This is a reviewable release-candidate change set, not a signed release candidate. There is still no Developer ID identity on this Mac, no confirmed notary profile, no stapled artifact and no final Homebrew metadata. None of those boxes have been softened just because the code is now on GitHub.
+
+The next useful action is owner review of the draft. After that, S5 still needs the real credential-assisted signing and installed-artifact pass before it can finish. Nothing has been published, merged or moved into S6.
+
+**Source:** `BUILDLOG.md`, Entry S5.4

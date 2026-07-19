@@ -75,3 +75,21 @@ reported 158 files immediately before and after the second call. No historical
 session names or contents were inspected. CLI stderr contained model-catalog,
 plugin and MCP startup warnings; execution still completed successfully, so
 Premonition treats bounded stderr as diagnostics rather than result content.
+
+## S5 re-verification on Codex CLI 0.144.6
+
+Re-verified 2026-07-18 using the opt-in A1 headless harness. The current
+`CodexExecutor.arguments` contract remains pinned to `gpt-5.6-sol` with global
+no approval, JSONL, read-only sandbox, ephemeral mode, ignored user
+configuration and explicit Low/Medium effort values.
+
+The first current live call returned a bounded patch that passed the canonical
+parser, path checks and `git apply --check` in 17.907 seconds without mutating
+the fixture repository. A deliberate repeat returned no applicable patch after
+24.871 seconds. Both outcomes are retained as evidence that applicability is
+variable and is not a correctness guarantee.
+
+The aggregate Codex session-file count was 310 immediately before and after the
+repeat ephemeral call. An earlier 309-to-310 observation during the active
+desktop task is treated as inconclusive rather than attributed to either
+process. No historical session names or contents were inspected.
