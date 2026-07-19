@@ -2863,3 +2863,63 @@ Respond to the owner's review that the explainer needed rework by using the inst
 ### Next entry state
 
 - The owner signs in to the already-open version 2 review URL and judges the simplified page. Resolve any concrete copy or composition feedback on PR #21. When DNS records are available, refresh and verify `premonition.tcballard.dev`; keep public access, release, promotion and submission behind separate explicit decisions.
+
+---
+
+## Entry S5.9 — The README now points to the review door
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T21:05:58+01:00
+
+**Phase:** S5
+
+**Status:** Partial — owner-review URL discoverable; canonical domain and public access remain pending
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Add the deployed explainer URL to the repository front door without implying that the owner-only Sites deployment is public or that the pending custom hostname is active.
+
+### Completed
+
+- Added the working Sites URL immediately after the README's release-status paragraph, before the first substantive documentation section.
+- Displayed the destination as a literal URL and labelled it `Owner-review explainer (ChatGPT sign-in required)`.
+- Kept `premonition.tcballard.dev` out of the README while its DNS and certificate validation remain incomplete.
+- Preserved every README section below the front-door boundary without reformatting or unrelated copy changes.
+
+### Decisions and provenance
+
+- **Owner decision:** Include the deployed explainer link in the README as a URL.
+- **Sol implemented:** Narrow front-door link placement, access qualification and paired provenance checkpoint.
+- **Sol reviewed:** Destination accuracy, owner-only access wording, release-status consistency and unchanged public/custom-domain boundary.
+- **Human-authored and Sol-reviewed:** The request to expose the explainer as a URL.
+
+### Artefacts
+
+- `README.md` — qualified owner-review URL in the opening block.
+- Draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) — review surface for the README addition.
+
+### Verification
+
+- README front-door inspection — canonical product name, tagline, one explanatory paragraph, honest release status and one qualified explainer destination remain above `How the loop works`.
+- External destination — the same owner-only URL previously reached the expected Sign in with ChatGPT gate in BUILDLOG S5.8.
+- `git diff --check` — passed with only the intended front-door and provenance additions.
+- Paired-log and provenance checkers — passed after the S5.9 commit.
+
+### Deviations
+
+- The Toolkit front-door audit helper is not present in this repository, so the opening block and external URL were checked manually with the repository's paired-log and provenance tooling.
+
+### Risks and missing evidence
+
+- Public README visitors will reach a ChatGPT sign-in gate and are not authorised viewers. The label makes that limitation explicit but does not make the explainer public.
+- The generated Sites URL is not the intended long-term canonical destination. Replace it only after `premonition.tcballard.dev` is active and the owner confirms the access policy.
+- S5 signing/notarisation and S6 completion remain unchanged.
+
+### Next entry state
+
+- Review the README and version 2 page through PR #21. After DNS validation and an explicit access decision, replace the generated owner-review URL with the canonical custom domain. Keep release, public promotion and submission separately owner-gated.

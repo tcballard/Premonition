@@ -11,6 +11,9 @@ and waits for your decision.
 The v0.1 source and offline demo are usable now. The signed and notarised judge
 artifact remains a release gate and is not yet published.
 
+Owner-review explainer (ChatGPT sign-in required):
+<https://premonition-field-guide.tom-ballard08574345.chatgpt.site>
+
 ## How the loop works
 
 ```text

@@ -704,3 +704,17 @@ The reduction did not buy simplicity by dropping the awkward truths. The copied 
 Desktop height fell from 7,221 to 1,684 pixels, the source and build contracts pass, and version 2 is deployed behind the same owner-only door. The next verdict belongs to the owner after sign-in; the custom domain and signed app are still separate unfinished gates.
 
 **Source:** `BUILDLOG.md`, Entry S5.8
+
+---
+
+## S5.9 — A door with the right label
+
+**Date:** 2026-07-19
+
+The README now points to the deployed explainer, but it does not pretend the door is public. The raw Sites URL sits in the opening block with the important qualification beside it: owner review, ChatGPT sign-in required.
+
+That is less elegant than `premonition.tcballard.dev`, but more honest today. The custom hostname is still waiting on DNS and a certificate, so putting it in the repository front door would turn a future intention into a broken current claim.
+
+Once the canonical domain is genuinely active and its access policy is deliberate, the generated address can disappear. Until then, reviewers can find the real door and understand why it asks them to sign in.
+
+**Source:** `BUILDLOG.md`, Entry S5.9
