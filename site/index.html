@@ -3,62 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0d0f12" />
+    <meta name="theme-color" content="#0c0e11" />
     <meta
       name="description"
-      content="A field guide to Premonition: copy an error, review the validated Codex patch, decide."
+      content="Premonition watches for copied errors, asks GPT-5.6 Sol for one bounded patch, and waits for you to decide."
     />
     <title>Premonition — The fix was already waiting</title>
     <script type="module" src="/src/main.js"></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to the field guide</a>
+    <a class="skip-link" href="#main">Skip to Premonition</a>
 
-    <header class="site-header" aria-label="Premonition field guide">
-      <a class="wordmark" href="#overview" aria-label="Premonition, back to overview">
-        <svg class="wordmark-eye" viewBox="0 0 40 24" aria-hidden="true">
+    <header class="site-header" aria-label="Premonition">
+      <a class="wordmark" href="#main" aria-label="Premonition, back to the beginning">
+        <svg viewBox="0 0 40 24" aria-hidden="true">
           <path d="M2 12c4.7-6 10.7-9 18-9s13.3 3 18 9c-4.7 6-10.7 9-18 9S6.7 18 2 12Z" />
           <circle cx="20" cy="12" r="5" />
         </svg>
         <span>Premonition</span>
       </a>
-      <div class="header-meta" aria-label="Project context">
-        <span>Field guide&nbsp; 0.1</span>
-        <span aria-hidden="true">/</span>
-        <span>Developer Tools</span>
-      </div>
-      <a class="text-link header-link" href="https://github.com/tcballard/Premonition">Source ↗</a>
+
+      <p class="product-line">macOS · Developer Tools · v0.1</p>
+
+      <a class="header-link" href="https://github.com/tcballard/Premonition">Source <span aria-hidden="true">↗</span></a>
     </header>
 
     <main id="main">
-      <section class="hero" id="overview" aria-labelledby="hero-title">
+      <section class="hero" aria-labelledby="hero-title">
         <div class="hero-copy">
           <p class="eyebrow">A watchful native instrument for Codex</p>
           <h1 id="hero-title">The fix was<br />already waiting.</h1>
-          <p class="hero-summary">
+          <p class="summary">
             Copy an error. Premonition admits it locally, asks GPT-5.6 Sol for one bounded patch,
             validates the diff, and waits for you to decide.
           </p>
-          <div class="hero-actions">
-            <a class="primary-action" href="#loop">Watch the loop</a>
-            <span class="release-state" role="status">
-              <span class="state-dot" aria-hidden="true"></span>
+
+          <div class="hero-meta">
+            <a class="primary-action" href="https://github.com/tcballard/Premonition">View the source</a>
+            <p class="release-state" role="status">
+              <span aria-hidden="true"></span>
               Signed release pending verification
-            </span>
+            </p>
           </div>
-          <dl class="hero-facts">
-            <div><dt>Platform</dt><dd>macOS 14+</dd></div>
-            <div><dt>Runtime</dt><dd>GPT-5.6 Sol</dd></div>
-            <div><dt>Decision</dt><dd>Always human</dd></div>
-          </dl>
         </div>
 
-        <div class="instrument" aria-label="Premonition monitoring instrument">
-          <div class="instrument-head">
+        <aside class="instrument" aria-label="Premonition monitoring instrument">
+          <div class="instrument-header">
             <span>Local admission</span>
-            <span class="instrument-status"><span aria-hidden="true"></span>Watching</span>
+            <span class="watching"><i aria-hidden="true"></i> Watching</span>
           </div>
-          <div class="dial" data-dial aria-hidden="true">
+
+          <div class="dial" aria-hidden="true">
             <div class="dial-ticks" data-dial-ticks></div>
             <div class="dial-core">
               <svg viewBox="0 0 120 72">
@@ -67,177 +62,76 @@
               </svg>
             </div>
           </div>
+
           <div class="instrument-copy">
             <strong>Watching for errors</strong>
             <span>Ordinary clipboard text stops here.</span>
           </div>
-          <div class="instrument-foot">
-            <span>read-only</span>
-            <span>one candidate</span>
-            <span>no auto-apply</span>
+
+          <div class="instrument-footer" aria-label="Monitoring guarantees">
+            <span>Read-only</span>
+            <span>One candidate</span>
+            <span>No auto-apply</span>
           </div>
-        </div>
+        </aside>
       </section>
 
-      <section class="loop-section" id="loop" aria-labelledby="loop-title">
-        <div class="section-heading">
-          <p class="section-index">01 / The loop</p>
-          <h2 id="loop-title">Useful work begins in the dead window.</h2>
-          <p>
-            Premonition does not replace review. It occupies the seconds between copying a traceback
-            and deciding what to do next.
-          </p>
+      <section class="loop" aria-labelledby="loop-title">
+        <div class="section-label">
+          <p>How it works</p>
+          <h2 id="loop-title">One bounded loop.</h2>
         </div>
 
-        <div class="loop-layout">
-          <aside class="loop-instrument" aria-label="Current loop stage">
-            <div class="loop-eye" aria-hidden="true">
-              <svg viewBox="0 0 120 72">
-                <path d="M8 36c14-18 31-27 52-27s38 9 52 27C98 54 81 63 60 63S22 54 8 36Z" />
-                <circle cx="60" cy="36" r="14" />
-              </svg>
-            </div>
-            <p class="loop-stage-kicker">Current stage</p>
-            <p class="loop-stage-name" data-stage-name aria-live="polite">Gate</p>
-            <div class="loop-progress" aria-hidden="true"><span data-loop-progress></span></div>
-            <p class="loop-stage-count"><span data-stage-count>1</span> / 7</p>
-          </aside>
-
-          <ol class="loop-steps">
-            <li class="loop-step" data-stage="Gate" data-stage-index="1">
-              <span class="step-number">01</span>
-              <div><h3>Gate</h3><p>Error-shaped, multi-line text only. Everything else stays local.</p></div>
-              <span class="step-boundary">local</span>
-            </li>
-            <li class="loop-step" data-stage="Resolve" data-stage-index="2">
-              <span class="step-number">02</span>
-              <div><h3>Resolve</h3><p>Paths must lead to a Git repository beneath a root you allowlisted.</p></div>
-              <span class="step-boundary">local</span>
-            </li>
-            <li class="loop-step" data-stage="Admit" data-stage-index="3">
-              <span class="step-number">03</span>
-              <div><h3>Admit</h3><p>Single-flight and the daily candidate cap are checked before egress.</p></div>
-              <span class="step-boundary">boundary</span>
-            </li>
-            <li class="loop-step" data-stage="Sol drafts" data-stage-index="4">
-              <span class="step-number">04</span>
-              <div><h3>Sol drafts</h3><p>Codex runs pinned to GPT-5.6 Sol, ephemeral, read-only and no-approval.</p></div>
-              <span class="step-boundary">model</span>
-            </li>
-            <li class="loop-step" data-stage="Validate" data-stage-index="5">
-              <span class="step-number">05</span>
-              <div><h3>Validate</h3><p>One parser bounds the diff; <code>git apply --check</code> proves only that it applies.</p></div>
-              <span class="step-boundary">local</span>
-            </li>
-            <li class="loop-step" data-stage="Present" data-stage-index="6">
-              <span class="step-number">06</span>
-              <div><h3>Present</h3><p>Diagnosis, semantic diff and optional rationale arrive together for review.</p></div>
-              <span class="step-boundary">review</span>
-            </li>
-            <li class="loop-step" data-stage="Human decision" data-stage-index="7">
-              <span class="step-number">07</span>
-              <div><h3>Human decision</h3><p>Apply, Copy Patch or Dismiss. Premonition never chooses for you.</p></div>
-              <span class="step-boundary">you</span>
-            </li>
-          </ol>
-        </div>
+        <ol class="loop-rail">
+          <li><span>01</span><strong>Gate</strong><small>Error-shaped</small></li>
+          <li><span>02</span><strong>Resolve</strong><small>Allowlisted repo</small></li>
+          <li><span>03</span><strong>Admit</strong><small>Cap + single-flight</small></li>
+          <li><span>04</span><strong>Sol drafts</strong><small>Read-only</small></li>
+          <li><span>05</span><strong>Validate</strong><small><code>git apply --check</code></small></li>
+          <li><span>06</span><strong>Present</strong><small>One patch</small></li>
+          <li><span>07</span><strong>You decide</strong><small>Apply · Copy · Dismiss</small></li>
+        </ol>
       </section>
 
-      <section class="safety-section" id="safety" aria-labelledby="safety-title">
-        <div class="section-heading compact-heading">
-          <p class="section-index">02 / Safety spine</p>
-          <h2 id="safety-title">Decisive, never autonomous.</h2>
+      <section class="contract" aria-labelledby="contract-title">
+        <div class="contract-intro">
+          <p class="eyebrow">The safety contract</p>
+          <h2 id="contract-title">Decisive.<br />Never autonomous.</h2>
         </div>
-        <div class="safety-ledger">
-          <article><span class="ledger-code">L01</span><h3>Clipboard</h3><p>Watched locally. Concealed, transient and auto-generated items are skipped before content reads.</p><span class="ledger-state">No history</span></article>
-          <article><span class="ledger-code">L02</span><h3>Repository</h3><p>Only canonical paths beneath roots explicitly added in Settings can resolve.</p><span class="ledger-state">Allowlisted</span></article>
-          <article><span class="ledger-code">L03</span><h3>Speculation</h3><p>Read-only Codex execution, one candidate at a time, with bounded timeout and one escalation.</p><span class="ledger-state">No mutation</span></article>
-          <article><span class="ledger-code">L04</span><h3>Diff</h3><p>Malformed, binary, absolute, traversal, <code>.git</code> and symlink-escape patches are rejected.</p><span class="ledger-state">Bounded</span></article>
-          <article><span class="ledger-code">L05</span><h3>Apply</h3><p>Cleanliness and applicability are rechecked at the click. The edit remains unstaged.</p><span class="ledger-state">Explicit</span></article>
-        </div>
-      </section>
 
-      <section class="privacy-section" id="privacy" aria-labelledby="privacy-title">
-        <div class="privacy-lead">
-          <p class="section-index">03 / Privacy contract</p>
-          <h2 id="privacy-title">The boundary is visible.</h2>
-        </div>
         <blockquote>
           Watches your clipboard locally. Nothing leaves this machine unless it is error-shaped text
           resolving to a Git repository you explicitly allowlist. If admitted, the copied error is sent
           verbatim to Codex using GPT-5.6 Sol. Premonition does not redact it, store it or auto-apply the
           result. You always review the patch first.
         </blockquote>
-        <div class="privacy-columns">
-          <article>
-            <p class="column-label">Stays local</p>
-            <h3>Ordinary clipboard content</h3>
-            <p>Prose, URLs, snippets and unsupported shapes stop before the executor starts.</p>
-          </article>
-          <article>
-            <p class="column-label">Can leave</p>
-            <h3>Admitted copied errors</h3>
-            <p>After gate, allowlist and cap admission, the error is sent verbatim. v0.1 has no secret-redaction pass and makes no claim about provider retention.</p>
-          </article>
-        </div>
-      </section>
 
-      <section class="provenance-section" id="provenance" aria-labelledby="provenance-title">
-        <div class="section-heading compact-heading">
-          <p class="section-index">04 / Sol provenance</p>
-          <h2 id="provenance-title">One model. Two explicit roles.</h2>
-        </div>
-        <div class="role-grid">
-          <article>
-            <p class="role-number">I</p>
-            <p class="role-label">Runtime engine</p>
-            <h3>Sol drafts the patch.</h3>
-            <p>Every real v0.1 patch and rationale call uses Codex pinned to GPT-5.6 Sol.</p>
-          </article>
-          <article>
-            <p class="role-number">II</p>
-            <p class="role-label">Build partner</p>
-            <h3>Sol helped build the instrument.</h3>
-            <p>Architecture, implementation, tests, design reviews and release preparation share one durable evidence trail.</p>
-          </article>
-        </div>
-        <nav class="evidence-links" aria-label="Build provenance">
-          <a href="https://github.com/tcballard/Premonition/blob/main/PREMONITION_SPEC.md">Specification <span>↗</span></a>
-          <a href="https://github.com/tcballard/Premonition/blob/main/BUILDLOG.md">Build log <span>↗</span></a>
-          <a href="https://github.com/tcballard/Premonition/blob/main/DEVLOG.md">Dev diary <span>↗</span></a>
-          <a href="https://github.com/tcballard/Premonition/blob/main/docs/build-week/sol-ledger.md">Sol ledger <span>↗</span></a>
-        </nav>
-      </section>
-
-      <section class="demo-section" id="demo" aria-labelledby="demo-title">
-        <div class="demo-heading">
-          <p class="section-index">05 / Demo guide</p>
-          <h2 id="demo-title">What to watch for.</h2>
-          <p>The useful evidence is in what Premonition refuses to do.</p>
-        </div>
-        <ol class="demo-sequence">
-          <li><span>01</span><strong>Copy ordinary text.</strong><p>Nothing starts. Nothing leaves.</p></li>
-          <li><span>02</span><strong>Copy a traceback.</strong><p>The admitted loop becomes visible.</p></li>
-          <li><span>03</span><strong>Review the patch.</strong><p>Applicability is shown without a correctness claim.</p></li>
-          <li><span>04</span><strong>Dirty the worktree.</strong><p>Apply blocks; Copy Patch remains available.</p></li>
-          <li><span>05</span><strong>Disable networking.</strong><p>Labelled fixture replay still traverses the real local safety spine.</p></li>
-        </ol>
-      </section>
-
-      <section class="closing-section" aria-labelledby="closing-title">
-        <p class="eyebrow">Premonition v0.1</p>
-        <h2 id="closing-title">Review the patch.<br />Keep the decision.</h2>
-        <div class="closing-actions">
-          <a class="primary-action" href="https://github.com/tcballard/Premonition">View the source</a>
-          <span class="release-state"><span class="state-dot" aria-hidden="true"></span>Download follows signed-artifact verification</span>
-        </div>
+        <dl class="contract-facts">
+          <div>
+            <dt>Stays local</dt>
+            <dd>Ordinary clipboard content, repository checks, diff validation and Apply checks.</dd>
+          </div>
+          <div>
+            <dt>Can leave</dt>
+            <dd>Only an admitted copied error, sent verbatim after gate, allowlist and cap checks. v0.1 makes no provider retention claim.</dd>
+          </div>
+          <div>
+            <dt>Human boundary</dt>
+            <dd><code>git apply --check</code> proves applicability—not correctness. You choose what happens.</dd>
+          </div>
+        </dl>
       </section>
     </main>
 
     <footer>
-      <span>Build Week 2026 / Developer Tools</span>
-      <span>MIT licensed</span>
-      <span>Built and reviewed with GPT-5.6 Sol</span>
+      <p><strong>GPT-5.6 Sol</strong> is both the Runtime engine and the recorded build partner.</p>
+      <nav aria-label="Build evidence">
+        <a href="https://github.com/tcballard/Premonition/blob/main/PREMONITION_SPEC.md">Spec</a>
+        <a href="https://github.com/tcballard/Premonition/blob/main/BUILDLOG.md">Build log</a>
+        <a href="https://github.com/tcballard/Premonition/blob/main/DEVLOG.md">Dev diary</a>
+        <a href="https://github.com/tcballard/Premonition/blob/main/docs/build-week/sol-ledger.md">Sol ledger</a>
+      </nav>
+      <p class="footer-meta">Build Week 2026 · MIT</p>
     </footer>
   </body>
 </html>

@@ -688,3 +688,19 @@ That distinction is worth keeping sharp. A production URL exists; a public launc
 The next move is human again. Sign in through the open browser tab, review the actual page, add the DNS records, and then let the tooling verify the custom hostname rather than declaring it finished early.
 
 **Source:** `BUILDLOG.md`, Entry S5.7
+
+---
+
+## S5.8 — One page, one idea
+
+**Date:** 2026-07-19
+
+The first explainer was accurate but behaved like a guided exhibition: six sections, a sticky narrator and more than seven thousand pixels of desktop scroll. The owner wanted a page, not a tour.
+
+The Toolkit-led rework removed whole systems rather than polishing them. What remains is one instrument plate: the promise and watch dial, the seven-step loop in a single rail, and the safety contract underneath. The eye still gives Premonition its identity, but it no longer has to compete with a second stage instrument, five ledgers and a closing billboard.
+
+The reduction did not buy simplicity by dropping the awkward truths. The copied error can leave verbatim only after admission. There is no redaction or provider-retention claim. Apply remains human, and `git apply --check` still proves applicability rather than correctness. The evidence links are smaller, not missing.
+
+Desktop height fell from 7,221 to 1,684 pixels, the source and build contracts pass, and version 2 is deployed behind the same owner-only door. The next verdict belongs to the owner after sign-in; the custom domain and signed app are still separate unfinished gates.
+
+**Source:** `BUILDLOG.md`, Entry S5.8

@@ -10,10 +10,10 @@ const requiredCopy = [
   'Nothing leaves this machine unless it is error-shaped text',
   'does not redact it, store it or auto-apply',
   'git apply --check',
-  'proves only that it applies',
+  'proves applicability',
   'provider retention',
   'Runtime engine',
-  'Build partner',
+  'recorded build partner',
   'Signed release pending verification',
 ];
 
@@ -28,9 +28,12 @@ for (const landmark of ['<header', '<main', '<section', '<footer']) {
 if (!html.includes('class="skip-link"')) throw new Error('missing skip link');
 if (!css.includes(':focus-visible')) throw new Error('missing visible focus treatment');
 if (!css.includes('prefers-reduced-motion')) throw new Error('missing reduced motion treatment');
-if (!css.includes('@media (max-width: 1080px)') || !css.includes('@media (max-width: 540px)')) {
+if (!css.includes('@media (max-width: 1040px)') || !css.includes('@media (max-width: 520px)')) {
   throw new Error('missing representative responsive transformations');
 }
-if (!script.includes('IntersectionObserver')) throw new Error('missing functional loop-stage observer');
+if (!script.includes('data-dial-ticks')) throw new Error('missing functional admission dial');
+
+const sectionCount = (html.match(/<section/g) || []).length;
+if (sectionCount !== 3) throw new Error(`expected three concise sections, found ${sectionCount}`);
 
 console.log('site source contract passed');
