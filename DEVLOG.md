@@ -652,3 +652,69 @@ The local update was less graceful. The Mac's File Provider cancelled Git's norm
 That leaves a useful distinction intact. The hardening PR is merged, but S5 is still open. There is no Developer ID identity, confirmed notary profile, stapled artifact or installed release-candidate approval yet. Issue #17 remains the place for those gates, and nothing has moved into publication or S6.
 
 **Source:** `BUILDLOG.md`, Entry S5.5
+
+---
+
+## S5.6 — A field guide, still behind the glass
+
+**Date:** 2026-07-19
+
+The Sites handoff was written to stop us building the wrapper before the product. The product is now far enough along that the remaining S5 work is genuinely waiting on distribution credentials, so the owner opened a narrow exception: shape the explainer now, but do not deploy it and do not pretend S6 has begun.
+
+The result feels more like an exhibit label beside an instrument than a launch page. It leads with the promise, turns the safety spine into the structure, quotes the privacy constitution exactly and makes the two Sol roles inspectable. The eye and admission dial carry the product identity without importing the app's chrome into a browser or collapsing into generic AI marketing.
+
+The uncomfortable truths stay visible. `git apply --check` proves applicability, not correctness. Admitted errors leave verbatim. There is no secret-redaction or provider-retention claim. The signed release is still pending, so there is no download button wearing a disguise.
+
+Desktop, tablet and mobile layouts hold together, the source/build contracts pass, and Sites version 1 points to an exact standalone source commit. It remains behind the glass: no live URL, no preview URL, no deployment and no promotion. Before that changes, it still needs owner review and a real keyboard pass, and Premonition still needs the signed artifact that keeps S5 honestly open.
+
+The final provenance check also caught a separate piece of unfinished bookkeeping: PR #19's squash kept its title but dropped the verified S5.5 trailers. The append-only exception now links the exact source and squash commits rather than rewriting `main` or letting a green checker hide the gap.
+
+The branch is now in draft PR #21. That is the review surface, not a launch switch.
+
+**Source:** `BUILDLOG.md`, Entry S5.6
+
+---
+
+## S5.7 — Behind a real door
+
+**Date:** 2026-07-19
+
+The field guide now has a real production door, but it is still a private review room. The owner explicitly lifted the no-deployment stop, Sites confirmed the access list contains only the owner, and version 1 is live behind Sign in with ChatGPT.
+
+That distinction is worth keeping sharp. A production URL exists; a public launch does not. Nothing about the app, release state or S6 completion changed just because the explainer can finally be seen outside localhost.
+
+`premonition.tcballard.dev` is attached too, but DNS is honest in its own way: the necessary CNAME and validation records are not there yet, so the hostname is pending and the certificate is still being prepared. The generated Sites URL is the working review route until those records land.
+
+The next move is human again. Sign in through the open browser tab, review the actual page, add the DNS records, and then let the tooling verify the custom hostname rather than declaring it finished early.
+
+**Source:** `BUILDLOG.md`, Entry S5.7
+
+---
+
+## S5.8 — One page, one idea
+
+**Date:** 2026-07-19
+
+The first explainer was accurate but behaved like a guided exhibition: six sections, a sticky narrator and more than seven thousand pixels of desktop scroll. The owner wanted a page, not a tour.
+
+The Toolkit-led rework removed whole systems rather than polishing them. What remains is one instrument plate: the promise and watch dial, the seven-step loop in a single rail, and the safety contract underneath. The eye still gives Premonition its identity, but it no longer has to compete with a second stage instrument, five ledgers and a closing billboard.
+
+The reduction did not buy simplicity by dropping the awkward truths. The copied error can leave verbatim only after admission. There is no redaction or provider-retention claim. Apply remains human, and `git apply --check` still proves applicability rather than correctness. The evidence links are smaller, not missing.
+
+Desktop height fell from 7,221 to 1,684 pixels, the source and build contracts pass, and version 2 is deployed behind the same owner-only door. The next verdict belongs to the owner after sign-in; the custom domain and signed app are still separate unfinished gates.
+
+**Source:** `BUILDLOG.md`, Entry S5.8
+
+---
+
+## S5.9 — A door with the right label
+
+**Date:** 2026-07-19
+
+The README now points to the deployed explainer, but it does not pretend the door is public. The raw Sites URL sits in the opening block with the important qualification beside it: owner review, ChatGPT sign-in required.
+
+That is less elegant than `premonition.tcballard.dev`, but more honest today. The custom hostname is still waiting on DNS and a certificate, so putting it in the repository front door would turn a future intention into a broken current claim.
+
+Once the canonical domain is genuinely active and its access policy is deliberate, the generated address can disappear. Until then, reviewers can find the real door and understand why it asks them to sign in.
+
+**Source:** `BUILDLOG.md`, Entry S5.9

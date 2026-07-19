@@ -2642,3 +2642,284 @@ Verify the owner-confirmed PR #18 merge, preserve its Sol provenance, restore a 
 ### Next entry state
 
 - Keep issue #17 and S5 active. When the owner supplies or confirms the Developer ID identity and `notarytool` profile, run the fail-fast signing/notarisation path, independently verify the signed archive, derive and audit the real cask metadata, install the exact artifact for owner review and record the evidence. Do not publish or begin S6 without separate authority.
+
+---
+
+## Entry S5.6 — The explainer has a reviewable shape, not a public URL
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T15:41:54+01:00
+
+**Phase:** S5
+
+**Status:** Partial — owner-authorised submission collateral prepared while signed-artifact gates remain
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Use the previously deferred Sites handoff to prepare a truthful, authored explainer for local and saved-version review while S5 is credential-blocked, without deploying, publishing, promoting, changing runtime scope or marking S6 started.
+
+### Completed
+
+- Created issue [#20](https://github.com/tcballard/Premonition/issues/20) with an explicit local/private preview boundary and testable content, design, responsive and accessibility acceptance criteria.
+- Implemented a single-page field guide under `site/` with the product promise, admission loop, safety spine, exact privacy constitution, Sol's runtime/build roles, provenance links and demo cues.
+- Used an authored dark field-guide composition rather than a generic SaaS surface, with the eye/dial family as its functional signature and no external fonts or image dependencies.
+- Kept the release state honest: the page says signed verification is pending and provides no invented download, release or deployment URL.
+- Created the Sites project once, pushed an exact standalone source commit `dfadbb35a6f4ee5e52c9d944b624fe85e5c592bf` and saved undeployed Sites version 1.
+- Confirmed the project has neither a live URL nor a preview URL. No deployment, access-policy expansion, domain work, publication, submission or promotion occurred.
+- Added the append-only provenance exception for PR #19 after its GitHub squash commit was found to have stripped the already-verified S5.5 source trailers.
+- Pushed `codex/issue-20-sites-explainer-preview` and opened draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) for owner review without enabling merge or changing the Sites deployment state.
+
+### Decisions and provenance
+
+- **Owner decision:** Work on the deferred Sites explainer in the meantime after asking what follows the remaining S5 gates.
+- **Sol implemented:** Evidence-grounded copy, authored responsive presentation, functional loop-stage instrument, source/build checks, browser review, Sites source provenance and the undeployed version checkpoint.
+- **Sol reviewed:** S5/S6 boundary, product claims, privacy constitution, correctness limits, release-status language, responsive layout, semantics, focus treatment and reduced-motion fallback.
+- **Human-authored and Sol-reviewed:** The owner-authored handoff in `docs/build-week/sites-explainer-handoff.md` supplied the purpose, constraints and suggested information architecture.
+
+### Artefacts
+
+- `site/` — source, verification script, deterministic build adapter and private-review instructions.
+- Sites project `appgprj_6a5cd9f4fb4c8191a7825271e3b82970` — active but undeployed.
+- Sites version 1 — source commit `dfadbb35a6f4ee5e52c9d944b624fe85e5c592bf`; no live or preview URL.
+- GitHub issue [#20](https://github.com/tcballard/Premonition/issues/20) — authority and review boundary for the explainer preparation.
+- Draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) — review surface for the source, checks and provenance records.
+- `docs/build-week/provenance-exceptions.md` — exact PR #19 squash/source linkage preserving the already-recorded S5.5 provenance without rewriting `main`.
+
+### Verification
+
+- `npm run verify` — required claims, semantic landmarks, skip link, visible focus, responsive breakpoints, reduced-motion treatment and functional loop observer passed.
+- `npm run build` — Vite 7.3.6 produced the client assets and the deterministic Sites worker entrypoint.
+- In-app browser review at 1440 × 1000, 820 × 1024 and 390 × 844 — no horizontal overflow; hierarchy, instrument and provenance surfaces remained coherent.
+- Browser DOM snapshot — named header/main/section/footer landmarks, headings, lists, navigation and current-stage live region were exposed; the skip link received a visible 2 px focus outline.
+- Browser console inspection — no warnings or errors.
+- Standalone Sites source rebuild — `npm ci`, `npm run verify` and `npm run build` passed from the exact committed source; author and committer were both `Tom Ballard <tom@armytage.co>`.
+- Sites inspection — latest version number is 1; `current_live_url` and `current_preview_url` are both null.
+- Repository `scripts/test.sh` — all 55 Swift tests plus deterministic demo-repository, measurement-normalisation and release-tool contracts passed.
+- `scripts/build-app.sh release` — the unchanged macOS product built successfully at `dist/Premonition.app`.
+- GitHub PR #19 inspection — source `427c99284864ba4b8d20cf968ef06f32f11478f4` carried the required S5.5 trailers; squash `6fc8066b93c951c71d2c042c62ba4d0887aea8ed` retained only the title, and the exact append-only exception restored a complete checker result.
+- GitHub draft-PR inspection — PR #21 targets `main`, contains only the issue #20 branch and remains unmerged.
+
+### Deviations
+
+- The managed sandbox could not resolve the Sites Git host, so the exact source push used the approved network boundary with a short-lived per-command credential that was neither printed nor persisted.
+- The first repository test attempt could not write SwiftPM's default module cache. The unchanged prescribed test and release-build commands passed after using explicit temporary module-cache paths at the approved normal macOS execution boundary.
+- Uploading the optional prebuilt archive was unavailable in the current Sites file-upload path. The version was therefore saved from the exact pushed source commit without an archive; no deployment or production build was attempted.
+- The in-app browser's synthetic Tab key did not advance from the page body, so focus visibility was verified by focusing the unique skip-link locator and inspecting its computed outline. Source checks cover the shared `:focus-visible` rule; a final real-browser keyboard pass remains appropriate before any deployment.
+
+### Risks and missing evidence
+
+- S5 is still incomplete: there is no Developer ID identity, confirmed notary profile, signed/stapled artifact, final cask evidence or installed release-candidate owner approval.
+- The explainer is reviewable source and an undeployed Sites version, not a production page. Responsive and semantic evidence is current, but public routing, production build behaviour and external-link checks have not been exercised.
+- S6 is not marked started or complete. The demo video, final submission copy, release/download routes and any public Sites deployment remain future owner-gated work.
+
+### Next entry state
+
+- Review issue #20 and draft PR #21. Keep Sites version 1 undeployed. Finish the credential-assisted S5 release gates when inputs become available; only after the app, README, demo, provenance logs and release evidence are stable should the owner decide whether to deploy the explainer and proceed through the remaining S6 submission work.
+
+---
+
+## Entry S5.7 — The field guide is deployed for owner review
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T16:27:03+01:00
+
+**Phase:** S5
+
+**Status:** Partial — owner-only review deployment live; requested custom domain awaits DNS
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Act on the owner's explicit decision to deploy the saved explainer for review, preserve owner-only access, attach `premonition.tcballard.dev` if supported and record the production boundary without making the page public or changing app/runtime scope.
+
+### Completed
+
+- Confirmed the Sites project remained in custom access mode with one allowed user and no allowed groups before deployment.
+- Deployed saved Sites version 1 through the verified owner-only path. The deployment completed successfully at `https://premonition-field-guide.tom-ballard08574345.chatgpt.site`.
+- Attached `premonition.tcballard.dev` to the Sites project. Sites accepted the hostname and returned the required CNAME plus two TXT validation records.
+- Confirmed public DNS does not yet contain the requested CNAME or validation records, so the custom hostname remains pending and its certificate is still initialising.
+- Opened the deployed URL in the in-app browser. The owner-only Sign in with ChatGPT gate loaded successfully and was left open for the owner to continue.
+- Preserved the existing custom access policy. No public-access change, release publication, submission, external promotion or Premonition runtime change occurred.
+
+### Decisions and provenance
+
+- **Owner decision:** Deploy the explainer for review and use `premonition.tcballard.dev` if possible.
+- **Sol implemented:** Owner-only Sites deployment, deployment-status monitoring, custom-hostname attachment, DNS inspection and the browser review handoff.
+- **Sol reviewed:** The production nature of every Sites URL, owner-only access policy, explicit-publication boundary, domain validation state and unchanged S5/S6/runtime gates.
+- **Human-authored and Sol-reviewed:** The requested `premonition.tcballard.dev` hostname.
+
+### Artefacts
+
+- Owner-only review URL: `https://premonition-field-guide.tom-ballard08574345.chatgpt.site`.
+- Requested custom hostname: `premonition.tcballard.dev` — attached, pending DNS validation.
+- Sites version 1 — unchanged exact source commit `dfadbb35a6f4ee5e52c9d944b624fe85e5c592bf`.
+- Draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) — source and provenance review surface.
+
+### Verification
+
+- Sites access inspection — custom mode, one allowed user, zero allowed groups.
+- Sites deployment status — progressed from pending through building and publishing to succeeded.
+- Sites custom-domain response — hostname accepted; provider pending; SSL initialising; no provider error.
+- Read-only DNS lookup — no CNAME or required TXT validation records currently resolve for `premonition.tcballard.dev`.
+- In-app browser DOM inspection — the deployed owner-only URL returned the Sign in with ChatGPT review gate rather than an error page.
+
+### Deviations
+
+- Entry S5.6 deliberately kept Sites version 1 undeployed under the earlier handoff. The owner explicitly superseded that stop for an owner-only review deployment in this session; it does not authorise public access, promotion or submission.
+- The custom domain cannot become active from Sites alone. DNS records must be added at the authoritative provider before Sites can validate the hostname and issue its certificate.
+- Deployed page content remains behind the owner authentication gate. The deployment endpoint is proven reachable, but the final rendered page still needs the owner's signed-in review.
+
+### Risks and missing evidence
+
+- Every Sites deployment URL is production even though access is owner-only. The page must not be described as public or externally reviewable.
+- `premonition.tcballard.dev` is not active yet; DNS and certificate validation remain incomplete.
+- The final signed macOS artifact and the rest of S5 remain blocked on the Developer ID identity and notary profile. S6 is not marked complete.
+
+### Next entry state
+
+- The owner continues through the already-open Sign in with ChatGPT gate and reviews the deployed page. Add the supplied CNAME and TXT records at the authoritative DNS provider, then refresh Sites validation and verify the custom hostname and rendered page. Treat any public-access change, external promotion, release or submission as a separate explicit owner decision.
+
+---
+
+## Entry S5.8 — The explainer now scans like one instrument
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T19:01:12+01:00
+
+**Phase:** S5
+
+**Status:** Partial — simplified owner-only version deployed; owner review and custom-domain DNS remain
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Respond to the owner's review that the explainer needed rework by using the installed tcballard Codex Toolkit to make it materially simpler: one concise page, one visual idea and one fast reading path, without weakening Premonition's claims or changing the owner-only deployment boundary.
+
+### Completed
+
+- Applied the Toolkit's `authored-frontend-design` direction and replaced the six-part scrolling field guide with one compact instrument plate containing three sections: promise/instrument, bounded loop and safety contract.
+- Removed the sticky stage navigator, scroll-driven stage observer, separate safety ledger, duplicated provenance cards, demo list and oversized closing section.
+- Retained the functional eye/admission dial as the single signature element and reduced its script to the forty-eight semantic dial ticks only.
+- Compressed the full seven-stage pipeline into one scan-friendly rail while preserving gate, allowlist, cap, read-only Sol, validation, single candidate and explicit human-decision boundaries.
+- Preserved the privacy constitution verbatim, the applicability-not-correctness limit, the no-provider-retention claim and the four direct provenance links.
+- Updated the source contract so simplicity is testable: exactly three sections, one functional dial, representative responsive transformations, semantic landmarks, focus treatment and reduced-motion support.
+- Saved Sites version 2 from exact source commit `f5541358ae895efe26fa18dfacdd48dd758817e3` and successfully updated the existing owner-only deployment at `https://premonition-field-guide.tom-ballard08574345.chatgpt.site`.
+- Kept custom access at one allowed user and zero groups. No public-access, runtime, release, submission or promotion change occurred.
+
+### Decisions and provenance
+
+- **Owner decision:** Rework the site into a simpler single-page experience using the tcballard Codex Toolkit.
+- **Sol implemented:** Information-architecture reduction, authored instrument-plate composition, responsive transformations, contract updates, visual/accessibility verification, exact Sites source version and owner-only redeployment.
+- **Sol reviewed:** C1–C5/§13 claims, privacy language, applicability limit, Sol roles, release-status honesty, reduced-motion fallback and unchanged public/runtime boundaries.
+- **Human-authored and Sol-reviewed:** The explicit request for a simpler single-page experience and use of the owner's Toolkit plugin.
+
+### Artefacts
+
+- `site/index.html` — three-section single-page information architecture.
+- `site/src/style.css` — restrained instrument-plate system and responsive transformations.
+- `site/src/main.js` — dial-only enhancement with no scroll-state machinery.
+- `site/scripts/verify-site.mjs` — concise-page and invariant contract.
+- Sites version 2 — exact source commit `f5541358ae895efe26fa18dfacdd48dd758817e3`.
+- Draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) — owner review surface.
+
+### Verification
+
+- `npm --prefix site run verify` — required claims, three-section limit, semantic landmarks, focus, reduced motion, breakpoints and functional dial passed.
+- `npm --prefix site run build` — Vite 7.3.6 produced a 5.96 kB HTML entry, 10.37 kB CSS asset and 0.92 kB JavaScript asset before compression.
+- Exact standalone source rebuild — `npm ci`, `npm run verify` and `npm run build` passed from commit `f5541358` with Tom Ballard as author and committer.
+- In-app browser at 1440 × 1000 — document height 1,684 px instead of the previous 7,221 px baseline; three sections and no horizontal overflow.
+- In-app browser at 820 × 1024 and 390 × 844 — hierarchy transformed without horizontal overflow; mobile retained visible Source and review actions.
+- Browser DOM inspection — one H1, two H2 headings, ordered seven-stage list, definition-list contract, named footer navigation and unique skip link exposed in reading order.
+- Focus inspection — skip link showed a 2 px focus outline with 4 px offset; browser console inspection returned no warnings or errors.
+- Sites access/version inspection — custom access remained one user and zero groups; version 2 identified exact source commit `f5541358`.
+- Sites deployment status — version 2 progressed to succeeded at the unchanged owner-only URL.
+- Production browser inspection — the endpoint returned the expected Sign in with ChatGPT gate without console errors.
+
+### Deviations
+
+- The first private Sites source pushes waited for the managed network approval and did not start before its deadline. A fresh short-lived credential and the already-approved Git push path completed the exact source update; no credential was persisted.
+- Production content remains behind the owner authentication gate. Local visual evidence covers the rendered source at three breakpoints; the owner must still sign in to inspect version 2 through Sites.
+- The app regression suite was not rerun because the commit changes only static submission collateral and its paired provenance records; the site-specific source/build/browser checks are the proportionate verification surface.
+
+### Risks and missing evidence
+
+- The simplified page is deployed but not yet owner-accepted. Copy density and the exact balance between the hero instrument and safety contract remain review judgments.
+- `premonition.tcballard.dev` remains attached but pending its previously supplied DNS records and certificate validation.
+- S5's signed macOS artifact remains blocked on the Developer ID identity and notary profile. S6 is not complete and public access remains unauthorised.
+
+### Next entry state
+
+- The owner signs in to the already-open version 2 review URL and judges the simplified page. Resolve any concrete copy or composition feedback on PR #21. When DNS records are available, refresh and verify `premonition.tcballard.dev`; keep public access, release, promotion and submission behind separate explicit decisions.
+
+---
+
+## Entry S5.9 — The README now points to the review door
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T21:05:58+01:00
+
+**Phase:** S5
+
+**Status:** Partial — owner-review URL discoverable; canonical domain and public access remain pending
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Add the deployed explainer URL to the repository front door without implying that the owner-only Sites deployment is public or that the pending custom hostname is active.
+
+### Completed
+
+- Added the working Sites URL immediately after the README's release-status paragraph, before the first substantive documentation section.
+- Displayed the destination as a literal URL and labelled it `Owner-review explainer (ChatGPT sign-in required)`.
+- Kept `premonition.tcballard.dev` out of the README while its DNS and certificate validation remain incomplete.
+- Preserved every README section below the front-door boundary without reformatting or unrelated copy changes.
+
+### Decisions and provenance
+
+- **Owner decision:** Include the deployed explainer link in the README as a URL.
+- **Sol implemented:** Narrow front-door link placement, access qualification and paired provenance checkpoint.
+- **Sol reviewed:** Destination accuracy, owner-only access wording, release-status consistency and unchanged public/custom-domain boundary.
+- **Human-authored and Sol-reviewed:** The request to expose the explainer as a URL.
+
+### Artefacts
+
+- `README.md` — qualified owner-review URL in the opening block.
+- Draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) — review surface for the README addition.
+
+### Verification
+
+- README front-door inspection — canonical product name, tagline, one explanatory paragraph, honest release status and one qualified explainer destination remain above `How the loop works`.
+- External destination — the same owner-only URL previously reached the expected Sign in with ChatGPT gate in BUILDLOG S5.8.
+- `git diff --check` — passed with only the intended front-door and provenance additions.
+- Paired-log and provenance checkers — passed after the S5.9 commit.
+
+### Deviations
+
+- The Toolkit front-door audit helper is not present in this repository, so the opening block and external URL were checked manually with the repository's paired-log and provenance tooling.
+
+### Risks and missing evidence
+
+- Public README visitors will reach a ChatGPT sign-in gate and are not authorised viewers. The label makes that limitation explicit but does not make the explainer public.
+- The generated Sites URL is not the intended long-term canonical destination. Replace it only after `premonition.tcballard.dev` is active and the owner confirms the access policy.
+- S5 signing/notarisation and S6 completion remain unchanged.
+
+### Next entry state
+
+- Review the README and version 2 page through PR #21. After DNS validation and an explicit access decision, replace the generated owner-review URL with the canonical custom domain. Keep release, public promotion and submission separately owner-gated.

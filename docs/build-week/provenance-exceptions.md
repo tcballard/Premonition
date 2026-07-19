@@ -5,3 +5,4 @@ Append-only. A row records a protected-branch merge that stripped already-verifi
 | Commit | Pull request | Source commit | Phase | Session ID | BUILDLOG entry | Reason |
 | --- | --- | --- | --- | --- | --- | --- |
 | 27e4150163f669bef474aa6dbf9d5203f93e8f04 | #7 | 0d34b1803c8f18acb18cd70422d059977fde9a18 | S1 | 019f5f0f-a2dd-78e3-a5b3-413860708eab | S1.1 | GitHub squash merge retained the issue title but stripped the source commit trailers; rewriting protected main was rejected. |
+| 6fc8066b93c951c71d2c042c62ba4d0887aea8ed | #19 | 427c99284864ba4b8d20cf968ef06f32f11478f4 | S5 | 019f5f0f-a2dd-78e3-a5b3-413860708eab | S5.5 | GitHub squash merge retained only the issue title and stripped the verified source commit trailers; rewriting protected main was rejected. |
