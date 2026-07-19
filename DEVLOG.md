@@ -638,3 +638,17 @@ That distinction matters. This is a reviewable release-candidate change set, not
 The next useful action is owner review of the draft. After that, S5 still needs the real credential-assisted signing and installed-artifact pass before it can finish. Nothing has been published, merged or moved into S6.
 
 **Source:** `BUILDLOG.md`, Entry S5.4
+
+---
+
+## S5.5 — Merged is not the same as released
+
+**Date:** 2026-07-19
+
+PR #18 is merged, and the important part survived the squash: both S5 commits still carry their Sol session, phase and build-log trail. The repository now has the hardening work, the honest front door and the release machinery on `main`.
+
+The local update was less graceful. The Mac's File Provider cancelled Git's normal fast-forward twice, leaving partial file writes. Because the starting tree was known clean, the recovery could be stricter than another hopeful retry: apply the exact merged patch, compare the entire resulting tree hash with remote `main`, and move the reference only when they match.
+
+That leaves a useful distinction intact. The hardening PR is merged, but S5 is still open. There is no Developer ID identity, confirmed notary profile, stapled artifact or installed release-candidate approval yet. Issue #17 remains the place for those gates, and nothing has moved into publication or S6.
+
+**Source:** `BUILDLOG.md`, Entry S5.5
