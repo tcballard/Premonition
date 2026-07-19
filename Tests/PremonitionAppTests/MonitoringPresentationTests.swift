@@ -69,6 +69,41 @@ func settingsWindowControllerOwnsReusableWindow() throws {
     #expect(controller.window === window)
 }
 
+@MainActor
+@Test("A14 isolated first run saves an allowlisted root without hand-editing JSON")
+func a14IsolatedFirstRunOnboarding() throws {
+    let manager = FileManager.default
+    let support = manager.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+    let configurationURL = support.appendingPathComponent("config.json")
+    let repository = support.appendingPathComponent("DemoRepository")
+    try manager.createDirectory(at: repository, withIntermediateDirectories: true)
+    defer { try? manager.removeItem(at: support) }
+    let pasteboard = NSPasteboard(name: .init("PremonitionA14.\(UUID().uuidString)"))
+
+    let model = PresentationModel(
+        configurationURL: configurationURL,
+        watcher: PasteboardWatcher(pasteboard: pasteboard)
+    )
+    #expect(model.status == .notConfigured)
+    #expect(!manager.fileExists(atPath: configurationURL.path))
+
+    model.addRoot(repository)
+    #expect(model.status == .watching)
+    #expect(manager.fileExists(atPath: configurationURL.path))
+    let attributes = try manager.attributesOfItem(atPath: configurationURL.path)
+    #expect((attributes[.posixPermissions] as? NSNumber)?.intValue == 0o600)
+
+    let restored = PresentationModel(
+        configurationURL: configurationURL,
+        watcher: PasteboardWatcher(pasteboard: pasteboard)
+    )
+    #expect(restored.status == .watching)
+    #expect(restored.configuration.allowlistedRoots == [repository.resolvingSymlinksInPath().path])
+    #expect(restored.configuration.model == "gpt-5.6-sol")
+    #expect(restored.configuration.dailyCap == 30)
+    #expect(!restored.configuration.soundOnReady)
+}
+
 @Test("monitoring presentation maps status to native identity symbols and copy")
 func monitoringPresentationMapsStatus() {
     #expect(MonitoringPresentation(status: .watching).stateTitle == Strings.watching)

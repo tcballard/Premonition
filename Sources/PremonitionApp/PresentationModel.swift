@@ -58,24 +58,30 @@ final class PresentationModel {
 
     private var filter = ClipboardCandidateFilter()
     private var machine = CandidateStateMachine(dailyCap: DailyCap(limit: 30))
-    private let watcher = PasteboardWatcher()
+    private let watcher: PasteboardWatcher
     private var debounceTask: Task<Void, Never>?
     private var pipelineTask: Task<Void, Never>?
+    private var rationaleTask: Task<Void, Never>?
     private var expiryTask: Task<Void, Never>?
     private var activeHash: String?
     private var persistedPanelFrame: String?
 
-    let configurationURL = FileManager.default.homeDirectoryForCurrentUser
-        .appendingPathComponent("Library/Application Support/Premonition/config.json")
+    let configurationURL: URL
     private var stateURL: URL { configurationURL.deletingLastPathComponent().appendingPathComponent("state.json") }
 
-    init() {
+    init(
+        configurationURL: URL = FileManager.default.homeDirectoryForCurrentUser
+            .appendingPathComponent("Library/Application Support/Premonition/config.json"),
+        watcher: PasteboardWatcher? = nil
+    ) {
+        self.configurationURL = configurationURL
+        self.watcher = watcher ?? PasteboardWatcher()
         load()
         let persisted = (try? Data(contentsOf: stateURL)).flatMap { try? JSONDecoder().decode(PersistentState.self, from: $0) }
         let capState = DailyCapState(capDate: persisted?.capDate ?? "", capCount: persisted?.capCount ?? 0)
         persistedPanelFrame = persisted?.panelFrame
         machine = CandidateStateMachine(dailyCap: DailyCap(limit: configuration.dailyCap, state: capState))
-        watcher.onItem = { [weak self] item in self?.observe(item) }
+        self.watcher.onItem = { [weak self] item in self?.observe(item) }
     }
 
     func startWatching() { if !isPaused { watcher.start() } }
@@ -110,6 +116,10 @@ final class PresentationModel {
         let panel = NSOpenPanel(); panel.canChooseDirectories = true; panel.canChooseFiles = false
         panel.allowsMultipleSelection = false; panel.prompt = Strings.addRoot
         guard panel.runModal() == .OK, let url = panel.url else { return }
+        addRoot(url)
+    }
+
+    func addRoot(_ url: URL) {
         let path = url.standardizedFileURL.resolvingSymlinksInPath().path
         if !configuration.allowlistedRoots.contains(path) { configuration.allowlistedRoots.append(path); save() }
     }
@@ -208,10 +218,13 @@ final class PresentationModel {
                     try? await Task.sleep(for: .seconds(600)); guard !Task.isCancelled else { return }
                     if self?.heldFix?.diff == diff { self?.record(.expired); self?.lastRunStatus = Strings.expired; self?.releaseFix() }
                 }
-                Task { [weak self] in
+                rationaleTask?.cancel()
+                rationaleTask = Task { [weak self] in
                     let rationalePrompt = PromptBuilder().rationale(error: text, diff: diff)
                     let rationale = await pipeline.rationale(prompt: rationalePrompt, repositoryRoot: resolution.root)
+                    guard !Task.isCancelled else { return }
                     if self?.heldFix?.diff == diff { self?.heldFix?.rationale = rationale }
+                    self?.rationaleTask = nil
                 }
             case .discarded:
                 machine.release(); status = .watching; lastRunStatus = Strings.noApplicableFix; record(.validationDiscard, repository: resolution.root)
@@ -251,7 +264,9 @@ final class PresentationModel {
         if paused {
             watcher.stop(); debounceTask?.cancel()
             if pipelineTask != nil { record(.cancelled) }
-            pipelineTask?.cancel(); pipelineTask = nil; expiryTask?.cancel(); machine.release(); heldFix = nil; record(.paused)
+            pipelineTask?.cancel(); pipelineTask = nil
+            rationaleTask?.cancel(); rationaleTask = nil
+            expiryTask?.cancel(); machine.release(); heldFix = nil; record(.paused)
             demo.reset()
         }
         else { watcher.start(); record(.resumed) }
@@ -302,7 +317,9 @@ final class PresentationModel {
     }
 
     private func releaseFix() {
-        expiryTask?.cancel(); heldFix = nil; applyEnabled = false; machine.release()
+        expiryTask?.cancel()
+        rationaleTask?.cancel(); rationaleTask = nil
+        heldFix = nil; applyEnabled = false; machine.release()
         status = isPaused ? .paused : .watching
     }
 

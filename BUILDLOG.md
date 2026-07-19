@@ -2289,3 +2289,225 @@ Record the owner's installed S4 acceptance, repeat the complete branch verificat
 ### Next entry state
 
 - Owner reviews draft PR #16 and squash-merges it if satisfied while preserving the required Sol provenance. Only after that merge is confirmed may the next durable session select S5 and begin the full A1–A14 hardening sweep.
+
+---
+
+## Entry S5.1 — Hardening starts from the merged demo loop
+
+**Date:** 2026-07-18
+
+**Recorded at:** 2026-07-18T21:12:30+01:00
+
+**Phase:** S5
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Verify the owner-confirmed PR #16 squash merge, restore a clean merged `main`, and establish the bounded S5 issue, branch and evidence-first implementation plan without beginning release publication or S6.
+
+### Completed
+
+- Verified PR #16 was squash merged at 2026-07-18T19:33:04Z as `44a541114b5a2be69567688536b2696651eb7823`.
+- Confirmed the squash commit retained both issue #15 commit narratives and their required S4.2/S4.3 Sol trailers.
+- Fast-forwarded local `main` to the verified squash commit and confirmed it is clean and identical to `origin/main`.
+- Re-ran paired-log and provenance validation successfully on merged `main`.
+- Closed completed issue #15.
+- Created issue #17, `S5: harden and prepare release-ready evidence`, with the full A1–A14, security/privacy, documentation, distribution-tooling and owner-credential boundaries.
+- Created `codex/issue-17-release-hardening` from clean merged `main`.
+- Added `docs/build-week/s5-implementation-plan.md`, ordering acceptance evidence, final review, repository documentation, release tooling and owner-assisted signing without any publication authority.
+
+### Decisions and provenance
+
+- **Owner decision:** PR #16 is merged; continue from the completed S4 boundary.
+- **Sol implemented:** Merge/provenance verification, safe local transition, issue #17, S5 branch and implementation plan.
+- **Sol reviewed:** Earliest-incomplete-phase selection, S5 exit criteria, missing repository/release surfaces, owner-credential gate and the prohibition on S6/public action.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- Squash commit `44a541114b5a2be69567688536b2696651eb7823` — merged issue #15 implementation with retained S4 provenance.
+- GitHub issue #17 — bounded S5 objective, scope, acceptance criteria and exclusions.
+- `codex/issue-17-release-hardening` — S5 implementation branch.
+- `docs/build-week/s5-implementation-plan.md` — owner-reviewable S5 work order and stop gates.
+
+### Verification
+
+- GitHub PR inspection — PR #16 was closed and merged; head `689ca9b`, squash `44a5411`.
+- Squash commit inspection — S4.2 and S4.3 model, session, phase and BUILDLOG trailers retained.
+- `git fsck --no-dangling` — completed without findings after the narrow fetch.
+- `python3 scripts/check_buildlog.py BUILDLOG.md --devlog DEVLOG.md` — 36 paired entries valid on merged `main`.
+- `python3 scripts/check-provenance.py` — provenance record complete on merged `main`.
+- Local `main` and `origin/main` — identical at `44a541114b5a2be69567688536b2696651eb7823` before branch creation.
+
+### Deviations
+
+- The first full `git fetch --prune origin` was interrupted when `rev-list` received signal 10 and did not update the remote ref. A narrow `git fetch origin main` then completed; object integrity, the squash commit and clean branch topology were verified before fast-forwarding.
+
+### Risks and missing evidence
+
+- `README.md`, `SECURITY.md`, `CHANGELOG.md`, signing/notarisation scripts, release verification and the prepared Homebrew surface do not yet exist.
+- `docs/architecture.md` and `docs/threat-model.md` still contain older S1/S2 phase-boundary prose and require an S5 truth pass.
+- Signing identity and notary profile availability have not been inspected or supplied; no signed/notarised artifact is claimed.
+- No S5 runtime, documentation or release-tooling implementation has started beyond the durable plan.
+
+### Next entry state
+
+- Create the A1–A14 acceptance register, run the baseline deterministic suite and inspect the build machine's signing/notary/Homebrew capabilities without exposing credentials. Use those results to separate implementable S5 work from the explicit owner-assisted release gate.
+
+---
+
+## Entry S5.2 — Release evidence is separated from release hope
+
+**Date:** 2026-07-18
+
+**Recorded at:** 2026-07-18T21:17:20+01:00
+
+**Phase:** S5
+
+**Status:** Partial
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Create the evidence-first A1–A14 register, establish the current deterministic baseline and inspect distribution capabilities without exposing credentials or attempting signing, notarisation or publication.
+
+### Completed
+
+- Added `docs/build-week/s5-acceptance-register.md` with separate current automated, recorded live, owner-observed, pending and blocked evidence classes for every A1–A14 scenario.
+- Recorded that A2 lacks the full §10 negative corpus and normal-workday zero-egress simulation; A1 live execution is opt-in and was not exercised by the ordinary baseline; current A10 and A14 reruns remain open.
+- Identified explicit acceptance-mapping gaps for A3, A4, A8 and A13 despite their existing behavioural test coverage.
+- Ran the merged S4 baseline from a fresh stable `/tmp` snapshot: 51 Swift tests and the repository wrapper passed.
+- Confirmed Xcode 26.6, `notarytool` 1.1.2, `stapler`, Homebrew 6.0.11 and Homebrew `audit`/`style` are available.
+- Confirmed the machine currently has zero valid code-signing identities; no identity name or notary profile was inferred.
+- Inspected `/Applications/Premonition.app` as an ad hoc/linker-signed development artifact with no Team ID or bundle-bound Info.plist; Gatekeeper did not accept it as a distribution artifact.
+
+### Decisions and provenance
+
+- **Owner decision:** None beyond the previously recorded instruction to continue after the S4 merge.
+- **Sol implemented:** Acceptance/evidence register and read-only machine/distribution capability audit.
+- **Sol reviewed:** Existing A1–A14 evidence strength, skipped-live-test semantics, current distribution readiness and the owner credential boundary.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- `docs/build-week/s5-acceptance-register.md` — current acceptance matrix, capability baseline, blockers and publication boundary.
+- Stable snapshot `/tmp/Premonition-s5-baseline.4YGexg` — S5 baseline verification copy; not a release artifact.
+
+### Verification
+
+- Stable snapshot `swift test` — 51 tests passed; the opt-in A1 body returned immediately because `PREMONITION_LIVE_CODEX` was unset.
+- Stable snapshot `scripts/test.sh` — 51 Swift tests plus deterministic demo-repository and measurement-normalisation checks passed.
+- `security find-identity -p codesigning -v` — zero valid identities found.
+- `xcodebuild -version` — Xcode 26.6, build 17F113.
+- `xcrun notarytool --version` — 1.1.2 (41); `xcrun stapler` exposed staple/validate commands.
+- `brew --version` and command inspection — Homebrew 6.0.11-49-g3488a8c with `audit` and `style` available.
+- `codesign -dvvv --entitlements :- /Applications/Premonition.app` — ad hoc/linker-signed arm64 executable, no Team ID, Info.plist not bound and no sealed resources.
+- `spctl -a -vv /Applications/Premonition.app` — Code Signing subsystem error for the current unsigned development bundle; no Gatekeeper acceptance claimed.
+
+### Deviations
+
+- `codesign` and `spctl` do not expose the attempted GNU-style `--version` switches on this machine; their operational commands remain available and were used for the artifact inspection.
+
+### Risks and missing evidence
+
+- A valid `Developer ID Application` identity is not installed, so the signed/notarised S5 exit artifact is currently blocked on owner action.
+- A `notarytool` Keychain profile name has not been supplied or inspected.
+- Full A2/workday zero-egress evidence, current live A1/A10, isolated A14 and explicit A3/A4/A8/A13 acceptance coverage remain open.
+- No release documentation or release scripts have been implemented yet.
+
+### Next entry state
+
+- Expand the deterministic acceptance suite and harness first: full A2/workday zero-egress, explicit A3/A4/A8/A13 mapping and safe A14 isolation. Then update the architecture/threat model and build the required README, SECURITY, CHANGELOG and release scripts while the signing credential gate remains open.
+
+---
+
+## Entry S5.3 — Every non-credential release gate is closed
+
+**Date:** 2026-07-18
+
+**Recorded at:** 2026-07-18T22:57:17+01:00
+
+**Phase:** S5
+
+**Status:** Partial — ready at the owner signing/notarisation gate
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Complete every S5 hardening, acceptance, documentation and release-preparation task that does not require the absent owner signing identity, notary profile or signed artifact, while preserving the no-publication and no-S6 boundaries.
+
+### Completed
+
+- Expanded the current acceptance suite from 51 to 55 tests: a twenty-shape A2 negative corpus plus 96-item normal-workday zero-egress simulation; deep-fixture Low-to-Medium A3; explicit A4; cap/no-extra-egress A5; post-presentation tracked/untracked A8; held-fix/dedup-expiry A13; and isolated mode-`0600` first-run A14.
+- Ran current live A1 twice on Codex CLI 0.144.6. The first call produced a validated, non-mutating patch in 17.907 seconds; the deliberate repeat produced no applicable patch in 24.871 seconds. Both outcomes remain recorded without a correctness or determinism claim.
+- Re-ran A10 without inspecting historic session names or content. The bounded repeat left the aggregate session-file count at 310 before/after; an earlier 309-to-310 observation during the active desktop task is explicitly inconclusive. Key-only local inspection found only owner-mode config, state and content-free verdict schemas.
+- Completed the final Sol security/privacy/accessibility review. It found and resolved one lifecycle defect: the optional rationale task could outlive Pause or a terminal review action. `PresentationModel` now owns and cancels rationale work whenever its candidate is released.
+- Rewrote `docs/architecture.md` and `docs/threat-model.md` to describe the actual S4/S5 product and retained residual risks rather than obsolete S1/S2 future boundaries.
+- Added the complete README front door, SECURITY policy and unreleased CHANGELOG, including the privacy constitution verbatim, exact egress/apply contracts, warnings, offline demo, Sol runtime/build provenance, dated prior/new boundary and roadmap-only MCP/direct API note.
+- Added fail-fast signing/notarisation and independent release-verification scripts. Missing identity/profile inputs stop before output creation; signed mode requires Developer ID, Gatekeeper and staple verification, while unsigned-local mode verifies only development bundle structure and resources.
+- Added a prepared Homebrew cask with conspicuous unresolved release URL/checksum placeholders. Ruby syntax and Homebrew style pass; audit and publication remain gated on the real verified archive.
+- Updated the A1–A14 register, Codex contract and S5 plan. No signing, notarisation, GitHub release, artifact upload, Homebrew publication, Sites work, submission or external promotion occurred.
+
+### Decisions and provenance
+
+- **Owner decision:** Complete everything except the hard-blocking items.
+- **Sol implemented:** Acceptance expansion, isolated test seams, rationale lifecycle repair, repository front door, current architecture/threat model, security review, release scripts and prepared Homebrew cask.
+- **Sol reviewed:** C1–C5/§13 ordering, current live variability, persistence boundary, cancellation, Apply, accessibility, misleading copy, release fail-fast behaviour and credential/publication stop gates.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- `Sources/PremonitionApp/PresentationModel.swift` — injected isolated configuration/pasteboard seams and candidate-owned rationale cancellation.
+- `Tests/AcceptanceTests/SafetyCoreAcceptanceTests.swift`, `Tests/PremonitionCoreTests/S2ExecutorTests.swift` and `Tests/PremonitionAppTests/MonitoringPresentationTests.swift` — current A2–A5, A8, A13 and A14 evidence.
+- `README.md`, `SECURITY.md`, `CHANGELOG.md` — truthful repository and release front door.
+- `docs/architecture.md`, `docs/threat-model.md`, `docs/codex-contract.md` — current runtime and live-contract documentation.
+- `docs/build-week/s5-acceptance-register.md`, `s5-sol-review.md` and `s5-implementation-plan.md` — final non-credential evidence, findings and gate status.
+- `scripts/sign-and-notarise.sh`, `scripts/verify-release.sh`, `scripts/test-release-tools.sh` and `packaging/homebrew/premonition.rb` — unpublished release preparation.
+- Stable working snapshot `/tmp/Premonition-s5-work.ry9Ri4` — verification copy, not a release artifact.
+
+### Verification
+
+- Stable snapshot `swift test` — 55 tests passed, including the named current A2–A14 deterministic coverage.
+- Stable snapshot `scripts/test.sh` — 55 Swift tests, deterministic demo-repository, measurement-normalisation and release-tool contracts passed.
+- `PREMONITION_LIVE_CODEX=1 swift test --filter a1HeadlessRealSol` — first call passed in 17.907 seconds; deliberate repeat did not produce an applicable patch in 24.871 seconds.
+- Aggregate Codex session-file count — 310 immediately before and after the repeat ephemeral call; no historic names/content inspected.
+- Premonition Application Support key-only audit — only `config.json`, `state.json`, `verdicts.jsonl`; all mode `0600`; permitted keys only.
+- Stable snapshot `scripts/build-app.sh release` — built `/tmp/Premonition-s5-work.ry9Ri4/dist/Premonition.app`.
+- Stable snapshot `scripts/verify-release.sh --unsigned-local dist/Premonition.app` — v0.1.0 bundle identity, macOS 14 floor, LSUIElement, executable and fixture resources passed.
+- Stable snapshot `script/build_and_run.sh --verify` — rebuilt app launched and remained running.
+- README front-door audit — passed with no placeholder or missing-local-path failure.
+- `scripts/test-release-tools.sh` — shell/Ruby syntax, missing-input fail-fast/no-output and cask placeholder contracts passed.
+- `brew style packaging/homebrew/premonition.rb` — one file inspected, no offences.
+- Stable-copy `python3 scripts/check_buildlog.py BUILDLOG.md --devlog DEVLOG.md` — 39 BUILDLOG and 39 DEVLOG entries valid.
+- Temporary local-history clone `python3 scripts/check-provenance.py` — provenance record complete against merged `44a5411` history and the current ledger/logs.
+- `git diff --check` — passed after representing blank diff context without source trailing whitespace.
+
+### Deviations
+
+- The managed workspace's nested SwiftPM sandbox could not write its usual module cache or apply `sandbox-exec`; exact test/build commands were therefore run from the stable `/tmp` snapshot with explicit temporary module-cache paths and the approved normal macOS execution boundary.
+- The workspace provider also stalled historical `git show` reads inside the provenance checker. A temporary filtered clone of the same `origin/main` history received only the current checker, ledger and paired logs, and the unchanged checker completed there; no repository history was rewritten.
+- The first A10 aggregate count changed from 309 to 310 while this Codex desktop task was active. Because the source could not be attributed without inspecting session names, it is preserved as inconclusive; the deliberate repeat then held 310-to-310.
+- Homebrew's first style run installed its own RuboCop dependency and reported stanza/sigil formatting only. Those offences were corrected manually; the final style run is clean.
+
+### Risks and missing evidence
+
+- `security find-identity` still reports zero valid identities. A `Developer ID Application` identity must be installed by the owner.
+- No owner-confirmed `notarytool` Keychain profile name exists in this session.
+- Therefore no signed, notarised or stapled judge artifact exists; signed release verification, final cask URL/checksum/audit and installed owner release review remain blocked.
+- Live Sol output remains probabilistic: one current pass and one current non-applicable result are both factual evidence.
+- No public or submission action has started.
+
+### Next entry state
+
+- Package the completed non-credential work into the issue #17 commit and draft PR for owner review. When the owner later installs/confirms the Developer ID identity and notary profile, run `scripts/sign-and-notarise.sh`, independently run signed `scripts/verify-release.sh`, derive the real cask URL/checksum, run Homebrew audit and present the installed candidate for owner review. Do not publish or begin S6 without separate authority.
