@@ -2642,3 +2642,81 @@ Verify the owner-confirmed PR #18 merge, preserve its Sol provenance, restore a 
 ### Next entry state
 
 - Keep issue #17 and S5 active. When the owner supplies or confirms the Developer ID identity and `notarytool` profile, run the fail-fast signing/notarisation path, independently verify the signed archive, derive and audit the real cask metadata, install the exact artifact for owner review and record the evidence. Do not publish or begin S6 without separate authority.
+
+---
+
+## Entry S5.6 — The explainer has a reviewable shape, not a public URL
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T15:41:54+01:00
+
+**Phase:** S5
+
+**Status:** Partial — owner-authorised submission collateral prepared while signed-artifact gates remain
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Use the previously deferred Sites handoff to prepare a truthful, authored explainer for local and saved-version review while S5 is credential-blocked, without deploying, publishing, promoting, changing runtime scope or marking S6 started.
+
+### Completed
+
+- Created issue [#20](https://github.com/tcballard/Premonition/issues/20) with an explicit local/private preview boundary and testable content, design, responsive and accessibility acceptance criteria.
+- Implemented a single-page field guide under `site/` with the product promise, admission loop, safety spine, exact privacy constitution, Sol's runtime/build roles, provenance links and demo cues.
+- Used an authored dark field-guide composition rather than a generic SaaS surface, with the eye/dial family as its functional signature and no external fonts or image dependencies.
+- Kept the release state honest: the page says signed verification is pending and provides no invented download, release or deployment URL.
+- Created the Sites project once, pushed an exact standalone source commit `dfadbb35a6f4ee5e52c9d944b624fe85e5c592bf` and saved undeployed Sites version 1.
+- Confirmed the project has neither a live URL nor a preview URL. No deployment, access-policy expansion, domain work, publication, submission or promotion occurred.
+- Added the append-only provenance exception for PR #19 after its GitHub squash commit was found to have stripped the already-verified S5.5 source trailers.
+- Pushed `codex/issue-20-sites-explainer-preview` and opened draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) for owner review without enabling merge or changing the Sites deployment state.
+
+### Decisions and provenance
+
+- **Owner decision:** Work on the deferred Sites explainer in the meantime after asking what follows the remaining S5 gates.
+- **Sol implemented:** Evidence-grounded copy, authored responsive presentation, functional loop-stage instrument, source/build checks, browser review, Sites source provenance and the undeployed version checkpoint.
+- **Sol reviewed:** S5/S6 boundary, product claims, privacy constitution, correctness limits, release-status language, responsive layout, semantics, focus treatment and reduced-motion fallback.
+- **Human-authored and Sol-reviewed:** The owner-authored handoff in `docs/build-week/sites-explainer-handoff.md` supplied the purpose, constraints and suggested information architecture.
+
+### Artefacts
+
+- `site/` — source, verification script, deterministic build adapter and private-review instructions.
+- Sites project `appgprj_6a5cd9f4fb4c8191a7825271e3b82970` — active but undeployed.
+- Sites version 1 — source commit `dfadbb35a6f4ee5e52c9d944b624fe85e5c592bf`; no live or preview URL.
+- GitHub issue [#20](https://github.com/tcballard/Premonition/issues/20) — authority and review boundary for the explainer preparation.
+- Draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) — review surface for the source, checks and provenance records.
+- `docs/build-week/provenance-exceptions.md` — exact PR #19 squash/source linkage preserving the already-recorded S5.5 provenance without rewriting `main`.
+
+### Verification
+
+- `npm run verify` — required claims, semantic landmarks, skip link, visible focus, responsive breakpoints, reduced-motion treatment and functional loop observer passed.
+- `npm run build` — Vite 7.3.6 produced the client assets and the deterministic Sites worker entrypoint.
+- In-app browser review at 1440 × 1000, 820 × 1024 and 390 × 844 — no horizontal overflow; hierarchy, instrument and provenance surfaces remained coherent.
+- Browser DOM snapshot — named header/main/section/footer landmarks, headings, lists, navigation and current-stage live region were exposed; the skip link received a visible 2 px focus outline.
+- Browser console inspection — no warnings or errors.
+- Standalone Sites source rebuild — `npm ci`, `npm run verify` and `npm run build` passed from the exact committed source; author and committer were both `Tom Ballard <tom@armytage.co>`.
+- Sites inspection — latest version number is 1; `current_live_url` and `current_preview_url` are both null.
+- Repository `scripts/test.sh` — all 55 Swift tests plus deterministic demo-repository, measurement-normalisation and release-tool contracts passed.
+- `scripts/build-app.sh release` — the unchanged macOS product built successfully at `dist/Premonition.app`.
+- GitHub PR #19 inspection — source `427c99284864ba4b8d20cf968ef06f32f11478f4` carried the required S5.5 trailers; squash `6fc8066b93c951c71d2c042c62ba4d0887aea8ed` retained only the title, and the exact append-only exception restored a complete checker result.
+- GitHub draft-PR inspection — PR #21 targets `main`, contains only the issue #20 branch and remains unmerged.
+
+### Deviations
+
+- The managed sandbox could not resolve the Sites Git host, so the exact source push used the approved network boundary with a short-lived per-command credential that was neither printed nor persisted.
+- The first repository test attempt could not write SwiftPM's default module cache. The unchanged prescribed test and release-build commands passed after using explicit temporary module-cache paths at the approved normal macOS execution boundary.
+- Uploading the optional prebuilt archive was unavailable in the current Sites file-upload path. The version was therefore saved from the exact pushed source commit without an archive; no deployment or production build was attempted.
+- The in-app browser's synthetic Tab key did not advance from the page body, so focus visibility was verified by focusing the unique skip-link locator and inspecting its computed outline. Source checks cover the shared `:focus-visible` rule; a final real-browser keyboard pass remains appropriate before any deployment.
+
+### Risks and missing evidence
+
+- S5 is still incomplete: there is no Developer ID identity, confirmed notary profile, signed/stapled artifact, final cask evidence or installed release-candidate owner approval.
+- The explainer is reviewable source and an undeployed Sites version, not a production page. Responsive and semantic evidence is current, but public routing, production build behaviour and external-link checks have not been exercised.
+- S6 is not marked started or complete. The demo video, final submission copy, release/download routes and any public Sites deployment remain future owner-gated work.
+
+### Next entry state
+
+- Review issue #20 and draft PR #21. Keep Sites version 1 undeployed. Finish the credential-assisted S5 release gates when inputs become available; only after the app, README, demo, provenance logs and release evidence are stable should the owner decide whether to deploy the explainer and proceed through the remaining S6 submission work.
