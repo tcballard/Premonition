@@ -2576,3 +2576,69 @@ Package the completed non-credential issue #17 work into a provenance-bearing co
 ### Next entry state
 
 - Owner reviews draft PR #18. Resolve any requested changes on the issue branch. When the owner later supplies the signing identity and notary profile, produce and independently verify the signed candidate, complete the cask evidence and present the installed artifact for review. Do not merge, publish or begin S6 without the corresponding owner decision.
+
+---
+
+## Entry S5.5 — The hardening merge is complete; S5 is not
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T09:05:05+01:00
+
+**Phase:** S5
+
+**Status:** Partial — non-credential hardening merged; signed-artifact gates remain
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Verify the owner-confirmed PR #18 merge, preserve its Sol provenance, restore a trustworthy local merged baseline and keep issue #17 open for the remaining credential-assisted S5 work.
+
+### Completed
+
+- Verified pull request [#18](https://github.com/tcballard/Premonition/pull/18) was squash merged at 2026-07-19T07:36:32Z as `d922b109a74055fdfc8d35f5bac65af8bb92e099`.
+- Confirmed the squash message retained both issue #17 commit narratives and their required S5.3/S5.4 model, session, phase and BUILDLOG trailers.
+- Recovered local `main` from two File Provider `mmap` cancellations by applying the exact PR patch to the verified clean parent and advancing the reference only after the resulting tree hash matched `origin/main` byte-for-byte.
+- Confirmed local `main` and `origin/main` both identify `d922b10` and the primary checkout is left on protected `main` without a local commit or push.
+- Confirmed issue #17 remains open because its signed, notarised, stapled and installed-owner-review criteria are not complete.
+- Created `codex/issue-17-release-completion` from the verified squash commit for the remaining S5 checkpoint and later credential-assisted work.
+
+### Decisions and provenance
+
+- **Owner decision:** PR #18 was merged.
+- **Sol implemented:** Merge/provenance verification, exact-tree local recovery and the issue #17 continuation branch/checkpoint.
+- **Sol reviewed:** Retained squash provenance, S5 completion criteria, protected-branch safety and the continued prohibition on release, publication and S6.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- Squash commit `d922b109a74055fdfc8d35f5bac65af8bb92e099` — merged non-credential S5 implementation and handoff records.
+- `codex/issue-17-release-completion` — continuation branch for this checkpoint and the remaining S5 gates.
+- GitHub issue #17 — still-open authority for the credential-assisted signed-artifact work.
+
+### Verification
+
+- GitHub PR inspection — PR #18 is closed and merged; head `01fcfbb`, squash `d922b10`.
+- Squash commit inspection — retained both material commit messages and the S5.3/S5.4 Sol provenance trailers.
+- Recovery tree comparison — reconstructed index tree `b992804b0f26f660108c98f01e38873bac90f510` exactly matched `origin/main^{tree}` before the local reference advanced.
+- Local reference check — `HEAD` and `origin/main` both returned `d922b109a74055fdfc8d35f5bac65af8bb92e099` after recovery.
+- Independent merged-main check — paired logs reported 40 BUILDLOG and 40 DEVLOG entries valid; the unchanged provenance checker reported the record complete.
+- GitHub issue inspection — issue #17 remains open with its original signed-artifact acceptance criteria.
+
+### Deviations
+
+- Two ordinary `git merge --ff-only origin/main` attempts were cancelled by the managed workspace File Provider while mapping repository data, leaving only partial worktree writes. The pre-operation branch was proven clean. Each partial write was restored, and the final recovery used the exact verified PR patch plus a full Git tree-hash equality gate; no repository history was rewritten.
+- The File Provider also stalled the continuation branch HEAD update in the primary checkout. The protected checkout was left clean on merged `main`, and this checkpoint was prepared from the independently verified local clone on the same continuation branch.
+
+### Risks and missing evidence
+
+- No valid Developer ID identity or owner-confirmed `notarytool` profile is available in the recorded environment.
+- No signed, notarised or stapled judge artifact exists. Final cask URL/checksum/audit and installed release-candidate owner review remain open.
+- No GitHub release, artifact upload, Homebrew publication, Sites work, submission, promotion or S6 work has started.
+
+### Next entry state
+
+- Keep issue #17 and S5 active. When the owner supplies or confirms the Developer ID identity and `notarytool` profile, run the fail-fast signing/notarisation path, independently verify the signed archive, derive and audit the real cask metadata, install the exact artifact for owner review and record the evidence. Do not publish or begin S6 without separate authority.
