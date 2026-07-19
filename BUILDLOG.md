@@ -2720,3 +2720,70 @@ Use the previously deferred Sites handoff to prepare a truthful, authored explai
 ### Next entry state
 
 - Review issue #20 and draft PR #21. Keep Sites version 1 undeployed. Finish the credential-assisted S5 release gates when inputs become available; only after the app, README, demo, provenance logs and release evidence are stable should the owner decide whether to deploy the explainer and proceed through the remaining S6 submission work.
+
+---
+
+## Entry S5.7 — The field guide is deployed for owner review
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T16:27:03+01:00
+
+**Phase:** S5
+
+**Status:** Partial — owner-only review deployment live; requested custom domain awaits DNS
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Act on the owner's explicit decision to deploy the saved explainer for review, preserve owner-only access, attach `premonition.tcballard.dev` if supported and record the production boundary without making the page public or changing app/runtime scope.
+
+### Completed
+
+- Confirmed the Sites project remained in custom access mode with one allowed user and no allowed groups before deployment.
+- Deployed saved Sites version 1 through the verified owner-only path. The deployment completed successfully at `https://premonition-field-guide.tom-ballard08574345.chatgpt.site`.
+- Attached `premonition.tcballard.dev` to the Sites project. Sites accepted the hostname and returned the required CNAME plus two TXT validation records.
+- Confirmed public DNS does not yet contain the requested CNAME or validation records, so the custom hostname remains pending and its certificate is still initialising.
+- Opened the deployed URL in the in-app browser. The owner-only Sign in with ChatGPT gate loaded successfully and was left open for the owner to continue.
+- Preserved the existing custom access policy. No public-access change, release publication, submission, external promotion or Premonition runtime change occurred.
+
+### Decisions and provenance
+
+- **Owner decision:** Deploy the explainer for review and use `premonition.tcballard.dev` if possible.
+- **Sol implemented:** Owner-only Sites deployment, deployment-status monitoring, custom-hostname attachment, DNS inspection and the browser review handoff.
+- **Sol reviewed:** The production nature of every Sites URL, owner-only access policy, explicit-publication boundary, domain validation state and unchanged S5/S6/runtime gates.
+- **Human-authored and Sol-reviewed:** The requested `premonition.tcballard.dev` hostname.
+
+### Artefacts
+
+- Owner-only review URL: `https://premonition-field-guide.tom-ballard08574345.chatgpt.site`.
+- Requested custom hostname: `premonition.tcballard.dev` — attached, pending DNS validation.
+- Sites version 1 — unchanged exact source commit `dfadbb35a6f4ee5e52c9d944b624fe85e5c592bf`.
+- Draft pull request [#21](https://github.com/tcballard/Premonition/pull/21) — source and provenance review surface.
+
+### Verification
+
+- Sites access inspection — custom mode, one allowed user, zero allowed groups.
+- Sites deployment status — progressed from pending through building and publishing to succeeded.
+- Sites custom-domain response — hostname accepted; provider pending; SSL initialising; no provider error.
+- Read-only DNS lookup — no CNAME or required TXT validation records currently resolve for `premonition.tcballard.dev`.
+- In-app browser DOM inspection — the deployed owner-only URL returned the Sign in with ChatGPT review gate rather than an error page.
+
+### Deviations
+
+- Entry S5.6 deliberately kept Sites version 1 undeployed under the earlier handoff. The owner explicitly superseded that stop for an owner-only review deployment in this session; it does not authorise public access, promotion or submission.
+- The custom domain cannot become active from Sites alone. DNS records must be added at the authoritative provider before Sites can validate the hostname and issue its certificate.
+- Deployed page content remains behind the owner authentication gate. The deployment endpoint is proven reachable, but the final rendered page still needs the owner's signed-in review.
+
+### Risks and missing evidence
+
+- Every Sites deployment URL is production even though access is owner-only. The page must not be described as public or externally reviewable.
+- `premonition.tcballard.dev` is not active yet; DNS and certificate validation remain incomplete.
+- The final signed macOS artifact and the rest of S5 remain blocked on the Developer ID identity and notary profile. S6 is not marked complete.
+
+### Next entry state
+
+- The owner continues through the already-open Sign in with ChatGPT gate and reviews the deployed page. Add the supplied CNAME and TXT records at the authoritative DNS provider, then refresh Sites validation and verify the custom hostname and rendered page. Treat any public-access change, external promotion, release or submission as a separate explicit owner decision.

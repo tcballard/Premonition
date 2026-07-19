@@ -672,3 +672,19 @@ The final provenance check also caught a separate piece of unfinished bookkeepin
 The branch is now in draft PR #21. That is the review surface, not a launch switch.
 
 **Source:** `BUILDLOG.md`, Entry S5.6
+
+---
+
+## S5.7 — Behind a real door
+
+**Date:** 2026-07-19
+
+The field guide now has a real production door, but it is still a private review room. The owner explicitly lifted the no-deployment stop, Sites confirmed the access list contains only the owner, and version 1 is live behind Sign in with ChatGPT.
+
+That distinction is worth keeping sharp. A production URL exists; a public launch does not. Nothing about the app, release state or S6 completion changed just because the explainer can finally be seen outside localhost.
+
+`premonition.tcballard.dev` is attached too, but DNS is honest in its own way: the necessary CNAME and validation records are not there yet, so the hostname is pending and the certificate is still being prepared. The generated Sites URL is the working review route until those records land.
+
+The next move is human again. Sign in through the open browser tab, review the actual page, add the DNS records, and then let the tooling verify the custom hostname rather than declaring it finished early.
+
+**Source:** `BUILDLOG.md`, Entry S5.7
