@@ -624,3 +624,17 @@ there can be no stapled judge artifact, final cask metadata or owner release
 review yet. Nothing was published and S6 has not started.
 
 **Source:** `BUILDLOG.md`, Entry S5.3
+
+---
+
+## S5.4 — The review package is ready; the release is not
+
+**Date:** 2026-07-19
+
+Everything S5 could honestly finish without the owner's distribution credentials is now in draft PR #18. The commit carries the required Sol trail, the pushed branch passes the independent paired-log and provenance checks, and the PR explains both the evidence and its limits.
+
+That distinction matters. This is a reviewable release-candidate change set, not a signed release candidate. There is still no Developer ID identity on this Mac, no confirmed notary profile, no stapled artifact and no final Homebrew metadata. None of those boxes have been softened just because the code is now on GitHub.
+
+The next useful action is owner review of the draft. After that, S5 still needs the real credential-assisted signing and installed-artifact pass before it can finish. Nothing has been published, merged or moved into S6.
+
+**Source:** `BUILDLOG.md`, Entry S5.4

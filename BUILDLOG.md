@@ -2511,3 +2511,68 @@ Complete every S5 hardening, acceptance, documentation and release-preparation t
 ### Next entry state
 
 - Package the completed non-credential work into the issue #17 commit and draft PR for owner review. When the owner later installs/confirms the Developer ID identity and notary profile, run `scripts/sign-and-notarise.sh`, independently run signed `scripts/verify-release.sh`, derive the real cask URL/checksum, run Homebrew audit and present the installed candidate for owner review. Do not publish or begin S6 without separate authority.
+
+---
+
+## Entry S5.4 — Non-credential S5 work is in owner review
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T07:37:02+01:00
+
+**Phase:** S5
+
+**Status:** Partial — draft PR open; owner signing/notarisation gate remains
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Package the completed non-credential issue #17 work into a provenance-bearing commit and draft pull request for owner review without signing, notarising, publishing, merging or beginning S6.
+
+### Completed
+
+- Reauthenticated GitHub CLI through the owner's macOS keychain after the prior saved tokens had expired.
+- Reviewed and explicitly staged only the twenty-one issue #17 S5 files; removed six Markdown hard-break spaces found by the staged whitespace gate.
+- Committed the implementation as `d0976541afabbf0420678c14464ec31ca78992c2` with the required issue, model, session, phase and S5.3 BUILDLOG provenance.
+- Pushed `codex/issue-17-release-hardening` and opened draft pull request [#18](https://github.com/tcballard/Premonition/pull/18) against `main`.
+- Marked only the draft-PR item complete in the S5 plan. Signing inputs, signed artifact and installed release-candidate review remain open.
+
+### Decisions and provenance
+
+- **Owner decision:** Continue after completing GitHub device authorisation and package every non-hard-blocked S5 item for review.
+- **Sol implemented:** Explicit staging, provenance-bearing commit, branch push, complete draft-PR review contract and paired handoff records.
+- **Sol reviewed:** Issue #17 scope, commit identity and trailers, draft status, S5 stop boundary and unchanged signing/publication blockers.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- Commit `d0976541afabbf0420678c14464ec31ca78992c2` — complete non-credential S5 hardening implementation.
+- Draft pull request [#18](https://github.com/tcballard/Premonition/pull/18) — owner review surface for issue #17.
+- `docs/build-week/s5-implementation-plan.md` — draft-PR checkpoint complete; credential and release-review gates still open.
+
+### Verification
+
+- `git diff --cached --check` — passed after the six formatting-only Markdown spaces were removed.
+- Commit identity check — author and committer were both `Tom Ballard <tom@armytage.co>`.
+- Commit-message inspection — `Co-developed-with`, `Sol-Session`, `Sol-Phase` and `Build-Log-Entry: S5.3` were present.
+- `git push -u origin codex/issue-17-release-hardening` — created the remote review branch at `d097654`.
+- GitHub draft PR inspection — PR #18 is open and draft, targets `main`, uses the issue #17 branch and contains one commit with twenty-one changed files.
+- Independent filtered clone of the pushed branch — paired-log validation reported 39 BUILDLOG and 39 DEVLOG entries valid, and the unchanged provenance checker reported the record complete before this append.
+
+### Deviations
+
+- The managed workspace could not read the refreshed macOS keychain and continued to report the old invalid GitHub token. Authentication was confirmed through the native keychain boundary before any remote mutation.
+- The workspace file provider again stalled a historical provenance read. The checker was rerun unchanged against an independent filtered clone of the pushed branch instead of treating the provider stall as a product failure.
+
+### Risks and missing evidence
+
+- This Mac still has zero valid Developer ID identities and the session still has no owner-confirmed `notarytool` profile.
+- No signed, notarised or stapled judge artifact exists. Final cask metadata/audit and installed release-candidate review remain blocked.
+- Draft PR #18 is unmerged. No release, publication, submission, Sites work, promotion or S6 work has started.
+
+### Next entry state
+
+- Owner reviews draft PR #18. Resolve any requested changes on the issue branch. When the owner later supplies the signing identity and notary profile, produce and independently verify the signed candidate, complete the cask evidence and present the installed artifact for review. Do not merge, publish or begin S6 without the corresponding owner decision.

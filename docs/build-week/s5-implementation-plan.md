@@ -123,4 +123,4 @@ build from a stable local snapshot, sign, notarise, staple and verify the judge 
 - [ ] Signed, notarised, stapled judge artifact independently verified.
 - [x] Full repository verification passes; paired-log, ledger and provenance checks are rerun at the final checkpoint.
 - [ ] Installed/release candidate owner review complete.
-- [ ] Draft PR opened for owner review; no merge or publication.
+- [x] Draft PR opened for owner review; no merge or publication.
