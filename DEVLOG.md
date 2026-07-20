@@ -760,3 +760,17 @@ The signed-candidate push found an old piece of honest history: GitHub still ret
 So the new package moved instead. `codex/issue-17-signed-candidate` says exactly what this increment contains and leaves the older branch untouched. Nothing about the app, evidence or release boundary changed; only the route to review became safer and clearer.
 
 **Source:** `BUILDLOG.md`, Entry S5.12
+
+---
+
+## S5.13 — Stop making the toolchain the product
+
+**Date:** 2026-07-20
+
+The remaining choice was not about Premonition anymore. The app is signed, notarised, stapled, independently checked and owner-approved. The cask has its real checksum and intended URL, and its contract, Ruby syntax and style are clean. Only Homebrew's strict audit remained, blocked because today's Homebrew wants a newer Xcode than this Mac has installed.
+
+The specification anticipated exactly this kind of gravity well. Its cut order permits polished Homebrew automation to wait as long as the prepared formula remains valid. The owner chose that cut explicitly, so the failed audit stays in the evidence and S5 stops pretending an Xcode upgrade is product work.
+
+PR #22 had already merged, which makes this a small postscript rather than a rewrite of the accepted candidate. Once this decision record lands, the next phase is submission material—not more release-tool polishing—and even that waits for a separate owner decision.
+
+**Source:** `BUILDLOG.md`, Entry S5.13
