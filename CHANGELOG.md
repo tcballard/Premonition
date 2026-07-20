@@ -5,6 +5,8 @@ semantic versioning once the first release is published.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-07-20
+
 ### Added
 
 - Native macOS 14+ menu-bar monitoring, paused, speculating and fix-ready
@@ -32,6 +34,7 @@ semantic versioning once the first release is published.
 
 ### Release status
 
-- Release verification and distribution metadata are being prepared in S5.
-- A signed, notarised and stapled artifact is not yet available; publication
-  remains owner-gated.
+- The signed, notarised and stapled Apple Silicon archive is published through
+  the GitHub `v0.1.0` release.
+- The prepared Homebrew cask remains unpublished; strict cask audit was
+  explicitly deferred under the specification's cut order.

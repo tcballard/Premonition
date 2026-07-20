@@ -9,8 +9,9 @@ pinned to GPT-5.6 Sol for one bounded patch, validates that the patch applies,
 and waits for your decision.
 
 The v0.1 source, offline demo and signed, notarised judge artifact are complete
-and owner-approved. This repository is public for judging; the signed archive
-has not been published.
+and owner-approved. This repository is public for judging, and the verified
+[Premonition 0.1.0 release](https://github.com/tcballard/Premonition/releases/tag/v0.1.0)
+provides the signed archive.
 
 Owner-review explainer (ChatGPT sign-in required):
 <https://premonition-field-guide.tom-ballard08574345.chatgpt.site>
@@ -69,6 +70,18 @@ prompts, diffs, rationales, model output or subprocess stderr.
 
 Premonition has no third-party runtime dependencies.
 
+## Install the signed release
+
+Download
+[`Premonition-0.1.0.zip`](https://github.com/tcballard/Premonition/releases/download/v0.1.0/Premonition-0.1.0.zip),
+extract it, move `Premonition.app` to `/Applications`, and open the app. The
+archive is signed with Developer ID, notarised by Apple and stapled. Its
+SHA-256 is:
+
+```text
+3d48e5b06342ce8bd11dddf0fa7f8b318e7273dd3e453177b6a2b47ef8d03178
+```
+
 ## Build and run from source
 
 The repository-owned developer entry point builds the app bundle and launches
@@ -89,8 +102,8 @@ containing repositories you permit Premonition to resolve. Settings shows the
 Codex CLI status, the pinned GPT-5.6 Sol runtime, the daily count, and the
 fixture-replay controls. No JSON editing is required for onboarding.
 
-The local source-build bundle is not the signed judge artifact. A verified
-signed archive is prepared, but no public download has been published.
+The local source-build bundle is not the signed judge artifact. Use the
+published v0.1.0 release above when evaluating the distributed build.
 
 ## Offline demo mode
 

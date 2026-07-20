@@ -3308,3 +3308,71 @@ Record the owner's public-repository judging route and align the README and Laun
 ### Next entry state
 
 - Ask the owner to select the signed judge-download route. Recommended route: a GitHub v0.1.0 release using the already-prepared URL and verified ZIP checksum, but do not create or upload it without explicit authority. Then draft the submission narrative and known form fields against the confirmed public repository and download state.
+
+---
+
+## Entry S6.3 — The signed judge build is publicly downloadable
+
+**Date:** 2026-07-20
+
+**Recorded at:** 2026-07-20T17:56:56+01:00
+
+**Phase:** S6
+
+**Status:** Partial — public signed-download route complete; submission narrative and demo remain
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Use the owner-authorised GitHub `v0.1.0` route to publish the exact signed judge archive, verify what the public receives and reconcile the S6 evidence pack without extending authority to another channel.
+
+### Completed
+
+- Received explicit owner authority to distribute the signed judge build through a public GitHub `v0.1.0` release.
+- Rechecked the local `Premonition-0.1.0.zip` checksum and verified a fresh extraction with the repository signed-bundle verifier in the normal macOS trust context.
+- Confirmed that neither the `v0.1.0` tag nor release existed and that merged `main` resolved to `b356c9b31dbff19f92685342ca18790b97faac1b`.
+- Published non-draft, non-prerelease GitHub release `v0.1.0` targeting that exact merged commit and uploaded the verified 440,569-byte ZIP.
+- Downloaded the asset through its public URL without GitHub authentication. The downloaded SHA-256 remained `3d48e5b06342ce8bd11dddf0fa7f8b318e7273dd3e453177b6a2b47ef8d03178`.
+- Freshly extracted the public bytes and confirmed strict code-signing validity, Developer ID authority, Gatekeeper acceptance as Notarized Developer ID and a valid stapled ticket.
+- Updated README installation/download copy, CHANGELOG release state, prepared cask commentary, the S6 plan and the Launch Pack to use the verified public route.
+
+### Decisions and provenance
+
+- **Owner decision:** Publish the signed archive through public GitHub release `v0.1.0`.
+- **Sol implemented:** Pre-publication verification, release creation/upload, public-byte verification and repository evidence reconciliation.
+- **Sol reviewed:** Release/tag collision state, exact target commit, checksum, signed/notarised trust evidence, platform qualification and the unchanged owner gates for other channels.
+- **Human-authored and Sol-reviewed:** The owner's direct release-route approval.
+
+### Artefacts
+
+- `https://github.com/tcballard/Premonition/releases/tag/v0.1.0` — public release page.
+- `https://github.com/tcballard/Premonition/releases/download/v0.1.0/Premonition-0.1.0.zip` — public signed artifact.
+- `README.md` and `CHANGELOG.md` — public installation and release-state copy.
+- `docs/build-week/s6-implementation-plan.md` and `launch-pack/` — signed-download decision and evidence propagated across S6.
+
+### Verification
+
+- `shasum -a 256 dist/release/Premonition-0.1.0.zip` — matched the S5-fixed checksum.
+- Clean extraction plus `scripts/verify-release.sh` outside the managed sandbox — strict signature, Developer ID, Gatekeeper and staple checks passed.
+- `git ls-remote` and `gh release view` before publication — `v0.1.0` absent; merged `main` was `b356c9b`.
+- GitHub release inspection after publication — public, non-draft, non-prerelease release; target `b356c9b`; asset uploaded with GitHub digest matching the expected SHA-256.
+- Unauthenticated public asset download — 440,569 bytes and byte-for-byte checksum match.
+- Fresh extraction of the downloaded asset plus `scripts/verify-release.sh` — valid on disk, satisfied its designated requirement, Gatekeeper accepted it as Notarized Developer ID and staple validation passed.
+- Paired-log, provenance, Launch Pack structural, README front-door and diff checks — run before the S6.3 commit.
+
+### Deviations
+
+- An initial trust check inside the managed filesystem sandbox falsely reported an invalid signature and zero valid signing identities because Keychain/trust-service access was unavailable. Publication stopped; the identical bytes were rerun in the normal macOS trust context and passed before upload. The public asset was then downloaded and independently passed the same trust checks.
+
+### Risks and missing evidence
+
+- The documentation reconciliation remains on draft PR #26 until owner review and merge; the public release itself is live.
+- Submission narrative, exact form fields, timed demo materials, footage, public YouTube URL and final Devpost approval remain open.
+- This approval does not authorise Sites access changes, video publication, Homebrew publication, another release/asset, Devpost submission or external promotion.
+
+### Next entry state
+
+- Commit and push the S6.3 evidence reconciliation to draft PR #26, then draft the Developer Tools submission narrative and known form fields against the verified public repository and signed-download routes. Keep video, Sites and Devpost actions separately owner-gated.

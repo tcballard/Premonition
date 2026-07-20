@@ -4,9 +4,9 @@
 - Release: Premonition v0.1
 - Version: 0.1.0
 - Build: signed local candidate from source `e93f44b`
-- Pack status: Initial S6 evidence spine; not ready for publication or submission
-- Publication authority: Tom Ballard only; none granted by this pack
-- Exact next action: choose the signed judge-download route, then draft submission copy against the public repository and qualified binary availability
+- Pack status: Public repository and signed download ready; narrative and demo work remain
+- Publication authority: Tom Ballard only; public GitHub `v0.1.0` release authorised and complete; all other public actions remain gated
+- Exact next action: draft submission copy against the public repository and verified signed-download route
 
 ## Included deliverables
 
@@ -15,7 +15,7 @@
 | Repository | `README.md` | Ready | C01-C09, C11-C12, C14 | Public judging route and dated boundary verified |
 | Competition | `launch-pack/outputs/submission-narrative.md` | Missing | C01-C12 | Requires form inspection and access decisions |
 | Product demo | `launch-pack/outputs/demo-script.md` and public YouTube URL | Missing | C01-C09, C12 | Requires Product Demo workflow and owner upload |
-| Signed download | External artifact URL | Blocked | C06-C07, C11 | Artifact exists locally; no publication authority |
+| Signed download | `https://github.com/tcballard/Premonition/releases/tag/v0.1.0` | Ready | C06-C07, C10-C11 | Public asset checksum and fresh extraction verified |
 | Website | Owner-review Sites URL | Qualified | C01-C05, C08, C12 | Not public and not suitable as an unqualified submission link |
 
 ## Omitted or not-applicable deliverables
@@ -26,9 +26,9 @@
 
 ## Claims
 
-- Verified: C01-C09, C11-C12
+- Verified: C01-C12, C14
 - Qualified: product promise boundaries, fixture-only offline behavior and owner-only website access
-- Blocked or removed: public download availability, public Sites access and all unapproved publication calls to action
+- Blocked or removed: public Sites access, public YouTube video and all unapproved publication calls to action
 
 ## Validation performed
 
@@ -38,7 +38,6 @@
 
 ## Remaining decisions and blockers
 
-- Signed artifact download route.
 - Public YouTube upload authority and final video URL.
 - Whether to omit or change access for the Sites explainer.
 - Exact Devpost form fields and final owner submission approval.

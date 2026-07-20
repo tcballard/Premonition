@@ -802,3 +802,19 @@ The README had one stale sentence from before signing. It now says the precise t
 The prior/new boundary is also easier to audit now. The planning and S0 starting points are direct GitHub commit links rather than short hashes a judge has to search for. Next comes the consequential distribution choice: where, if anywhere yet, the signed ZIP should live.
 
 **Source:** `BUILDLOG.md`, Entry S6.2
+
+---
+
+## S6.3 — The binary crossed the boundary
+
+**Date:** 2026-07-20
+
+The owner chose the direct route: publish the exact signed candidate through GitHub `v0.1.0`. That turns the judging path from an instruction to rebuild into a real download.
+
+The most useful moment came before upload. The managed sandbox made the valid app look broken because it could not reach the Mac's trust services. We stopped, reran the identical bytes in the normal trust context, and only continued after Developer ID, Gatekeeper and the staple all passed.
+
+The release is now public, but the verification did not end at GitHub's upload response. The asset came back down through its public URL with the same checksum, and a fresh extraction passed the signed verifier again. The README and launch pack can finally say “download” without qualification or wishful thinking.
+
+This approval is deliberately narrow. The video, Sites access, Homebrew and Devpost submission still have their own gates. Next comes the Developer Tools narrative, now grounded in a repository and binary that judges can actually reach.
+
+**Source:** `BUILDLOG.md`, Entry S6.3

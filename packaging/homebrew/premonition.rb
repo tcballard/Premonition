@@ -1,8 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
-# Prepared from the verified, stapled v0.1.0 archive. The URL remains
-# unavailable until the owner separately authorises a GitHub release.
+# Prepared from the verified, stapled v0.1.0 archive. The release URL and
+# checksum are live; the cask itself remains unpublished.
 cask "premonition" do
   version "0.1.0"
   sha256 "3d48e5b06342ce8bd11dddf0fa7f8b318e7273dd3e453177b6a2b47ef8d03178"
