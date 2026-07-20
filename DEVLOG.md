@@ -774,3 +774,17 @@ The specification anticipated exactly this kind of gravity well. Its cut order p
 PR #22 had already merged, which makes this a small postscript rather than a rewrite of the accepted candidate. Once this decision record lands, the next phase is submission material—not more release-tool polishing—and even that waits for a separate owner decision.
 
 **Source:** `BUILDLOG.md`, Entry S5.13
+
+---
+
+## S6.1 — The launch pack begins by saying no
+
+**Date:** 2026-07-20
+
+S6 could easily become a pile of polished claims that disagree with one another. Instead it starts with one ledger and several useful refusals. There is no public download yet, so the pack says blocked. The Sites page is owner-only, so it is qualified rather than presented as a landing page. Social and Homebrew are not on the submission critical path, so they are omitted.
+
+The official rules make the real deliverables clear: one Developer Tools entry, a narrated public YouTube demo no longer than three minutes, a repository judges can access, a testing path that does not require rebuilding, and a specific account of how Codex and GPT-5.6 were used. Premonition already has unusually strong raw evidence for all of that; the work now is compression and consistency.
+
+The first inconsistency is mundane but important: the README still says the signed artifact is pending. It was true when written and is false now. The next owner decision—public or privately shared repository—sets the availability language around that correction and everything downstream.
+
+**Source:** `BUILDLOG.md`, Entry S6.1
