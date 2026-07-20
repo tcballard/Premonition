@@ -3177,3 +3177,70 @@ Resolve the final S5 Homebrew-audit decision by applying the specification's exp
 ### Next entry state
 
 - Commit and open a narrow draft PR for the S5.13 deferral checkpoint. After owner review and merge, close issue #17 and begin S6 only on a separately authorised issue/branch. Keep release publication, Homebrew publication, submission and promotion separately owner-gated.
+
+---
+
+## Entry S6.1 — Submission starts with one evidence spine
+
+**Date:** 2026-07-20
+
+**Recorded at:** 2026-07-20T07:56:47+01:00
+
+**Phase:** S6
+
+**Status:** Partial — issue, branch, live constraints and initial submission pack established
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Begin the owner-authorised S6 submission-materials phase from completed S5 evidence without treating preparation as authority to publish, upload or submit.
+
+### Completed
+
+- Verified PR #23 merged as `cac8cef48ff839e5a4218e393b0878afd39f4c12`, issue #17 closed as completed and no existing S6 issue existed.
+- Created issue #24, `S6: assemble submission materials and owner handoff`, with objective, included/excluded scope, testable acceptance criteria and explicit public-action stop gates.
+- Created `codex/issue-24-submission-materials` from exact merged `main` commit `cac8cef`.
+- Checked the official Build Week rules, FAQ and OpenAI event page on 2026-07-20. Confirmed the deadline, single Developer Tools track, public narrated YouTube video at or under three minutes, repository/judge-sharing routes, primary feedback ID, testing-path and pre-existing-work disclosure requirements.
+- Added a repository S6 plan and the Toolkit Launch Pack evidence spine: brief, claims ledger, asset inventory, channel matrix, release checklist and handoff.
+- Classified public download and public Sites access as blocked rather than implying availability. Social/community/Homebrew publication remain deliberately omitted from the submission critical path.
+- Identified one immediate consistency defect for S6: README still says the signed artifact is pending even though S5 produced and owner-approved it. No README edit was made in this checkpoint.
+
+### Decisions and provenance
+
+- **Owner decision:** Begin working through S6 submission materials.
+- **Sol implemented:** Issue/branch setup, official-constraint verification, bounded S6 plan and initial launch evidence spine.
+- **Sol reviewed:** S5 exit, S6 entry, current Build Week requirements, claims evidence, access-state qualifications and public-action boundaries.
+- **Human-authored and Sol-reviewed:** Owner direction to proceed through S6.
+
+### Artefacts
+
+- GitHub issue #24 — S6 scope and acceptance contract.
+- `docs/build-week/s6-implementation-plan.md` — ordered, owner-gated execution plan.
+- `launch-pack/LAUNCH_BRIEF.md`, `CLAIMS_LEDGER.md`, `ASSET_INVENTORY.md`, `CHANNEL_MATRIX.md`, `RELEASE_CHECKLIST.md` and `HANDOFF.md` — initial submission package state.
+
+### Verification
+
+- GitHub issue list — no pre-existing S6 issue; issue #17 closed and issue #20 remains open submission support.
+- GitHub/main inspection — `cac8cef48ff839e5a4218e393b0878afd39f4c12` is merged main before the S6 branch.
+- Official [rules](https://openai.devpost.com/rules), [FAQ](https://openai.devpost.com/details/faqs) and [event page](https://openai.com/build-week/) — live constraints checked on 2026-07-20.
+- Repository evidence inspection — specification, README, prior/new boundary, S5 acceptance evidence, logs and Sol ledger checked for initial claims and gaps.
+- Launch Pack structural checker, paired-log checker, provenance checker and diff review — run before the S6.1 commit.
+
+### Deviations
+
+- The Toolkit Launch Pack checker lives in the installed plugin rather than this repository. It is run from the installed skill path and is workflow tooling, not a Premonition runtime dependency.
+- Exact Devpost form fields beyond the public rules/FAQ remain owner-side live-form evidence and are not fabricated in this checkpoint.
+
+### Risks and missing evidence
+
+- Repository, signed-download, public YouTube and optional Sites routes require separate owner decisions.
+- Submission narrative, timed demo script, footage, captions and final form answers do not yet exist.
+- README availability wording is stale and must be corrected before public use.
+- No public action, Devpost submission, release upload, video upload, repository-visibility change or Sites-access change has occurred.
+
+### Next entry state
+
+- Ask the owner to choose the repository judging route first: public MIT repository, or private repository shared with the two official judge addresses. Then reconcile README status/boundary and draft submission copy against that access decision. Do not publish or submit.
