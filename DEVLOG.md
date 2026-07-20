@@ -718,3 +718,45 @@ That is less elegant than `premonition.tcballard.dev`, but more honest today. Th
 Once the canonical domain is genuinely active and its access policy is deliberate, the generated address can disappear. Until then, reviewers can find the real door and understand why it asks them to sign in.
 
 **Source:** `BUILDLOG.md`, Entry S5.9
+
+---
+
+## S5.10 — The release candidate is real now
+
+**Date:** 2026-07-19
+
+The long-standing credential gate finally became a build rather than a sentence in the plan. The general Developer ID identity was already on the Mac; once the `Premonition` notary profile existed, the repository's deliberately fussy release script did exactly what it was meant to do.
+
+Apple accepted the submission, the ticket stapled, and the independent pass checked both the app and a fresh extraction of the ZIP. The same candidate is now installed in `/Applications`, still carrying its Developer ID authority and notarisation ticket. Nothing was uploaded to GitHub and the cask remains prepared rather than published.
+
+One toolchain wrinkle remains. Homebrew now refuses to run its strict audit with Xcode 26.6 because it expects Xcode 27.0. That is not being disguised as a clean audit, even though the cask contract, Ruby syntax and style checks pass.
+
+The next meaningful evidence is human: use the installed candidate and decide whether it is the build we are willing to release. After that, the remaining choice is whether the Xcode update is worth doing or whether the specification's allowed Homebrew-polish cut is the honest call.
+
+**Source:** `BUILDLOG.md`, Entry S5.10
+
+---
+
+## S5.11 — Approved where it matters
+
+**Date:** 2026-07-19
+
+The signed build has crossed the last human product gate: the owner used the installed candidate and approved it. That verdict belongs beside the cryptographic evidence, not in place of it. Apple acceptance, Gatekeeper, the stapled ticket and the clean ZIP extraction still prove their own narrower things; the owner proves this is the candidate worth carrying forward.
+
+The Homebrew wrinkle remains deliberately unresolved. Approval of the app does not turn an Xcode-version refusal into a passing strict audit. The cask is populated, syntax-clean and style-clean, but the choice between updating Xcode and taking the specification's permitted polish cut still needs to be made explicitly.
+
+For now, the honest next step is a draft PR: make the signed evidence reviewable, keep the release private, and decide the cask-audit question without reopening the product itself.
+
+**Source:** `BUILDLOG.md`, Entry S5.11
+
+---
+
+## S5.12 — A branch name is not worth rewriting history
+
+**Date:** 2026-07-19
+
+The signed-candidate push found an old piece of honest history: GitHub still retains the earlier issue #17 completion branch from PR #19. A force-push would have made the new name convenient by making the old review surface less trustworthy.
+
+So the new package moved instead. `codex/issue-17-signed-candidate` says exactly what this increment contains and leaves the older branch untouched. Nothing about the app, evidence or release boundary changed; only the route to review became safer and clearer.
+
+**Source:** `BUILDLOG.md`, Entry S5.12

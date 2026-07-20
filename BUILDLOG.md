@@ -2923,3 +2923,194 @@ Add the deployed explainer URL to the repository front door without implying tha
 ### Next entry state
 
 - Review the README and version 2 page through PR #21. After DNS validation and an explicit access decision, replace the generated owner-review URL with the canonical custom domain. Keep release, public promotion and submission separately owner-gated.
+
+---
+
+## Entry S5.10 — The judge artifact is signed and running
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T22:17:35+01:00
+
+**Phase:** S5
+
+**Status:** Partial — signed installed candidate awaiting owner acceptance; no release published
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Use the now-available owner distribution toolchain to create, independently verify and install the signed v0.1.0 judge candidate without publishing a release or beginning S6.
+
+### Completed
+
+- Confirmed the valid `Developer ID Application` identity for team `R8HXTBY3NM` and authenticated the owner-created `Premonition` notarytool Keychain profile without reading or recording credential values.
+- Ran the prescribed signing pipeline from a clean local issue #17 completion branch. Apple accepted notarisation submission `5aaf9cfe-b35a-4971-b18e-adece5eaa6ca`; the app was stapled, validated and accepted by Gatekeeper.
+- Independently verified both `dist/release/Premonition.app` and a clean extraction of `Premonition-0.1.0.zip`. The final archive SHA-256 is `3d48e5b06342ce8bd11dddf0fa7f8b318e7273dd3e453177b6a2b47ef8d03178`.
+- Replaced the unpublished Homebrew cask placeholders with the verified checksum and intended GitHub v0.1.0 release URL. Updated its contract test to reject placeholders and require release-shaped metadata.
+- Installed the stapled candidate at `/Applications/Premonition.app`, reran the signed verifier against that installed copy and confirmed it remained running with Developer ID, team and staple metadata intact.
+- Kept DNS work outside the current agenda at the owner's direction. No GitHub release, release-asset upload, Homebrew publication, public promotion or submission occurred.
+
+### Decisions and provenance
+
+- **Owner decision:** Use the general Mac distribution toolchain, store the notary profile as `Premonition`, ignore DNS work and continue the signed S5 path.
+- **Sol implemented:** Credential validation, repository signing/notarisation pipeline execution, independent extracted-archive verification, prepared cask metadata, installed-candidate verification and this evidence checkpoint.
+- **Sol reviewed:** S5/§13 boundaries, credential non-persistence, signed archive provenance, no-publication boundary and installed candidate trust state.
+- **Human-authored and Sol-reviewed:** Owner-provided Apple credentials and Keychain configuration remained outside the repository and were not inspected.
+
+### Artefacts
+
+- Local `dist/release/Premonition.app` and `dist/release/Premonition-0.1.0.zip` — signed, notarised and stapled release outputs; ignored local artefacts, not committed or published.
+- `/Applications/Premonition.app` — installed signed candidate for owner review.
+- `packaging/homebrew/premonition.rb` and `scripts/test-release-tools.sh` — verified unpublished cask metadata and release contract.
+- `docs/build-week/s5-acceptance-register.md` and `docs/build-week/s5-implementation-plan.md` — credential gates closed and installed review left open.
+
+### Verification
+
+- `xcrun notarytool history --keychain-profile Premonition` — authenticated successfully.
+- `scripts/sign-and-notarise.sh dist/release` with explicit identity/profile environment names — production build, Developer ID signing, Apple submission/wait, accepted status, stapling, Gatekeeper and final ZIP creation passed.
+- `scripts/verify-release.sh dist/release/Premonition.app` — signed bundle contract, Developer ID authority, Gatekeeper and staple checks passed.
+- Clean ZIP extraction plus `scripts/verify-release.sh`, direct `spctl` and `stapler validate` — passed against the distributed copy.
+- `shasum -a 256 dist/release/Premonition-0.1.0.zip` — `3d48e5b06342ce8bd11dddf0fa7f8b318e7273dd3e453177b6a2b47ef8d03178`; archive size 432 KB.
+- `scripts/test-release-tools.sh`, `ruby -c` and `brew style` — passed; one cask inspected with no offences.
+- `swift test` — 55 tests passed.
+- `scripts/test.sh` — 55 tests plus deterministic demo repository, measurement normalisation and release-tool contracts passed.
+- `scripts/build-app.sh release` and `script/build_and_run.sh --verify` — production bundle built and real app-bundle launch remained running.
+- Installed `/Applications/Premonition.app` — signed verifier passed; `codesign` reports the intended Developer ID authority, team `R8HXTBY3NM`, secure timestamp and stapled ticket.
+
+### Deviations
+
+- `brew audit --cask --strict packaging/homebrew/premonition.rb` stopped before inspecting the cask because Homebrew now requires Xcode 27.0 while this Mac has Xcode 26.6. Syntax, release-contract and style checks pass, but no strict audit pass is claimed.
+- The primary Documents workspace still cannot update Git references under the managed File Provider boundary, so the signed work uses the clean local `/tmp` clone already tied to issue #20 and refreshed from merged `main`; the new issue #17 completion branch begins at exact merged commit `e93f44b`.
+
+### Risks and missing evidence
+
+- The installed candidate has not yet received the owner's manual acceptance.
+- Strict Homebrew audit remains unavailable until Xcode 27.0 is installed or the cask polish is explicitly deferred under the specification's cut order.
+- The intended GitHub release URL does not exist because publication remains owner-gated. The archive is local only.
+- S5 cannot close and S6 cannot begin until owner acceptance, final paired-log/ledger/provenance review and the issue #17 completion review path are complete.
+
+### Next entry state
+
+- Owner reviews the installed signed candidate from `/Applications/Premonition.app`. Record acceptance or concrete defects. If accepted, decide whether to update Xcode for the strict cask audit or explicitly defer that polish under the allowed cut order, then run the final paired-log, ledger and provenance checks and package the issue #17 completion branch into a draft PR. Do not publish or begin S6.
+
+---
+
+## Entry S5.11 — The installed candidate is owner-approved
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T22:21:59+01:00
+
+**Phase:** S5
+
+**Status:** Partial — owner acceptance complete; strict cask audit deviation remains explicit
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Record the owner's acceptance of the installed signed candidate and package the credential-assisted S5 completion work for review without merging or publishing it.
+
+### Completed
+
+- Received explicit owner approval for the installed `/Applications/Premonition.app` candidate described and verified in S5.10.
+- Marked the installed/release-candidate review complete in the S5 plan and acceptance register.
+- Kept the strict Homebrew audit limitation open and visible rather than treating owner app acceptance as evidence for a command that did not run.
+- Confirmed issue #17 remains open and that the only earlier completion-branch PR is merged PR #19; the current branch begins from merged `main` and contains the new signed-candidate evidence.
+
+### Decisions and provenance
+
+- **Owner decision:** Approve the installed signed v0.1.0 candidate.
+- **Sol implemented:** Acceptance-state updates, paired owner-decision checkpoint and review packaging.
+- **Sol reviewed:** Installed-artifact evidence, unchanged publication boundary, remaining Xcode/Homebrew deviation and issue #17 scope.
+- **Human-authored and Sol-reviewed:** The owner's direct acceptance verdict.
+
+### Artefacts
+
+- `docs/build-week/s5-implementation-plan.md` — installed review marked complete.
+- `docs/build-week/s5-acceptance-register.md` — owner acceptance recorded without broadening the strict-audit claim.
+- Issue #17 completion commit and draft PR — review surfaces to be produced from this checkpoint.
+
+### Verification
+
+- Owner observation — explicit `Approved.` response for the installed signed candidate.
+- GitHub issue inspection — issue #17 remains open.
+- GitHub branch-PR inspection — merged PR #19 is the only prior PR associated with the completion branch name; no open completion PR exists.
+- Final paired-log, ledger, provenance, release-contract and diff checks — run before the S5.11 commit.
+
+### Deviations
+
+- Strict Homebrew audit is still not claimed. Homebrew requires Xcode 27.0 on this machine; Xcode 26.6 remains installed.
+
+### Risks and missing evidence
+
+- The owner has not yet decided whether to install Xcode 27 for the strict cask audit or explicitly defer that polish under the specification's cut order.
+- The intended GitHub release URL remains unavailable because no release asset has been published.
+- This acceptance does not authorise merging the completion PR, publishing a release, pushing a cask, promoting externally or beginning S6.
+
+### Next entry state
+
+- Push the issue #17 completion branch and open a draft PR containing the signed-candidate evidence and prepared unpublished cask. Owner reviews the PR and chooses either Xcode 27 strict-audit completion or explicit Homebrew-polish deferral. Keep merge, release publication and S6 separately owner-gated.
+
+---
+
+## Entry S5.12 — The old review branch remains untouched
+
+**Date:** 2026-07-19
+
+**Recorded at:** 2026-07-19T22:23:53+01:00
+
+**Phase:** S5
+
+**Status:** Partial — signed-candidate commit ready on a collision-free review branch
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Resolve the remote branch-name collision discovered during the owner-approved S5.11 push without overwriting the retained PR #19 branch or weakening provenance.
+
+### Completed
+
+- The attempted normal push to `codex/issue-17-release-completion` was rejected because the remote still contains commit `427c99284864ba4b8d20cf968ef06f32f11478f4` under that name.
+- Refused to force-push or rewrite the retained branch.
+- Renamed the new local review branch to `codex/issue-17-signed-candidate` and updated the active S5 plan accordingly.
+- Preserved the earlier S5.5 references to the original completion branch as historical facts; this append-only entry records the new branch decision.
+
+### Decisions and provenance
+
+- **Owner decision:** Approve the signed installed candidate and proceed to the review package.
+- **Sol implemented:** Safe branch-collision diagnosis, non-destructive rename and append-only provenance correction.
+- **Sol reviewed:** Remote ref identity, no-force-push boundary, issue #17 naming and unchanged release/publication gates.
+- **Human-authored and Sol-reviewed:** None.
+
+### Artefacts
+
+- `codex/issue-17-signed-candidate` — collision-free branch for the signed-candidate evidence.
+- `docs/build-week/s5-implementation-plan.md` — current branch reference corrected.
+
+### Verification
+
+- `git ls-remote --heads origin refs/heads/codex/issue-17-release-completion` — retained remote ref resolves to `427c99284864ba4b8d20cf968ef06f32f11478f4`.
+- Local branch inspection — `codex/issue-17-signed-candidate` is one commit ahead of merged `origin/main` before the amended checkpoint commit.
+- Final paired-log, provenance and staged-diff checks — rerun after this append and before push.
+
+### Deviations
+
+- The branch name differs from the S5.11 planned completion name solely to preserve the older remote review branch without force-pushing it.
+
+### Risks and missing evidence
+
+- The renamed branch and its draft PR are not yet remote at the time of this entry.
+- Strict Homebrew audit, release publication and S6 boundaries remain unchanged.
+
+### Next entry state
+
+- Amend the unpushed signed-candidate commit to include this collision checkpoint, push `codex/issue-17-signed-candidate`, open the draft issue #17 PR and stop for owner review. Do not merge or publish.

@@ -1,8 +1,8 @@
 # S5 Hardening and Release-Ready Plan
 
-**Status:** At owner credential gate; all non-credential implementation and verification complete
+**Status:** Signed candidate owner-approved; strict cask audit toolchain deviation pending
 **Issue:** #17 — S5: harden and prepare release-ready evidence
-**Branch:** `codex/issue-17-release-hardening`
+**Branch:** `codex/issue-17-signed-candidate`
 **Phase boundary:** S5 only
 
 ## Objective
@@ -119,8 +119,8 @@ build from a stable local snapshot, sign, notarise, staple and verify the judge 
 - [x] README, SECURITY and CHANGELOG complete.
 - [x] Signing/notarisation and independent verification scripts complete.
 - [x] Homebrew surface prepared and syntactically/style checked, not published.
-- [ ] Owner signing/notarisation inputs confirmed.
-- [ ] Signed, notarised, stapled judge artifact independently verified.
+- [x] Owner signing/notarisation inputs confirmed.
+- [x] Signed, notarised, stapled judge artifact independently verified.
 - [x] Full repository verification passes; paired-log, ledger and provenance checks are rerun at the final checkpoint.
-- [ ] Installed/release candidate owner review complete.
+- [x] Installed/release candidate owner review complete.
 - [x] Draft PR opened for owner review; no merge or publication.

@@ -20,7 +20,16 @@ if [[ -e "$TEMP_DIR/output" ]]; then
   exit 1
 fi
 
-/usr/bin/grep -F 'PREMONITION_RELEASE_URL' "$ROOT_DIR/packaging/homebrew/premonition.rb" >/dev/null
-/usr/bin/grep -F 'PREMONITION_RELEASE_SHA256' "$ROOT_DIR/packaging/homebrew/premonition.rb" >/dev/null
+if /usr/bin/grep -E 'PREMONITION_RELEASE_(URL|SHA256)' \
+    "$ROOT_DIR/packaging/homebrew/premonition.rb" >/dev/null; then
+  echo "release cask still contains metadata placeholders" >&2
+  exit 1
+fi
+
+/usr/bin/grep -E 'sha256 "[0-9a-f]{64}"' \
+  "$ROOT_DIR/packaging/homebrew/premonition.rb" >/dev/null
+/usr/bin/grep -F \
+  'url "https://github.com/tcballard/Premonition/releases/download/v#{version}/Premonition-#{version}.zip"' \
+  "$ROOT_DIR/packaging/homebrew/premonition.rb" >/dev/null
 
 echo "release tooling contracts passed"

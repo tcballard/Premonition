@@ -51,6 +51,30 @@ Stable working snapshot: `/tmp/Premonition-s5-work.ry9Ri4`
 - `brew style packaging/homebrew/premonition.rb` — one file, no offences.
 - Release signing script with absent inputs — exited before creating its output.
 
+Credential-assisted release candidate on 2026-07-19:
+
+- `security find-identity -p codesigning -v` — valid Developer ID Application
+  identity for team `R8HXTBY3NM` present.
+- `xcrun notarytool history --keychain-profile Premonition` — saved profile
+  authenticated successfully; no credential value was read or recorded.
+- `scripts/sign-and-notarise.sh dist/release` — production build signed with
+  hardened runtime, submission `5aaf9cfe-b35a-4971-b18e-adece5eaa6ca`
+  accepted by Apple, ticket stapled and Gatekeeper assessment accepted.
+- `scripts/verify-release.sh dist/release/Premonition.app` — signed bundle,
+  Developer ID authority, Gatekeeper and staple checks passed.
+- Clean extraction of `Premonition-0.1.0.zip` — the extracted app passed the
+  same signed verifier, direct Gatekeeper assessment and staple validation.
+- Final ZIP SHA-256 —
+  `3d48e5b06342ce8bd11dddf0fa7f8b318e7273dd3e453177b6a2b47ef8d03178`.
+- `scripts/test-release-tools.sh`, Ruby syntax and `brew style` — passed with
+  populated metadata and no remaining release placeholders.
+- `brew audit --cask --strict packaging/homebrew/premonition.rb` — Homebrew
+  stopped before auditing the cask because it requires Xcode 27.0 and this Mac
+  has Xcode 26.6; no cask audit result is claimed.
+- `/Applications/Premonition.app` — installed from the stapled candidate,
+  passed the signed verifier and remained running with its Developer ID team,
+  timestamp and stapled ticket intact.
+
 ## Distribution capability and gates
 
 | Capability | Current state | Classification |
@@ -58,12 +82,12 @@ Stable working snapshot: `/tmp/Premonition-s5-work.ry9Ri4`
 | Xcode | Xcode 26.6, build 17F113 | Available |
 | `notarytool` / `stapler` | 1.1.2 (41); commands available | Available |
 | Homebrew | 6.0.11 with style/audit commands | Available |
-| Code-signing identity | `security find-identity -p codesigning -v` reports zero valid identities | **Blocked pending owner-installed Developer ID Application identity** |
-| Notary profile | No owner-confirmed Keychain profile name supplied or inferred | **Blocked pending owner confirmation** |
+| Code-signing identity | Valid Developer ID Application identity for team `R8HXTBY3NM` | Available; owner confirmed |
+| Notary profile | Keychain profile `Premonition` authenticated to Apple | Available; owner confirmed |
 | Unsigned local bundle | Built and independently verified | Development evidence only |
-| Signed judge artifact | Cannot be created without the two inputs above | **Blocked** |
-| Homebrew URL/checksum and audit | Cask syntax/style pass; placeholders remain until the verified stapled archive exists | **Blocked by signed artifact; not published** |
-| Final installed release review | Requires the signed/notarised/stapled candidate | **Blocked** |
+| Signed judge artifact | Apple-accepted, stapled app and final ZIP independently verified | Ready for owner review; not published |
+| Homebrew URL/checksum and audit | Verified checksum and intended v0.1.0 GitHub release URL prepared in the unpublished cask | Audit evidence pending; not published |
+| Final installed release review | Owner approved the installed signed candidate on 2026-07-19 | **Accepted** |
 
 ## Publication boundary
 
