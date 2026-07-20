@@ -788,3 +788,33 @@ The official rules make the real deliverables clear: one Developer Tools entry, 
 The first inconsistency is mundane but important: the README still says the signed artifact is pending. It was true when written and is false now. The next owner decision—public or privately shared repository—sets the availability language around that correction and everything downstream.
 
 **Source:** `BUILDLOG.md`, Entry S6.1
+
+---
+
+## S6.2 — Public source, private binary
+
+**Date:** 2026-07-20
+
+The first submission decision turned out to need no switch at all: Premonition is already public, MIT-licensed and ready to be the repository judges receive. The work was making every surrounding sentence agree with that reality.
+
+The README had one stale sentence from before signing. It now says the precise thing: the signed, notarised artifact exists and has been approved, but the archive is not published. Public source and public binary are separate states, and S6 will keep them separate until the owner chooses a download route.
+
+The prior/new boundary is also easier to audit now. The planning and S0 starting points are direct GitHub commit links rather than short hashes a judge has to search for. Next comes the consequential distribution choice: where, if anywhere yet, the signed ZIP should live.
+
+**Source:** `BUILDLOG.md`, Entry S6.2
+
+---
+
+## S6.3 — The binary crossed the boundary
+
+**Date:** 2026-07-20
+
+The owner chose the direct route: publish the exact signed candidate through GitHub `v0.1.0`. That turns the judging path from an instruction to rebuild into a real download.
+
+The most useful moment came before upload. The managed sandbox made the valid app look broken because it could not reach the Mac's trust services. We stopped, reran the identical bytes in the normal trust context, and only continued after Developer ID, Gatekeeper and the staple all passed.
+
+The release is now public, but the verification did not end at GitHub's upload response. The asset came back down through its public URL with the same checksum, and a fresh extraction passed the signed verifier again. The README and launch pack can finally say “download” without qualification or wishful thinking.
+
+This approval is deliberately narrow. The video, Sites access, Homebrew and Devpost submission still have their own gates. Next comes the Developer Tools narrative, now grounded in a repository and binary that judges can actually reach.
+
+**Source:** `BUILDLOG.md`, Entry S6.3

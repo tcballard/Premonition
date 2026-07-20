@@ -4,7 +4,7 @@
 
 **Issue:** #24 — S6: assemble submission materials and owner handoff
 
-**Branch:** `codex/issue-24-submission-materials`
+**Branch:** `codex/issue-24-readme-provenance`
 
 **Phase boundary:** S6 only
 
@@ -57,8 +57,8 @@ Checked against the official [Build Week rules](https://openai.devpost.com/rules
 
 Resolve one at a time:
 
-1. public MIT repository or approved private judge sharing;
-2. signed judge-download route;
+1. [x] public MIT repository at `https://github.com/tcballard/Premonition`;
+2. [x] public signed judge download at `https://github.com/tcballard/Premonition/releases/tag/v0.1.0`;
 3. public YouTube upload authority;
 4. whether the owner-only Sites explainer is included, omitted or later made public;
 5. final Devpost submission authority.
@@ -72,7 +72,7 @@ Resolve one at a time:
 
 ## Explicit stop gates
 
-- Do not publish a GitHub release, upload the signed ZIP, make a video public, expand Sites access, publish Homebrew, change repository visibility, submit Devpost or promote externally without separate owner authority.
+- The owner authorised and the session verified the public GitHub `v0.1.0` release. Do not publish another release or asset, make a video public, expand Sites access, publish Homebrew, change repository visibility, submit Devpost or promote externally without separate owner authority.
 - Do not add runtime/UI polish unless a submission-blocking product defect is separately evidenced and approved.
 - Do not fabricate form fields, dates, metrics, links, test states or access states.
 
@@ -81,11 +81,12 @@ Resolve one at a time:
 - [x] S6 issue and branch established from merged S5 main.
 - [x] Official current submission constraints verified.
 - [x] Initial launch brief, claims ledger, inventory, channel matrix, checklist and handoff created.
-- [ ] README current status and dated boundary verified.
+- [x] README current status and dated boundary verified.
 - [ ] Submission narrative and known form fields complete.
 - [ ] Timed demo script, shot list and captions plan complete.
 - [ ] Real footage captured and final public-YouTube candidate technically verified.
-- [ ] Repository, signed-download, video and optional Sites routes owner-approved.
+- [x] Repository and signed-download routes owner-approved and verified.
+- [ ] Video and optional Sites routes owner-approved.
 - [ ] Launch Pack final validation passes.
 - [ ] BUILDLOG, DEVLOG and Sol ledger contain final S6 evidence.
 - [ ] Owner gives final approval before publication or submission.
