@@ -788,3 +788,17 @@ The official rules make the real deliverables clear: one Developer Tools entry, 
 The first inconsistency is mundane but important: the README still says the signed artifact is pending. It was true when written and is false now. The next owner decision—public or privately shared repository—sets the availability language around that correction and everything downstream.
 
 **Source:** `BUILDLOG.md`, Entry S6.1
+
+---
+
+## S6.2 — Public source, private binary
+
+**Date:** 2026-07-20
+
+The first submission decision turned out to need no switch at all: Premonition is already public, MIT-licensed and ready to be the repository judges receive. The work was making every surrounding sentence agree with that reality.
+
+The README had one stale sentence from before signing. It now says the precise thing: the signed, notarised artifact exists and has been approved, but the archive is not published. Public source and public binary are separate states, and S6 will keep them separate until the owner chooses a download route.
+
+The prior/new boundary is also easier to audit now. The planning and S0 starting points are direct GitHub commit links rather than short hashes a judge has to search for. Next comes the consequential distribution choice: where, if anywhere yet, the signed ZIP should live.
+
+**Source:** `BUILDLOG.md`, Entry S6.2

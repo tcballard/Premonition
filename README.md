@@ -8,8 +8,9 @@ error only against Git repositories you explicitly allowlist, asks Codex
 pinned to GPT-5.6 Sol for one bounded patch, validates that the patch applies,
 and waits for your decision.
 
-The v0.1 source and offline demo are usable now. The signed and notarised judge
-artifact remains a release gate and is not yet published.
+The v0.1 source, offline demo and signed, notarised judge artifact are complete
+and owner-approved. This repository is public for judging; the signed archive
+has not been published.
 
 Owner-review explainer (ChatGPT sign-in required):
 <https://premonition-field-guide.tom-ballard08574345.chatgpt.site>
@@ -88,8 +89,8 @@ containing repositories you permit Premonition to resolve. Settings shows the
 Codex CLI status, the pinned GPT-5.6 Sol runtime, the daily count, and the
 fixture-replay controls. No JSON editing is required for onboarding.
 
-The local source-build bundle is not a substitute for the pending signed and
-notarised release artifact.
+The local source-build bundle is not the signed judge artifact. A verified
+signed archive is prepared, but no public download has been published.
 
 ## Offline demo mode
 
@@ -145,8 +146,9 @@ The evidence trail is in [PREMONITION_SPEC.md](PREMONITION_SPEC.md),
 
 The boundary is dated and explicit: specification v1.1 planning predates the
 Submission Period on 12 July 2026; Sol-assisted specification and workflow
-planning is recorded through commit `2e83e84` on 13 July; new application
-implementation begins with S0 commit `3422b0c` on 14 July. See
+planning is recorded through [commit `2e83e84`](https://github.com/tcballard/Premonition/commit/2e83e846d9bbe8764dce82a2e0869ce5655ea24c)
+on 13 July; new application implementation begins with [S0 commit `3422b0c`](https://github.com/tcballard/Premonition/commit/3422b0c4100f3ea156eab11fd91f9a251f2f9cac)
+on 14 July. See
 [docs/build-week/prior-new-boundary.md](docs/build-week/prior-new-boundary.md).
 
 ## Roadmap

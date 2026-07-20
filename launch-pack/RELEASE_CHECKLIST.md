@@ -8,6 +8,6 @@
 | Technical | Channel and submission constraints pass | Official rules verified; final media/form not yet checked | Draft | Tom Ballard | Inspect exact Devpost form and final exports |
 | Accessibility | Captions, contrast, text alternatives and readability pass | Requirements recorded only | Missing | Tom Ballard | Caption and review final demo at delivery size |
 | Privacy | No secrets, private data or embargoed details leak | Fixture-only policy and claims boundary established | Draft | Tom Ballard | Inspect every screenshot/frame and output |
-| Links | Destinations and calls to action work | Repository/download/video route undecided; Sites owner-only | Blocked | Tom Ballard | Resolve access choices and verify links |
+| Links | Destinations and calls to action work | Public repository verified; download/video unresolved; Sites owner-only | Blocked | Tom Ballard | Resolve remaining external routes and verify links |
 | Provenance | Required source and model-contribution records exist | Feedback ID, ledger, BUILDLOG/DEVLOG and commits present | Ready | Tom Ballard | Select concise citations for outputs |
 | Authority | Publisher and manual action are explicit | Owner-only authority recorded | Blocked | Tom Ballard | Grant each publication/submission action separately |

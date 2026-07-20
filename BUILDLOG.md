@@ -3244,3 +3244,67 @@ Begin the owner-authorised S6 submission-materials phase from completed S5 evide
 ### Next entry state
 
 - Ask the owner to choose the repository judging route first: public MIT repository, or private repository shared with the two official judge addresses. Then reconcile README status/boundary and draft submission copy against that access decision. Do not publish or submit.
+
+---
+
+## Entry S6.2 — The public repository becomes the judge front door
+
+**Date:** 2026-07-20
+
+**Recorded at:** 2026-07-20T17:46:39+01:00
+
+**Phase:** S6
+
+**Status:** Partial — repository route and README provenance front door complete
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Record the owner's public-repository judging route and align the README and Launch Pack with the completed signed candidate and verified prior/new-work boundary.
+
+### Completed
+
+- Confirmed PR #25 merged as `b356c9b31dbff19f92685342ca18790b97faac1b` and issue #24 remains open.
+- Received the owner's explicit decision to use the already-public `https://github.com/tcballard/Premonition` repository as the official judging route. No visibility mutation was needed.
+- Created `codex/issue-24-readme-provenance` from exact merged `main` commit `b356c9b`.
+- Corrected two stale README statements: the signed/notarised judge artifact is complete and owner-approved, while the archive remains unpublished.
+- Converted the planning and S0 implementation boundary commit references into direct dated GitHub links in both README and `docs/build-week/prior-new-boundary.md`.
+- Updated the S6 plan and Launch Pack brief, claims, asset, channel, checklist and handoff state to treat the public repository as ready while keeping the signed download blocked.
+- Preserved the explicitly qualified owner-review Sites link; no Sites access change or public-site claim was made.
+
+### Decisions and provenance
+
+- **Owner decision:** Keep Premonition public and use the public GitHub repository for Build Week judging.
+- **Sol implemented:** Narrow README availability correction, verified dated commit links and cross-pack repository-route reconciliation.
+- **Sol reviewed:** README truth hierarchy, public-source versus unpublished-binary distinction, prior/new boundary, Sol role copy and unchanged publication gates.
+- **Human-authored and Sol-reviewed:** Owner selection of the public judging route.
+
+### Artefacts
+
+- `README.md` — current release state and direct boundary commit links.
+- `docs/build-week/prior-new-boundary.md` — verified planning and S0 commit links.
+- `docs/build-week/s6-implementation-plan.md` — first access decision and README checkpoint complete.
+- `launch-pack/` — canonical public repository route and remaining signed-download blocker propagated across the pack.
+
+### Verification
+
+- GitHub repository inspection — `tcballard/Premonition` reports `PUBLIC`.
+- Local and GitHub commit inspection — planning commit `2e83e846d9bbe8764dce82a2e0869ce5655ea24c` resolves at 2026-07-13T21:59:55+01:00; S0 commit `3422b0c4100f3ea156eab11fd91f9a251f2f9cac` resolves at 2026-07-14T07:25:58+01:00.
+- Toolkit README front-door audit, Launch Pack structural checker, paired-log checker, provenance checker and diff review — run before the S6.2 commit.
+
+### Deviations
+
+- The owner-review Sites URL remains in the README because it was an earlier explicit owner request. It is still labelled as requiring ChatGPT sign-in and is not used as the public judging or download route.
+
+### Risks and missing evidence
+
+- The signed judge archive has no public download route.
+- Submission narrative, exact form-field draft, demo script, footage, public YouTube URL and final owner approval remain open.
+- Public repository access does not authorise a GitHub release, asset upload, Sites access expansion, YouTube publication or Devpost submission.
+
+### Next entry state
+
+- Ask the owner to select the signed judge-download route. Recommended route: a GitHub v0.1.0 release using the already-prepared URL and verified ZIP checksum, but do not create or upload it without explicit authority. Then draft the submission narrative and known form fields against the confirmed public repository and download state.

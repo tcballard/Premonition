@@ -6,13 +6,13 @@
 - Build: signed local candidate from source `e93f44b`
 - Pack status: Initial S6 evidence spine; not ready for publication or submission
 - Publication authority: Tom Ballard only; none granted by this pack
-- Exact next action: choose the repository access route, then reconcile README and submission copy against that decision
+- Exact next action: choose the signed judge-download route, then draft submission copy against the public repository and qualified binary availability
 
 ## Included deliverables
 
 | Channel | Output | Status | Claim IDs | Notes |
 | --- | --- | --- | --- | --- |
-| Repository | `README.md` | Draft | C01-C09, C11-C12 | Release-status copy needs correction |
+| Repository | `README.md` | Ready | C01-C09, C11-C12, C14 | Public judging route and dated boundary verified |
 | Competition | `launch-pack/outputs/submission-narrative.md` | Missing | C01-C12 | Requires form inspection and access decisions |
 | Product demo | `launch-pack/outputs/demo-script.md` and public YouTube URL | Missing | C01-C09, C12 | Requires Product Demo workflow and owner upload |
 | Signed download | External artifact URL | Blocked | C06-C07, C11 | Artifact exists locally; no publication authority |
@@ -38,7 +38,6 @@
 
 ## Remaining decisions and blockers
 
-- Public repository versus approved private judge sharing.
 - Signed artifact download route.
 - Public YouTube upload authority and final video URL.
 - Whether to omit or change access for the Sites explainer.

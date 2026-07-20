@@ -4,7 +4,7 @@
 
 **Issue:** #24 — S6: assemble submission materials and owner handoff
 
-**Branch:** `codex/issue-24-submission-materials`
+**Branch:** `codex/issue-24-readme-provenance`
 
 **Phase boundary:** S6 only
 
@@ -57,7 +57,7 @@ Checked against the official [Build Week rules](https://openai.devpost.com/rules
 
 Resolve one at a time:
 
-1. public MIT repository or approved private judge sharing;
+1. [x] public MIT repository at `https://github.com/tcballard/Premonition`;
 2. signed judge-download route;
 3. public YouTube upload authority;
 4. whether the owner-only Sites explainer is included, omitted or later made public;
@@ -81,7 +81,7 @@ Resolve one at a time:
 - [x] S6 issue and branch established from merged S5 main.
 - [x] Official current submission constraints verified.
 - [x] Initial launch brief, claims ledger, inventory, channel matrix, checklist and handoff created.
-- [ ] README current status and dated boundary verified.
+- [x] README current status and dated boundary verified.
 - [ ] Submission narrative and known form fields complete.
 - [ ] Timed demo script, shot list and captions plan complete.
 - [ ] Real footage captured and final public-YouTube candidate technically verified.

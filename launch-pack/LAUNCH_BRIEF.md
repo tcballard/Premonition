@@ -14,12 +14,12 @@
 - User outcome: understand and test the copy-error-to-reviewed-patch loop without rebuilding or trusting an autonomous mutation
 - Launch objective: submit a clear, evidence-backed Developer Tools entry
 - Primary call to action: watch the product demo, inspect the repository evidence and use the judge testing path
-- Canonical destination: Blocked pending owner repository and signed-download decisions
+- Canonical destination: `https://github.com/tcballard/Premonition`
 
 ## Availability and boundaries
 
 - Platforms and minimum versions: native macOS 14+; current signed binary is Apple Silicon
-- Rollout or eligibility: local owner-approved candidate; no public release exists
+- Rollout or eligibility: public MIT source repository; local owner-approved candidate; no public binary release exists
 - Pricing: no paid offering; repository licence is MIT
 - Material limitations: heuristic gate; admitted errors leave verbatim; no secret redaction; `git apply --check` proves applicability only; live Sol output varies; macOS-only
 - Required disclosures: pre-period planning boundary; Sol runtime/build-partner roles; no auto-Apply; no provider-retention claim; owner-only explainer access if linked
