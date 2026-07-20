@@ -1,8 +1,8 @@
 # S5 Hardening and Release-Ready Plan
 
-**Status:** Signed candidate owner-approved; strict cask audit toolchain deviation pending
+**Status:** Complete — signed candidate owner-approved; strict cask audit explicitly deferred under the cut order
 **Issue:** #17 — S5: harden and prepare release-ready evidence
-**Branch:** `codex/issue-17-signed-candidate`
+**Branch:** `codex/issue-17-homebrew-audit-deferral`
 **Phase boundary:** S5 only
 
 ## Objective
@@ -124,3 +124,4 @@ build from a stable local snapshot, sign, notarise, staple and verify the judge 
 - [x] Full repository verification passes; paired-log, ledger and provenance checks are rerun at the final checkpoint.
 - [x] Installed/release candidate owner review complete.
 - [x] Draft PR opened for owner review; no merge or publication.
+- [x] Strict Homebrew audit explicitly deferred by the owner under the §11 cut order; cask contract, Ruby syntax and Homebrew style remain verified.

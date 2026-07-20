@@ -3114,3 +3114,66 @@ Resolve the remote branch-name collision discovered during the owner-approved S5
 ### Next entry state
 
 - Amend the unpushed signed-candidate commit to include this collision checkpoint, push `codex/issue-17-signed-candidate`, open the draft issue #17 PR and stop for owner review. Do not merge or publish.
+
+---
+
+## Entry S5.13 — Homebrew polish is deliberately deferred
+
+**Date:** 2026-07-20
+
+**Recorded at:** 2026-07-20T07:27:11+01:00
+
+**Phase:** S5
+
+**Status:** Complete — S5 exit evidence satisfied; no public action
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Resolve the final S5 Homebrew-audit decision by applying the specification's explicit cut order without weakening the signed judge path or claiming an audit that did not run.
+
+### Completed
+
+- Received the owner's explicit decision to defer strict Homebrew audit rather than install Xcode 27 solely for that polish step.
+- Applied §11 cut-order item 4: defer polished Homebrew automation while retaining a valid prepared cask.
+- Kept the verified cask URL/checksum, release-contract test, Ruby syntax pass and Homebrew style pass; retained the failed strict-audit attempt as an explicit Xcode-version deviation.
+- Confirmed PR #22 was merged as `0daa72665049a93483e7d72dfc4be8a3dfa4e8f5` before this decision, so created fresh branch `codex/issue-17-homebrew-audit-deferral` from merged `main` instead of modifying the closed review branch.
+- Marked the S5 plan complete. The signed, notarised, stapled and owner-approved judge artifact, full required evidence and complete provenance record satisfy the S5 exit criteria without publishing anything.
+
+### Decisions and provenance
+
+- **Owner decision:** Defer strict Homebrew audit under the specification's permitted Homebrew-polish cut.
+- **Sol implemented:** Phase-state update, explicit audit classification, fresh post-merge branch and paired provenance checkpoint.
+- **Sol reviewed:** §11 S5 exit criteria, cut-order boundary, prepared-cask validity, no-false-audit claim and no-publication boundary.
+- **Human-authored and Sol-reviewed:** The owner's direct deferral decision.
+
+### Artefacts
+
+- `docs/build-week/s5-implementation-plan.md` — S5 complete with the audit cut explicit.
+- `docs/build-week/s5-acceptance-register.md` — owner-approved artifact and deferred strict-audit classification.
+- `codex/issue-17-homebrew-audit-deferral` — narrow post-merge branch for the final S5 decision record.
+
+### Verification
+
+- Owner statement — `Defer it I think` in the durable session.
+- `PREMONITION_SPEC.md` §11 — cut order explicitly permits deferring polished Homebrew automation while retaining a valid prepared formula.
+- GitHub PR inspection — PR #22 is merged.
+- GitHub/main inspection — merged main resolves to `0daa72665049a93483e7d72dfc4be8a3dfa4e8f5` before the fresh branch.
+- Paired-log, provenance and diff checks — run before committing this S5.13 checkpoint.
+
+### Deviations
+
+- `brew audit --cask --strict` remains unpassed because installed Homebrew requires Xcode 27 while the Mac has Xcode 26.6. This is now an explicit owner-approved polish deferral, not missing or misreported evidence.
+
+### Risks and missing evidence
+
+- The cask remains unpublished and has no strict-audit pass. Revisit the audit with the then-current Xcode/Homebrew toolchain before any later Homebrew publication.
+- The signed release archive remains local; no GitHub release or asset exists.
+- The S5.13 follow-up branch is not merged at the time of this entry. S6 work has not started.
+
+### Next entry state
+
+- Commit and open a narrow draft PR for the S5.13 deferral checkpoint. After owner review and merge, close issue #17 and begin S6 only on a separately authorised issue/branch. Keep release publication, Homebrew publication, submission and promotion separately owner-gated.

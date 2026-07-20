@@ -85,8 +85,8 @@ Credential-assisted release candidate on 2026-07-19:
 | Code-signing identity | Valid Developer ID Application identity for team `R8HXTBY3NM` | Available; owner confirmed |
 | Notary profile | Keychain profile `Premonition` authenticated to Apple | Available; owner confirmed |
 | Unsigned local bundle | Built and independently verified | Development evidence only |
-| Signed judge artifact | Apple-accepted, stapled app and final ZIP independently verified | Ready for owner review; not published |
-| Homebrew URL/checksum and audit | Verified checksum and intended v0.1.0 GitHub release URL prepared in the unpublished cask | Audit evidence pending; not published |
+| Signed judge artifact | Apple-accepted, stapled app and final ZIP independently verified | Owner-approved; not published |
+| Homebrew URL/checksum and audit | Verified checksum and intended v0.1.0 GitHub release URL prepared; contract, Ruby syntax and style pass; strict audit requires Xcode 27 | Strict audit explicitly deferred by owner under §11 cut order; not published |
 | Final installed release review | Owner approved the installed signed candidate on 2026-07-19 | **Accepted** |
 
 ## Publication boundary
