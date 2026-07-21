@@ -818,3 +818,29 @@ The release is now public, but the verification did not end at GitHub's upload r
 This approval is deliberately narrow. The video, Sites access, Homebrew and Devpost submission still have their own gates. Next comes the Developer Tools narrative, now grounded in a repository and binary that judges can actually reach.
 
 **Source:** `BUILDLOG.md`, Entry S6.3
+
+---
+
+## S6.4 — Read the form, do not become the entrant
+
+**Date:** 2026-07-21
+
+The live Devpost form is less mysterious now, and that is exactly where the
+automation should stop. There is already an unpublished “Untitled” project in
+the account. We read its state, the seven Build Week questions, the deadline
+and the judging criteria without changing a single field.
+
+The resulting document is intentionally two things at once: specific enough
+that no one has to reconstruct links, limits or Session IDs under deadline
+pressure, and visibly unfinished where the owner has to speak. Submitter type
+and country are attestations, not repository facts. More importantly, the
+host has explicitly asked people not to paste an AI-written project
+description unchanged, so the long draft is raw material for Tom's version,
+not a clever way around that request.
+
+The remaining critical path is now unmistakable. There is no public video URL,
+and therefore no valid submission yet. Next is the timed demo plan: make the
+real product, safety spine and two Sol roles legible in under three minutes,
+then review it before a camera or upload button enters the picture.
+
+**Source:** `BUILDLOG.md`, Entry S6.4

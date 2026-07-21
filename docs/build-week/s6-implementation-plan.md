@@ -1,10 +1,10 @@
 # S6 Submission Materials Plan
 
-**Status:** Active — evidence spine initialised; owner decisions and deliverables pending
+**Status:** Active — submission draft complete; demo and owner decisions pending
 
 **Issue:** #24 — S6: assemble submission materials and owner handoff
 
-**Branch:** `codex/issue-24-readme-provenance`
+**Branch:** `codex/issue-24-submission-narrative`
 
 **Phase boundary:** S6 only
 
@@ -42,9 +42,11 @@ Checked against the official [Build Week rules](https://openai.devpost.com/rules
 
 ### 3. Submission narrative and form draft
 
-- Draft the Developer Tools description, mechanism, limitations, Codex workflow, GPT-5.6 integration and pre-existing-planning disclosure.
-- Record unknown Devpost fields as owner-side blockers rather than guessing.
-- Connect feedback ID `019f5f0f-a2dd-78e3-a5b3-413860708eab` to the ledger and narrative.
+- [x] Draft the Developer Tools description, mechanism, limitations, Codex workflow, GPT-5.6 integration and pre-existing-planning disclosure.
+- [x] Inspect and map the authenticated live Devpost form without modifying the existing unpublished project.
+- [x] Record personal declarations and the missing public-video URL as owner-side blockers rather than guessing.
+- [x] Connect feedback ID `019f5f0f-a2dd-78e3-a5b3-413860708eab` to the ledger and narrative.
+- [ ] Owner rewrites the generated description in their own voice and confirms personal declarations before any live form update.
 
 ### 4. Under-three-minute demo
 
@@ -82,7 +84,7 @@ Resolve one at a time:
 - [x] Official current submission constraints verified.
 - [x] Initial launch brief, claims ledger, inventory, channel matrix, checklist and handoff created.
 - [x] README current status and dated boundary verified.
-- [ ] Submission narrative and known form fields complete.
+- [x] Submission narrative and known form fields complete as an owner-review draft.
 - [ ] Timed demo script, shot list and captions plan complete.
 - [ ] Real footage captured and final public-YouTube candidate technically verified.
 - [x] Repository and signed-download routes owner-approved and verified.
