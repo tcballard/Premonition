@@ -3376,3 +3376,70 @@ Use the owner-authorised GitHub `v0.1.0` route to publish the exact signed judge
 ### Next entry state
 
 - Commit and push the S6.3 evidence reconciliation to draft PR #26, then draft the Developer Tools submission narrative and known form fields against the verified public repository and signed-download routes. Keep video, Sites and Devpost actions separately owner-gated.
+
+---
+
+## Entry S6.4 — The live submission form is mapped without touching it
+
+**Date:** 2026-07-21
+
+**Recorded at:** 2026-07-21T06:58:36+01:00
+
+**Phase:** S6
+
+**Status:** Partial — owner-review submission draft complete; demo and submission approval remain
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Turn the verified repository, signed-release and provenance evidence into an exact Developer Tools submission draft while keeping the live Devpost project, personal declarations, video publication and final submission under owner control.
+
+### Completed
+
+- Inspected the authenticated live OpenAI Build Week submission requirements, custom-field IDs, deliverable rules, judging criteria and key dates without writing to Devpost.
+- Confirmed the account has one existing project, `1326961`, still named “Untitled” in unpublished `submission_pre_draft` state with no description or video URL.
+- Mapped all seven custom fields and separated verified project answers from the submitter-type and country-of-residence declarations that only the owner can attest.
+- Drafted the project name, tagline, technology list, evidence-grounded description, repository/release links, judge-testing instructions, feedback Session ID and explicit limitation disclosures in `launch-pack/outputs/submission-narrative.md`.
+- Kept the mandatory public YouTube URL visibly blocked and recorded that Devpost saving/updating and submission require separate owner authority.
+- Marked the description as an owner rewrite aid rather than submission-ready copy, following the host's instruction not to submit an AI-written project description unchanged.
+- Reconciled the S6 plan, asset inventory, channel matrix, checklist and handoff so the timed Product Demo workflow is now the next implementation step.
+
+### Decisions and provenance
+
+- **Owner decision:** Continue the S6 submission-material sequence after owner-approved merge of PR #26; no form-write or submission authority was given.
+- **Sol implemented:** Live form inspection, evidence-to-field mapping, limitation-safe description draft and Launch Pack reconciliation.
+- **Sol reviewed:** Judging-criteria coverage, prior/new boundary, runtime/build-partner distinction, judge installation path and every public claim boundary.
+- **Human-authored and Sol-reviewed:** Product promise, accumulated owner decisions and the requirement that Tom Ballard supply the final personal voice and declarations.
+
+### Artefacts
+
+- `launch-pack/outputs/submission-narrative.md` — exact live-field map, owner rewrite draft and unresolved submission gates.
+- `docs/build-week/s6-implementation-plan.md` — submission draft checkpoint complete and current branch recorded.
+- `launch-pack/ASSET_INVENTORY.md`, `CHANNEL_MATRIX.md`, `RELEASE_CHECKLIST.md` and `HANDOFF.md` — downstream state reconciled.
+
+### Verification
+
+- Authenticated Devpost read-only inspection — requirements were complete as fetched at 2026-07-21T05:53:29Z; seven custom fields and mandatory video were returned.
+- Authenticated project inspection — project `1326961` remained unpublished and unchanged in `submission_pre_draft` state.
+- Authenticated judging/date inspection — four criteria returned; submissions close 2026-07-22T00:00:00Z and the current phase was `submissions_open`.
+- GitHub issue inspection — issue #24 remained open for the S6 handoff.
+- Launch Pack structural checker, paired-log checker, provenance checker and whitespace review — run before the S6.4 commit.
+
+### Deviations
+
+- None. The live form was read through the authenticated Devpost connector, but no update, upload, publication or submission action was called.
+
+### Risks and missing evidence
+
+- The generated description must be rewritten by the owner in his own voice and reviewed in the final form preview.
+- Submitter type and country of residence remain owner attestations.
+- The timed demo script, footage, captions, final public YouTube URL and video-publication approval remain open.
+- Sites access remains owner-only and omitted from the unqualified public submission route.
+- No authority exists yet to update the live Devpost project or submit it.
+
+### Next entry state
+
+- Invoke the Product Demo workflow to draft and time a sub-three-minute script and shot list against the signed installed app and fixture path. Present that plan for owner review before recording or publishing anything.
