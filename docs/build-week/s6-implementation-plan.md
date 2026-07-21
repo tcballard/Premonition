@@ -1,10 +1,10 @@
 # S6 Submission Materials Plan
 
-**Status:** Active — submission draft complete; demo and owner decisions pending
+**Status:** Active — submission and demo plans complete; capture and owner decisions pending
 
 **Issue:** #24 — S6: assemble submission materials and owner handoff
 
-**Branch:** `codex/issue-24-submission-narrative`
+**Branch:** `codex/issue-24-demo-plan` stacked on the owner-review submission branch until PR #27 merges
 
 **Phase boundary:** S6 only
 
@@ -50,10 +50,12 @@ Checked against the official [Build Week rules](https://openai.devpost.com/rules
 
 ### 4. Under-three-minute demo
 
-- Use the Toolkit `product-demo` workflow against the signed installed app and deterministic fixture repository.
-- Produce a timed script, shot list, narration, captions and verification checklist before recording.
-- Required beats: ordinary clipboard no-op; admitted traceback; gate/repository/Sol/validation loop; review before Apply; dirty-tree safety; offline fixture replay; Sol as runtime and build partner.
-- Do not show private notifications, unrelated repositories, secrets, unlicensed music or generated UI as product evidence.
+- [x] Use the Toolkit `product-demo` workflow against the signed installed app and deterministic fixture repository.
+- [x] Produce a 2:50 timed script, 329-word narration, shot list, caption contract and verification checklist before recording.
+- [x] Cover ordinary clipboard no-op; admitted traceback; gate/repository/Sol/validation loop; review before Apply; dirty-tree safety; offline fixture replay; Sol as runtime and build partner.
+- [x] Require genuine product footage and exclude private notifications, unrelated repositories, secrets, unlicensed music and generated UI as product evidence.
+- [ ] Owner reviews the script and shot list before capture.
+- [ ] Capture, edit, caption and validate the final video candidate.
 
 ### 5. Owner access decisions
 
@@ -85,7 +87,7 @@ Resolve one at a time:
 - [x] Initial launch brief, claims ledger, inventory, channel matrix, checklist and handoff created.
 - [x] README current status and dated boundary verified.
 - [x] Submission narrative and known form fields complete as an owner-review draft.
-- [ ] Timed demo script, shot list and captions plan complete.
+- [x] Timed demo script, shot list and captions plan complete.
 - [ ] Real footage captured and final public-YouTube candidate technically verified.
 - [x] Repository and signed-download routes owner-approved and verified.
 - [ ] Video and optional Sites routes owner-approved.

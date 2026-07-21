@@ -844,3 +844,31 @@ real product, safety spine and two Sol roles legible in under three minutes,
 then review it before a camera or upload button enters the picture.
 
 **Source:** `BUILDLOG.md`, Entry S6.4
+
+---
+
+## S6.5 — Give the film a spine before opening the recorder
+
+**Date:** 2026-07-21
+
+The demo is now short on purpose rather than short by panic. In two minutes
+and fifty seconds it gets to the real product outcome first: a traceback is
+copied, a live Sol candidate arrives, the diff is reviewed, Apply is chosen,
+and the program runs again with an unstaged edit.
+
+The rest of the film earns that moment. Ordinary prose stays local. A dirty
+tree removes Apply. Fixture replay is labelled and replaces only the model
+hop. Applicability is explicitly not correctness. The final third explains
+the two Sol roles, the dated prior/new boundary and the roadmap line without
+turning the provenance files into marketing decoration.
+
+There is still no video. That is a useful fact. The ten-shot plan says exactly
+what each real take has to prove, how live and fixture footage stay separate,
+what must be hidden, and when a take is unusable. Even a shortened live wait
+has to carry its playback-rate label.
+
+PR #27 stays still while Tom reviews it. This demo work sits on a separate
+stacked branch until that base merges. Next comes owner review of the words and
+shots, not an upload button.
+
+**Source:** `BUILDLOG.md`, Entry S6.5

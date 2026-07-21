@@ -3443,3 +3443,77 @@ Turn the verified repository, signed-release and provenance evidence into an exa
 ### Next entry state
 
 - Invoke the Product Demo workflow to draft and time a sub-three-minute script and shot list against the signed installed app and fixture path. Present that plan for owner review before recording or publishing anything.
+
+---
+
+## Entry S6.5 — The film has a truthful 2:50 shape before it has footage
+
+**Date:** 2026-07-21
+
+**Recorded at:** 2026-07-21T07:28:15+01:00
+
+**Phase:** S6
+
+**Status:** Partial — demo pre-production complete; owner review, capture and delivery remain
+
+**Model:** GPT-5.6 Sol — explicitly confirmed for the Premonition durable session
+
+**Session ID:** 019f5f0f-a2dd-78e3-a5b3-413860708eab — Premonition durable session
+
+### Objective
+
+Create the under-three-minute Build Week demo script and evidence-linked shot list while the owner reviews the separate submission narrative, without changing PR #27, recording footage or granting video-publication authority.
+
+### Completed
+
+- Applied the Toolkit Product Demo truth/provenance and narrative/capture contracts in Plan mode.
+- Built the film around one early visible transformation: shallow Python traceback → admitted live Sol run → reviewed diff → explicit Apply → successful rerun → unstaged edit.
+- Produced a 2:50 timeline with 329 spoken words, leaving ten seconds beneath the three-minute hard maximum.
+- Included every specification-required beat: ambient promise, shallow money path, ordinary clipboard no-op, review-before-Apply, runtime/build-partner Sol roles, durable process and owner decisions, prior/new boundary, and MCP/direct-API roadmap disclosure.
+- Added dirty-worktree blocking, clearly labelled offline fixture replay, applicability-not-correctness copy and the exact public repository/release close.
+- Created a ten-shot capture plan with exact starting/ending states, handles, usability gates, claim IDs, deterministic demo-repository resets, privacy controls and recording-day QA.
+- Required genuine signed-app footage, visibly disclosed live-wait acceleration, owner-recorded narration, accurate captions and separate live/fixture take provenance.
+- Reconciled the S6 plan and Launch Pack so script/shot-list preparation is Draft rather than Missing and capture is the next gate.
+- Kept PR #27 unchanged by creating `codex/issue-24-demo-plan` as a local stacked branch from its exact review commit. No new PR targets `main` until the owner-review branch merges and the demo commit can be rebased cleanly.
+
+### Decisions and provenance
+
+- **Owner decision:** Prepare the demo script and shot list while the owner reviews the submission narrative.
+- **Sol implemented:** Demo narrative, timing, spoken draft, claims guardrails, shot contract, reset/rehearsal plan and Launch Pack reconciliation.
+- **Sol reviewed:** S6/video requirements, genuine-footage boundary, live-versus-fixture disclosure, timing honesty, privacy, captions, dirty-tree proof, Sol-role claims and prior/new disclosure.
+- **Human-authored and Sol-reviewed:** The product promise and accumulated owner decisions retained in the script; the final narration and capture performance remain the owner's contribution.
+
+### Artefacts
+
+- `launch-pack/outputs/demo-script.md` — 2:50 owner-review narration and edit contract.
+- `launch-pack/outputs/demo-shot-list.md` — ten-shot genuine-footage plan, reset sequence and recording checklist.
+- `docs/build-week/s6-implementation-plan.md` and `launch-pack/` — demo-plan state reconciled.
+- `codex/issue-24-demo-plan` — stacked work branch that does not mutate draft PR #27.
+
+### Verification
+
+- Timeline arithmetic — nine timed segments totalled 170 seconds, leaving ten seconds beneath the public-video maximum.
+- Narration extraction — 329 spoken words, approximately 116 words per minute across the 2:50 plan.
+- Required-beat inspection — ordinary no-op/zero-call boundary, shallow live run, review and Apply, GPT-5.6 Sol, fixture replay, owner decisions, dated boundary and roadmap exclusions all present.
+- Source/UI inspection — current Strings, monitoring, fix-ready, Settings, demo-panel, fixture and Apply implementations match every planned visible state and control label.
+- Installed app preflight — `/Applications/Premonition.app` reports version 0.1.0/build 1, arm64 executable, bundle identifier `co.armytage.Premonition` and stapled ticket; current executable SHA-256 recorded as `e94003440a81fc952644eaa1ef3118d104ed3514f3a5a183d58cced5b30a3595` for later recording-day comparison.
+- `ffmpeg` and `ffprobe` lookup — neither tool was found; this does not block Plan mode but remains an edit/review input decision.
+- Launch Pack structural checker, paired-log checker, provenance checker and whitespace review — run before the S6.5 commit.
+
+### Deviations
+
+- No display resolution was returned by the sandboxed display inventory. The plan therefore requires native-resolution source capture and a 1920 × 1080 final composition rather than inventing a recording resolution.
+- Code-signing authority resolution is unavailable in the managed sandbox, while bundle metadata, arm64 format and stapled ticket remain visible. S6.3's verified public-download trust evidence remains authoritative; recording day must re-run the exact signed-bundle check in the normal trust context.
+- PR #27 is still under owner review. The demo plan is intentionally stacked locally rather than added to that PR or opened as a draft against `main` with duplicated submission changes.
+
+### Risks and missing evidence
+
+- No source footage, narration, captions, edit project, review export or public YouTube URL exists.
+- A successful live take is variable and must not be fabricated or joined to another run's input. Any shortened wait must retain a visible playback-rate disclosure.
+- The owner must review the script, shot list and staging choices before capture.
+- Editing requires an approved renderer/media-inspection route because `ffmpeg`/`ffprobe` are currently absent.
+- No authority exists yet to upload or publish the video, update Devpost or submit it.
+
+### Next entry state
+
+- Owner reviews `launch-pack/outputs/demo-script.md` and `demo-shot-list.md`. After PR #27 merges, rebase the stacked demo commit onto merged `main`, push it and open the required draft PR. Once the plan itself is approved, verify the signed app and dedicated fixture on recording day, capture separate live and fixture takes, then stop for footage review before editing or publication.
